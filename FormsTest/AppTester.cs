@@ -11,6 +11,10 @@
 			Click("Button");
 			ShouldSee("Button clicked");
 			GoBack();
+
+			Click("Nested label");
+			ShouldSee("StackLayout clicked");
+			GoBack();
 		}
 	}
 }
