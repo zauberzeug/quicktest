@@ -4,9 +4,12 @@
 	{
 		public override void RunTest()
 		{
-			ShouldSee("Label");
+			Click("Label");
+			ShouldSee("Label tapped");
+
 			Click("Button");
-			ShouldSee("Ok");
+			ShouldSee("Button clicked");
+
 			LogPage();
 		}
 	}

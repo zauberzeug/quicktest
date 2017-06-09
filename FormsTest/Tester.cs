@@ -108,7 +108,7 @@ namespace FormsTest
 
 		public void Click(string text)
 		{
-			var view = Query(text).First();
+			var view = Query(text).FirstOrDefault();
 
 			if (view is Button) {
 				var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
