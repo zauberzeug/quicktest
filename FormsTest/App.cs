@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace FormsTest
 {
@@ -12,9 +13,32 @@ namespace FormsTest
 				Page = demoPage,
 			};
 
-			MainPage = new NavigationPage(tester.ResultPage);
+			MainPage = new MasterDetailPage {
+				Master = new ContentPage {
+					Title = " ",
+					Content = new StackLayout {
+						VerticalOptions = LayoutOptions.CenterAndExpand,
+						Children = {
+							CreatePageOpener("Demo page", () => new DemoPage()),
+							CreatePageOpener("Test result",()=>new NavigationPage(tester.ResultPage)),
+						},
+					},
+				},
+				Detail = new NavigationPage(tester.ResultPage),
+			};
 
 			tester.RunTest();
+		}
+
+		Button CreatePageOpener(string text, Func<NavigationPage> pageCreator)
+		{
+			return new Button {
+				Text = text,
+				Command = new Command(o => {
+					(MainPage as MasterDetailPage).Detail = pageCreator.Invoke();
+					(MainPage as MasterDetailPage).IsPresented = false;
+				}),
+			};
 		}
 	}
 }

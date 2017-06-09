@@ -4,10 +4,9 @@
 	{
 		public override void RunTest()
 		{
-			LogPage();
 			ShouldSee("Label");
-			LogPage();
 			Click("Button");
+			ShouldSee("Ok");
 			LogPage();
 		}
 	}

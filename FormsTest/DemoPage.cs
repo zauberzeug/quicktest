@@ -1,13 +1,12 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace FormsTest
 {
-	public class DemoPage : ContentPage
+	public class DemoPage : NavigationPage
 	{
-		public DemoPage()
+		public DemoPage() : base(new ContentPage())
 		{
-			Content = new StackLayout {
+			(CurrentPage as ContentPage).Content = new StackLayout {
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				Children = {
 					new Label {
@@ -15,7 +14,7 @@ namespace FormsTest
 					},
 					new Button {
 						Text = "Button",
-						Command = new Command(o => Console.WriteLine("Test")),
+						Command = new Command(o => Navigation.PushAsync(new ContentPage { Content = new Label{ Text = "Ok" } })),
 					},
 				},
 			};
