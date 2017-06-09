@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Xamarin.Forms;
@@ -78,20 +79,36 @@ namespace FormsTest
 			return "";
 		}
 
-		public void ShouldSee(string text)
-		{
-		}
-
-		public void Click(string text, View view = null)
+		List<View> Query(string text, View view = null)
 		{
 			view = view ?? CurrentPage.Content;
 
 			if (view is ScrollView)
-				Click(text, (view as ScrollView).Content);
+				return Query(text, (view as ScrollView).Content);
 
 			if (view is Layout<View>)
-				foreach (var child in (view as Layout<View>).Children)
-					Click(text, child);
+				return (view as Layout<View>).Children.SelectMany(child => Query(text, child)).ToList();
+
+			if ((view as Button)?.Text == text)
+				return new List<View> { view };
+
+			if ((view as Label)?.Text == text)
+				return new List<View> { view };
+
+			return new List<View>();
+		}
+
+		public void ShouldSee(string text)
+		{
+			if (Query(text).Any())
+				Console.WriteLine($"Seeing {text}");
+			else
+				Console.WriteLine($"Missing {text}!");
+		}
+
+		public void Click(string text)
+		{
+			var view = Query(text).First();
 
 			if (view is Button) {
 				var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
