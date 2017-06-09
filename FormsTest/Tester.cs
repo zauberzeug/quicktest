@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 using Xamarin.Forms;
 
 namespace FormsTest
@@ -80,8 +82,29 @@ namespace FormsTest
 		{
 		}
 
-		public void Click(string text)
+		public void Click(string text, View view = null)
 		{
+			view = view ?? CurrentPage.Content;
+
+			if (view is ScrollView)
+				Click(text, (view as ScrollView).Content);
+
+			if (view is Layout<View>)
+				foreach (var child in (view as Layout<View>).Children)
+					Click(text, child);
+
+			if (view is Button) {
+				var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
+				var method = typeof(Button).GetMethods(flags).First(m => m.Name.EndsWith("SendClicked", StringComparison.Ordinal));
+				method.Invoke(view, new object[] { });
+			}
+
+			if (view is Label)
+				view.GestureRecognizers.OfType<TapGestureRecognizer>().ToList().ForEach(gestureRecognizer => {
+					var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
+					var method = gestureRecognizer.GetType().GetMethod("SendTapped", flags);
+					method.Invoke(gestureRecognizer, new object[] { view });
+				});
 		}
 	}
 }

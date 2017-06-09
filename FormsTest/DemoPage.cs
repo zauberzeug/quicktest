@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace FormsTest
 {
@@ -14,6 +15,7 @@ namespace FormsTest
 					},
 					new Button {
 						Text = "Button",
+						Command = new Command(o => Console.WriteLine("Test")),
 					},
 				},
 			};
