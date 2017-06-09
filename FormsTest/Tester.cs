@@ -30,11 +30,6 @@ namespace FormsTest
 			}
 		}
 
-		protected void LogPage()
-		{
-			ResultPage.LogPage(CurrentPage);
-		}
-
 		protected abstract void RunTest();
 
 		public void TryRunTest()
@@ -93,6 +88,16 @@ namespace FormsTest
 					var method = gestureRecognizer.GetType().GetMethod("SendTapped", flags);
 					method.Invoke(gestureRecognizer, new object[] { view });
 				});
+		}
+
+		public void GoBack()
+		{
+			if (Page is NavigationPage) {
+				var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
+				var method = typeof(ContentPage).GetMethod("SendBackButtonPressed", flags);
+				method.Invoke(Page, new object[] { });
+			} else
+				throw new NotImplementedException($"Currently \"{nameof(GoBack)}()\" is supported for {nameof(NavigationPage)}s only.");
 		}
 	}
 }

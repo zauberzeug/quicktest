@@ -6,11 +6,11 @@
 		{
 			Click("Label");
 			ShouldSee("Label tapped");
+			GoBack();
 
 			Click("Button");
 			ShouldSee("Button clicked");
-
-			LogPage();
+			GoBack();
 		}
 	}
 }
