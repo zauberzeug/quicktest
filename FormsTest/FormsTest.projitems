@@ -13,5 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tester.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AppTester.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ResultPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TestException.cs" />
   </ItemGroup>
 </Project>

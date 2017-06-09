@@ -2,7 +2,7 @@
 {
 	public class AppTester : Tester
 	{
-		public override void RunTest()
+		protected override void RunTest()
 		{
 			Click("Label");
 			ShouldSee("Label tapped");

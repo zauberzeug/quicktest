@@ -10,9 +10,7 @@ namespace FormsTest
 	{
 		public Page Page;
 
-		public readonly ContentPage ResultPage = new ContentPage {
-			Title = nameof(Tester),
-		};
+		public readonly ResultPage ResultPage = new ResultPage();
 
 		ContentPage CurrentPage {
 			get {
@@ -32,51 +30,23 @@ namespace FormsTest
 			}
 		}
 
-		public abstract void RunTest();
-
-		public void LogPage()
+		protected void LogPage()
 		{
-			ResultPage.Content = new Label {
-				Text = ToString(CurrentPage.Content),
-				LineBreakMode = LineBreakMode.WordWrap,
-				MinimumWidthRequest = 1e6,
-				Margin = 8,
-			};
+			ResultPage.LogPage(CurrentPage);
 		}
 
-		static string ToString(View view)
+		protected abstract void RunTest();
+
+		public void TryRunTest()
 		{
-			if (view is ScrollView)
-				return ToString((view as ScrollView).Content);
-
-			if (view is Layout<View>) {
-				var tree = "";
-				foreach (var child in (view as Layout<View>).Children)
-					tree += ToString(child).Replace("\n", "\n    ") + "\n";
-				return tree.Trim();
+			try {
+				RunTest();
+				ResultPage.LogPage(CurrentPage);
+				ResultPage.LogInfo("Test succeeded");
+			} catch (TestException e) {
+				ResultPage.LogPage(CurrentPage);
+				ResultPage.LogError(e.Message);
 			}
-
-			if (view is ListView) {
-				var tree = "";
-				var listView = view as ListView;
-				foreach (var item in listView.ItemsSource) {
-					var itemView = (listView.ItemTemplate.CreateContent() as ViewCell).View as View;
-					itemView.BindingContext = item;
-					tree += ToString(itemView).Replace("\n", "\n    ") + "\n";
-				}
-				return tree.Trim();
-			}
-
-			if (view is Label)
-				return (view as Label).Text ?? "(null)";
-
-			if (view is Button)
-				return (view as Button).Text ?? "(null)";
-
-			if (view is SearchBar)
-				return (view as SearchBar).Placeholder;
-
-			return "";
 		}
 
 		List<View> Query(string text, View view = null)
@@ -100,15 +70,16 @@ namespace FormsTest
 
 		public void ShouldSee(string text)
 		{
-			if (Query(text).Any())
-				Console.WriteLine($"Seeing {text}");
-			else
-				Console.WriteLine($"Missing {text}!");
+			if (!Query(text).Any())
+				throw new NotFoundException(text);
 		}
 
 		public void Click(string text)
 		{
 			var view = Query(text).FirstOrDefault();
+
+			if (view == null)
+				throw new NotFoundException(text);
 
 			if (view is Button) {
 				var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;

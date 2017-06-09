@@ -28,7 +28,7 @@ namespace FormsTest
 				Detail = new NavigationPage(tester.ResultPage),
 			};
 
-			tester.RunTest();
+			tester.TryRunTest();
 		}
 
 		Button CreatePageOpener(string text, Func<NavigationPage> pageCreator)
