@@ -16,11 +16,12 @@ namespace FormsTest
 			MainPage = new MasterDetailPage {
 				Master = new ContentPage {
 					Title = " ",
+					Icon = Device.OS == TargetPlatform.iOS ? "menu.png" : null,
 					Content = new StackLayout {
 						VerticalOptions = LayoutOptions.CenterAndExpand,
 						Children = {
 							CreatePageOpener("Demo page", () => new DemoPage()),
-							CreatePageOpener("Test result",()=>new NavigationPage(tester.ResultPage)),
+							CreatePageOpener("Test result",() => new NavigationPage(tester.ResultPage)),
 						},
 					},
 				},
