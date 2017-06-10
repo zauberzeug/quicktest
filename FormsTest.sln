@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsTest.iOS", "iOS\FormsT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsTest.Droid", "Droid\FormsTest.Droid.csproj", "{2A73A727-FC9A-4650-A501-59B16F54D599}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DemoApp", "DemoApp\DemoApp.shproj", "{DEE10030-6F02-4C94-81CB-34B7020A38F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator

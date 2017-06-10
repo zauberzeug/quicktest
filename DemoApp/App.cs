@@ -1,7 +1,8 @@
 ﻿using System;
+using FormsTest;
 using Xamarin.Forms;
 
-namespace FormsTest
+namespace DemoApp
 {
 	public class App : Application
 	{

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace FormsTest
+namespace DemoApp
 {
 	public class DemoPage : NavigationPage
 	{
