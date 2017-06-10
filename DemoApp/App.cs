@@ -17,7 +17,7 @@ namespace DemoApp
 			MainPage = new MasterDetailPage {
 				Master = new ContentPage {
 					Title = " ",
-					Icon = Device.OS == TargetPlatform.iOS ? "menu.png" : null,
+					Icon = Device.RuntimePlatform == Device.iOS ? "menu.png" : null,
 					Content = new StackLayout {
 						VerticalOptions = LayoutOptions.CenterAndExpand,
 						Children = {
@@ -26,10 +26,11 @@ namespace DemoApp
 						},
 					},
 				},
-				Detail = new NavigationPage(tester.ResultPage),
+				Detail = demoPage,
+				//Detail = new NavigationPage(tester.ResultPage),
 			};
 
-			tester.TryRunTest();
+			//tester.TryRunTest();
 		}
 
 		Button CreatePageOpener(string text, Func<NavigationPage> pageCreator)
