@@ -1,7 +1,6 @@
 ﻿using DemoApp;
 using FormsTest;
 using NUnit.Framework;
-using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
 
 namespace NUnitTest

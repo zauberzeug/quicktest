@@ -7,8 +7,8 @@
     <ProjectGuid>{2A73A727-FC9A-4650-A501-59B16F54D599}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>FormsTest.Droid</RootNamespace>
-    <AssemblyName>FormsTest.Droid</AssemblyName>
+    <RootNamespace>DemoApp.Droid</RootNamespace>
+    <AssemblyName>DemoApp.Droid</AssemblyName>
     <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>

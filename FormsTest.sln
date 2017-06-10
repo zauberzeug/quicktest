@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FormsTest", "FormsTest\FormsTest.shproj", "{997F6DC3-F254-483F-8517-EA4BE1A8B364}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsTest.iOS", "iOS\FormsTest.iOS.csproj", "{854FFCD2-E0D1-4D69-9C01-DB3D24ECA83C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp.iOS", "DemoApp.iOS\DemoApp.iOS.csproj", "{854FFCD2-E0D1-4D69-9C01-DB3D24ECA83C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsTest.Droid", "Droid\FormsTest.Droid.csproj", "{2A73A727-FC9A-4650-A501-59B16F54D599}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp.Droid", "DemoApp.Droid\DemoApp.Droid.csproj", "{2A73A727-FC9A-4650-A501-59B16F54D599}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DemoApp", "DemoApp\DemoApp.shproj", "{DEE10030-6F02-4C94-81CB-34B7020A38F0}"
 EndProject
