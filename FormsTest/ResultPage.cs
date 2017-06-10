@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace FormsTest
 {
@@ -20,23 +21,27 @@ namespace FormsTest
 		public void LogInfo(string message)
 		{
 			Log(message, Color.Blue);
+			Console.WriteLine("Info: " + message);
 		}
 
 		public void LogError(string message)
 		{
 			Log(message, Color.Red);
+			Console.WriteLine("Error: " + message);
 		}
 
 		public void LogPage(ContentPage page)
 		{
+			var text = ToString(page.Content);
 			stackLayout.Children.Clear();
 			stackLayout.Children.Add(new Label {
-				Text = ToString(page.Content),
+				Text = text,
 				FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
 				LineBreakMode = LineBreakMode.WordWrap,
 				MinimumWidthRequest = 1e6,
 				Margin = new Thickness(10, 0),
 			});
+			Console.WriteLine(text);
 		}
 
 		void Log(string message, Color color)

@@ -38,6 +38,12 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Forms.Core.UnitTests">
+      <HintPath>..\packages\Xamarin.Forms.Mocks.2.3.4.2\lib\portable-net45+win8+wpa81+wp8\Xamarin.Forms.Core.UnitTests.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml.UnitTests">
+      <HintPath>..\packages\Xamarin.Forms.Mocks.2.3.4.2\lib\portable-net45+win8+wpa81+wp8\Xamarin.Forms.Xaml.UnitTests.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests.cs" />

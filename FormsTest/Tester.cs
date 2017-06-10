@@ -92,12 +92,12 @@ namespace FormsTest
 
 		public void GoBack()
 		{
-			if (Page is NavigationPage) {
+			if (Page is NavigationPage || Page is MasterDetailPage) {
 				var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 				var method = typeof(ContentPage).GetMethod("SendBackButtonPressed", flags);
 				method.Invoke(Page, new object[] { });
 			} else
-				throw new NotImplementedException($"Currently \"{nameof(GoBack)}()\" is supported for {nameof(NavigationPage)}s only.");
+				throw new NotImplementedException($"Currently \"{nameof(GoBack)}()\" is supported for {nameof(NavigationPage)}s and {nameof(MasterDetailPage)}s only.");
 		}
 	}
 }
