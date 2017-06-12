@@ -8,36 +8,36 @@ namespace FormsTest
 	[TestFixture]
 	public abstract class UserTest<T> where T : Application, new()
 	{
-		User tester;
+		User user;
 
 		[SetUp]
 		protected void Init()
 		{
 			MockForms.Init();
 
-			tester = new User(new T());
+			user = new User(new T());
 		}
 
 		protected void Tap(string text)
 		{
-			tester.Tap(text);
+			user.Tap(text);
 		}
 
 		protected void ShouldSee(string text)
 		{
-			Assert.That(tester.Contains(text));
+			Assert.That(user.Contains(text));
 		}
 
 		protected void GoBack()
 		{
-			tester.GoBack();
+			user.GoBack();
 		}
 
 		[TearDown]
 		public virtual void TearDown()
 		{
 			if (TestContext.CurrentContext.Result.Outcome == ResultState.Failure)
-				tester.PrintCurrentPage();
+				user.PrintCurrentPage();
 		}
 	}
 }
