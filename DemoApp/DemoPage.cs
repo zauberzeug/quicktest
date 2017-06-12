@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Collections.Generic;
+using Xamarin.Forms;
 
 namespace DemoApp
 {
@@ -29,12 +30,20 @@ namespace DemoApp
 				Command = new Command(o => OpenMessagePage("StackLayout tapped")),
 			});
 
+			var list = new List<string> { "A", "B", "C" };
+			var listView = new ListView {
+				ItemsSource = list,
+				ItemTemplate = new DataTemplate(typeof(TextCell)),
+			};
+			listView.ItemTemplate.SetBinding(TextCell.TextProperty, ".");
+
 			(CurrentPage as ContentPage).Content = new StackLayout {
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				Children = {
 					label,
 					button,
 					stackLayout,
+					listView,
 				},
 			};
 
