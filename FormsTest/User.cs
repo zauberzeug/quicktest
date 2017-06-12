@@ -33,59 +33,19 @@ namespace FormsTest
 			}
 		}
 
-		IEnumerable<Element> Query(string text, Element element = null)
+		public bool CanSee(string text)
 		{
-			element = element ?? CurrentPage;
-
-			if (element is ContentPage) {
-				if ((element as ContentPage).Title == text)
-					return new List<Element> { element };
-				return Query(text, (element as ContentPage).Content).Concat(
-					(element as Page).ToolbarItems.Where(t => t.Text == text));
-			}
-
-			if (element is ScrollView)
-				return Query(text, (element as ScrollView).Content);
-
-			if (element is Layout<View>)
-				return (element as Layout<View>).Children.SelectMany(child => Query(text, child)).ToList();
-
-			if (element is ListView)
-				foreach (var item in (element as ListView).ItemsSource) {
-					var content = (element as ListView).ItemTemplate.CreateContent();
-					if (content is TextCell) {
-						if ((item as string) == text)
-							return new List<Element> { element };
-					} else
-						throw new NotImplementedException($"Currently \"{content.GetType()}\" is not supported.");
-				}
-
-			if ((element as Button)?.Text == text)
-				return new List<Element> { element };
-
-			if ((element as Label)?.Text == text)
-				return new List<Element> { element };
-
-			return new List<Element>();
-		}
-
-		public bool Contains(string text)
-		{
-			return Query(text).Any();
+			return CurrentPage.Find(text).Any();
 		}
 
 		public void Tap(string text)
 		{
-			var element = Query(text).FirstOrDefault();
+			var element = CurrentPage.Find(text).FirstOrDefault();
 
 			if (element == null)
 				return;
 
-			if (element is Button) {
-				var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
-				var method = typeof(Button).GetMethods(flags).First(m => m.Name.EndsWith("SendClicked", StringComparison.Ordinal));
-				method.Invoke(element, new object[] { });
-			}
+			(element as Button)?.Tap();
 
 			if (element is ListView) {
 				var listView = element as ListView;
@@ -104,21 +64,9 @@ namespace FormsTest
 				}
 			}
 
-			if (element is ToolbarItem)
-				(element as ToolbarItem).Command.Execute(null);
+			(element as ToolbarItem)?.Tap();
 
-			while (element is View) {
-				var view = element as View;
-				var gestureRecognizers = view.GestureRecognizers.OfType<TapGestureRecognizer>().ToList();
-				gestureRecognizers.ForEach(gestureRecognizer => {
-					var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
-					var method = gestureRecognizer.GetType().GetMethod("SendTapped", flags);
-					method.Invoke(gestureRecognizer, new object[] { view });
-				});
-				if (gestureRecognizers.Any())
-					break;
-				element = element.Parent;
-			}
+			element.GetNearestAncestorWithTapGestureRecognizer()?.Tap();
 		}
 
 		public void GoBack()

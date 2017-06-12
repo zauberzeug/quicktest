@@ -25,7 +25,7 @@ namespace FormsTest
 
 		protected void ShouldSee(string text)
 		{
-			Assert.That(user.Contains(text));
+			Assert.That(user.CanSee(text));
 		}
 
 		protected void GoBack()
