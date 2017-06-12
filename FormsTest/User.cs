@@ -56,7 +56,7 @@ namespace FormsTest
 
 		public void PrintCurrentPage()
 		{
-			Console.WriteLine(CurrentPage.Render());
+			Console.WriteLine(CurrentPage.Render().Trim());
 		}
 	}
 }

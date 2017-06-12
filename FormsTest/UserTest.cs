@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using NUnit.Framework.Interfaces;
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
 
@@ -33,16 +32,10 @@ namespace FormsTest
 			user.GoBack();
 		}
 
-		protected void PrintCurrentPage()
-		{
-			user.PrintCurrentPage();
-		}
-
 		[TearDown]
 		public virtual void TearDown()
 		{
-			if (TestContext.CurrentContext.Result.Outcome == ResultState.Failure)
-				PrintCurrentPage();
+			user.PrintCurrentPage();
 		}
 	}
 }
