@@ -54,6 +54,12 @@ namespace NUnitTest
 		}
 
 		[Test]
+		public void TestPrintCurrentPage()
+		{
+			PrintCurrentPage();
+		}
+
+		[Test]
 		[Ignore("This is not a test")]
 		public void ScanForSendMethods()
 		{

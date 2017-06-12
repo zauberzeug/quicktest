@@ -33,11 +33,16 @@ namespace FormsTest
 			user.GoBack();
 		}
 
+		protected void PrintCurrentPage()
+		{
+			user.PrintCurrentPage();
+		}
+
 		[TearDown]
 		public virtual void TearDown()
 		{
 			if (TestContext.CurrentContext.Result.Outcome == ResultState.Failure)
-				user.PrintCurrentPage();
+				PrintCurrentPage();
 		}
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Xamarin.Forms;
@@ -60,7 +59,7 @@ namespace FormsTest
 
 		public void PrintCurrentPage()
 		{
-			Console.WriteLine(ToString(CurrentPage.Content));
+			Console.WriteLine(CurrentPage.Render());
 		}
 
 		static string ToString(View view)

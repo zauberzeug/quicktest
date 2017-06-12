@@ -68,8 +68,7 @@ namespace FormsTest
 					info.InvokeTapGestures = () => newTapGestureRecognizers.ForEach(r => {
 						var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 						var method = r.GetType().GetMethod("SendTapped", flags);
-						method.Invoke(r, new object[] { element
-	});
+						method.Invoke(r, new object[] { element });
 					});
 
 			return result;
@@ -92,6 +91,25 @@ namespace FormsTest
 			var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 			var method = listView.GetType().GetMethods(flags).First(m => m.Name == "NotifyRowTapped" && m.GetParameters().Length == 2);
 			method.Invoke(listView, new object[] { index, null });
+		}
+
+		public static string Render(this Element element)
+		{
+			var result = "· ";
+
+			result += (element as NavigationPage)?.CurrentPage.Render();
+			result += (element as ContentPage)?.Content.Render();
+
+			result += (element as ScrollView)?.Content.Render();
+
+			result += string.Join("", (element as Layout<View>)?.Children.Select(c => c.Render()) ?? new[] { "" });
+
+			result += (element as Label)?.Text;
+			result += (element as Button)?.Text;
+
+			result = "\n" + result.Replace("\n", "\n  ");
+
+			return result;
 		}
 	}
 }
