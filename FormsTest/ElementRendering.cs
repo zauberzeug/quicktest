@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Xamarin.Forms;
 
 namespace FormsTest
@@ -29,19 +28,14 @@ namespace FormsTest
 
 		public static string Render(this ListView listView)
 		{
-			var result = "\n";
+			var result = "";
 
 			foreach (var item in listView.ItemsSource) {
 				var content = listView.ItemTemplate.CreateContent();
-				if (content is TextCell) {
-					(content as TextCell).BindingContext = item;
-					result += $"- {(content as TextCell).Text}\n";
-				} else if (content is ViewCell) {
-					(content as ViewCell).BindingContext = item;
-					result += (content as ViewCell).View.Render();
-				} else
-					throw new NotImplementedException($"Currently \"{content.GetType()}\" is not supported.");
+				(content as Cell).BindingContext = item;
+				result += $"- {(content as TextCell)?.Text + (content as ViewCell)?.View.Render().Trim()}\n";
 			}
+
 			return result;
 		}
 	}

@@ -55,22 +55,12 @@ namespace FormsTest
 			var result = new List<ElementInfo>();
 			foreach (var item in listView.ItemsSource) {
 				var content = listView.ItemTemplate.CreateContent();
-				if (content is TextCell) {
-					(content as TextCell).BindingContext = item;
-					if ((content as TextCell).Text == text)
-						result.Add(new ElementInfo {
-							EnclosingListView = listView,
-							ListViewIndex = listView.ItemsSource.Cast<object>().ToList().IndexOf(item),
-						});
-				} else if (content is ViewCell) {
-					(content as ViewCell).BindingContext = item;
-					if ((content as ViewCell).View.Find(text).Any())
-						result.Add(new ElementInfo {
-							EnclosingListView = listView,
-							ListViewIndex = listView.ItemsSource.Cast<object>().ToList().IndexOf(item),
-						});
-				} else
-					throw new NotImplementedException($"Currently \"{content.GetType()}\" is not supported.");
+				(content as Cell).BindingContext = item;
+				if ((content as TextCell)?.Text == text || ((content as ViewCell)?.View.Find(text).Any() ?? false))
+					result.Add(new ElementInfo {
+						EnclosingListView = listView,
+						ListViewIndex = listView.ItemsSource.Cast<object>().ToList().IndexOf(item),
+					});
 			}
 			return result;
 		}

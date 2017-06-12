@@ -53,10 +53,7 @@ namespace FormsTest
 
 		public void GoBack()
 		{
-			if (page is NavigationPage || page is MasterDetailPage)
-				page.Invoke("SendBackButtonPressed");
-			else
-				throw new NotImplementedException($"Currently \"{nameof(GoBack)}()\" is supported for {nameof(NavigationPage)}s and {nameof(MasterDetailPage)}s only.");
+			page.Invoke("SendBackButtonPressed");
 		}
 
 		public void PrintCurrentPage()
