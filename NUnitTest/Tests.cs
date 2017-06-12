@@ -45,6 +45,13 @@ namespace NUnitTest
 		}
 
 		[Test]
+		public void TestGrid()
+		{
+			Tap("D");
+			ShouldSee("D tapped");
+		}
+
+		[Test]
 		public void TestToolbarItem()
 		{
 			Tap("ToolbarItem");

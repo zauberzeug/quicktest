@@ -11,6 +11,7 @@ namespace DemoApp
 			ItemTemplate = new DataTemplate(typeof(TextCell));
 
 			BackgroundColor = Color.GhostWhite;
+			HeightRequest = 200;
 
 			ItemTemplate.SetBinding(TextCell.TextProperty, ".");
 			ItemTapped += (sender, e) => App.PushMessagePage(e.Item + " tapped");
@@ -25,6 +26,7 @@ namespace DemoApp
 			ItemTemplate = new DataTemplate(typeof(DemoCell));
 
 			BackgroundColor = Color.GhostWhite;
+			HeightRequest = 200;
 
 			ItemTapped += (sender, e) => App.PushMessagePage(e.Item + " tapped");
 		}

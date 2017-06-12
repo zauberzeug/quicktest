@@ -16,5 +16,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoStack.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoListViews.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoToolbarItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoGrid.cs" />
   </ItemGroup>
 </Project>

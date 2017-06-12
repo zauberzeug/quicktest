@@ -8,14 +8,17 @@ namespace DemoApp
 		{
 			Title = "Demo page";
 
-			Content = new StackLayout {
-				VerticalOptions = LayoutOptions.CenterAndExpand,
-				Children = {
-					new DemoLabel(),
-					new DemoButton(),
-					new DemoStack(),
-					new DemoListViewWithTextCell(),
-					new DemoListViewWithViewCell(),
+			Content = new ScrollView {
+				Content = new StackLayout {
+					VerticalOptions = LayoutOptions.CenterAndExpand,
+					Children = {
+						new DemoLabel(),
+						new DemoButton(),
+						new DemoStack(),
+						new DemoListViewWithTextCell(),
+						new DemoListViewWithViewCell(),
+						new DemoGrid(),
+					},
 				},
 			};
 
