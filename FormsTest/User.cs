@@ -6,11 +6,11 @@ using Xamarin.Forms;
 
 namespace FormsTest
 {
-	public class Tester
+	public class User
 	{
 		readonly Page page;
 
-		public Tester(Application app)
+		public User(Application app)
 		{
 			page = app.MainPage;
 		}

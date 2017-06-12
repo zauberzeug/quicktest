@@ -9,6 +9,7 @@
     <Import_RootNamespace>FormsTest</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Tester.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UserTest.cs" />
   </ItemGroup>
 </Project>
