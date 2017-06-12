@@ -37,9 +37,12 @@ namespace FormsTest
 		{
 			element = element ?? CurrentPage;
 
-			if (element is ContentPage)
+			if (element is ContentPage) {
+				if ((element as ContentPage).Title == text)
+					return new List<Element> { element };
 				return Query(text, (element as ContentPage).Content).Concat(
 					(element as Page).ToolbarItems.Where(t => t.Text == text));
+			}
 
 			if (element is ScrollView)
 				return Query(text, (element as ScrollView).Content);
