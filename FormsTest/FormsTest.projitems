@@ -11,6 +11,8 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UserTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ElementExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ElementInteractions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ElementInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ElementRendering.cs" />
   </ItemGroup>
 </Project>
