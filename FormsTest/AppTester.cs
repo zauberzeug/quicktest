@@ -16,6 +16,9 @@
 			ShouldSee("StackLayout tapped");
 			GoBack();
 
+			Click("A");
+			ShouldSee("A tapped");
+
 			Click("ToolbarItem");
 			ShouldSee("ToolbarItem tapped");
 			GoBack();

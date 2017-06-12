@@ -36,6 +36,7 @@ namespace DemoApp
 				ItemTemplate = new DataTemplate(typeof(TextCell)),
 			};
 			listView.ItemTemplate.SetBinding(TextCell.TextProperty, ".");
+			listView.ItemTapped += (sender, e) => OpenMessagePage(e.Item + " tapped");
 
 			(CurrentPage as ContentPage).Content = new StackLayout {
 				VerticalOptions = LayoutOptions.CenterAndExpand,
