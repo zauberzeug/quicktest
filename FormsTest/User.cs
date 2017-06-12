@@ -74,7 +74,7 @@ namespace FormsTest
 			return Query(text).Any();
 		}
 
-		public void Click(string text)
+		public void Tap(string text)
 		{
 			var element = Query(text).FirstOrDefault();
 

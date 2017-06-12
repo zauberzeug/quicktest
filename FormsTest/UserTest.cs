@@ -18,9 +18,9 @@ namespace FormsTest
 			tester = new User(new T());
 		}
 
-		protected void Click(string text)
+		protected void Tap(string text)
 		{
-			tester.Click(text);
+			tester.Tap(text);
 		}
 
 		protected void ShouldSee(string text)

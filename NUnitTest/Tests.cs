@@ -13,42 +13,42 @@ namespace NUnitTest
 		[Test]
 		public void TestLabel()
 		{
-			Click("Label");
+			Tap("Label");
 			ShouldSee("Label tapped");
 		}
 
 		[Test]
 		public void TestButton()
 		{
-			Click("Button");
+			Tap("Button");
 			ShouldSee("Button tapped");
 		}
 
 		[Test]
 		public void TestNestedLabel()
 		{
-			Click("Nested label");
+			Tap("Nested label");
 			ShouldSee("StackLayout tapped");
 		}
 
 		[Test]
 		public void TestListView()
 		{
-			Click("A");
+			Tap("A");
 			ShouldSee("A tapped");
 		}
 
 		[Test]
 		public void TestToolbarItem()
 		{
-			Click("ToolbarItem");
+			Tap("ToolbarItem");
 			ShouldSee("ToolbarItem tapped");
 		}
 
 		[Test]
 		public void TestGoBack()
 		{
-			Click("Label");
+			Tap("Label");
 			GoBack();
 			ShouldSee("DemoPage");
 		}
