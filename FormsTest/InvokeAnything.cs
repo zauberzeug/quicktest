@@ -5,7 +5,9 @@ namespace FormsTest
 {
 	public static class InvokeAnything
 	{
-		static BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
+		static BindingFlags bindingFlags = BindingFlags.FlattenHierarchy |
+													   BindingFlags.NonPublic | BindingFlags.Public |
+													   BindingFlags.Instance | BindingFlags.Static;
 
 		public static void Invoke(this object obj, string methodName, params object[] parameters)
 		{

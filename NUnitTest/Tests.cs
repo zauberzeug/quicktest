@@ -80,7 +80,7 @@ namespace NUnitTest
 		[Ignore("This is not a test")]
 		public void ScanForSendMethods()
 		{
-			var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
+			var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy;
 			foreach (var type in typeof(Page).Assembly.GetTypes())
 				foreach (var method in type.GetMethods(flags))
 					if (method.Name.Contains("Send") || method.Name.Contains("Notify"))
