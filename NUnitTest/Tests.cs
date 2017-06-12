@@ -67,8 +67,8 @@ namespace NUnitTest
 			var mscorlib = typeof(Page).Assembly;
 			foreach (var type in mscorlib.GetTypes())
 				foreach (var method in type.GetMethods(flags))
-					if (method.Name.StartsWith("Send", StringComparison.Ordinal))
-						Console.WriteLine(type.Name + "." + method.Name);
+					if (method.Name.Contains("Send") || method.Name.Contains("Notify"))
+						Console.WriteLine(type.Name + ": " + method.Name);
 		}
 	}
 }

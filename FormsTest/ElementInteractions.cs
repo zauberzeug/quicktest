@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Xamarin.Forms;
 
 namespace FormsTest
@@ -48,11 +47,7 @@ namespace FormsTest
 				return;
 
 			foreach (var info in result.Where(i => i.InvokeTapGestures == null))
-				info.InvokeTapGestures = () => tapGestureRecognizers.ForEach(r => {
-					var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
-					var method = r.GetType().GetMethod("SendTapped", flags);
-					method.Invoke(r, new object[] { sourceElement });
-				});
+				info.InvokeTapGestures = () => tapGestureRecognizers.ForEach(r => r.Invoke("SendTapped", sourceElement));
 		}
 
 		public static List<ElementInfo> Find(this ListView listView, string text)
@@ -71,25 +66,6 @@ namespace FormsTest
 					throw new NotImplementedException($"Currently \"{content.GetType()}\" is not supported.");
 			}
 			return result;
-		}
-
-		public static void Tap(this Button button)
-		{
-			var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
-			var method = typeof(Button).GetMethods(flags).First(m => m.Name.EndsWith("SendClicked", StringComparison.Ordinal));
-			method.Invoke(button, new object[] { });
-		}
-
-		public static void Tap(this ToolbarItem toolbarItem)
-		{
-			toolbarItem.Command.Execute(null);
-		}
-
-		public static void Tap(this ListView listView, int index)
-		{
-			var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
-			var method = listView.GetType().GetMethods(flags).First(m => m.Name == "NotifyRowTapped" && m.GetParameters().Length == 2);
-			method.Invoke(listView, new object[] { index, null });
 		}
 	}
 }

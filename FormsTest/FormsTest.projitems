@@ -14,5 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ElementInteractions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ElementInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ElementRendering.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InvokeAnything.cs" />
   </ItemGroup>
 </Project>

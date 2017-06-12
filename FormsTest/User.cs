@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using Xamarin.Forms;
 
 namespace FormsTest
@@ -41,62 +40,23 @@ namespace FormsTest
 		{
 			var elementInfo = CurrentPage.Find(text).FirstOrDefault();
 
-			(elementInfo.Element as ToolbarItem)?.Tap();
-			(elementInfo.Element as Button)?.Tap();
-			elementInfo.EnclosingListView?.Tap(elementInfo.ListViewIndex);
+			(elementInfo.Element as ToolbarItem)?.Command.Execute(null);
+			(elementInfo.Element as Button)?.Invoke("SendClicked");
+			elementInfo.EnclosingListView?.Invoke("NotifyRowTapped", elementInfo.ListViewIndex, null);
 			elementInfo.InvokeTapGestures?.Invoke();
 		}
 
 		public void GoBack()
 		{
-			if (page is NavigationPage || page is MasterDetailPage) {
-				var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
-				var method = typeof(ContentPage).GetMethod("SendBackButtonPressed", flags);
-				method.Invoke(page, new object[] { });
-			} else
+			if (page is NavigationPage || page is MasterDetailPage)
+				page.Invoke("SendBackButtonPressed");
+			else
 				throw new NotImplementedException($"Currently \"{nameof(GoBack)}()\" is supported for {nameof(NavigationPage)}s and {nameof(MasterDetailPage)}s only.");
 		}
 
 		public void PrintCurrentPage()
 		{
 			Console.WriteLine(CurrentPage.Render());
-		}
-
-		static string ToString(View view)
-		{
-			if (view is ScrollView)
-				return ToString((view as ScrollView).Content);
-
-			if (view is Layout<View>) {
-				var tree = "Layout:\n";
-				foreach (var child in (view as Layout<View>).Children)
-					tree += ToString(child).Replace("\n", "\n    ") + "\n";
-				return tree.Trim();
-			}
-
-			if (view is ListView) {
-				var tree = "ListView:\n";
-				var listView = view as ListView;
-				foreach (var item in listView.ItemsSource) {
-					var content = listView.ItemTemplate.CreateContent();
-					if (content is TextCell)
-						tree += $"\"{item}\"\n";
-					else
-						throw new NotImplementedException($"Currently \"{content.GetType()}\" is not supported.");
-				}
-				return tree.Trim();
-			}
-
-			if (view is Label)
-				return $"Label: \"{(view as Label).Text ?? "(null)"}\"";
-
-			if (view is Button)
-				return $"Button: \"{(view as Button).Text ?? "(null)"}\"";
-
-			if (view is SearchBar)
-				return $"SearchBar: \"{(view as SearchBar).Placeholder}\"";
-
-			return "";
 		}
 	}
 }
