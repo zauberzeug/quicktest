@@ -62,6 +62,13 @@ namespace FormsTest
 							EnclosingListView = listView,
 							ListViewIndex = listView.ItemsSource.Cast<object>().ToList().IndexOf(item),
 						});
+				} else if (content is ViewCell) {
+					(content as ViewCell).BindingContext = item;
+					if ((content as ViewCell).View.Find(text).Any())
+						result.Add(new ElementInfo {
+							EnclosingListView = listView,
+							ListViewIndex = listView.ItemsSource.Cast<object>().ToList().IndexOf(item),
+						});
 				} else
 					throw new NotImplementedException($"Currently \"{content.GetType()}\" is not supported.");
 			}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using NUnit.Framework;
 using Xamarin.Forms;
 
 namespace FormsTest
@@ -38,7 +39,11 @@ namespace FormsTest
 
 		public void Tap(string text)
 		{
-			var elementInfo = CurrentPage.Find(text).FirstOrDefault();
+			var elementInfos = CurrentPage.Find(text);
+			Assert.That(elementInfos, Is.Not.Empty, $"Did not find \"{text}\" on current page");
+			Assert.That(elementInfos, Has.Count.LessThan(2), $"Found multiple \"{text}\" on current page");
+
+			var elementInfo = elementInfos.First();
 
 			(elementInfo.Element as ToolbarItem)?.Command.Execute(null);
 			(elementInfo.Element as Button)?.Invoke("SendClicked");

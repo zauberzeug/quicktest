@@ -36,6 +36,9 @@ namespace FormsTest
 				if (content is TextCell) {
 					(content as TextCell).BindingContext = item;
 					result += $"- {(content as TextCell).Text}\n";
+				} else if (content is ViewCell) {
+					(content as ViewCell).BindingContext = item;
+					result += (content as ViewCell).View.Render();
 				} else
 					throw new NotImplementedException($"Currently \"{content.GetType()}\" is not supported.");
 			}

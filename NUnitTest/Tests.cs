@@ -32,10 +32,16 @@ namespace NUnitTest
 		}
 
 		[Test]
-		public void TestListView()
+		public void TestListViews()
 		{
-			Tap("A");
-			ShouldSee("A tapped");
+			Tap("A1");
+			ShouldSee("A1 tapped");
+
+			GoBack();
+			ShouldSee("Demo page");
+
+			Tap("A2");
+			ShouldSee("A2 tapped");
 		}
 
 		[Test]
@@ -50,7 +56,7 @@ namespace NUnitTest
 		{
 			Tap("Label");
 			GoBack();
-			ShouldSee("DemoPage");
+			ShouldSee("Demo page");
 		}
 
 		[Test]

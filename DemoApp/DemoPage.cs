@@ -7,7 +7,7 @@ namespace DemoApp
 	{
 		public DemoPage()
 		{
-			Title = "DemoPage";
+			Title = "Demo page";
 
 			var label = new Label {
 				Text = "Label",
@@ -32,13 +32,18 @@ namespace DemoApp
 				Command = new Command(o => OpenMessagePage("StackLayout tapped")),
 			});
 
-			var list = new List<string> { "A", "B", "C" };
-			var listView = new ListView {
-				ItemsSource = list,
+			var listView1 = new ListView {
+				ItemsSource = new List<string> { "A1", "B1", "C1" },
 				ItemTemplate = new DataTemplate(typeof(TextCell)),
 			};
-			listView.ItemTemplate.SetBinding(TextCell.TextProperty, ".");
-			listView.ItemTapped += (sender, e) => OpenMessagePage(e.Item + " tapped");
+			listView1.ItemTemplate.SetBinding(TextCell.TextProperty, ".");
+			listView1.ItemTapped += (sender, e) => OpenMessagePage(e.Item + " tapped");
+
+			var listView2 = new ListView {
+				ItemsSource = new List<string> { "A2", "B2", "C2" },
+				ItemTemplate = new DataTemplate(typeof(CustomCell)),
+			};
+			listView2.ItemTapped += (sender, e) => OpenMessagePage(e.Item + " tapped");
 
 			Content = new StackLayout {
 				VerticalOptions = LayoutOptions.CenterAndExpand,
@@ -46,7 +51,8 @@ namespace DemoApp
 					label,
 					button,
 					stackLayout,
-					listView,
+					listView1,
+					listView2,
 				},
 			};
 
@@ -59,10 +65,23 @@ namespace DemoApp
 		void OpenMessagePage(string message)
 		{
 			Navigation.PushAsync(new ContentPage {
+				Title = "Message page",
 				Content = new Label {
 					Text = message,
 				},
 			});
+		}
+	}
+
+	public class CustomCell : ViewCell
+	{
+		public CustomCell()
+		{
+			var label = new Label();
+			label.SetBinding(Label.TextProperty, ".");
+			View = new StackLayout {
+				Children = { label },
+			};
 		}
 	}
 }
