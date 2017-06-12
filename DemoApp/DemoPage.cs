@@ -7,6 +7,8 @@ namespace DemoApp
 	{
 		public DemoPage()
 		{
+			Title = "DemoPage";
+
 			var label = new Label {
 				Text = "Label",
 			};

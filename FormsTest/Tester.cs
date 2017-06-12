@@ -127,5 +127,47 @@ namespace FormsTest
 			} else
 				throw new NotImplementedException($"Currently \"{nameof(GoBack)}()\" is supported for {nameof(NavigationPage)}s and {nameof(MasterDetailPage)}s only.");
 		}
+
+		public void PrintCurrentPage()
+		{
+			Console.WriteLine(ToString(CurrentPage.Content));
+		}
+
+		static string ToString(View view)
+		{
+			if (view is ScrollView)
+				return ToString((view as ScrollView).Content);
+
+			if (view is Layout<View>) {
+				var tree = "Layout:\n";
+				foreach (var child in (view as Layout<View>).Children)
+					tree += ToString(child).Replace("\n", "\n    ") + "\n";
+				return tree.Trim();
+			}
+
+			if (view is ListView) {
+				var tree = "ListView:\n";
+				var listView = view as ListView;
+				foreach (var item in listView.ItemsSource) {
+					var content = listView.ItemTemplate.CreateContent();
+					if (content is TextCell)
+						tree += $"\"{item}\"\n";
+					else
+						throw new NotImplementedException($"Currently \"{content.GetType()}\" is not supported.");
+				}
+				return tree.Trim();
+			}
+
+			if (view is Label)
+				return $"Label: \"{(view as Label).Text ?? "(null)"}\"";
+
+			if (view is Button)
+				return $"Button: \"{(view as Button).Text ?? "(null)"}\"";
+
+			if (view is SearchBar)
+				return $"SearchBar: \"{(view as SearchBar).Placeholder}\"";
+
+			return "";
+		}
 	}
 }
