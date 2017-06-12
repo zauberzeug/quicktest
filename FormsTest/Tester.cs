@@ -44,12 +44,13 @@ namespace FormsTest
 			}
 		}
 
-		List<Element> Query(string text, Element element = null)
+		IEnumerable<Element> Query(string text, Element element = null)
 		{
 			element = element ?? CurrentPage;
 
 			if (element is ContentPage)
-				return Query(text, (element as ContentPage).Content);
+				return Query(text, (element as ContentPage).Content).Concat(
+					(element as Page).ToolbarItems.Where(t => t.Text == text));
 
 			if (element is ScrollView)
 				return Query(text, (element as ScrollView).Content);
@@ -84,6 +85,9 @@ namespace FormsTest
 				var method = typeof(Button).GetMethods(flags).First(m => m.Name.EndsWith("SendClicked", StringComparison.Ordinal));
 				method.Invoke(element, new object[] { });
 			}
+
+			if (element is ToolbarItem)
+				(element as ToolbarItem).Command.Execute(null);
 
 			while (element is View) {
 				var view = element as View;

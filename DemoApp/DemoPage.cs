@@ -15,7 +15,7 @@ namespace DemoApp
 
 			var button = new Button {
 				Text = "Button",
-				Command = new Command(o => OpenMessagePage("Button clicked")),
+				Command = new Command(o => OpenMessagePage("Button tapped")),
 			};
 
 			var stackLayout = new StackLayout {
@@ -37,6 +37,11 @@ namespace DemoApp
 					stackLayout,
 				},
 			};
+
+			(CurrentPage as ContentPage).ToolbarItems.Add(new ToolbarItem {
+				Text = "ToolbarItem",
+				Command = new Command(o => OpenMessagePage("ToolbarItem tapped")),
+			});
 		}
 
 		void OpenMessagePage(string message)

@@ -9,11 +9,15 @@
 			GoBack();
 
 			Click("Button");
-			ShouldSee("Button clicked");
+			ShouldSee("Button tapped");
 			GoBack();
 
 			Click("Nested label");
 			ShouldSee("StackLayout tapped");
+			GoBack();
+
+			Click("ToolbarItem");
+			ShouldSee("ToolbarItem tapped");
 			GoBack();
 		}
 	}
