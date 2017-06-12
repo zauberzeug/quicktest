@@ -64,8 +64,7 @@ namespace NUnitTest
 		public void ScanForSendMethods()
 		{
 			var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
-			var mscorlib = typeof(Page).Assembly;
-			foreach (var type in mscorlib.GetTypes())
+			foreach (var type in typeof(Page).Assembly.GetTypes())
 				foreach (var method in type.GetMethods(flags))
 					if (method.Name.Contains("Send") || method.Name.Contains("Notify"))
 						Console.WriteLine(type.Name + ": " + method.Name);

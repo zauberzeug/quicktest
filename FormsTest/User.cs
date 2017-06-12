@@ -46,7 +46,7 @@ namespace FormsTest
 			var elementInfo = elementInfos.First();
 
 			(elementInfo.Element as ToolbarItem)?.Command.Execute(null);
-			(elementInfo.Element as Button)?.Invoke("SendClicked");
+			(elementInfo.Element as Button)?.Command.Execute(null);
 			elementInfo.EnclosingListView?.Invoke("NotifyRowTapped", elementInfo.ListViewIndex, null);
 			elementInfo.InvokeTapGestures?.Invoke();
 		}

@@ -11,5 +11,10 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoLabel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoStack.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoListViews.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoToolbarItem.cs" />
   </ItemGroup>
 </Project>
