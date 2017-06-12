@@ -40,33 +40,12 @@ namespace FormsTest
 
 		public void Tap(string text)
 		{
-			var element = CurrentPage.Find(text).FirstOrDefault();
+			var elementInfo = CurrentPage.Find(text).FirstOrDefault();
 
-			if (element == null)
-				return;
-
-			(element as Button)?.Tap();
-
-			if (element is ListView) {
-				var listView = element as ListView;
-				var index = 0;
-				foreach (var item in listView.ItemsSource) {
-					var content = listView.ItemTemplate.CreateContent();
-					if (content is TextCell) {
-						if ((item as string) == text) {
-							var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
-							var method = listView.GetType().GetMethods(flags).First(m => m.Name == "NotifyRowTapped" && m.GetParameters().Length == 2);
-							method.Invoke(listView, new object[] { index, null });
-						}
-					} else
-						throw new NotImplementedException($"Currently \"{content.GetType()}\" is not supported.");
-					index++;
-				}
-			}
-
-			(element as ToolbarItem)?.Tap();
-
-			element.GetNearestAncestorWithTapGestureRecognizer()?.Tap();
+			(elementInfo.Element as ToolbarItem)?.Tap();
+			(elementInfo.Element as Button)?.Tap();
+			elementInfo.EnclosingListView?.Tap(elementInfo.ListViewIndex);
+			elementInfo.InvokeTapGestures?.Invoke();
 		}
 
 		public void GoBack()
