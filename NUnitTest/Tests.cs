@@ -22,11 +22,27 @@ namespace NUnitTest
 		{
 			var app = new App();
 
-			var tester = new AppTester {
-				Page = app.MainPage,
-			};
+			var tester = new Tester(app);
 
-			tester.TryRunTest();
+			tester.Click("Label");
+			Assert.That(tester.Contains("Label tapped"));
+			tester.GoBack();
+
+			tester.Click("Button");
+			Assert.That(tester.Contains("Button tapped"));
+			tester.GoBack();
+
+			tester.Click("Nested label");
+			Assert.That(tester.Contains("StackLayout tapped"));
+			tester.GoBack();
+
+			tester.Click("A");
+			Assert.That(tester.Contains("A tapped"));
+			tester.GoBack();
+
+			tester.Click("ToolbarItem");
+			Assert.That(tester.Contains("ToolbarItem tapped"));
+			tester.GoBack();
 		}
 
 		[Test]

@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace DemoApp
 {
-	public class DemoPage : NavigationPage
+	public class DemoPage : ContentPage
 	{
-		public DemoPage() : base(new ContentPage())
+		public DemoPage()
 		{
 			var label = new Label {
 				Text = "Label",
@@ -38,7 +38,7 @@ namespace DemoApp
 			listView.ItemTemplate.SetBinding(TextCell.TextProperty, ".");
 			listView.ItemTapped += (sender, e) => OpenMessagePage(e.Item + " tapped");
 
-			(CurrentPage as ContentPage).Content = new StackLayout {
+			Content = new StackLayout {
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				Children = {
 					label,
@@ -48,7 +48,7 @@ namespace DemoApp
 				},
 			};
 
-			(CurrentPage as ContentPage).ToolbarItems.Add(new ToolbarItem {
+			ToolbarItems.Add(new ToolbarItem {
 				Text = "ToolbarItem",
 				Command = new Command(o => OpenMessagePage("ToolbarItem tapped")),
 			});

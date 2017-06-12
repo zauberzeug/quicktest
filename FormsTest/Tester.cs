@@ -6,20 +6,23 @@ using Xamarin.Forms;
 
 namespace FormsTest
 {
-	public abstract class Tester
+	public class Tester
 	{
-		public Page Page;
+		readonly Page page;
 
-		public readonly ResultPage ResultPage = new ResultPage();
+		public Tester(Application app)
+		{
+			page = app.MainPage;
+		}
 
 		ContentPage CurrentPage {
 			get {
-				if (Page is ContentPage)
-					return Page as ContentPage;
-				if (Page is NavigationPage)
-					return (Page as NavigationPage).CurrentPage as ContentPage;
-				if (Page is MasterDetailPage) {
-					var masterDetailPage = Page as MasterDetailPage;
+				if (page is ContentPage)
+					return page as ContentPage;
+				if (page is NavigationPage)
+					return (page as NavigationPage).CurrentPage as ContentPage;
+				if (page is MasterDetailPage) {
+					var masterDetailPage = page as MasterDetailPage;
 					if (masterDetailPage.IsPresented)
 						return masterDetailPage.Master as ContentPage;
 					if (masterDetailPage.Navigation.ModalStack.Any())
@@ -27,20 +30,6 @@ namespace FormsTest
 					return (masterDetailPage.Detail as NavigationPage).CurrentPage as ContentPage;
 				}
 				return null;
-			}
-		}
-
-		protected abstract void RunTest();
-
-		public void TryRunTest()
-		{
-			try {
-				RunTest();
-				ResultPage.LogPage(CurrentPage);
-				ResultPage.LogInfo("Test succeeded");
-			} catch (TestException e) {
-				ResultPage.LogPage(CurrentPage);
-				ResultPage.LogError(e.Message);
 			}
 		}
 
@@ -77,10 +66,9 @@ namespace FormsTest
 			return new List<Element>();
 		}
 
-		public void ShouldSee(string text)
+		public bool Contains(string text)
 		{
-			if (!Query(text).Any())
-				throw new NotFoundException(text);
+			return Query(text).Any();
 		}
 
 		public void Click(string text)
@@ -88,7 +76,7 @@ namespace FormsTest
 			var element = Query(text).FirstOrDefault();
 
 			if (element == null)
-				throw new NotFoundException(text);
+				return;
 
 			if (element is Button) {
 				var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
@@ -132,10 +120,10 @@ namespace FormsTest
 
 		public void GoBack()
 		{
-			if (Page is NavigationPage || Page is MasterDetailPage) {
+			if (page is NavigationPage || page is MasterDetailPage) {
 				var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 				var method = typeof(ContentPage).GetMethod("SendBackButtonPressed", flags);
-				method.Invoke(Page, new object[] { });
+				method.Invoke(page, new object[] { });
 			} else
 				throw new NotImplementedException($"Currently \"{nameof(GoBack)}()\" is supported for {nameof(NavigationPage)}s and {nameof(MasterDetailPage)}s only.");
 		}
