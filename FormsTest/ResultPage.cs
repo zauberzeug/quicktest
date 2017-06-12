@@ -66,12 +66,14 @@ namespace FormsTest
 			}
 
 			if (view is ListView) {
-				var tree = "";
+				var tree = "ListView:\n";
 				var listView = view as ListView;
 				foreach (var item in listView.ItemsSource) {
-					var itemView = (listView.ItemTemplate.CreateContent() as ViewCell).View as View;
-					itemView.BindingContext = item;
-					tree += ToString(itemView).Replace("\n", "\n    ") + "\n";
+					var content = listView.ItemTemplate.CreateContent();
+					if (content is TextCell)
+						tree += item + "\n";
+					else
+						throw new NotImplementedException($"Currently \"{content.GetType()}\" is not supported.");
 				}
 				return tree.Trim();
 			}

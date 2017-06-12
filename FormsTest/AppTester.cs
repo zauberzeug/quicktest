@@ -18,6 +18,7 @@
 
 			Click("A");
 			ShouldSee("A tapped");
+			GoBack();
 
 			Click("ToolbarItem");
 			ShouldSee("ToolbarItem tapped");

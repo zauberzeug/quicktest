@@ -58,6 +58,16 @@ namespace FormsTest
 			if (element is Layout<View>)
 				return (element as Layout<View>).Children.SelectMany(child => Query(text, child)).ToList();
 
+			if (element is ListView)
+				foreach (var item in (element as ListView).ItemsSource) {
+					var content = (element as ListView).ItemTemplate.CreateContent();
+					if (content is TextCell) {
+						if ((item as string) == text)
+							return new List<Element> { element };
+					} else
+						throw new NotImplementedException($"Currently \"{content.GetType()}\" is not supported.");
+				}
+
 			if ((element as Button)?.Text == text)
 				return new List<Element> { element };
 
@@ -84,6 +94,23 @@ namespace FormsTest
 				var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 				var method = typeof(Button).GetMethods(flags).First(m => m.Name.EndsWith("SendClicked", StringComparison.Ordinal));
 				method.Invoke(element, new object[] { });
+			}
+
+			if (element is ListView) {
+				var listView = element as ListView;
+				var index = 0;
+				foreach (var item in listView.ItemsSource) {
+					var content = listView.ItemTemplate.CreateContent();
+					if (content is TextCell) {
+						if ((item as string) == text) {
+							var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
+							var method = listView.GetType().GetMethods(flags).First(m => m.Name == "NotifyRowTapped" && m.GetParameters().Length == 2);
+							method.Invoke(listView, new object[] { index, null });
+						}
+					} else
+						throw new NotImplementedException($"Currently \"{content.GetType()}\" is not supported.");
+					index++;
+				}
 			}
 
 			if (element is ToolbarItem)
