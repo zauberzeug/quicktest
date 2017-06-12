@@ -12,6 +12,11 @@ namespace FormsTest
 		public User(Application app)
 		{
 			page = app.MainPage;
+
+			if (page is NavigationPage) {
+				(page as NavigationPage).Pushed += (sender, e) => (page as IPageController).SendAppearing();
+				(page as NavigationPage).Popped += (sender, e) => (page as IPageController).SendDisappearing();
+			}
 		}
 
 		ContentPage CurrentPage {
