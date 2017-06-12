@@ -44,23 +44,26 @@ namespace FormsTest
 			}
 		}
 
-		List<View> Query(string text, View view = null)
+		List<Element> Query(string text, Element element = null)
 		{
-			view = view ?? CurrentPage.Content;
+			element = element ?? CurrentPage;
 
-			if (view is ScrollView)
-				return Query(text, (view as ScrollView).Content);
+			if (element is ContentPage)
+				return Query(text, (element as ContentPage).Content);
 
-			if (view is Layout<View>)
-				return (view as Layout<View>).Children.SelectMany(child => Query(text, child)).ToList();
+			if (element is ScrollView)
+				return Query(text, (element as ScrollView).Content);
 
-			if ((view as Button)?.Text == text)
-				return new List<View> { view };
+			if (element is Layout<View>)
+				return (element as Layout<View>).Children.SelectMany(child => Query(text, child)).ToList();
 
-			if ((view as Label)?.Text == text)
-				return new List<View> { view };
+			if ((element as Button)?.Text == text)
+				return new List<Element> { element };
 
-			return new List<View>();
+			if ((element as Label)?.Text == text)
+				return new List<Element> { element };
+
+			return new List<Element>();
 		}
 
 		public void ShouldSee(string text)
@@ -71,23 +74,29 @@ namespace FormsTest
 
 		public void Click(string text)
 		{
-			var view = Query(text).FirstOrDefault();
+			var element = Query(text).FirstOrDefault();
 
-			if (view == null)
+			if (element == null)
 				throw new NotFoundException(text);
 
-			if (view is Button) {
+			if (element is Button) {
 				var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 				var method = typeof(Button).GetMethods(flags).First(m => m.Name.EndsWith("SendClicked", StringComparison.Ordinal));
-				method.Invoke(view, new object[] { });
+				method.Invoke(element, new object[] { });
 			}
 
-			if (view is Label)
-				view.GestureRecognizers.OfType<TapGestureRecognizer>().ToList().ForEach(gestureRecognizer => {
+			while (element is View) {
+				var view = element as View;
+				var gestureRecognizers = view.GestureRecognizers.OfType<TapGestureRecognizer>().ToList();
+				gestureRecognizers.ForEach(gestureRecognizer => {
 					var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 					var method = gestureRecognizer.GetType().GetMethod("SendTapped", flags);
 					method.Invoke(gestureRecognizer, new object[] { view });
 				});
+				if (gestureRecognizers.Any())
+					break;
+				element = element.Parent;
+			}
 		}
 
 		public void GoBack()

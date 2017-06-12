@@ -13,7 +13,7 @@
 			GoBack();
 
 			Click("Nested label");
-			ShouldSee("StackLayout clicked");
+			ShouldSee("StackLayout tapped");
 			GoBack();
 		}
 	}

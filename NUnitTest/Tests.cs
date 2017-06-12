@@ -18,7 +18,7 @@ namespace NUnitTest
 		}
 
 		[Test]
-		public void AppLaunches()
+		public void TestApp()
 		{
 			var app = new App();
 
@@ -30,6 +30,7 @@ namespace NUnitTest
 		}
 
 		[Test]
+		[Ignore("This is not a test")]
 		public void ScanForSendMethods()
 		{
 			var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
