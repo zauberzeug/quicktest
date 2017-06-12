@@ -67,6 +67,16 @@ namespace NUnitTest
 		}
 
 		[Test]
+		public void TestDisAppearingPage()
+		{
+			Tap("DemoDisAppearing");
+			ShouldSee("Appeared");
+
+			GoBack();
+			ShouldSee("Disappearing");
+		}
+
+		[Test]
 		[Ignore("This is not a test")]
 		public void ScanForSendMethods()
 		{

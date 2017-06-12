@@ -9,9 +9,14 @@ namespace DemoApp
 			MainPage = new NavigationPage(new DemoPage());
 		}
 
+		public static void PushPage(ContentPage page)
+		{
+			(Current.MainPage as NavigationPage).PushAsync(page);
+		}
+
 		public static void PushMessagePage(string message)
 		{
-			(Current.MainPage as NavigationPage).PushAsync(new ContentPage {
+			PushPage(new ContentPage {
 				Title = "Message page",
 				Content = new Label {
 					Text = message,
