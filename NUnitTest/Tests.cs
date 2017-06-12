@@ -77,6 +77,17 @@ namespace NUnitTest
 		}
 
 		[Test]
+		public void TestAlert()
+		{
+			Tap("DemoAlert");
+			ShouldSee("Message");
+			//ShouldNotSee("Demo page"); // TODO
+
+			Tap("Ok");
+			ShouldSee("Demo page");
+		}
+
+		[Test]
 		[Ignore("This is not a test")]
 		public void ScanForSendMethods()
 		{

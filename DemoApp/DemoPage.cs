@@ -19,6 +19,7 @@ namespace DemoApp
 						new DemoListViewWithViewCell(),
 						new DemoGrid(),
 						new DemoDisAppearing(),
+						new DemoAlert(),
 					},
 				},
 			};
