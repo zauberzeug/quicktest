@@ -53,7 +53,7 @@ namespace FormsTest
 
 		public void GoBack()
 		{
-			page.Invoke("SendBackButtonPressed");
+			page.SendBackButtonPressed();
 		}
 
 		public void PrintCurrentPage()
