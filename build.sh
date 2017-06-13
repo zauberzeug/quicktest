@@ -1,17 +1,8 @@
   #!/bin/bash
 set -x
 
-VERSION="0.1"
-
-# XAMARIN_TOOLS=/Library/Frameworks/Mono.framework/Versions/Current/Commands/
-# NUGET="$XAMARIN_TOOLS/nuget"
-# XBUILD="$XAMARIN_TOOLS/xbuild"
-# MONO="$XAMARIN_TOOLS/mono"
-
-if [[ $1 ]]; then
-  echo "$1 was provided as a build number -- assuming we are executed on jenkins -> appending to version string"
-  VERSION=$VERSION.$1
-fi
+# get latest git tag and increase by one (see https://stackoverflow.com/questions/4485399/how-can-i-bump-a-version-number-using-bash)
+VERSION=`git describe --abbrev=0 | awk -F. '/[0-9]+\./{$NF+=1;OFS=".";print}'`
 
 echo "setting version to $VERSION"
 
@@ -52,16 +43,15 @@ TAG="v$VERSION"
 #git tag -a $TAG -m '' $GIT_COMMIT || exit 1
 #git push origin $TAG || exit 1
 
-nuget restore FormsTest.sln || exit 1
+nuget restore UserFlow.sln || exit 1
 updateAssemblyInfos .
 
-#xbuild /p:Configuration=Release FormsTest.sln || exit 1
+xbuild /p:Configuration=Release UserFlow.sln || exit 1
 
 pushd packages && nuget install Nunit.Runners && popd
 export MONO_IOMAP=all # this fixes slash, backslash path seperator problems within nunit test runner
 NUNIT="mono packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe"
-$NUNIT -config=Release "NUnitTest/NUnitTest.csproj" || exit 1
+#$NUNIT -config=Release "Tests/Tests.csproj" || exit 1
 
-rm *.nupkg
 packNuGet userflow.nuspec
-#publishNuGet *.nupkg
+publishNuGet UserFlow.$VERSION.nupkg
