@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
 
-namespace FormsTest
+namespace UserFlow
 {
 	public static class InvokeAnything
 	{

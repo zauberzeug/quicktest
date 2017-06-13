@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace FormsTest
+namespace UserFlow
 {
 	public class ElementInfo
 	{

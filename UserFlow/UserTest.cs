@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
 
-namespace FormsTest
+namespace UserFlow
 {
 	[TestFixture]
 	public abstract class UserTest<T> where T : Application, new()

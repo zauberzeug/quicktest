@@ -3,7 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Xamarin.Forms;
 
-namespace FormsTest
+namespace UserFlow
 {
 	public class User
 	{
