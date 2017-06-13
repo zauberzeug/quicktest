@@ -53,5 +53,5 @@ NUNIT="mono packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe"
 packNuGet userflow.nuspec
 publishNuGet UserFlow.$VERSION.nupkg
 
-git commit -am 'deployed nuget package v$VERSION' || exit 1
+git commit -am "nuget package v${VERSION}" || exit 1
 git tag -a $VERSION -m ''  || exit 1
