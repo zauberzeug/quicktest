@@ -13,6 +13,10 @@ namespace UserFlow
 		{
 			page = app.MainPage;
 
+			MessagingCenter.Subscribe<Page, Xamarin.Forms.Internals.AlertArguments>(this, Page.AlertSignalName, (obj, obj1) => {
+				Console.WriteLine("Showing Dialog");
+			});
+
 			if (page is NavigationPage) {
 				(page as NavigationPage).Pushed += (sender, e) => (page as IPageController).SendAppearing();
 				(page as NavigationPage).Popped += (sender, e) => (page as IPageController).SendDisappearing();
