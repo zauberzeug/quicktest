@@ -70,7 +70,7 @@ namespace NUnitTest
 		public void TestDisAppearingPage()
 		{
 			Tap("DemoDisAppearing");
-			ShouldSee("Appeared");
+			ShouldSee("Appeared!");
 
 			GoBack();
 			ShouldSee("Disappearing");

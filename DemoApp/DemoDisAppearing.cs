@@ -21,6 +21,8 @@ namespace DemoApp
 			Content = new Label {
 				Text = "Constructed",
 			};
+
+			Appearing += (sender, e) => (Content as Label).Text += "!";
 		}
 
 		protected override void OnAppearing()
