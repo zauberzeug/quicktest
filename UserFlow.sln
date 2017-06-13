@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp.Droid", "DemoApp.Dr
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DemoApp", "DemoApp\DemoApp.shproj", "{DEE10030-6F02-4C94-81CB-34B7020A38F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTest", "NUnitTest\NUnitTest.csproj", "{9E0BC72C-E2A5-41CE-B33B-BFA9233733DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{9E0BC72C-E2A5-41CE-B33B-BFA9233733DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserFlow", "UserFlow\UserFlow.csproj", "{A11334E1-28E5-43CE-AA56-D66C9E117159}"
 EndProject

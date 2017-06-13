@@ -5,7 +5,7 @@ using UserFlow;
 using NUnit.Framework;
 using Xamarin.Forms;
 
-namespace NUnitTest
+namespace Tests
 {
 	[TestFixture]
 	public class Tests : UserTest<App>
