@@ -39,5 +39,5 @@ $NUNIT -config=Release "Tests/Tests.csproj" || exit 1
 packNuGet userflow.nuspec
 publishNuGet UserFlow.$VERSION.nupkg
 
-git commit -am "nuget package v${VERSION}" || exit 1
+git commit -am "nuget package ${VERSION}" || exit 1
 git tag -a $VERSION -m ''  || exit 1
