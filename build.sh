@@ -39,10 +39,6 @@ function updateAssemblyInfos {
     done
 }
 
-TAG="v$VERSION"
-#git tag -a $TAG -m '' $GIT_COMMIT || exit 1
-#git push origin $TAG || exit 1
-
 nuget restore UserFlow.sln || exit 1
 updateAssemblyInfos .
 
@@ -53,5 +49,9 @@ export MONO_IOMAP=all # this fixes slash, backslash path seperator problems with
 NUNIT="mono packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe"
 #$NUNIT -config=Release "Tests/Tests.csproj" || exit 1
 
+
 packNuGet userflow.nuspec
 publishNuGet UserFlow.$VERSION.nupkg
+
+git commit -am 'deployed nuget package v$VERSION' || exit 1
+git tag -a $VERSION -m ''  || exit 1
