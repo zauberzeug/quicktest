@@ -21,19 +21,7 @@ namespace FormsTest
 
 		ContentPage CurrentPage {
 			get {
-				if (page is ContentPage)
-					return page as ContentPage;
-				if (page is NavigationPage)
-					return (page as NavigationPage).CurrentPage as ContentPage;
-				if (page is MasterDetailPage) {
-					var masterDetailPage = page as MasterDetailPage;
-					if (masterDetailPage.IsPresented)
-						return masterDetailPage.Master as ContentPage;
-					if (masterDetailPage.Navigation.ModalStack.Any())
-						return masterDetailPage.Navigation.ModalStack.Last() as ContentPage;
-					return (masterDetailPage.Detail as NavigationPage).CurrentPage as ContentPage;
-				}
-				return null;
+				return page.Navigation.NavigationStack.Concat(page.Navigation.ModalStack).Last() as ContentPage;
 			}
 		}
 

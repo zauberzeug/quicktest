@@ -19,5 +19,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoDisAppearing.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoAlert.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoModalPage.cs" />
   </ItemGroup>
 </Project>

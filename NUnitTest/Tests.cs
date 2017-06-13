@@ -88,6 +88,16 @@ namespace NUnitTest
 		}
 
 		[Test]
+		public void TestModalPage()
+		{
+			Tap("DemoModalPage");
+			ShouldSee("Modal page pushed");
+
+			Tap("Close");
+			ShouldSee("Demo page");
+		}
+
+		[Test]
 		[Ignore("This is not a test")]
 		public void ScanForSendMethods()
 		{

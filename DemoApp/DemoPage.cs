@@ -20,6 +20,7 @@ namespace DemoApp
 						new DemoGrid(),
 						new DemoDisAppearing(),
 						new DemoAlert(),
+						new DemoModalPage(),
 					},
 				},
 			};
