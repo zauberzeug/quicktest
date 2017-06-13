@@ -27,28 +27,14 @@ function publishNuGet {
   #nuget push $1
 }
 
-function updateAssemblyInfos {
-    DIRECTORY=$1
-    echo "Update AssemblyInfo.cs files:"
-    ASSEMBLY_INFOS=$(find $DIRECTORY -iname "assemblyinfo.cs")
-    for ASSEMBLY_INFO in $ASSEMBLY_INFOS;
-    do
-        echo "Updating $ASSEMBLY_INFO"
-        sed -E -i '' "s/AssemblyVersion.*\(.*\)/AssemblyVersion\(\"$VERSION\"\)/" $ASSEMBLY_INFO
-        sed -E -i '' "s/AssemblyFileVersion.*\(.*\)/AssemblyFileVersion\(\"$VERSION\"\)/" $ASSEMBLY_INFO
-    done
-}
-
 nuget restore UserFlow.sln || exit 1
-updateAssemblyInfos .
 
 xbuild /p:Configuration=Release UserFlow.sln || exit 1
 
 pushd packages && nuget install Nunit.Runners && popd
 export MONO_IOMAP=all # this fixes slash, backslash path seperator problems within nunit test runner
 NUNIT="mono packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe"
-#$NUNIT -config=Release "Tests/Tests.csproj" || exit 1
-
+$NUNIT -config=Release "Tests/Tests.csproj" || exit 1
 
 packNuGet userflow.nuspec
 publishNuGet UserFlow.$VERSION.nupkg
