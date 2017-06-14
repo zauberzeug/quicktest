@@ -54,10 +54,14 @@ namespace UserFlow
 
 		ContentPage CurrentPage {
 			get {
+				if (page.Navigation.ModalStack.Any())
+					return page.Navigation.ModalStack.Last() as ContentPage;
+
 				if ((page as MasterDetailPage)?.IsPresented ?? false)
 					return (page as MasterDetailPage).Master as ContentPage;
+
 				var rootPage = (page as MasterDetailPage)?.Detail ?? page;
-				return rootPage.Navigation.NavigationStack.Concat(page.Navigation.ModalStack).Last() as ContentPage;
+				return rootPage.Navigation.NavigationStack.Last() as ContentPage;
 			}
 		}
 

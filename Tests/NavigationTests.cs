@@ -14,6 +14,7 @@ namespace Tests
 
 			Tap("PushAsync");
 			ShouldSee("Navigation demo >");
+			ShouldNotSee("Navigation demo", "Menu");
 
 			Tap("PushAsync");
 			ShouldSee("Navigation demo > >");
@@ -30,6 +31,7 @@ namespace Tests
 
 			Tap("PushModalAsync");
 			ShouldSee("Navigation demo ^");
+			ShouldNotSee("Navigation demo", "Menu");
 
 			Tap("PushModalAsync");
 			ShouldSee("Navigation demo ^ ^");
