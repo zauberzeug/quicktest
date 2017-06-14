@@ -10,8 +10,7 @@ namespace UserFlow
 	public class User
 	{
 		readonly Page page;
-
-		Stack<AlertArguments> alerts = new Stack<AlertArguments>();
+		readonly Stack<AlertArguments> alerts = new Stack<AlertArguments>();
 
 		public User(Application app)
 		{
@@ -23,14 +22,9 @@ namespace UserFlow
 
 			if (page is NavigationPage) {
 				(page as NavigationPage).Pushed += (sender, e) => (page as IPageController).SendAppearing();
-				(page as NavigationPage).Popped += Popped;
-				(page as NavigationPage).PoppedToRoot += Popped;
+				(page as NavigationPage).Popped += (sender, e) => (e.Page as IPageController).SendDisappearing();
+				(page as NavigationPage).PoppedToRoot += (sender, e) => (e.Page as IPageController).SendDisappearing();
 			}
-		}
-
-		void Popped(object sender, EventArgs args)
-		{
-			(page as IPageController).SendDisappearing();
 		}
 
 		ContentPage CurrentPage {
