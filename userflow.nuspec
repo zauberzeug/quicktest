@@ -2,7 +2,7 @@
 <package>
   <metadata>
       <id>UserFlow</id>
-      <version>0.1.5</version>
+      <version>0.1.6</version>
       <authors>Perpetual Mobile GmbH</authors>
       <owners>Perpetual Mobile GmbH</owners>
       <description>Library to write NUnit Integration Tests for Xamarin.Forms Edit</description>
