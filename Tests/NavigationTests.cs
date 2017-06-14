@@ -63,9 +63,17 @@ namespace Tests
 		public void TestPageDisAppearingOnPushPop()
 		{
 			Tap("PushAsync");
-			ShouldSee("Log: Appeared");
+			ShouldSee("Log: Appeared Disappeared Appeared");
 
 			GoBack();
+			ShouldSee("Log: Appeared Disappeared Appeared Disappeared Appeared");
+		}
+
+		[Test]
+		public void TestPageDisAppearingOnMenuChange()
+		{
+			OpenMenu("Elements");
+			OpenMenu("Navigation");
 			ShouldSee("Log: Appeared Disappeared Appeared");
 		}
 

@@ -4,8 +4,12 @@ namespace DemoApp
 {
 	public class App : Application
 	{
+		public static DemoLabel Log { get; private set; }
+
 		public App()
 		{
+			Log = new DemoLabel("Log:");
+
 			MainPage = new MasterDetailPage {
 				Master = new MenuPage(),
 				Detail = new NavigationPage(new NavigationDemoPage()),

@@ -24,7 +24,16 @@ namespace UserFlow
 				throw new NotImplementedException("MainPage of type NavigationPage is currently not supported");
 
 			if (page is MasterDetailPage) {
-				var detail = (page as MasterDetailPage).Detail;
+				var masterDetailPage = page as MasterDetailPage;
+				masterDetailPage.PropertyChanging += (sender, e) => {
+					if (e.PropertyName == nameof(MasterDetailPage.Detail))
+						(masterDetailPage.Detail as IPageController).SendDisappearing();
+				};
+				masterDetailPage.PropertyChanged += (sender, e) => {
+					if (e.PropertyName == nameof(MasterDetailPage.Detail))
+						(masterDetailPage.Detail as IPageController).SendAppearing();
+				};
+				var detail = masterDetailPage.Detail;
 				(detail as IPageController).SendAppearing();
 				if (detail is NavigationPage) {
 					(detail as NavigationPage).Pushed += (sender, e) => {
