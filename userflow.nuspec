@@ -5,7 +5,7 @@
       <version>0.1.5</version>
       <authors>Perpetual Mobile GmbH</authors>
       <owners>Perpetual Mobile GmbH</owners>
-      <description>Library to write NUnit Integration Tests for Xamarin.Forms Edit (HEAD: 4080c5233a76889a32c934d88a33c460738d9b9f) (HEAD: 4080c5233a76889a32c934d88a33c460738d9b9f) (HEAD: 4080c5233a76889a32c934d88a33c460738d9b9f) (HEAD: 4080c5233a76889a32c934d88a33c460738d9b9f) (HEAD: e1ec558d577aac46f815b3bf8ab6d453e41c995f) (HEAD: e1ec558d577aac46f815b3bf8ab6d453e41c995f) (HEAD: d8afe9c279c613e8747df284a9a4ce3e6160b2bc) (HEAD: 423a71ccb649691d4aba78af6998fe7ec95a9095)</description>
+      <description>Library to write NUnit Integration Tests for Xamarin.Forms Edit</description>
       <copyright>Perpetual Mobile GmbH Copyright 2017</copyright>
       <dependencies>
          <group>
