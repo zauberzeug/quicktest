@@ -7,7 +7,7 @@ VERSION=`git describe --abbrev=0 | awk -F. '/[0-9]+\./{$NF+=1;OFS=".";print}'`
 echo "setting version to $VERSION"
 
 function setVersion_Nupkg {
-  sed -i '' "s/\(<version>\).*\(<\/version>\)/\1$VERSION\2/" $1
+  sed -i '' "s/\(<version>\).*\(<\/version>\)/\1$VERSION-pre\2/" $1
 }
 
 function packNuGet {
