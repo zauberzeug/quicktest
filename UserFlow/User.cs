@@ -20,14 +20,26 @@ namespace UserFlow
 				alerts.Push(alert);
 			});
 
-			if (page is NavigationPage) {
-				(page as NavigationPage).Pushed += (sender, e) => (page as IPageController).SendAppearing();
-				(page as NavigationPage).Popped += (sender, e) => (e.Page as IPageController).SendDisappearing();
-				(page as NavigationPage).PoppedToRoot += (sender, e) => ((e as PoppedToRootEventArgs).PoppedPages.Last() as IPageController).SendDisappearing();
-			}
+			if (page is NavigationPage)
+				throw new NotImplementedException("MainPage of type NavigationPage is currently not supported");
 
 			if (page is MasterDetailPage) {
-				((page as MasterDetailPage).Detail as IPageController).SendAppearing();
+				var detail = (page as MasterDetailPage).Detail;
+				(detail as IPageController).SendAppearing();
+				if (detail is NavigationPage) {
+					(detail as NavigationPage).Pushed += (sender, e) => {
+						var stack = CurrentPage.Navigation.NavigationStack;
+						(stack[stack.Count - 2]).SendDisappearing();
+						(e.Page as IPageController).SendAppearing();
+					};
+					(detail as NavigationPage).Popped += (sender, e) => {
+						(e.Page as IPageController).SendDisappearing();
+						(CurrentPage as IPageController).SendAppearing();
+					};
+					(detail as NavigationPage).PoppedToRoot += (sender, e) => {
+						((e as PoppedToRootEventArgs).PoppedPages.Last() as IPageController).SendDisappearing();
+					};
+				}
 			}
 		}
 

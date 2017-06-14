@@ -60,6 +60,16 @@ namespace Tests
 		}
 
 		[Test]
+		public void TestPageDisAppearingOnPushPop()
+		{
+			Tap("PushAsync");
+			ShouldSee("Log: Appeared");
+
+			GoBack();
+			ShouldSee("Log: Appeared Disappeared Appeared");
+		}
+
+		[Test]
 		[Ignore("Not working yet")]
 		public void TestDisAppearingPage()
 		{
