@@ -1,7 +1,7 @@
-﻿using System;
-using DemoApp;
+﻿using DemoApp;
 using NUnit.Framework;
 using UserFlow;
+
 namespace Tests
 {
 	public class TestRendering : UserTest<App>
@@ -14,6 +14,5 @@ namespace Tests
 
 			Assert.That(Render(), Is.EqualTo("Alert\nMessage\n\n[] [Ok]"));
 		}
-
 	}
 }
