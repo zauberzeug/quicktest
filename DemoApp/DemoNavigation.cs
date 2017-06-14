@@ -5,7 +5,7 @@ namespace DemoApp
 {
 	public class DemoNavigationPage : ContentPage
 	{
-		INavigation CurrentNavigation { get { return (Application.Current.MainPage as NavigationPage).Navigation; } }
+		INavigation CurrentNavigation { get { return Application.Current.MainPage.Navigation; } }
 
 		public DemoNavigationPage(string title = "Navigation page")
 		{

@@ -9,12 +9,15 @@ namespace UserFlow
 	{
 		User user;
 
+		public T App { get; private set; }
+
 		[SetUp]
 		protected void Init()
 		{
 			MockForms.Init();
 
-			user = new User(new T());
+			App = new T();
+			user = new User(App);
 		}
 
 		protected void Tap(string text)

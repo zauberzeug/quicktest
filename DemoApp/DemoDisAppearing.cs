@@ -22,7 +22,7 @@ namespace DemoApp
 
 		protected override void OnDisappearing()
 		{
-			App.ShowMessage("Disappeard", "Page just disappeard");
+			App.ShowMessage("Disappeared", "Page just disappeared");
 
 			base.OnDisappearing();
 		}

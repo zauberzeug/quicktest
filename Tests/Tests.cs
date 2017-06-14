@@ -67,7 +67,17 @@ namespace Tests
 			ShouldSee("Appeared!");
 
 			GoBack();
-			ShouldSee("Disappeard");
+			ShouldSee("Disappeared");
+
+			Tap("Ok");
+			ShouldSee("Demo page");
+
+			Tap("Dis-/Appearing");
+			App.MainPage.Navigation.PopToRootAsync();
+			ShouldSee("Disappeared");
+
+			Tap("Ok");
+			ShouldSee("Demo page");
 		}
 
 		[Test]
