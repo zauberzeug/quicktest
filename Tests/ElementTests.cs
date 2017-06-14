@@ -6,6 +6,12 @@ namespace Tests
 {
 	public class ElementTests : UserTest<App>
 	{
+		[SetUp]
+		public void SetUp()
+		{
+			OpenMenu("Elements");
+		}
+
 		[Test]
 		public void TestLabel()
 		{

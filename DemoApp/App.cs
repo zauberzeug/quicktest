@@ -8,7 +8,7 @@ namespace DemoApp
 		{
 			MainPage = new MasterDetailPage {
 				Master = new MenuPage(),
-				Detail = new NavigationPage(new ElementDemoPage()),
+				Detail = new NavigationPage(new NavigationDemoPage()),
 			};
 		}
 

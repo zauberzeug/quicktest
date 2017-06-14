@@ -13,9 +13,9 @@ namespace DemoApp
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				Children = {
 					new DemoLabel("Menu"),
+					CreateMenuButton("Navigation", () => new NavigationDemoPage()),
 					CreateMenuButton("Elements", () => new ElementDemoPage()),
 					CreateMenuButton("ListViews", () => new ListViewDemoPage()),
-					CreateMenuButton("Navigation", () => new NavigationDemoPage()),
 					CreateMenuButton("Dis-/Appearing", () => new DisAppearingDemoPage()),
 					new DemoButton("Alert") { Command = new Command(o => Application.Current.MainPage.DisplayAlert("Alert", "Message", "Ok")) },
 				},
