@@ -79,20 +79,6 @@ namespace Tests
 
 		[Test]
 		[Ignore("Not working yet")]
-		public void TestDisAppearingPage()
-		{
-			OpenMenu("Dis-/Appearing");
-			ShouldSee("Appeared!");
-
-			OpenMenu("Elements");
-			ShouldSee("Disappeared");
-
-			Tap("Ok");
-			ShouldSee("Element demo");
-		}
-
-		[Test]
-		[Ignore("Not working yet")]
 		public void TestPopToRootEvent()
 		{
 			Tap("Dis-/Appearing");

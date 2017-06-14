@@ -18,7 +18,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\NavigationDemoPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListViewDemoPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoStack.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\DisAppearingDemoPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ElementDemoPage.cs" />
   </ItemGroup>
   <ItemGroup>
