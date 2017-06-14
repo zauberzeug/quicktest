@@ -82,12 +82,33 @@ namespace Tests
 		}
 
 		[Test]
-		public void TestModalPage()
+		public void TestNavigation()
 		{
-			Tap("Modal page");
-			ShouldSee("Modal page pushed");
+			Tap("Navigation");
+			ShouldSee("Navigation page");
 
-			Tap("Close");
+			Tap("PushAsync");
+			ShouldSee("Navigation page >");
+
+			Tap("PushAsync");
+			ShouldSee("Navigation page > >");
+
+			Tap("PopAsync");
+			ShouldSee("Navigation page >");
+
+			Tap("PushModalAsync");
+			ShouldSee("Navigation page > ^");
+
+			Tap("PushModalAsync");
+			ShouldSee("Navigation page > ^ ^");
+
+			Tap("PopModalAsync");
+			ShouldSee("Navigation page > ^");
+
+			Tap("PopModalAsync");
+			ShouldSee("Navigation page >");
+
+			Tap("PopToRootAsync");
 			ShouldSee("Demo page");
 		}
 

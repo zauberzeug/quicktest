@@ -17,7 +17,7 @@ namespace DemoApp
 						new DemoGrid(),
 						new DemoButton("ListViews") { Command = new Command(o => Navigation.PushAsync(new DemoListViewPage())) },
 						new DemoButton("Alert") { Command = new Command(o => Application.Current.MainPage.DisplayAlert("Alert", "Message", "Ok")) },
-						new DemoButton("Modal page") { Command = new Command(o => Navigation.PushModalAsync(new DemoModalPage())) },
+						new DemoButton("Navigation") { Command = new Command(o => Navigation.PushAsync(new DemoNavigationPage())) },
 						new DemoButton("Dis-/Appearing") { Command = new Command(o => Navigation.PushAsync(new DisAppearingPage())) },
 					},
 				},
