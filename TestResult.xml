@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-run id="2" testcasecount="19" result="Skipped" label="Ignored" total="19" passed="18" failed="0" inconclusive="0" skipped="1" asserts="120" engine-version="3.6.1.0" clr-version="4.0.30319.42000" start-time="2017-06-14 15:04:33Z" end-time="2017-06-14 15:04:34Z" duration="1.254136">
+  <command-line><![CDATA[/Users/rodja/Projects/userflow/packages/NUnit.ConsoleRunner.3.6.1/tools/nunit3-console.exe -config=Release Tests/Tests.csproj]]></command-line>
+  <test-suite type="Assembly" id="1-1024" name="NUnitTest.dll" fullname="/Users/rodja/Projects/userflow/Tests/bin/Release/NUnitTest.dll" runstate="Runnable" testcasecount="19" result="Skipped" label="Ignored" start-time="2017-06-14 15:04:33Z" end-time="2017-06-14 15:04:34Z" duration="0.399117" total="19" passed="18" failed="0" warnings="0" inconclusive="0" skipped="1" asserts="120">
+    <environment framework-version="3.7.1.0" clr-version="4.0.30319.42000" os-version="Unix 16.6.0.0" platform="Unix" cwd="/Users/rodja/Projects/userflow" machine-name="R3.local" user="rodja" user-domain="R3.local" culture="de-DE" uiculture="de-DE" os-architecture="x86" />
+    <settings>
+      <setting name="BasePath" value="/Users/rodja/Projects/userflow/Tests/bin/Release" />
+      <setting name="DisposeRunners" value="True" />
+      <setting name="ActiveConfig" value="Release" />
+      <setting name="WorkDirectory" value="/Users/rodja/Projects/userflow" />
+      <setting name="ImageRuntimeVersion" value="4.0.30319" />
+      <setting name="ImageTargetFrameworkName" value=".NETFramework,Version=v4.5" />
+      <setting name="ImageRequiresX86" value="False" />
+      <setting name="ImageRequiresDefaultAppDomainAssemblyResolver" value="False" />
+      <setting name="NumberOfTestWorkers" value="4" />
+    </settings>
+    <properties>
+      <property name="_PID" value="15696" />
+      <property name="_APPDOMAIN" value="domain-3026b9a2-Tests.csproj" />
+    </properties>
+    <reason>
+      <message><![CDATA[One or more child tests were ignored]]></message>
+    </reason>
+    <test-suite type="TestSuite" id="1-1025" name="Tests" fullname="Tests" runstate="Runnable" testcasecount="19" result="Skipped" label="Ignored" start-time="2017-06-14 15:04:33Z" end-time="2017-06-14 15:04:34Z" duration="0.385420" total="19" passed="18" failed="0" warnings="0" inconclusive="0" skipped="1" asserts="120">
+      <reason>
+        <message><![CDATA[One or more child tests were ignored]]></message>
+      </reason>
+      <test-suite type="TestFixture" id="1-1000" name="ElementTests" fullname="Tests.ElementTests" classname="Tests.ElementTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2017-06-14 15:04:33Z" end-time="2017-06-14 15:04:34Z" duration="0.205751" total="8" passed="8" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="58">
+        <test-case id="1-1008" name="TestAlert" fullname="Tests.ElementTests.TestAlert" methodname="TestAlert" classname="Tests.ElementTests" runstate="Runnable" seed="1243786224" result="Passed" start-time="2017-06-14 15:04:33Z" end-time="2017-06-14 15:04:34Z" duration="0.132660" asserts="7">
+          <output><![CDATA[· MenuPage 
+  · 
+    · Menu
+    · Navigation
+    · Elements
+    · ListViews
+    · Alert
+]]></output>
+        </test-case>
+        <test-case id="1-1002" name="TestButton" fullname="Tests.ElementTests.TestButton" methodname="TestButton" classname="Tests.ElementTests" runstate="Runnable" seed="809193638" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.007192" asserts="5">
+          <output><![CDATA[Success
+Button tapped
+
+[] [Ok]
+]]></output>
+        </test-case>
+        <test-case id="1-1006" name="TestEntry" fullname="Tests.ElementTests.TestEntry" methodname="TestEntry" classname="Tests.ElementTests" runstate="Runnable" seed="1664558349" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.004199" asserts="14">
+          <output><![CDATA[· Element demo [ToolbarItem]
+  · 
+    · 
+      · Button
+      · Label
+      · 
+        · label in tap-able layout
+      · 
+        · Cell A
+        · Cell B
+        · Cell C
+        · Cell D
+      · Text3
+]]></output>
+        </test-case>
+        <test-case id="1-1005" name="TestGrid" fullname="Tests.ElementTests.TestGrid" methodname="TestGrid" classname="Tests.ElementTests" runstate="Runnable" seed="314805352" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.002664" asserts="5">
+          <output><![CDATA[Success
+Cell D tapped
+
+[] [Ok]
+]]></output>
+        </test-case>
+        <test-case id="1-1001" name="TestLabel" fullname="Tests.ElementTests.TestLabel" methodname="TestLabel" classname="Tests.ElementTests" runstate="Runnable" seed="2141219337" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.001254" asserts="5">
+          <output><![CDATA[Success
+Label tapped
+
+[] [Ok]
+]]></output>
+        </test-case>
+        <test-case id="1-1004" name="TestListViews" fullname="Tests.ElementTests.TestListViews" methodname="TestListViews" classname="Tests.ElementTests" runstate="Runnable" seed="753863786" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.030103" asserts="12">
+          <output><![CDATA[Success
+Item A2 tapped
+
+[] [Ok]
+]]></output>
+        </test-case>
+        <test-case id="1-1003" name="TestNestedLabel" fullname="Tests.ElementTests.TestNestedLabel" methodname="TestNestedLabel" classname="Tests.ElementTests" runstate="Runnable" seed="512898914" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.001112" asserts="5">
+          <output><![CDATA[Success
+StackLayout tapped
+
+[] [Ok]
+]]></output>
+        </test-case>
+        <test-case id="1-1007" name="TestToolbarItem" fullname="Tests.ElementTests.TestToolbarItem" methodname="TestToolbarItem" classname="Tests.ElementTests" runstate="Runnable" seed="1771694753" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.000950" asserts="5">
+          <output><![CDATA[Success
+ToolbarItem tapped
+
+[] [Ok]
+]]></output>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1-1013" name="NavigationTests" fullname="Tests.NavigationTests" classname="Tests.NavigationTests" runstate="Runnable" testcasecount="7" result="Skipped" label="Ignored" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.057935" total="7" passed="6" failed="0" warnings="0" inconclusive="0" skipped="1" asserts="47">
+        <reason>
+          <message><![CDATA[One or more child tests were ignored]]></message>
+        </reason>
+        <test-case id="1-1015" name="TestModalStack" fullname="Tests.NavigationTests.TestModalStack" methodname="TestModalStack" classname="Tests.NavigationTests" runstate="Runnable" seed="1881431188" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.012065" asserts="12">
+          <output><![CDATA[· Navigation demo ^ 
+  · 
+    · Navigation demo ^
+    · Navigation stack:
+    · PushAsync
+    · PopAsync
+    · PopToRootAsync
+    · Modal stack:
+    · PushModalAsync
+    · PopModalAsync
+]]></output>
+        </test-case>
+        <test-case id="1-1014" name="TestNavigationStack" fullname="Tests.NavigationTests.TestNavigationStack" methodname="TestNavigationStack" classname="Tests.NavigationTests" runstate="Runnable" seed="1673851836" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.004915" asserts="12">
+          <output><![CDATA[· Navigation demo > 
+  · 
+    · Navigation stack:
+    · PushAsync
+    · PopAsync
+    · PopToRootAsync
+    · Modal stack:
+    · PushModalAsync
+    · PopModalAsync
+]]></output>
+        </test-case>
+        <test-case id="1-1017" name="TestPageAppearingOnAppStart" fullname="Tests.NavigationTests.TestPageAppearingOnAppStart" methodname="TestPageAppearingOnAppStart" classname="Tests.NavigationTests" runstate="Runnable" seed="521210519" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.011040" asserts="1">
+          <output><![CDATA[· Navigation demo 
+  · 
+    · Navigation stack:
+    · PushAsync
+    · PopAsync
+    · PopToRootAsync
+    · Modal stack:
+    · PushModalAsync
+    · PopModalAsync
+]]></output>
+        </test-case>
+        <test-case id="1-1019" name="TestPageDisAppearingOnMenuChange" fullname="Tests.NavigationTests.TestPageDisAppearingOnMenuChange" methodname="TestPageDisAppearingOnMenuChange" classname="Tests.NavigationTests" runstate="Runnable" seed="659811207" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.001160" asserts="5">
+          <output><![CDATA[· Navigation demo 
+  · 
+    · Navigation stack:
+    · PushAsync
+    · PopAsync
+    · PopToRootAsync
+    · Modal stack:
+    · PushModalAsync
+    · PopModalAsync
+]]></output>
+        </test-case>
+        <test-case id="1-1018" name="TestPageDisAppearingOnPushPop" fullname="Tests.NavigationTests.TestPageDisAppearingOnPushPop" methodname="TestPageDisAppearingOnPushPop" classname="Tests.NavigationTests" runstate="Runnable" seed="386900342" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.005832" asserts="4">
+          <output><![CDATA[· Navigation demo 
+  · 
+    · Navigation stack:
+    · PushAsync
+    · PopAsync
+    · PopToRootAsync
+    · Modal stack:
+    · PushModalAsync
+    · PopModalAsync
+]]></output>
+        </test-case>
+        <test-case id="1-1016" name="TestPopToRoot" fullname="Tests.NavigationTests.TestPopToRoot" methodname="TestPopToRoot" classname="Tests.NavigationTests" runstate="Runnable" seed="458491129" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.005276" asserts="13">
+          <output><![CDATA[· Navigation demo 
+  · 
+    · Navigation stack:
+    · PushAsync
+    · PopAsync
+    · PopToRootAsync
+    · Modal stack:
+    · PushModalAsync
+    · PopModalAsync
+]]></output>
+        </test-case>
+        <test-case id="1-1020" name="TestPopToRootEvent" fullname="Tests.NavigationTests.TestPopToRootEvent" methodname="TestPopToRootEvent" classname="Tests.NavigationTests" runstate="Ignored" seed="1828119377" result="Skipped" label="Ignored" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.000556" asserts="0">
+          <properties>
+            <property name="_SKIPREASON" value="Not working yet" />
+          </properties>
+          <reason>
+            <message><![CDATA[Not working yet]]></message>
+          </reason>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1-1011" name="ReflectionTests" fullname="Tests.ReflectionTests" classname="Tests.ReflectionTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.099090" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="0">
+        <test-case id="1-1012" name="ScanForSendMethods" fullname="Tests.ReflectionTests.ScanForSendMethods" methodname="ScanForSendMethods" classname="Tests.ReflectionTests" runstate="Runnable" seed="1513806857" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.096467" asserts="0">
+          <output><![CDATA[Application: SendOnAppLinkRequestReceived
+Application: SendResume
+Application: SendSleepAsync
+Application: SendStart
+EntryCell: SendCompleted
+EntryCell: SendAppearing
+EntryCell: SendDisappearing
+ICellController: SendAppearing
+ICellController: SendDisappearing
+IEntryCellController: SendCompleted
+ImageCell: SendAppearing
+ImageCell: SendDisappearing
+IEditorController: SendCompleted
+IWebViewController: SendNavigated
+IWebViewController: SendNavigating
+INavigationMenuController: SendTargetSelected
+Effect: SendAttached
+Effect: SendDetached
+Effect: SendOnElementPropertyChanged
+IEntryController: SendCompleted
+IButtonController: SendClicked
+IButtonController: SendPressed
+IButtonController: SendReleased
+IListViewController: NotifyRowTapped
+IListViewController: NotifyRowTapped
+IListViewController: SendCellAppearing
+IListViewController: SendCellDisappearing
+IListViewController: SendRefreshing
+IPageController: SendAppearing
+IPageController: SendDisappearing
+IPanGestureController: SendPan
+IPanGestureController: SendPanCanceled
+IPanGestureController: SendPanCompleted
+IPanGestureController: SendPanStarted
+IPinchGestureController: SendPinch
+IPinchGestureController: SendPinchCanceled
+IPinchGestureController: SendPinchEnded
+IPinchGestureController: SendPinchStarted
+IScrollViewController: SendScrollFinished
+NullEffect: SendAttached
+NullEffect: SendDetached
+NullEffect: SendOnElementPropertyChanged
+PanGestureRecognizer: SendPan
+PanGestureRecognizer: SendPanCanceled
+PanGestureRecognizer: SendPanCompleted
+PanGestureRecognizer: SendPanStarted
+PlatformEffect`2: SendDetached
+PlatformEffect`2: SendOnElementPropertyChanged
+PlatformEffect`2: SendAttached
+RoutingEffect: SendAttached
+RoutingEffect: SendDetached
+RoutingEffect: SendOnElementPropertyChanged
+TapGestureRecognizer: SendTapped
+TemplatedPage: SendBackButtonPressed
+TemplatedPage: SendAppearing
+TemplatedPage: SendDisappearing
+NavigationPage: SendBackButtonPressed
+NavigationPage: SendAppearing
+NavigationPage: SendDisappearing
+Page: SendBackButtonPressed
+Page: SendAppearing
+Page: SendDisappearing
+CarouselPage: SendBackButtonPressed
+CarouselPage: SendAppearing
+CarouselPage: SendDisappearing
+IMessagingCenter: Send
+IMessagingCenter: Send
+MessagingCenter: Send
+MessagingCenter: Xamarin.Forms.IMessagingCenter.Send
+MessagingCenter: Send
+MessagingCenter: Xamarin.Forms.IMessagingCenter.Send
+MessagingCenter: InnerSend
+Cell: SendAppearing
+Cell: SendDisappearing
+SwitchCell: SendAppearing
+SwitchCell: SendDisappearing
+TextCell: SendAppearing
+TextCell: SendDisappearing
+ViewCell: SendAppearing
+ViewCell: SendDisappearing
+ListView: SendCellAppearing
+ListView: SendCellDisappearing
+ListView: SendRefreshing
+ListView: NotifyRowTapped
+ListView: NotifyRowTapped
+Button: SendClicked
+Button: SendPressed
+Button: SendReleased
+Editor: SendCompleted
+Entry: SendCompleted
+MasterDetailPage: SendBackButtonPressed
+MasterDetailPage: SendAppearing
+MasterDetailPage: SendDisappearing
+ScrollView: SendScrollFinished
+TabbedPage: SendBackButtonPressed
+TabbedPage: SendAppearing
+TabbedPage: SendDisappearing
+WebView: SendNavigated
+WebView: SendNavigating
+ContentPage: SendBackButtonPressed
+ContentPage: SendAppearing
+ContentPage: SendDisappearing
+MultiPage`1: SendBackButtonPressed
+MultiPage`1: SendAppearing
+MultiPage`1: SendDisappearing
+PinchGestureRecognizer: SendPinch
+PinchGestureRecognizer: SendPinchCanceled
+PinchGestureRecognizer: SendPinchEnded
+PinchGestureRecognizer: SendPinchStarted
+Application: GetSendDisappearingEventOnPause
+Application: SetSendDisappearingEventOnPause
+Application: GetSendDisappearingEventOnPause
+Application: SendDisappearingEventOnPause
+Application: GetSendAppearingEventOnResume
+Application: SetSendAppearingEventOnResume
+Application: GetSendAppearingEventOnResume
+Application: SendAppearingEventOnResume
+LockableObservableListWrapper: System.Collections.Specialized.INotifyCollectionChanged.add_CollectionChanged
+LockableObservableListWrapper: System.Collections.Specialized.INotifyCollectionChanged.remove_CollectionChanged
+LockableObservableListWrapper: System.ComponentModel.INotifyPropertyChanged.add_PropertyChanged
+LockableObservableListWrapper: System.ComponentModel.INotifyPropertyChanged.remove_PropertyChanged
+Ticker: SendSignals
+NavigationMenu: SendTargetSelected
+<>c__DisplayClass14_0: <SendSignals>b__0
+· Navigation demo 
+  · 
+    · Navigation stack:
+    · PushAsync
+    · PopAsync
+    · PopToRootAsync
+    · Modal stack:
+    · PushModalAsync
+    · PopModalAsync
+]]></output>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1-1009" name="RendererTests" fullname="Tests.RendererTests" classname="Tests.RendererTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.003575" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="4">
+        <test-case id="1-1010" name="TestAlertRendering" fullname="Tests.RendererTests.TestAlertRendering" methodname="TestAlertRendering" classname="Tests.RendererTests" runstate="Runnable" seed="485339955" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.000968" asserts="4">
+          <output><![CDATA[Alert
+Message
+
+[] [Ok]
+]]></output>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1-1021" name="ToolingTests" fullname="Tests.ToolingTests" classname="Tests.ToolingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.007232" total="2" passed="2" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="11">
+        <test-case id="1-1022" name="TestShouldSee" fullname="Tests.ToolingTests.TestShouldSee" methodname="TestShouldSee" classname="Tests.ToolingTests" runstate="Runnable" seed="951746972" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.000878" asserts="4">
+          <output><![CDATA[· Navigation demo 
+  · 
+    · Navigation stack:
+    · PushAsync
+    · PopAsync
+    · PopToRootAsync
+    · Modal stack:
+    · PushModalAsync
+    · PopModalAsync
+]]></output>
+        </test-case>
+        <test-case id="1-1023" name="TestTap" fullname="Tests.ToolingTests.TestTap" methodname="TestTap" classname="Tests.ToolingTests" runstate="Runnable" seed="124482368" result="Passed" start-time="2017-06-14 15:04:34Z" end-time="2017-06-14 15:04:34Z" duration="0.001024" asserts="7">
+          <output><![CDATA[· Navigation demo 
+  · 
+    · Navigation stack:
+    · PushAsync
+    · PopAsync
+    · PopToRootAsync
+    · Modal stack:
+    · PushModalAsync
+    · PopModalAsync
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
