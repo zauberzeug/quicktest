@@ -56,6 +56,7 @@
     <Compile Include="RendererTests.cs" />
     <Compile Include="ReflectionTests.cs" />
     <Compile Include="NavigationTests.cs" />
+    <Compile Include="ToolingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

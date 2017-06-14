@@ -20,19 +20,22 @@ namespace UserFlow
 			user = new User(App);
 		}
 
-		protected void Tap(string text)
+		protected void Tap(params string[] texts)
 		{
-			user.Tap(text);
+			foreach (var text in texts)
+				user.Tap(text);
 		}
 
-		protected void ShouldSee(string text)
+		protected void ShouldSee(params string[] texts)
 		{
-			Assert.That(user.CanSee(text), $"User can't see \"{text}\"");
+			foreach (var text in texts)
+				Assert.That(user.CanSee(text), $"User can't see \"{text}\"");
 		}
 
-		protected void ShouldNotSee(string text)
+		protected void ShouldNotSee(params string[] texts)
 		{
-			Assert.That(user.CanSee(text), Is.False, $"User can see \"{text}\"");
+			foreach (var text in texts)
+				Assert.That(user.CanSee(text), Is.False, $"User can see \"{text}\"");
 		}
 
 		protected void OpenMenu(string textToTap = null)
