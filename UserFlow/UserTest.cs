@@ -27,6 +27,11 @@ namespace UserFlow
 			Assert.That(user.CanSee(text), $"User can't see \"{text}\"");
 		}
 
+		protected void ShouldNotSee(string text)
+		{
+			Assert.That(user.CanSee(text), Is.False, $"User can see \"{text}\"");
+		}
+
 		protected void GoBack()
 		{
 			user.GoBack();

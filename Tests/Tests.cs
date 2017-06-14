@@ -81,7 +81,7 @@ namespace Tests
 		{
 			Tap("DemoAlert");
 			ShouldSee("Message");
-			//ShouldNotSee("Demo page"); // TODO
+			ShouldNotSee("Demo page");
 
 			Tap("Ok");
 			ShouldSee("Demo page");
