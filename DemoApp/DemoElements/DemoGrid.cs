@@ -14,10 +14,10 @@ namespace DemoApp
 				new ColumnDefinition(),
 				new ColumnDefinition(),
 			};
-			Children.Add(new DemoLabel("A").WithGestureRecognizer(), 0, 0);
-			Children.Add(new DemoLabel("B").WithGestureRecognizer(), 0, 1);
-			Children.Add(new DemoLabel("C").WithGestureRecognizer(), 1, 0);
-			Children.Add(new DemoLabel("D").WithGestureRecognizer(), 1, 1);
+			Children.Add(new DemoLabel("Cell A").WithGestureRecognizer(), 0, 0);
+			Children.Add(new DemoLabel("Cell B").WithGestureRecognizer(), 0, 1);
+			Children.Add(new DemoLabel("Cell C").WithGestureRecognizer(), 1, 0);
+			Children.Add(new DemoLabel("Cell D").WithGestureRecognizer(), 1, 1);
 		}
 	}
 }

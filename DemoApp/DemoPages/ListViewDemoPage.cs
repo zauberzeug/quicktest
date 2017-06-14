@@ -3,11 +3,11 @@ using Xamarin.Forms;
 
 namespace DemoApp
 {
-	public class DemoListViewPage : ContentPage
+	public class ListViewDemoPage : ContentPage
 	{
-		public DemoListViewPage()
+		public ListViewDemoPage()
 		{
-			Title = "ListViews";
+			Title = "ListView demo";
 
 			Content = new StackLayout {
 				Children = {

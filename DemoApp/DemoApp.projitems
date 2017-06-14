@@ -10,14 +10,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoLabel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoButton.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoStack.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoListViews.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoToolbarItem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoGrid.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoDisAppearing.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoNavigation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MenuPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoGrid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoLabel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoToolbarItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\NavigationDemoPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListViewDemoPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoStack.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\DisAppearingDemoPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ElementDemoPage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)DemoPages\" />
   </ItemGroup>
 </Project>

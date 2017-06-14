@@ -2,11 +2,11 @@
 
 namespace DemoApp
 {
-	public class DisAppearingPage : ContentPage
+	public class DisAppearingDemoPage : ContentPage
 	{
-		public DisAppearingPage()
+		public DisAppearingDemoPage()
 		{
-			Title = "(Dis)Appearing page";
+			Title = "(Dis)Appearing demo";
 
 			Content = new DemoLabel("Constructed");
 
