@@ -16,6 +16,10 @@ function packNuGet {
 }
 
 function publishNuGet {
+  git add $1
+  git commit -am "nuget package ${VERSION}" || exit 1
+  git tag -a $VERSION -m ''  || exit 1
+
   echo "not publishing nuget jet"
   #nuget push $1
 }
@@ -31,6 +35,3 @@ $NUNIT -config=Release "Tests/Tests.csproj" || exit 1
 
 packNuGet userflow.nuspec
 publishNuGet UserFlow.$VERSION.nupkg
-
-git commit -am "nuget package ${VERSION}" || exit 1
-git tag -a $VERSION -m ''  || exit 1
