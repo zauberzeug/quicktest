@@ -6,7 +6,7 @@ namespace DemoApp
 	{
 		public DemoStack()
 		{
-			Children.Add(new DemoLabel("Nested label"));
+			Children.Add(new DemoLabel("label in tap-able layout"));
 
 			BackgroundColor = Color.Gray.MultiplyAlpha(0.2);
 			Padding = 10;
