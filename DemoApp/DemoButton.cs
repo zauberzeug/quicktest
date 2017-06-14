@@ -4,13 +4,13 @@ namespace DemoApp
 {
 	public class DemoButton : Button
 	{
-		public DemoButton()
+		public DemoButton(string text)
 		{
-			Text = "Button";
+			Text = text;
 
 			BackgroundColor = Color.AliceBlue;
 
-			Command = new Command(o => App.PushMessagePage("Button tapped"));
+			Command = new Command(o => App.ShowMessage("Success", text + " tapped"));
 		}
 	}
 }

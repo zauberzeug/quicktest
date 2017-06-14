@@ -14,14 +14,9 @@ namespace DemoApp
 			(Current.MainPage as NavigationPage).PushAsync(page);
 		}
 
-		public static void PushMessagePage(string message)
+		public static void ShowMessage(string title, string message)
 		{
-			PushPage(new ContentPage {
-				Title = "Message page",
-				Content = new Label {
-					Text = message,
-				},
-			});
+			Current.MainPage.DisplayAlert(title, message, "Ok");
 		}
 	}
 }

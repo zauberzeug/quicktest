@@ -10,17 +10,15 @@ namespace DemoApp
 
 			Content = new ScrollView {
 				Content = new StackLayout {
-					VerticalOptions = LayoutOptions.CenterAndExpand,
 					Children = {
-						new DemoLabel(),
-						new DemoButton(),
+						new DemoButton("Button"),
+						new DemoLabel("Label").WithGestureRecognizer(),
 						new DemoStack(),
-						new DemoListViewWithTextCell(),
-						new DemoListViewWithViewCell(),
 						new DemoGrid(),
-						new DemoDisAppearing(),
-						new DemoAlert(),
-						new DemoModalPage(),
+						new DemoButton("ListViews") { Command = new Command(o => Navigation.PushAsync(new DemoListViewPage())) },
+						new DemoButton("Alert") { Command = new Command(o => Application.Current.MainPage.DisplayAlert("Alert", "Message", "Ok")) },
+						new DemoButton("Modal page") { Command = new Command(o => Navigation.PushModalAsync(new DemoModalPage())) },
+						new DemoButton("Dis-/Appearing") { Command = new Command(o => Navigation.PushAsync(new DisAppearingPage())) },
 					},
 				},
 			};

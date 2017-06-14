@@ -14,10 +14,10 @@ namespace DemoApp
 				new ColumnDefinition(),
 				new ColumnDefinition(),
 			};
-			Children.Add(new Label { Text = "A" }, 0, 0);
-			Children.Add(new Label { Text = "B" }, 0, 1);
-			Children.Add(new Label { Text = "C" }, 1, 0);
-			Children.Add(new Button { Text = "D", Command = new Command(o => App.PushMessagePage("D tapped")) }, 1, 1);
+			Children.Add(new DemoLabel("A").WithGestureRecognizer(), 0, 0);
+			Children.Add(new DemoLabel("B").WithGestureRecognizer(), 0, 1);
+			Children.Add(new DemoLabel("C").WithGestureRecognizer(), 1, 0);
+			Children.Add(new DemoLabel("D").WithGestureRecognizer(), 1, 1);
 		}
 	}
 }

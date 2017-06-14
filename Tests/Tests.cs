@@ -34,14 +34,16 @@ namespace Tests
 		[Test]
 		public void TestListViews()
 		{
-			Tap("A1");
-			ShouldSee("A1 tapped");
+			Tap("ListViews");
 
-			GoBack();
-			ShouldSee("Demo page");
+			Tap("Item A1");
+			ShouldSee("Item A1 tapped");
 
-			Tap("A2");
-			ShouldSee("A2 tapped");
+			Tap("Ok");
+			ShouldSee("ListViews");
+
+			Tap("Item A2");
+			ShouldSee("Item A2 tapped");
 		}
 
 		[Test]
@@ -59,17 +61,9 @@ namespace Tests
 		}
 
 		[Test]
-		public void TestGoBack()
-		{
-			Tap("Label");
-			GoBack();
-			ShouldSee("Demo page");
-		}
-
-		[Test]
 		public void TestDisAppearingPage()
 		{
-			Tap("DemoDisAppearing");
+			Tap("Dis-/Appearing");
 			ShouldSee("Appeared!");
 
 			GoBack();
@@ -79,7 +73,7 @@ namespace Tests
 		[Test]
 		public void TestAlert()
 		{
-			Tap("DemoAlert");
+			Tap("Alert");
 			ShouldSee("Message");
 			ShouldNotSee("Demo page");
 
@@ -90,7 +84,7 @@ namespace Tests
 		[Test]
 		public void TestModalPage()
 		{
-			Tap("DemoModalPage");
+			Tap("Modal page");
 			ShouldSee("Modal page pushed");
 
 			Tap("Close");

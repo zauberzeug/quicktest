@@ -7,7 +7,7 @@ namespace DemoApp
 		public DemoToolbarItem()
 		{
 			Text = "ToolbarItem";
-			Command = new Command(o => App.PushMessagePage("ToolbarItem tapped"));
+			Command = new Command(o => App.ShowMessage("Success", Text + " tapped"));
 		}
 	}
 }

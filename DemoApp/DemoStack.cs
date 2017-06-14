@@ -6,16 +6,13 @@ namespace DemoApp
 	{
 		public DemoStack()
 		{
-			Children.Add(new Label {
-				Text = "Nested label",
-				BackgroundColor = Color.FloralWhite,
-				Margin = 5,
-			});
+			Children.Add(new DemoLabel("Nested label"));
 
 			BackgroundColor = Color.Gray.MultiplyAlpha(0.2);
+			Padding = 10;
 
 			GestureRecognizers.Add(new TapGestureRecognizer {
-				Command = new Command(o => App.PushMessagePage("StackLayout tapped")),
+				Command = new Command(o => App.ShowMessage("Success", "StackLayout tapped")),
 			});
 		}
 	}

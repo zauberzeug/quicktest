@@ -3,18 +3,33 @@ using Xamarin.Forms;
 
 namespace DemoApp
 {
+	public class DemoListViewPage : ContentPage
+	{
+		public DemoListViewPage()
+		{
+			Title = "ListViews";
+
+			Content = new StackLayout {
+				Children = {
+					new DemoListViewWithTextCell(),
+					new DemoListViewWithViewCell(),
+				},
+			};
+		}
+	}
+
 	public class DemoListViewWithTextCell : ListView
 	{
 		public DemoListViewWithTextCell()
 		{
-			ItemsSource = new List<string> { "A1", "B1", "C1" };
+			ItemsSource = new List<string> { "Item A1", "Item B1", "Item C1" };
 			ItemTemplate = new DataTemplate(typeof(TextCell));
 
 			BackgroundColor = Color.GhostWhite;
 			HeightRequest = 200;
 
 			ItemTemplate.SetBinding(TextCell.TextProperty, ".");
-			ItemTapped += (sender, e) => App.PushMessagePage(e.Item + " tapped");
+			ItemTapped += (sender, e) => App.ShowMessage("Success", e.Item + " tapped");
 		}
 	}
 
@@ -22,13 +37,13 @@ namespace DemoApp
 	{
 		public DemoListViewWithViewCell()
 		{
-			ItemsSource = new List<string> { "A2", "B2", "C2" };
+			ItemsSource = new List<string> { "Item A2", "Item B2", "Item C2" };
 			ItemTemplate = new DataTemplate(typeof(DemoCell));
 
 			BackgroundColor = Color.GhostWhite;
 			HeightRequest = 200;
 
-			ItemTapped += (sender, e) => App.PushMessagePage(e.Item + " tapped");
+			ItemTapped += (sender, e) => App.ShowMessage("Success", e.Item + " tapped");
 		}
 	}
 
@@ -36,9 +51,7 @@ namespace DemoApp
 	{
 		public DemoCell()
 		{
-			var label = new Label {
-				BackgroundColor = Color.FloralWhite,
-			};
+			var label = new DemoLabel();
 			label.SetBinding(Label.TextProperty, ".");
 			View = new StackLayout {
 				Children = { label },
