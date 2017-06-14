@@ -56,7 +56,7 @@
     <Compile Include="User.cs" />
     <Compile Include="InvokeAnything.cs" />
     <Compile Include="ElementRendering.cs" />
-    <Compile Include="ElementInteractions.cs" />
+    <Compile Include="ElementSearch.cs" />
     <Compile Include="ElementInfo.cs" />
     <Compile Include="AlertArgumentExtensions.cs" />
   </ItemGroup>
