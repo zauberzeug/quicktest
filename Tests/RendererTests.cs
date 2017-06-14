@@ -9,7 +9,7 @@ namespace Tests
 		[Test]
 		public void TestAlertRendering()
 		{
-			Tap("Alert");
+			OpenMenu("Alert");
 			ShouldSee("Message");
 
 			Assert.That(Render(), Is.EqualTo("Alert\nMessage\n\n[] [Ok]"));

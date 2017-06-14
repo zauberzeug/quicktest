@@ -7,52 +7,69 @@ namespace Tests
 	public class NavigationTests : UserTest<App>
 	{
 		[Test]
-		public void TestNavigation()
+		public void TestNavigationStack()
 		{
-			Tap("Navigation");
-			ShouldSee("Navigation page");
+			OpenMenu("Navigation");
+			ShouldSee("Navigation demo");
 
 			Tap("PushAsync");
-			ShouldSee("Navigation page >");
+			ShouldSee("Navigation demo >");
 
 			Tap("PushAsync");
-			ShouldSee("Navigation page > >");
+			ShouldSee("Navigation demo > >");
 
 			Tap("PopAsync");
-			ShouldSee("Navigation page >");
-
-			Tap("PushModalAsync");
-			ShouldSee("Navigation page > ^");
-
-			Tap("PushModalAsync");
-			ShouldSee("Navigation page > ^ ^");
-
-			Tap("PopModalAsync");
-			ShouldSee("Navigation page > ^");
-
-			Tap("PopModalAsync");
-			ShouldSee("Navigation page >");
-
-			Tap("PopToRootAsync");
-			ShouldSee("Demo page");
+			ShouldSee("Navigation demo >");
 		}
 
 		[Test]
-		public void TestDisAppearingPage()
+		public void TestModalStack()
 		{
-			Tap("Dis-/Appearing");
-			ShouldSee("Appeared!");
+			OpenMenu("Navigation");
+			ShouldSee("Navigation demo");
 
-			GoBack();
-			ShouldSee("Disappeared");
+			Tap("PushModalAsync");
+			ShouldSee("Navigation demo ^");
 
-			Tap("Ok");
-			ShouldSee("Demo page");
+			Tap("PushModalAsync");
+			ShouldSee("Navigation demo ^ ^");
+
+			Tap("PopModalAsync");
+			ShouldSee("Navigation demo ^");
+		}
+
+		[Test]
+		public void TestPopToRoot()
+		{
+			OpenMenu("Navigation");
+			ShouldSee("Navigation demo");
+
+			Tap("PushAsync");
+			Tap("PushAsync");
+			Tap("PushAsync");
+			ShouldSee("Navigation demo > > >");
+
+			Tap("PopToRootAsync");
+			ShouldSee("Navigation demo");
 		}
 
 		[Test]
 		[Ignore("Not working yet")]
-		public void TestPopToRoot()
+		public void TestDisAppearingPage()
+		{
+			OpenMenu("Dis-/Appearing");
+			ShouldSee("Appeared!");
+
+			OpenMenu("Elements");
+			ShouldSee("Disappeared");
+
+			Tap("Ok");
+			ShouldSee("Element demo");
+		}
+
+		[Test]
+		[Ignore("Not working yet")]
+		public void TestPopToRootEvent()
 		{
 			Tap("Dis-/Appearing");
 			App.MainPage.Navigation.PopToRootAsync();

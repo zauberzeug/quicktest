@@ -13,7 +13,7 @@ namespace DemoApp
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				Children = {
 					new DemoLabel("Menu"),
-					CreateMenuButton("Views", () => new ElementDemoPage()),
+					CreateMenuButton("Elements", () => new ElementDemoPage()),
 					CreateMenuButton("ListViews", () => new ListViewDemoPage()),
 					CreateMenuButton("Navigation", () => new NavigationDemoPage()),
 					CreateMenuButton("Dis-/Appearing", () => new DisAppearingDemoPage()),
