@@ -10,19 +10,16 @@ function setVersion_Nupkg {
   sed -i '' "s/\(<version>\).*\(<\/version>\)/\1$VERSION\2/" $1
 }
 
-function setGitHead_Nupkg {
-  HEAD=$( git rev-parse HEAD )
-  HEAD=" (HEAD: $HEAD)"
-  sed -i '' "s/\(<description>\)\(.*\)\(<\/description>\)/\1\2$HEAD\3/" $1
-}
-
 function packNuGet {
 	setVersion_Nupkg $1
-	setGitHead_Nupkg $1
 	nuget pack $1 || exit 1
 }
 
 function publishNuGet {
+  git add $1
+  git commit -am "nuget package ${VERSION}" || exit 1
+  git tag -a $VERSION -m ''  || exit 1
+
   echo "not publishing nuget jet"
   #nuget push $1
 }
@@ -38,6 +35,3 @@ $NUNIT -config=Release "Tests/Tests.csproj" || exit 1
 
 packNuGet userflow.nuspec
 publishNuGet UserFlow.$VERSION.nupkg
-
-git commit -am "nuget package ${VERSION}" || exit 1
-git tag -a $VERSION -m ''  || exit 1
