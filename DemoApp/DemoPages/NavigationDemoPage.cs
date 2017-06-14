@@ -29,7 +29,6 @@ namespace DemoApp
 					new DemoButton("PopModalAsync") {
 						Command = new Command(obj => App.PopModalAsync()),
 					},
-					App.Log,
 				},
 			};
 
@@ -41,12 +40,12 @@ namespace DemoApp
 		{
 			base.OnAppearing();
 
-			App.Log.Text += " Appeared";
+			App.PageLog += " Appeared";
 		}
 
 		protected override void OnDisappearing()
 		{
-			App.Log.Text += " Disappeared";
+			App.PageLog += " Disappeared";
 
 			base.OnDisappearing();
 		}

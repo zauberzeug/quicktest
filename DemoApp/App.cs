@@ -4,11 +4,11 @@ namespace DemoApp
 {
 	public class App : Application
 	{
-		public static DemoLabel Log { get; private set; }
+		public static string PageLog;
 
 		public App()
 		{
-			Log = new DemoLabel("Log:");
+			PageLog = "";
 
 			MainPage = new MasterDetailPage {
 				Master = new MenuPage(),

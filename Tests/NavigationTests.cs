@@ -56,17 +56,17 @@ namespace Tests
 		[Test]
 		public void TestPageAppearingOnAppStart()
 		{
-			ShouldSee("Log: Appeared");
+			Assert.That(App.PageLog, Is.EqualTo(" Appeared"));
 		}
 
 		[Test]
 		public void TestPageDisAppearingOnPushPop()
 		{
 			Tap("PushAsync");
-			ShouldSee("Log: Appeared Disappeared Appeared");
+			Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared"));
 
 			GoBack();
-			ShouldSee("Log: Appeared Disappeared Appeared Disappeared Appeared");
+			Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared Disappeared Appeared"));
 		}
 
 		[Test]
@@ -74,7 +74,7 @@ namespace Tests
 		{
 			OpenMenu("Elements");
 			OpenMenu("Navigation");
-			ShouldSee("Log: Appeared Disappeared Appeared");
+			Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared"));
 		}
 
 		[Test]
