@@ -4,9 +4,9 @@ namespace DemoApp
 {
 	public class DemoEntry : Entry
 	{
-		public DemoEntry(string text)
+		public DemoEntry(string automationId)
 		{
-			Text = text;
+			AutomationId = automationId;
 		}
 	}
 }

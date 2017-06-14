@@ -59,7 +59,7 @@ namespace Tests
 		[Test]
 		public void TestEntry()
 		{
-			Input("", "Text");
+			Input("entry_automation_id", "Text");
 			ShouldSee("Text");
 		}
 
