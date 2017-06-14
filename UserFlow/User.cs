@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace UserFlow
 {
@@ -9,12 +11,14 @@ namespace UserFlow
 	{
 		readonly Page page;
 
+		Stack<AlertArguments> alerts = new Stack<AlertArguments>();
+
 		public User(Application app)
 		{
 			page = app.MainPage;
 
-			MessagingCenter.Subscribe<Page, Xamarin.Forms.Internals.AlertArguments>(this, Page.AlertSignalName, (obj, obj1) => {
-				Console.WriteLine("Showing Dialog");
+			MessagingCenter.Subscribe<Page, AlertArguments>(this, Page.AlertSignalName, (page, alert) => {
+				alerts.Push(alert);
 			});
 
 			if (page is NavigationPage) {
@@ -31,11 +35,29 @@ namespace UserFlow
 
 		public bool CanSee(string text)
 		{
+			if (alerts.Any()) {
+				var alert = alerts.Peek();
+				return alert.Title == text || alert.Message == text;
+			}
+
 			return CurrentPage.Find(text).Any();
 		}
 
 		public void Tap(string text)
 		{
+			if (alerts.Any()) {
+				var alert = alerts.Peek();
+				if (alert.Accept == text)
+					alert.SetResult(true);
+				else if (alert.Cancel == text)
+					alert.SetResult(false);
+				else
+					Assert.Fail($"Could not tap \"{text}\" on alert\n{alert}");
+
+				alerts.Pop();
+				return;
+			}
+
 			var elementInfos = CurrentPage.Find(text);
 			Assert.That(elementInfos, Is.Not.Empty, $"Did not find \"{text}\" on current page");
 			Assert.That(elementInfos, Has.Count.LessThan(2), $"Found multiple \"{text}\" on current page");
