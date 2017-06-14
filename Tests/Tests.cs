@@ -13,99 +13,99 @@ namespace Tests
 		[Test]
 		public void TestLabel()
 		{
-			Tap ("Label");
-			ShouldSee ("Label tapped");
+			Tap("Label");
+			ShouldSee("Label tapped");
 		}
 
 		[Test]
 		public void TestButton()
 		{
-			Tap ("Button");
-			ShouldSee ("Button tapped");
+			Tap("Button");
+			ShouldSee("Button tapped");
 		}
 
 		[Test]
 		public void TestNestedLabel()
 		{
-			Tap ("Nested label");
-			ShouldSee ("StackLayout tapped");
+			Tap("Nested label");
+			ShouldSee("StackLayout tapped");
 		}
 
 		[Test]
 		public void TestListViews()
 		{
-			Tap ("A1");
-			ShouldSee ("A1 tapped");
+			Tap("A1");
+			ShouldSee("A1 tapped");
 
-			GoBack ();
-			ShouldSee ("Demo page");
+			GoBack();
+			ShouldSee("Demo page");
 
-			Tap ("A2");
-			ShouldSee ("A2 tapped");
+			Tap("A2");
+			ShouldSee("A2 tapped");
 		}
 
 		[Test]
 		public void TestGrid()
 		{
-			Tap ("D");
-			ShouldSee ("D tapped");
+			Tap("D");
+			ShouldSee("D tapped");
 		}
 
 		[Test]
 		public void TestToolbarItem()
 		{
-			Tap ("ToolbarItem");
-			ShouldSee ("ToolbarItem tapped");
+			Tap("ToolbarItem");
+			ShouldSee("ToolbarItem tapped");
 		}
 
 		[Test]
 		public void TestGoBack()
 		{
-			Tap ("Label");
-			GoBack ();
-			ShouldSee ("Demo page");
+			Tap("Label");
+			GoBack();
+			ShouldSee("Demo page");
 		}
 
 		[Test]
 		public void TestDisAppearingPage()
 		{
-			Tap ("DemoDisAppearing");
-			ShouldSee ("Appeared!");
+			Tap("DemoDisAppearing");
+			ShouldSee("Appeared!");
 
-			GoBack ();
-			ShouldSee ("Disappearing");
+			GoBack();
+			ShouldSee("Disappearing");
 		}
 
 		[Test]
 		public void TestAlert()
 		{
-			Tap ("DemoAlert");
-			ShouldSee ("Message");
+			Tap("DemoAlert");
+			ShouldSee("Message");
 			//ShouldNotSee("Demo page"); // TODO
 
-			Tap ("Ok");
-			ShouldSee ("Demo page");
+			Tap("Ok");
+			ShouldSee("Demo page");
 		}
 
 		[Test]
 		public void TestModalPage()
 		{
-			Tap ("DemoModalPage");
-			ShouldSee ("Modal page pushed");
+			Tap("DemoModalPage");
+			ShouldSee("Modal page pushed");
 
-			Tap ("Close");
-			ShouldSee ("Demo page");
+			Tap("Close");
+			ShouldSee("Demo page");
 		}
 
 		[Test]
-		[Ignore ("This is not a test")]
+		[Ignore("This is not a test")]
 		public void ScanForSendMethods()
 		{
 			var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy;
-			foreach (var type in typeof (Page).Assembly.GetTypes ())
-				foreach (var method in type.GetMethods (flags))
-					if (method.Name.Contains ("Send") || method.Name.Contains ("Notify"))
-						Console.WriteLine (type.Name + ": " + method.Name);
+			foreach (var type in typeof(Page).Assembly.GetTypes())
+				foreach (var method in type.GetMethods(flags))
+					if (method.Name.Contains("Send") || method.Name.Contains("Notify"))
+						Console.WriteLine(type.Name + ": " + method.Name);
 		}
 	}
 }
