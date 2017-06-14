@@ -23,7 +23,7 @@ namespace UserFlow
 			if (page is NavigationPage) {
 				(page as NavigationPage).Pushed += (sender, e) => (page as IPageController).SendAppearing();
 				(page as NavigationPage).Popped += (sender, e) => (e.Page as IPageController).SendDisappearing();
-				(page as NavigationPage).PoppedToRoot += (sender, e) => (e.Page as IPageController).SendDisappearing();
+				(page as NavigationPage).PoppedToRoot += (sender, e) => ((e as PoppedToRootEventArgs).PoppedPages.Last() as IPageController).SendDisappearing();
 			}
 		}
 
