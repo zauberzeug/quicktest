@@ -26,9 +26,9 @@ namespace UserFlow
 				user.Tap(text);
 		}
 
-		protected void Input(string currentText, string newText)
+		protected void Input(string automationId, string text)
 		{
-			user.Input(currentText, newText);
+			user.Input(automationId, text);
 		}
 
 		protected void ShouldSee(params string[] texts)

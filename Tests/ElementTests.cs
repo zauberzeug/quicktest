@@ -59,8 +59,17 @@ namespace Tests
 		[Test]
 		public void TestEntry()
 		{
-			Input("", "Text");
-			ShouldSee("Text");
+			ShouldSee("Placeholder", "entry_automation_id");
+
+			Input("Placeholder", "Text1");
+			ShouldSee("Text1");
+			ShouldNotSee("Placeholder");
+
+			Input("entry_automation_id", "Text2");
+			ShouldSee("Text2");
+
+			Input("Text2", "Text3");
+			ShouldSee("Text3");
 		}
 
 		[Test]
