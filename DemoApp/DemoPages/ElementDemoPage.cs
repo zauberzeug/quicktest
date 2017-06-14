@@ -15,7 +15,7 @@ namespace DemoApp
 						new DemoLabel("Label").WithGestureRecognizer(),
 						new DemoStack(),
 						new DemoGrid(),
-						new DemoEntry("entry_automation_id"),
+						new DemoEntry("entry_automation_id", "Placeholder"),
 					},
 				},
 			};

@@ -42,6 +42,7 @@ namespace UserFlow
 				(element as Button)?.Text == text ||
 				(element as Label)?.Text == text ||
 				(element as Entry)?.Text == text ||
+				((element as Entry)?.Placeholder == text && string.IsNullOrEmpty((element as Entry)?.Text)) ||
 				(element as TextCell)?.Text == text ||
 				element.AutomationId == text;
 		}
