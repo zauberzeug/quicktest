@@ -34,4 +34,4 @@ NUNIT="mono packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe"
 $NUNIT -config=Release "Tests/Tests.csproj" || exit 1
 
 packNuGet userflow.nuspec
-publishNuGet UserFlow.$VERSION.nupkg
+publishNuGet UserFlow.$VERSION-pre.nupkg
