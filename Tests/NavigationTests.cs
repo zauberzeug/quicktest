@@ -6,16 +6,12 @@ namespace Tests
 {
 	public class NavigationTests : UserTest<App>
 	{
-		[SetUp]
-		public void SetUp()
-		{
-			OpenMenu("Navigation");
-			ShouldSee("Navigation demo");
-		}
-
 		[Test]
 		public void TestNavigationStack()
 		{
+			OpenMenu("Navigation");
+			ShouldSee("Navigation demo");
+
 			Tap("PushAsync");
 			ShouldSee("Navigation demo >");
 
@@ -29,6 +25,9 @@ namespace Tests
 		[Test]
 		public void TestModalStack()
 		{
+			OpenMenu("Navigation");
+			ShouldSee("Navigation demo");
+
 			Tap("PushModalAsync");
 			ShouldSee("Navigation demo ^");
 
@@ -42,6 +41,9 @@ namespace Tests
 		[Test]
 		public void TestPopToRoot()
 		{
+			OpenMenu("Navigation");
+			ShouldSee("Navigation demo");
+
 			Tap("PushAsync");
 			Tap("PushAsync");
 			Tap("PushAsync");
@@ -49,6 +51,12 @@ namespace Tests
 
 			Tap("PopToRootAsync");
 			ShouldSee("Navigation demo");
+		}
+
+		[Test]
+		public void TestPageAppearingOnAppStart()
+		{
+			ShouldSee("Log: Appeared");
 		}
 
 		[Test]

@@ -5,6 +5,8 @@ namespace DemoApp
 {
 	public class NavigationDemoPage : ContentPage
 	{
+		readonly DemoLabel log = new DemoLabel("Log:");
+
 		public NavigationDemoPage(string title = "Navigation demo")
 		{
 			Title = title;
@@ -29,11 +31,26 @@ namespace DemoApp
 					new DemoButton("PopModalAsync") {
 						Command = new Command(obj => App.PopModalAsync()),
 					},
+					log,
 				},
 			};
 
 			if (title.EndsWith("^", StringComparison.Ordinal))
 				(Content as StackLayout).Children.Insert(0, new DemoLabel(title));
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+
+			log.Text += " Appeared";
+		}
+
+		protected override void OnDisappearing()
+		{
+			log.Text += " Disappeared";
+
+			base.OnDisappearing();
 		}
 	}
 }

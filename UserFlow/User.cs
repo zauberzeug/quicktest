@@ -25,6 +25,10 @@ namespace UserFlow
 				(page as NavigationPage).Popped += (sender, e) => (e.Page as IPageController).SendDisappearing();
 				(page as NavigationPage).PoppedToRoot += (sender, e) => ((e as PoppedToRootEventArgs).PoppedPages.Last() as IPageController).SendDisappearing();
 			}
+
+			if (page is MasterDetailPage) {
+				((page as MasterDetailPage).Detail as IPageController).SendAppearing();
+			}
 		}
 
 		ContentPage CurrentPage {
