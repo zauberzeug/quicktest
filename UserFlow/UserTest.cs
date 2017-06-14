@@ -37,6 +37,11 @@ namespace UserFlow
 			user.GoBack();
 		}
 
+		public string Render()
+		{
+			return user.Render();
+		}
+
 		[TearDown]
 		public virtual void TearDown()
 		{

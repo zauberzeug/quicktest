@@ -58,6 +58,7 @@
     <Compile Include="ElementRendering.cs" />
     <Compile Include="ElementInteractions.cs" />
     <Compile Include="ElementInfo.cs" />
+    <Compile Include="AlertArgumentExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

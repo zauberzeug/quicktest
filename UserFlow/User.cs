@@ -77,10 +77,15 @@ namespace UserFlow
 
 		public void Print()
 		{
+			Console.WriteLine(Render());
+		}
+
+		public string Render()
+		{
 			if (alerts.Any())
-				Console.WriteLine(alerts.Peek());
+				return alerts.Peek().Render();
 			else
-				Console.WriteLine(CurrentPage.Render().Trim());
+				return CurrentPage.Render().Trim();
 		}
 	}
 }
