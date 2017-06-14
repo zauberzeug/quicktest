@@ -23,8 +23,14 @@ namespace UserFlow
 
 			if (page is NavigationPage) {
 				(page as NavigationPage).Pushed += (sender, e) => (page as IPageController).SendAppearing();
-				(page as NavigationPage).Popped += (sender, e) => (page as IPageController).SendDisappearing();
+				(page as NavigationPage).Popped += Popped;
+				(page as NavigationPage).PoppedToRoot += Popped;
 			}
+		}
+
+		void Popped(object sender, EventArgs args)
+		{
+			(page as IPageController).SendDisappearing();
 		}
 
 		ContentPage CurrentPage {
@@ -75,9 +81,12 @@ namespace UserFlow
 			page.SendBackButtonPressed();
 		}
 
-		public void PrintCurrentPage()
+		public void Print()
 		{
-			Console.WriteLine(CurrentPage.Render().Trim());
+			if (alerts.Any())
+				Console.WriteLine(alerts.Peek());
+			else
+				Console.WriteLine(CurrentPage.Render().Trim());
 		}
 	}
 }

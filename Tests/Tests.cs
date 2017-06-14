@@ -73,7 +73,7 @@ namespace Tests
 			ShouldSee("Appeared!");
 
 			GoBack();
-			ShouldSee("Disappearing");
+			ShouldSee("Disappeard");
 		}
 
 		[Test]

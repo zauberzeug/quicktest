@@ -36,7 +36,7 @@ namespace DemoApp
 
 		protected override void OnDisappearing()
 		{
-			Application.Current.MainPage.DisplayAlert("Alert", "Disappearing", "Ok");
+			Application.Current.MainPage.DisplayAlert("Disappeard", "Page just disappeard", "Ok");
 
 			base.OnDisappearing();
 		}

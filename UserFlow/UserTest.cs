@@ -35,7 +35,7 @@ namespace UserFlow
 		[TearDown]
 		public virtual void TearDown()
 		{
-			//user?.PrintCurrentPage();
+			user?.Print();
 		}
 	}
 }
