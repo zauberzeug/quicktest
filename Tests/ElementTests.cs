@@ -29,7 +29,7 @@ namespace Tests
 		[Test]
 		public void TestNestedLabel()
 		{
-			Tap("Nested label");
+			Tap("label in tap-able layout");
 			ShouldSee("StackLayout tapped");
 		}
 
