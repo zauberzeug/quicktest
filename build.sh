@@ -5,7 +5,7 @@ set -x
 VERSION=`git describe --abbrev=0 | awk -F. '/[0-9]+\./{$NF+=1;OFS=".";print}'`
 
 echo "setting version to $VERSION"
-
+exit
 function setVersion_Nupkg {
   sed -i '' "s/\(<version>\).*\(<\/version>\)/\1$VERSION-pre\2/" $1
 }
