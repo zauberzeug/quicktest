@@ -57,6 +57,13 @@ namespace Tests
 		}
 
 		[Test]
+		public void TestEntry()
+		{
+			Input("", "Text");
+			ShouldSee("Text");
+		}
+
+		[Test]
 		public void TestToolbarItem()
 		{
 			Tap("ToolbarItem");

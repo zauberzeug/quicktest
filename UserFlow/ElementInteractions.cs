@@ -34,6 +34,9 @@ namespace UserFlow
 			if ((element as Label)?.Text == text)
 				result.Add(ElementInfo.FromElement(element));
 
+			if ((element as Entry)?.Text == text)
+				result.Add(ElementInfo.FromElement(element));
+
 			AddTapGestureRecognizers(element, result);
 
 			return result;

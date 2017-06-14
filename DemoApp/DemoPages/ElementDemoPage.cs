@@ -15,6 +15,7 @@ namespace DemoApp
 						new DemoLabel("Label").WithGestureRecognizer(),
 						new DemoStack(),
 						new DemoGrid(),
+						new DemoEntry(""),
 					},
 				},
 			};

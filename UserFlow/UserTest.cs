@@ -26,6 +26,11 @@ namespace UserFlow
 				user.Tap(text);
 		}
 
+		protected void Input(string currentText, string newText)
+		{
+			user.Input(currentText, newText);
+		}
+
 		protected void ShouldSee(params string[] texts)
 		{
 			foreach (var text in texts)

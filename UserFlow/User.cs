@@ -98,6 +98,15 @@ namespace UserFlow
 			elementInfo.InvokeTapGestures?.Invoke();
 		}
 
+		public void Input(string currentText, string newText)
+		{
+			var elements = CurrentPage.Find(currentText).Select(i => i.Element).OfType<Entry>().ToList();
+			Assert.That(elements, Is.Not.Empty, $"Did not find entry \"{currentText}\" on current page");
+			Assert.That(elements, Has.Count.LessThan(2), $"Found multiple entries \"{currentText}\" on current page");
+
+			elements.First().Text = newText;
+		}
+
 		public void OpenMenu()
 		{
 			(page as MasterDetailPage).IsPresented = true;
