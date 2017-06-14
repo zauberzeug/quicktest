@@ -52,8 +52,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tests.cs" />
-    <Compile Include="TestRendering.cs" />
+    <Compile Include="ElementTests.cs" />
+    <Compile Include="RendererTests.cs" />
+    <Compile Include="ReflectionTests.cs" />
+    <Compile Include="NavigationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

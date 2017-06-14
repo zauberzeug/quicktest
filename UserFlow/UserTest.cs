@@ -35,6 +35,14 @@ namespace UserFlow
 			Assert.That(user.CanSee(text), Is.False, $"User can see \"{text}\"");
 		}
 
+		protected void OpenMenu(string textToTap = null)
+		{
+			user.OpenMenu();
+
+			if (textToTap != null)
+				Tap(textToTap);
+		}
+
 		protected void GoBack()
 		{
 			user.GoBack();

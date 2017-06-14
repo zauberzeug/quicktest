@@ -29,7 +29,10 @@ namespace UserFlow
 
 		ContentPage CurrentPage {
 			get {
-				return page.Navigation.NavigationStack.Concat(page.Navigation.ModalStack).Last() as ContentPage;
+				if ((page as MasterDetailPage)?.IsPresented ?? false)
+					return (page as MasterDetailPage).Master as ContentPage;
+				var rootPage = (page as MasterDetailPage)?.Detail ?? page;
+				return rootPage.Navigation.NavigationStack.Concat(page.Navigation.ModalStack).Last() as ContentPage;
 			}
 		}
 
@@ -68,6 +71,11 @@ namespace UserFlow
 			(elementInfo.Element as Button)?.Command.Execute(null);
 			elementInfo.EnclosingListView?.Invoke("NotifyRowTapped", elementInfo.ListViewIndex, null);
 			elementInfo.InvokeTapGestures?.Invoke();
+		}
+
+		public void OpenMenu()
+		{
+			(page as MasterDetailPage).IsPresented = true;
 		}
 
 		public void GoBack()

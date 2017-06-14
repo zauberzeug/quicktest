@@ -12,6 +12,7 @@ namespace DemoApp
 			Content = new StackLayout {
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				Children = {
+					new DemoLabel("Menu"),
 					CreateMenuButton("Views", () => new ElementDemoPage()),
 					CreateMenuButton("ListViews", () => new ListViewDemoPage()),
 					CreateMenuButton("Navigation", () => new NavigationDemoPage()),

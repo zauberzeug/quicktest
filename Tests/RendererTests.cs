@@ -4,7 +4,7 @@ using UserFlow;
 
 namespace Tests
 {
-	public class TestRendering : UserTest<App>
+	public class RendererTests : UserTest<App>
 	{
 		[Test]
 		public void TestAlertRendering()
