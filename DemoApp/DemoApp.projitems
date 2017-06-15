@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoStack.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ElementDemoPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoEntry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BindableObjectExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DemoPages\" />

@@ -35,7 +35,8 @@ Message
         · Cell B
         · Cell C
         · Cell D
-      · some text input"));
+      · some text input
+      · bound text 2"));
 		}
 	}
 }

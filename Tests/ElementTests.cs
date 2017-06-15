@@ -64,6 +64,12 @@ namespace Tests
 		}
 
 		[Test]
+		public void TestBinding()
+		{
+			ShouldSee("bound text 2");
+		}
+
+		[Test]
 		public void TestEntry()
 		{
 			ShouldSee("Placeholder", "entry_automation_id");

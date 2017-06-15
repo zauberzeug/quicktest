@@ -8,6 +8,7 @@ namespace DemoApp
 		{
 			Title = "Element demo";
 
+			var bindableText = new BindableText("bound text");
 			Content = new ScrollView {
 				Content = new StackLayout {
 					Children = {
@@ -17,11 +18,30 @@ namespace DemoApp
 						new DemoGrid(),
 						new DemoEntry("entry_automation_id", "Placeholder"),
 						new DemoLabel("Invisible Label").Invisible(),
-					},
+						new DemoLabel().BindTo(bindableText, BindableText.TextProperty, Label.TextProperty),
+		},
 				},
 			};
 
 			ToolbarItems.Add(new DemoToolbarItem());
+			bindableText.Text = "bound text 2";
+		}
+	}
+
+	public class BindableText : BindableObject
+	{
+		public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(string), "");
+
+		string text = "";
+
+		public BindableText(string text)
+		{
+			Text = text;
+		}
+
+		public string Text {
+			get { return (string)GetValue(TextProperty); }
+			set { SetValue(TextProperty, value); }
 		}
 	}
 }
