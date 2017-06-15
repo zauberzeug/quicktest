@@ -96,18 +96,20 @@ namespace Tests
 		{
 			Tap("Toggle MasterDetail MainPage");
 			ShouldSee("Navigation demo");
-			Assert.That(App.PageLog, Is.EqualTo(" Appeared"));
+
+			var expectedLog = " Appeared Disappeared Appeared";
+			Assert.That(App.PageLog, Is.EqualTo(expectedLog));
 
 			Tap("PushAsync");
 			ShouldSee("Navigation demo >");
-			//Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared"));
+			Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
 
 			Tap("PopAsync");
 			ShouldSee("Navigation demo");
-			//Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared Disappeared Appeared"));
+			Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
 
 			Tap("Toggle MasterDetail MainPage");
-			Assert.That(App.PageLog, Is.EqualTo(" Appeared"));
+			Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
 
 			OpenMenu("Elements");
 			ShouldSee("Element demo");

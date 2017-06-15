@@ -20,38 +20,16 @@ namespace UserFlow
 				alerts.Push(alert);
 			});
 
-			if (app.MainPage is MasterDetailPage) {
-				var masterDetailPage = app.MainPage as MasterDetailPage;
-				masterDetailPage.PropertyChanging += (sender, e) => {
-					if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
-						var page = masterDetailPage.Detail.Navigation.NavigationStack.Last();
-						Console.WriteLine("disappearing: " + page.Title);
-						page.SendDisappearing();
-					}
-				};
-				masterDetailPage.PropertyChanged += (sender, e) => {
-					if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
-						var page = masterDetailPage.Detail.Navigation.NavigationStack.Last();
-						Console.WriteLine("appearing: " + page.Title);
-						page.SendAppearing();
-					}
-				};
-			}
+			app.PropertyChanging += (s, args) => {
+				if (args.PropertyName == nameof(Application.MainPage))
+					(CurrentPage as IPageController).SendDisappearing();
+			};
+			app.PropertyChanged += (s, args) => {
+				if (args.PropertyName == nameof(Application.MainPage))
+					HandleDisAppearing();
+			};
 
-			(CurrentPage as IPageController).SendAppearing();
-
-			CurrentNavigationPage.Pushed += (sender, e) => {
-				var stack = CurrentPage.Navigation.NavigationStack;
-				(stack[stack.Count - 2]).SendDisappearing();
-				(e.Page as IPageController).SendAppearing();
-			};
-			CurrentNavigationPage.Popped += (sender, e) => {
-				(e.Page as IPageController).SendDisappearing();
-				(CurrentPage as IPageController).SendAppearing();
-			};
-			CurrentNavigationPage.PoppedToRoot += (sender, e) => {
-				((e as PoppedToRootEventArgs).PoppedPages.Last() as IPageController).SendDisappearing();
-			};
+			HandleDisAppearing();
 		}
 
 		public NavigationPage CurrentNavigationPage {
@@ -140,6 +118,42 @@ namespace UserFlow
 				return alerts.Peek().Render();
 			else
 				return CurrentPage.Render().Trim();
+		}
+
+		void HandleDisAppearing()
+		{
+			(CurrentPage as IPageController).SendAppearing();
+
+			if (app.MainPage is MasterDetailPage) {
+				var masterDetailPage = app.MainPage as MasterDetailPage;
+				masterDetailPage.PropertyChanging += (sender, e) => {
+					if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
+						var page = masterDetailPage.Detail.Navigation.NavigationStack.Last();
+						Console.WriteLine("disappearing: " + page.Title);
+						page.SendDisappearing();
+					}
+				};
+				masterDetailPage.PropertyChanged += (sender, e) => {
+					if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
+						var page = masterDetailPage.Detail.Navigation.NavigationStack.Last();
+						Console.WriteLine("appearing: " + page.Title);
+						page.SendAppearing();
+					}
+				};
+			}
+
+			CurrentNavigationPage.Pushed += (sender, e) => {
+				var stack = CurrentPage.Navigation.NavigationStack;
+				(stack[stack.Count - 2]).SendDisappearing();
+				(e.Page as IPageController).SendAppearing();
+			};
+			CurrentNavigationPage.Popped += (sender, e) => {
+				(e.Page as IPageController).SendDisappearing();
+				(CurrentPage as IPageController).SendAppearing();
+			};
+			CurrentNavigationPage.PoppedToRoot += (sender, e) => {
+				((e as PoppedToRootEventArgs).PoppedPages.Last() as IPageController).SendDisappearing();
+			};
 		}
 	}
 }
