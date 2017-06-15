@@ -22,6 +22,7 @@ Message
 		public void TestElementRendering()
 		{
 			OpenMenu("Elements");
+			Input("entry_automation_id", "some text input");
 			Assert.That(Render(), Is.EqualTo(@"· Element demo [ToolbarItem]
   · 
     · 
@@ -34,7 +35,7 @@ Message
         · Cell B
         · Cell C
         · Cell D
-      ·"));
+      · some text input"));
 		}
 	}
 }
