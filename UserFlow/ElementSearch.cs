@@ -48,7 +48,7 @@ namespace UserFlow
 				(element as Entry)?.Text == text ||
 				((element as Entry)?.Placeholder == text && string.IsNullOrEmpty((element as Entry)?.Text)) ||
 				(element as TextCell)?.Text == text ||
-				element.AutomationId == text;
+				element?.AutomationId == text;
 		}
 
 		static void AddTapGestureRecognizers(Element sourceElement, IEnumerable<ElementInfo> result)
