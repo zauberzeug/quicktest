@@ -7,6 +7,9 @@ namespace UserFlow
 	{
 		public static string Render(this Element element)
 		{
+			if (!(element as VisualElement)?.IsVisible ?? false)
+				return "";
+
 			var result = "· ";
 
 			result += (element as NavigationPage)?.CurrentPage.Render();

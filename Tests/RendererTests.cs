@@ -12,7 +12,29 @@ namespace Tests
 			OpenMenu("Alert");
 			ShouldSee("Message");
 
-			Assert.That(Render(), Is.EqualTo("Alert\nMessage\n\n[] [Ok]"));
+			Assert.That(Render(), Is.EqualTo(@"Alert
+Message
+
+[] [Ok]"));
+		}
+
+		[Test]
+		public void TestElementRendering()
+		{
+			OpenMenu("Elements");
+			Assert.That(Render(), Is.EqualTo(@"· Element demo [ToolbarItem]
+  · 
+    · 
+      · Button
+      · Label
+      · 
+        · label in tap-able layout
+      · 
+        · Cell A
+        · Cell B
+        · Cell C
+        · Cell D
+      ·"));
 		}
 	}
 }

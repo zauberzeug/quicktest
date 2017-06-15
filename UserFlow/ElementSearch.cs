@@ -10,6 +10,9 @@ namespace UserFlow
 		public static List<ElementInfo> Find(this Element element, Predicate<Element> predicate)
 		{
 			var result = new List<ElementInfo>();
+			if (!(element as VisualElement)?.IsVisible ?? false)
+				return result;
+
 			IEnumerable<ElementInfo> empty = new List<ElementInfo>();
 
 			result.AddRange((element as Page)?.ToolbarItems.Where(predicate.Invoke).Select(ElementInfo.FromElement) ?? empty);

@@ -57,6 +57,12 @@ namespace Tests
 		}
 
 		[Test]
+		public void TestInvisible()
+		{
+			ShouldNotSee("Invisible Label");
+		}
+
+		[Test]
 		public void TestEntry()
 		{
 			ShouldSee("Placeholder", "entry_automation_id");

@@ -16,6 +16,7 @@ namespace DemoApp
 						new DemoStack(),
 						new DemoGrid(),
 						new DemoEntry("entry_automation_id", "Placeholder"),
+						new DemoLabel("Invisible Label").Invisible(),
 					},
 				},
 			};

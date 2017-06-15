@@ -20,5 +20,12 @@ namespace DemoApp
 
 			return this;
 		}
+
+		public DemoLabel Invisible()
+		{
+			IsVisible = false;
+
+			return this;
+		}
 	}
 }
