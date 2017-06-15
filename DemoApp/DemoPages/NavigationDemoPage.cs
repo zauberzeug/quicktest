@@ -29,6 +29,10 @@ namespace DemoApp
 					new DemoButton("PopModalAsync") {
 						Command = new Command(obj => App.PopModalAsync()),
 					},
+					new DemoButton("Toggle MasterDetail MainPage")
+					{
+						Command = new Command(obj => (Application.Current as App).ToggleMasterDetail()),
+					},
 				},
 			};
 
