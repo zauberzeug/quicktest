@@ -9,10 +9,10 @@ namespace UserFlow
 	{
 		User user;
 
-		public T App { get; private set; }
+		protected T App { get; private set; }
 
 		[SetUp]
-		virtual protected void SetUp()
+		protected virtual void SetUp()
 		{
 			MockForms.Init();
 
@@ -66,13 +66,13 @@ namespace UserFlow
 			user.GoBack();
 		}
 
-		public string Render()
+		protected string Render()
 		{
 			return user.Render();
 		}
 
 		[TearDown]
-		public virtual void TearDown()
+		protected virtual void TearDown()
 		{
 			user?.Print();
 		}
