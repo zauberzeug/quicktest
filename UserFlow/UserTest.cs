@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
+using System;
 
 namespace UserFlow
 {
@@ -34,6 +35,16 @@ namespace UserFlow
 		{
 			foreach (var text in texts)
 				Assert.That(user.CanSee(text), $"User can't see \"{text}\"");
+		}
+
+		protected void ShouldSee(string text, TimeSpan timeout)
+		{
+			ShouldSee(text, (int)timeout.TotalMilliseconds);
+		}
+
+		protected void ShouldSee(string text, int timeout)
+		{
+			Assert.That(() => user.CanSee(text), Is.True.After(timeout, 10), $"User can't see \"{text}\"");
 		}
 
 		protected void ShouldNotSee(params string[] texts)

@@ -9,58 +9,66 @@ namespace UserFlow
 {
 	public class User
 	{
-		readonly Page page;
+		readonly Application app;
 		readonly Stack<AlertArguments> alerts = new Stack<AlertArguments>();
 
 		public User(Application app)
 		{
-			page = app.MainPage;
+			this.app = app;
 
 			MessagingCenter.Subscribe<Page, AlertArguments>(this, Page.AlertSignalName, (page, alert) => {
 				alerts.Push(alert);
 			});
 
-			if (page is NavigationPage)
-				throw new NotImplementedException("MainPage of type NavigationPage is currently not supported");
-
-			if (page is MasterDetailPage) {
-				var masterDetailPage = page as MasterDetailPage;
+			if (app.MainPage is MasterDetailPage) {
+				var masterDetailPage = app.MainPage as MasterDetailPage;
 				masterDetailPage.PropertyChanging += (sender, e) => {
-					if (e.PropertyName == nameof(MasterDetailPage.Detail))
-						(masterDetailPage.Detail as IPageController).SendDisappearing();
+					if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
+						var page = masterDetailPage.Detail.Navigation.NavigationStack.Last();
+						Console.WriteLine("disappearing: " + page.Title);
+						page.SendDisappearing();
+					}
 				};
 				masterDetailPage.PropertyChanged += (sender, e) => {
-					if (e.PropertyName == nameof(MasterDetailPage.Detail))
-						(masterDetailPage.Detail as IPageController).SendAppearing();
+					if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
+						var page = masterDetailPage.Detail.Navigation.NavigationStack.Last();
+						Console.WriteLine("appearing: " + page.Title);
+						page.SendAppearing();
+					}
 				};
-				var detail = masterDetailPage.Detail;
-				(detail as IPageController).SendAppearing();
-				if (detail is NavigationPage) {
-					(detail as NavigationPage).Pushed += (sender, e) => {
-						var stack = CurrentPage.Navigation.NavigationStack;
-						(stack[stack.Count - 2]).SendDisappearing();
-						(e.Page as IPageController).SendAppearing();
-					};
-					(detail as NavigationPage).Popped += (sender, e) => {
-						(e.Page as IPageController).SendDisappearing();
-						(CurrentPage as IPageController).SendAppearing();
-					};
-					(detail as NavigationPage).PoppedToRoot += (sender, e) => {
-						((e as PoppedToRootEventArgs).PoppedPages.Last() as IPageController).SendDisappearing();
-					};
-				}
+			}
+
+			(CurrentPage as IPageController).SendAppearing();
+
+			CurrentNavigationPage.Pushed += (sender, e) => {
+				var stack = CurrentPage.Navigation.NavigationStack;
+				(stack[stack.Count - 2]).SendDisappearing();
+				(e.Page as IPageController).SendAppearing();
+			};
+			CurrentNavigationPage.Popped += (sender, e) => {
+				(e.Page as IPageController).SendDisappearing();
+				(CurrentPage as IPageController).SendAppearing();
+			};
+			CurrentNavigationPage.PoppedToRoot += (sender, e) => {
+				((e as PoppedToRootEventArgs).PoppedPages.Last() as IPageController).SendDisappearing();
+			};
+		}
+
+		public NavigationPage CurrentNavigationPage {
+			get {
+				return (app.MainPage as NavigationPage) ?? ((app.MainPage as MasterDetailPage).Detail as NavigationPage);
 			}
 		}
 
 		ContentPage CurrentPage {
 			get {
-				if (page.Navigation.ModalStack.Any())
-					return page.Navigation.ModalStack.Last() as ContentPage;
+				if (app.MainPage.Navigation.ModalStack.Any())
+					return app.MainPage.Navigation.ModalStack.Last() as ContentPage;
 
-				if ((page as MasterDetailPage)?.IsPresented ?? false)
-					return (page as MasterDetailPage).Master as ContentPage;
+				if ((app.MainPage as MasterDetailPage)?.IsPresented ?? false)
+					return (app.MainPage as MasterDetailPage).Master as ContentPage;
 
-				var rootPage = (page as MasterDetailPage)?.Detail ?? page;
+				var rootPage = (app.MainPage as MasterDetailPage)?.Detail ?? app.MainPage;
 				return rootPage.Navigation.NavigationStack.Last() as ContentPage;
 			}
 		}
@@ -113,12 +121,12 @@ namespace UserFlow
 
 		public void OpenMenu()
 		{
-			(page as MasterDetailPage).IsPresented = true;
+			(app.MainPage as MasterDetailPage).IsPresented = true;
 		}
 
 		public void GoBack()
 		{
-			page.SendBackButtonPressed();
+			app.MainPage.SendBackButtonPressed();
 		}
 
 		public void Print()

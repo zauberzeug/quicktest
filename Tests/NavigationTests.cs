@@ -90,5 +90,27 @@ namespace Tests
 			Tap("Ok");
 			ShouldSee("Demo page");
 		}
+
+		[Test]
+		public void ToggleMainPageBetweenMasterDetailAndNavigation()
+		{
+			Tap("Toggle MasterDetail MainPage");
+			ShouldSee("Navigation demo");
+			Assert.That(App.PageLog, Is.EqualTo(" Appeared"));
+
+			Tap("PushAsync");
+			ShouldSee("Navigation demo >");
+			//Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared"));
+
+			Tap("PopAsync");
+			ShouldSee("Navigation demo");
+			//Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared Disappeared Appeared"));
+
+			Tap("Toggle MasterDetail MainPage");
+			Assert.That(App.PageLog, Is.EqualTo(" Appeared"));
+
+			OpenMenu("Elements");
+			ShouldSee("Element demo");
+		}
 	}
 }
