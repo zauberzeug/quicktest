@@ -38,16 +38,17 @@ namespace UserFlow
 			}
 		}
 
+		ContentPage badPage = new ContentPage { Title = "Error", Content = new Label { Text = "The expected page is not of type 'ContentPage'" } };
 		ContentPage CurrentPage {
 			get {
 				if (app.MainPage.Navigation.ModalStack.Any())
-					return app.MainPage.Navigation.ModalStack.Last() as ContentPage;
+					return app.MainPage.Navigation.ModalStack.Last() as ContentPage ?? badPage;
 
 				if ((app.MainPage as MasterDetailPage)?.IsPresented ?? false)
-					return (app.MainPage as MasterDetailPage).Master as ContentPage;
+					return (app.MainPage as MasterDetailPage).Master as ContentPage ?? badPage;
 
 				var rootPage = (app.MainPage as MasterDetailPage)?.Detail ?? app.MainPage;
-				return rootPage.Navigation.NavigationStack.Last() as ContentPage;
+				return rootPage.Navigation.NavigationStack.Last() as ContentPage ?? badPage;
 			}
 		}
 
