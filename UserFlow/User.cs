@@ -34,7 +34,11 @@ namespace UserFlow
 
 		public NavigationPage CurrentNavigationPage {
 			get {
-				return (app.MainPage as NavigationPage) ?? ((app.MainPage as MasterDetailPage).Detail as NavigationPage);
+				var navigationPage = (app.MainPage as NavigationPage) ?? ((app.MainPage as MasterDetailPage)?.Detail as NavigationPage);
+				if (navigationPage == null)
+					Assert.Fail("We must have a NavigationPage");
+
+				return navigationPage;
 			}
 		}
 
