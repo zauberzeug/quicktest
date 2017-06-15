@@ -24,6 +24,7 @@ namespace UserFlow
 			result += (element as Label)?.Text;
 			result += (element as Button)?.Text;
 			result += (element as Entry)?.Text;
+			result += (element as Editor)?.Text;
 
 			result = "\n" + result.Replace("\n", "\n  ");
 

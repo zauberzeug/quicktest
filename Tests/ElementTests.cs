@@ -86,6 +86,18 @@ namespace Tests
 		}
 
 		[Test]
+		public void TestEditor()
+		{
+			ShouldSee("editor_automation_id");
+
+			Input("editor_automation_id", "Text1");
+			ShouldSee("Text1");
+
+			Input("Text1", "Text2");
+			ShouldSee("Text2");
+		}
+
+		[Test]
 		public void TestToolbarItem()
 		{
 			Tap("ToolbarItem");

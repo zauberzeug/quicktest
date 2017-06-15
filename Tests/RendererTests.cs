@@ -36,6 +36,7 @@ Message
         · Cell C
         · Cell D
       · some text input
+      · editor content
       · bound text 2"));
 		}
 	}

@@ -17,6 +17,7 @@ namespace DemoApp
 						new DemoStack(),
 						new DemoGrid(),
 						new DemoEntry("entry_automation_id", "Placeholder"),
+						new DemoEditor("editor_automation_id", "editor content"),
 						new DemoLabel("Invisible Label").Invisible(),
 						new DemoLabel().BindTo(bindableText, BindableText.TextProperty, Label.TextProperty),
 		},
