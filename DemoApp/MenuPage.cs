@@ -24,7 +24,11 @@ namespace DemoApp
 		DemoButton CreateMenuButton(string title, Func<ContentPage> pageCreator)
 		{
 			return new DemoButton(title) {
-				Command = new Command(o => App.Open(pageCreator.Invoke())),
+				Command = new Command(o => {
+					var mainPage = (Application.Current.MainPage as MasterDetailPage);
+					mainPage.Detail = new NavigationPage(pageCreator.Invoke());
+					mainPage.IsPresented = false;
+				}),
 			};
 		}
 	}

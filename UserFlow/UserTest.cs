@@ -4,7 +4,6 @@ using Xamarin.Forms.Mocks;
 
 namespace UserFlow
 {
-	[TestFixture]
 	public abstract class UserTest<T> where T : Application, new()
 	{
 		User user;
@@ -12,7 +11,7 @@ namespace UserFlow
 		public T App { get; private set; }
 
 		[SetUp]
-		protected void Init()
+		protected void SetUp()
 		{
 			MockForms.Init();
 

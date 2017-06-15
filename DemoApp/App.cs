@@ -10,31 +10,39 @@ namespace DemoApp
 		{
 			PageLog = "";
 
-			MainPage = new MasterDetailPage {
-				Master = new MenuPage(),
-				Detail = new NavigationPage(new NavigationDemoPage()),
-			};
+			ToggleMasterDetail();
 		}
 
-		public static void Open(ContentPage page)
+		public void ToggleMasterDetail()
 		{
-			(Current.MainPage as MasterDetailPage).Detail = new NavigationPage(page);
-			(Current.MainPage as MasterDetailPage).IsPresented = false;
+			if ((MainPage as MasterDetailPage) == null)
+				MainPage = new MasterDetailPage {
+					Master = new MenuPage(),
+					Detail = new NavigationPage(new NavigationDemoPage()),
+				};
+			else
+				MainPage = new NavigationPage(new NavigationDemoPage());
+		}
+
+		public static NavigationPage CurrentNavigationPage {
+			get {
+				return (Current.MainPage as NavigationPage) ?? ((Current.MainPage as MasterDetailPage).Detail as NavigationPage);
+			}
 		}
 
 		public static void PushAsync(ContentPage page)
 		{
-			((Current.MainPage as MasterDetailPage).Detail as NavigationPage).PushAsync(page);
+			CurrentNavigationPage.PushAsync(page);
 		}
 
 		public static void PopAsync()
 		{
-			((Current.MainPage as MasterDetailPage).Detail as NavigationPage).PopAsync();
+			CurrentNavigationPage.PopAsync();
 		}
 
 		public static void PopToRootAsync()
 		{
-			((Current.MainPage as MasterDetailPage).Detail as NavigationPage).PopToRootAsync();
+			CurrentNavigationPage.PopToRootAsync();
 		}
 
 		public static void PushModalAsync(ContentPage page)
