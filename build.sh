@@ -21,14 +21,15 @@ function publishNuGet {
   git tag -a $VERSION -m ''  || exit 1
 
   git push --tags
-  
+
   echo "not publishing to nuget.org jet"
   #nuget push $1
 }
 
 nuget restore UserFlow.sln || exit 1
 
-xbuild /p:Configuration=Release UserFlow.sln || exit 1
+xbuild /p:Configuration=Release UserFlow/UserFlow.csproj || exit 1
+xbuild /p:Configuration=Release Tests/Tests.csproj || exit 1
 
 pushd packages && nuget install Nunit.Runners && popd
 export MONO_IOMAP=all # this fixes slash, backslash path seperator problems within nunit test runner
