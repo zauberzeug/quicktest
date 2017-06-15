@@ -10,10 +10,18 @@ namespace DemoApp
 		{
 			PageLog = "";
 
-			MainPage = new MasterDetailPage {
-				Master = new MenuPage(),
-				Detail = new NavigationPage(new NavigationDemoPage()),
-			};
+			ToggleMasterDetail();
+		}
+
+		public void ToggleMasterDetail()
+		{
+			if ((MainPage as MasterDetailPage) == null)
+				MainPage = new MasterDetailPage {
+					Master = new MenuPage(),
+					Detail = new NavigationPage(new NavigationDemoPage()),
+				};
+			else
+				MainPage = new NavigationPage(new NavigationDemoPage());
 		}
 
 		public static void Open(ContentPage page)
