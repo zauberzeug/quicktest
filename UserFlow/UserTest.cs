@@ -12,7 +12,7 @@ namespace UserFlow
 		public T App { get; private set; }
 
 		[SetUp]
-		protected void SetUp()
+		virtual protected void SetUp()
 		{
 			MockForms.Init();
 
