@@ -10,9 +10,7 @@ namespace UserFlow
 		public static List<ElementInfo> Find(this Element element, Predicate<Element> predicate)
 		{
 			var result = new List<ElementInfo>();
-			if (!(element as VisualElement)?.IsVisible ?? false)
-				return result;
-
+			
 			IEnumerable<ElementInfo> empty = new List<ElementInfo>();
 
 			result.AddRange((element as Page)?.ToolbarItems.Where(predicate.Invoke).Select(ElementInfo.FromElement) ?? empty);
@@ -39,8 +37,11 @@ namespace UserFlow
 
 		public static bool HasText(this Element element, string text)
 		{
+            if (!(element as VisualElement)?.IsVisible ?? false)
+                return false;
+            
 			return
-				(element as ToolbarItem)?.Text == text ||
+                (element as ToolbarItem)?.Text == text ||
 				(element as ContentPage)?.Title == text ||
 				(element as Button)?.Text == text ||
 				(element as Label)?.Text == text ||
