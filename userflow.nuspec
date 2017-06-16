@@ -17,5 +17,6 @@
   </metadata>
     <files>
         <file src="UserFlow/bin/Release/UserFlow.dll" target="lib/net45" />
+        <file src="UserFlow/bin/Release/UserFlow.pdb" target="lib/net45" />
     </files>
 </package>
