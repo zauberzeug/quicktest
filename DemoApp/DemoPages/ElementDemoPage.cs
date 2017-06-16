@@ -33,8 +33,6 @@ namespace DemoApp
 	{
 		public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(string), "");
 
-		string text = "";
-
 		public BindableText(string text)
 		{
 			Text = text;
