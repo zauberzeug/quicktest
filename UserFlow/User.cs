@@ -98,8 +98,7 @@ namespace UserFlow
 
 			(elementInfo.Element as ToolbarItem)?.Command.Execute(null);
 			(elementInfo.Element as Button)?.Command.Execute(null);
-			elementInfo.EnclosingListView?.Invoke("NotifyRowTapped", elementInfo.ListViewIndex, null);
-			elementInfo.InvokeTapGestures?.Invoke();
+			elementInfo.InvokeTap?.Invoke();
 		}
 
 		public void Input(string automationId, string text)

@@ -59,8 +59,8 @@ namespace UserFlow
 			if (tapGestureRecognizers == null || !tapGestureRecognizers.Any())
 				return;
 
-			foreach (var info in result.Where(i => i.InvokeTapGestures == null))
-				info.InvokeTapGestures = () => tapGestureRecognizers.ForEach(r => r.Invoke("SendTapped", sourceElement));
+			foreach (var info in result.Where(i => i.InvokeTap == null))
+				info.InvokeTap = () => tapGestureRecognizers.ForEach(r => r.Invoke("SendTapped", sourceElement));
 		}
 
 		public static List<ElementInfo> Find(this ListView listView, Predicate<Element> predicate)
@@ -71,8 +71,7 @@ namespace UserFlow
 				(content as Cell).BindingContext = item;
 				if (predicate.Invoke(content as Cell) || ((content as ViewCell)?.View.Find(predicate).Any() ?? false))
 					result.Add(new ElementInfo {
-						EnclosingListView = listView,
-						ListViewIndex = listView.ItemsSource.Cast<object>().ToList().IndexOf(item),
+						InvokeTap = () => listView.Invoke("NotifyRowTapped", listView.ItemsSource.Cast<object>().ToList().IndexOf(item), null),
 					});
 			}
 			return result;
