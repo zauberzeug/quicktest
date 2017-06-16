@@ -10,9 +10,6 @@ namespace Tests
 		[Test]
 		public void TestNavigationStack()
 		{
-			OpenMenu("Navigation");
-			ShouldSee("Navigation demo");
-
 			Tap("PushAsync");
 			ShouldSee("Navigation demo >");
 			ShouldNotSee("Navigation demo", "Menu");
@@ -27,9 +24,6 @@ namespace Tests
 		[Test]
 		public void TestModalStack()
 		{
-			OpenMenu("Navigation");
-			ShouldSee("Navigation demo");
-
 			Tap("PushModalAsync");
 			ShouldSee("Navigation demo ^");
 			ShouldNotSee("Navigation demo", "Menu");
@@ -42,11 +36,24 @@ namespace Tests
 		}
 
 		[Test]
+		public void TestNavigationPageOnModalStack()
+		{
+			Tap("PushModalAsync NavigationPage");
+			ShouldSee("Navigation demo ^");
+
+			Tap("PushAsync");
+			ShouldSee("Navigation demo ^ >");
+
+			Tap("PopAsync");
+			ShouldSee("Navigation demo ^");
+
+			Tap("PopModalAsync");
+			ShouldSee("Navigation demo");
+		}
+
+		[Test]
 		public void TestPopToRoot()
 		{
-			OpenMenu("Navigation");
-			ShouldSee("Navigation demo");
-
 			Tap("PushAsync");
 			Tap("PushAsync");
 			Tap("PushAsync");
@@ -120,7 +127,7 @@ namespace Tests
 		public void TestOnlyContentPagesAreSupported()
 		{
 			App.CurrentNavigationPage.PushAsync(new Page());
-			ShouldSee("The expected page is not of type 'ContentPage'");
+			ShouldSee("The expected page is not of type \"ContentPage\"");
 		}
 	}
 }

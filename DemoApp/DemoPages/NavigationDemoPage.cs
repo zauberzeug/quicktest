@@ -30,7 +30,7 @@ namespace DemoApp
 						Command = new Command(obj => App.PopModalAsync()),
 					},
 					new DemoButton("PushModalAsync NavigationPage") {
-						Command = new Command(o => App.PushModalAsync(new NavigationPage(new NavigationDemoPage($"N({title} ^")))),
+						Command = new Command(o => App.PushModalAsync(new NavigationPage(new NavigationDemoPage(title + " ^")))),
 					},
 					new DemoLabel("MasterDetail:"),
 					new DemoButton("Toggle MasterDetail MainPage") {
