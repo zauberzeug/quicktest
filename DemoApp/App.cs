@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Linq;
+using Xamarin.Forms;
 
 namespace DemoApp
 {
@@ -26,7 +27,9 @@ namespace DemoApp
 
 		public static NavigationPage CurrentNavigationPage {
 			get {
-				return (Current.MainPage as NavigationPage) ?? ((Current.MainPage as MasterDetailPage).Detail as NavigationPage);
+				return (Current.MainPage.Navigation.ModalStack.LastOrDefault() as NavigationPage)
+					?? (Current.MainPage as NavigationPage)
+					?? ((Current.MainPage as MasterDetailPage).Detail as NavigationPage);
 			}
 		}
 

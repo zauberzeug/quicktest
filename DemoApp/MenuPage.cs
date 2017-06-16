@@ -7,7 +7,7 @@ namespace DemoApp
 	{
 		public MenuPage()
 		{
-			Title = nameof(MenuPage);
+			Title = "Menu";
 
 			Content = new StackLayout {
 				VerticalOptions = LayoutOptions.CenterAndExpand,
