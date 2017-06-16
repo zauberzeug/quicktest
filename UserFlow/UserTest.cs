@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
-using System;
 
 namespace UserFlow
 {

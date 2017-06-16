@@ -30,7 +30,7 @@ namespace DemoApp
 			}
 		}
 
-		public static void PushAsync(ContentPage page)
+		public static void PushAsync(Page page)
 		{
 			CurrentNavigationPage.PushAsync(page);
 		}
@@ -45,7 +45,7 @@ namespace DemoApp
 			CurrentNavigationPage.PopToRootAsync();
 		}
 
-		public static void PushModalAsync(ContentPage page)
+		public static void PushModalAsync(Page page)
 		{
 			Current.MainPage.Navigation.PushModalAsync(page);
 		}
