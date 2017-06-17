@@ -70,7 +70,7 @@ namespace UserFlow
         }
 
         protected PatientUser Now {
-            get { return new PatientUser(user, TimeSpan.Zero); }
+            get { return new PatientUser(user, TimeSpan.FromSeconds(0.1)); }
         }
     }
 }
