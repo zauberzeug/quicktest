@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using NUnit.Framework;
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
@@ -23,8 +22,7 @@ namespace UserFlow
 
 		protected void Tap(params string[] texts)
 		{
-			foreach (var text in texts)
-				user.Tap(text);
+			Now.Tap(texts);
 		}
 
 		protected void Input(string automationId, string text)
@@ -34,13 +32,12 @@ namespace UserFlow
 
 		protected void ShouldSee(params string[] texts)
 		{
-			After(0).ShouldSee(texts);
+			Now.ShouldSee(texts);
 		}
 
 		protected void ShouldNotSee(params string[] texts)
 		{
-			foreach (var text in texts)
-				Assert.That(user.CanSee(text), Is.False, $"User can see \"{text}\"");
+			Now.ShouldNotSee(texts);
 		}
 
 		protected void OpenMenu(string textToTap = null)
@@ -67,30 +64,13 @@ namespace UserFlow
 			user?.Print();
 		}
 
-		protected Delay After(double seconds)
+		protected PatientUser After(double seconds)
 		{
-			return new Delay(user, TimeSpan.FromSeconds(seconds));
+			return new PatientUser(user, TimeSpan.FromSeconds(seconds));
 		}
 
-		protected class Delay
-		{
-			readonly TimeSpan timeSpan;
-			readonly User user;
-
-			public Delay(User user, TimeSpan timeSpan)
-			{
-				this.user = user;
-				this.timeSpan = timeSpan;
-			}
-
-			public void ShouldSee(params string[] texts)
-			{
-				var list = new List<string>(texts);
-				if (list.TrueForAll(user.CanSee))
-					return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
-				Assert.That(() => list.TrueForAll(user.CanSee), Is.True.After((int)timeSpan.TotalMilliseconds, 10),
-							$"User can't see all: {string.Join(", ", texts)}");
-			}
+		protected PatientUser Now {
+			get { return new PatientUser(user, TimeSpan.Zero); }
 		}
 	}
 }
