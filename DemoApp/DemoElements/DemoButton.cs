@@ -1,16 +1,16 @@
-﻿using Xamarin.Forms;
+using Xamarin.Forms;
 
 namespace DemoApp
 {
-	public class DemoButton : Button
-	{
-		public DemoButton(string text)
-		{
-			Text = text;
+    public class DemoButton : Button
+    {
+        public DemoButton(string text)
+        {
+            Text = text;
 
-			BackgroundColor = Color.AliceBlue;
+            BackgroundColor = Color.AliceBlue;
 
-			Command = new Command(o => App.ShowMessage("Success", text + " tapped"));
-		}
-	}
+            Command = new Command(o => App.ShowMessage("Success", text + " tapped"));
+        }
+    }
 }

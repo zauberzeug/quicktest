@@ -1,31 +1,31 @@
-﻿using Xamarin.Forms;
+using Xamarin.Forms;
 
 namespace DemoApp
 {
-	public class DemoLabel : Label
-	{
-		public DemoLabel(string text = null)
-		{
-			Text = text;
+    public class DemoLabel : Label
+    {
+        public DemoLabel(string text = null)
+        {
+            Text = text;
 
-			BackgroundColor = Color.FloralWhite;
-			HorizontalTextAlignment = TextAlignment.Center;
-		}
+            BackgroundColor = Color.FloralWhite;
+            HorizontalTextAlignment = TextAlignment.Center;
+        }
 
-		public DemoLabel WithGestureRecognizer()
-		{
-			GestureRecognizers.Add(new TapGestureRecognizer {
-				Command = new Command(o => App.ShowMessage("Success", Text + " tapped")),
-			});
+        public DemoLabel WithGestureRecognizer()
+        {
+            GestureRecognizers.Add(new TapGestureRecognizer {
+                Command = new Command(o => App.ShowMessage("Success", Text + " tapped")),
+            });
 
-			return this;
-		}
+            return this;
+        }
 
-		public DemoLabel Invisible()
-		{
-			IsVisible = false;
+        public DemoLabel Invisible()
+        {
+            IsVisible = false;
 
-			return this;
-		}
-	}
+            return this;
+        }
+    }
 }
