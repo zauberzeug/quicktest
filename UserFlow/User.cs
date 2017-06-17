@@ -69,7 +69,10 @@ namespace UserFlow
 		{
 			if (alerts.Any()) {
 				var alert = alerts.Peek();
-				return alert.Title == text || alert.Message == text;
+				return alert.Title == text
+					|| alert.Message == text
+					|| alert.Cancel == text
+					|| alert.Accept == text;
 			}
 
 			return CurrentPage.Find(text).Any();

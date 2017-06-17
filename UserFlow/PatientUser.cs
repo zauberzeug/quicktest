@@ -21,7 +21,7 @@ namespace UserFlow
 			var list = new List<string>(texts);
 			if (list.All(user.CanSee))
 				return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
-			Assert.That(() => list.TrueForAll(user.CanSee), Is.True.After((int)timeSpan.TotalMilliseconds, 10),
+			Assert.That(() => list.All(user.CanSee), Is.True.After((int)timeSpan.TotalMilliseconds, 10),
 						$"User can't see all: {string.Join(", ", texts)}");
 		}
 
@@ -30,7 +30,7 @@ namespace UserFlow
 			var list = new List<string>(texts);
 			if (!list.Any(user.CanSee))
 				return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
-			Assert.That(() => list.TrueForAll(text => !user.CanSee(text)), Is.True.After((int)timeSpan.TotalMilliseconds, 10),
+			Assert.That(() => !list.Any(user.CanSee), Is.True.After((int)timeSpan.TotalMilliseconds, 10),
 						$"User can see any: {string.Join(", ", texts)}");
 		}
 

@@ -109,7 +109,7 @@ namespace Tests
 		public void TestAlert()
 		{
 			OpenMenu("Alert");
-			ShouldSee("Message");
+			ShouldSee("Alert", "Message", "Ok");
 			ShouldNotSee("Demo page");
 
 			Tap("Ok");
