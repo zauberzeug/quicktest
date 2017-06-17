@@ -36,9 +36,10 @@ namespace UserFlow
 
         public void Tap(params string[] texts)
         {
-            ShouldSee(texts[0]);
-            foreach (var text in texts)
+            foreach (var text in texts) {
+                ShouldSee(text);
                 user.Tap(text);
+            }
         }
     }
 }
