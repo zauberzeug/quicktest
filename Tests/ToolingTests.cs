@@ -1,4 +1,5 @@
-﻿using DemoApp;
+﻿using System;
+using DemoApp;
 using NUnit.Framework;
 using UserFlow;
 
@@ -25,6 +26,17 @@ namespace Tests
 		{
 			Tap("PushAsync", "PopAsync");
 			ShouldSee("Navigation demo");
+		}
+
+		[Test]
+		public void TestDelay()
+		{
+			OpenMenu("Elements");
+			Tap("Countdown");
+			ShouldNotSee("Countdown");
+			var time = DateTime.Now;
+			After(2).ShouldSee("2");
+			Assert.That(DateTime.Now - time, Is.GreaterThan(TimeSpan.FromSeconds(1)));
 		}
 	}
 }
