@@ -7,8 +7,10 @@ namespace Tests
 	public class ToolingTests : UserTest<App>
 	{
 		[SetUp]
-		public void SetUp()
+		protected override void SetUp()
 		{
+			base.SetUp();
+
 			OpenMenu("Navigation");
 		}
 

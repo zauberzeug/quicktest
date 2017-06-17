@@ -7,9 +7,10 @@ namespace Tests
 	public class ElementTests : UserTest<App>
 	{
 		[SetUp]
-		override protected void SetUp()
+		protected override void SetUp()
 		{
 			base.SetUp();
+
 			OpenMenu("Elements");
 		}
 
