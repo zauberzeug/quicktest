@@ -20,6 +20,7 @@ namespace DemoApp
 						new DemoEditor("editor_automation_id", "editor content"),
 						new DemoLabel("Invisible Label").Invisible(),
 						new DemoLabel().BindTo(bindableText, BindableText.TextProperty, Label.TextProperty),
+						new DemoCountdown(),
 		},
 				},
 			};

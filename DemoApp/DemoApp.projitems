@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoEntry.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BindableObjectExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoEditor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoCountdown.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DemoPages\" />
