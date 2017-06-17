@@ -4,7 +4,7 @@ using Xamarin.Forms.Mocks;
 
 namespace UserFlow
 {
-	public abstract class UserTest<T> where T : Application, new()
+	public abstract class IntegrationTest<T> where T : Application, new()
 	{
 		User user;
 

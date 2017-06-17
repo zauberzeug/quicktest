@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Tests
 {
-	public class ReflectionTests : UserTest<App>
+	public class ReflectionTests : IntegrationTest<App>
 	{
 		[Test]
 		public void ScanForSendMethods()

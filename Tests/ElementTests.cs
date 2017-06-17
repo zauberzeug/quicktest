@@ -4,7 +4,7 @@ using UserFlow;
 
 namespace Tests
 {
-	public class ElementTests : UserTest<App>
+	public class ElementTests : IntegrationTest<App>
 	{
 		[SetUp]
 		protected override void SetUp()

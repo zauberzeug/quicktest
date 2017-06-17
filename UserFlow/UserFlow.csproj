@@ -52,7 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserTest.cs" />
+    <Compile Include="IntegrationTest.cs" />
     <Compile Include="User.cs" />
     <Compile Include="InvokeAnything.cs" />
     <Compile Include="ElementRendering.cs" />

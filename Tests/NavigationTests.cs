@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace Tests
 {
-	public class NavigationTests : UserTest<App>
+	public class NavigationTests : IntegrationTest<App>
 	{
 		[Test]
 		public void TestNavigationStack()
