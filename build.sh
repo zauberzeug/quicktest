@@ -20,6 +20,7 @@ function publishNuGet {
   git commit -am "nuget package ${VERSION}" || exit 1
   git tag -a $VERSION -m ''  || exit 1
 
+  git push
   git push --tags
 
   echo "not publishing to nuget.org jet"
