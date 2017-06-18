@@ -1,118 +1,119 @@
-﻿using DemoApp;
+using DemoApp;
 using NUnit.Framework;
 using UserFlow;
 
 namespace Tests
 {
-	public class ElementTests : UserTest<App>
-	{
-		[SetUp]
-		override protected void SetUp()
-		{
-			base.SetUp();
-			OpenMenu("Elements");
-		}
+    public class ElementTests : IntegrationTest<App>
+    {
+        [SetUp]
+        protected override void SetUp()
+        {
+            base.SetUp();
 
-		[Test]
-		public void TestLabel()
-		{
-			Tap("Label");
-			ShouldSee("Label tapped");
-		}
+            OpenMenu("Elements");
+        }
 
-		[Test]
-		public void TestButton()
-		{
-			Tap("Button");
-			ShouldSee("Button tapped");
-		}
+        [Test]
+        public void TestLabel()
+        {
+            Tap("Label");
+            ShouldSee("Label tapped");
+        }
 
-		[Test]
-		public void TestNestedLabel()
-		{
-			Tap("label in tap-able layout");
-			ShouldSee("StackLayout tapped");
-		}
+        [Test]
+        public void TestButton()
+        {
+            Tap("Button");
+            ShouldSee("Button tapped");
+        }
 
-		[Test]
-		public void TestListViews()
-		{
-			OpenMenu("ListViews");
-			ShouldSee("ListView demo");
+        [Test]
+        public void TestNestedLabel()
+        {
+            Tap("label in tap-able layout");
+            ShouldSee("StackLayout tapped");
+        }
 
-			Tap("Item A1");
-			ShouldSee("Item A1 tapped");
+        [Test]
+        public void TestListViews()
+        {
+            OpenMenu("ListViews");
+            ShouldSee("ListView demo");
 
-			Tap("Ok");
-			ShouldSee("ListView demo");
+            Tap("Item A1");
+            ShouldSee("Item A1 tapped");
 
-			Tap("Item A2");
-			ShouldSee("Item A2 tapped");
-		}
+            Tap("Ok");
+            ShouldSee("ListView demo");
 
-		[Test]
-		public void TestGrid()
-		{
-			Tap("Cell D");
-			ShouldSee("Cell D tapped");
-		}
+            Tap("Item A2");
+            ShouldSee("Item A2 tapped");
+        }
 
-		[Test]
-		public void TestInvisible()
-		{
-			ShouldNotSee("Invisible Label");
-		}
+        [Test]
+        public void TestGrid()
+        {
+            Tap("Cell D");
+            ShouldSee("Cell D tapped");
+        }
 
-		[Test]
-		public void TestBinding()
-		{
-			ShouldSee("bound text 2");
-		}
+        [Test]
+        public void TestInvisible()
+        {
+            ShouldNotSee("Invisible Label");
+        }
 
-		[Test]
-		public void TestEntry()
-		{
-			ShouldSee("Placeholder", "entry_automation_id");
+        [Test]
+        public void TestBinding()
+        {
+            ShouldSee("bound text 2");
+        }
 
-			Input("Placeholder", "Text1");
-			ShouldSee("Text1");
-			ShouldNotSee("Placeholder");
+        [Test]
+        public void TestEntry()
+        {
+            ShouldSee("Placeholder", "entry_automation_id");
 
-			Input("entry_automation_id", "Text2");
-			ShouldSee("Text2");
+            Input("Placeholder", "Text1");
+            ShouldSee("Text1");
+            ShouldNotSee("Placeholder");
 
-			Input("Text2", "Text3");
-			ShouldSee("Text3");
-		}
+            Input("entry_automation_id", "Text2");
+            ShouldSee("Text2");
 
-		[Test]
-		public void TestEditor()
-		{
-			ShouldSee("editor_automation_id");
+            Input("Text2", "Text3");
+            ShouldSee("Text3");
+        }
 
-			Input("editor_automation_id", "Text1");
-			ShouldSee("Text1");
+        [Test]
+        public void TestEditor()
+        {
+            ShouldSee("editor_automation_id");
 
-			Input("Text1", "Text2");
-			ShouldSee("Text2");
-		}
+            Input("editor_automation_id", "Text1");
+            ShouldSee("Text1");
 
-		[Test]
-		public void TestToolbarItem()
-		{
-			Tap("ToolbarItem");
-			ShouldSee("ToolbarItem tapped");
-		}
+            Input("Text1", "Text2");
+            ShouldSee("Text2");
+        }
 
-		[Test]
-		public void TestAlert()
-		{
-			OpenMenu("Alert");
-			ShouldSee("Message");
-			ShouldNotSee("Demo page");
+        [Test]
+        public void TestToolbarItem()
+        {
+            Tap("ToolbarItem");
+            ShouldSee("ToolbarItem tapped");
+        }
 
-			Tap("Ok");
-			ShouldSee("Menu");
-		}
-	}
+        [Test]
+        public void TestAlert()
+        {
+            OpenMenu("Alert");
+            ShouldSee("Alert", "Message", "Ok");
+            ShouldNotSee("Demo page");
+
+            Tap("Ok");
+            ShouldSee("Menu");
+        }
+    }
 }

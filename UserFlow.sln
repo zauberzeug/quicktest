@@ -74,11 +74,10 @@ Global
 		Policies = $0
 		$0.TextStylePolicy = $1
 		$1.FileWidth = 120
-		$1.TabsToSpaces = False
-		$1.EolMarker = Unix
-		$1.inheritsSet = null
+		$1.inheritsSet = VisualStudio
 		$1.inheritsScope = text/plain
-		$1.scope = application/config+xml
+		$1.scope = text/x-csharp
+		$1.EolMarker = Unix
 		$0.CSharpFormattingPolicy = $2
 		$2.IndentSwitchCaseSection = False
 		$2.SpacingAfterMethodDeclarationName = False
@@ -93,5 +92,9 @@ Global
 		$0.XmlFormattingPolicy = $4
 		$4.inheritsSet = null
 		$4.scope = application/config+xml
+		$4.inheritsScope = application/xml
+		$0.StandardHeader = $5
+		$5.Text = 
+		$5.IncludeInNewFiles = True
 	EndGlobalSection
 EndGlobal

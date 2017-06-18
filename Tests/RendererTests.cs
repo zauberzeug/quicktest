@@ -1,29 +1,29 @@
-﻿using DemoApp;
+using DemoApp;
 using NUnit.Framework;
 using UserFlow;
 
 namespace Tests
 {
-	public class RendererTests : UserTest<App>
-	{
-		[Test]
-		public void TestAlertRendering()
-		{
-			OpenMenu("Alert");
-			ShouldSee("Message");
+    public class RendererTests : IntegrationTest<App>
+    {
+        [Test]
+        public void TestAlertRendering()
+        {
+            OpenMenu("Alert");
+            ShouldSee("Message");
 
-			Assert.That(Render(), Is.EqualTo(@"Alert
+            Assert.That(Render(), Is.EqualTo(@"Alert
 Message
 
 [] [Ok]"));
-		}
+        }
 
-		[Test]
-		public void TestElementRendering()
-		{
-			OpenMenu("Elements");
-			Input("entry_automation_id", "some text input");
-			Assert.That(Render(), Is.EqualTo(@"· Element demo [ToolbarItem]
+        [Test]
+        public void TestElementRendering()
+        {
+            OpenMenu("Elements");
+            Input("entry_automation_id", "some text input");
+            Assert.That(Render(), Is.EqualTo(@"· Element demo [ToolbarItem]
   · 
     · 
       · Button
@@ -37,7 +37,8 @@ Message
         · Cell D
       · some text input
       · editor content
-      · bound text 2"));
-		}
-	}
+      · bound text 2
+      · Countdown"));
+        }
+    }
 }

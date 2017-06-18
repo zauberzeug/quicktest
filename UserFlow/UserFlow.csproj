@@ -55,13 +55,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserTest.cs" />
+    <Compile Include="IntegrationTest.cs" />
     <Compile Include="User.cs" />
     <Compile Include="InvokeAnything.cs" />
     <Compile Include="ElementRendering.cs" />
     <Compile Include="ElementSearch.cs" />
     <Compile Include="ElementInfo.cs" />
     <Compile Include="AlertArgumentExtensions.cs" />
+    <Compile Include="PatientUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

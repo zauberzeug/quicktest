@@ -1,14 +1,14 @@
-﻿using Xamarin.Forms;
+using Xamarin.Forms;
 
 namespace DemoApp
 {
-	public class DemoEntry : Entry
-	{
-		public DemoEntry(string automationId, string placeholder = null, string text = null)
-		{
-			AutomationId = automationId;
-			Placeholder = placeholder;
-			Text = text;
-		}
-	}
+    public class DemoEntry : Entry
+    {
+        public DemoEntry(string automationId, string placeholder = null, string text = null)
+        {
+            AutomationId = automationId;
+            Placeholder = placeholder;
+            Text = text;
+        }
+    }
 }

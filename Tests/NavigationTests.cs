@@ -1,126 +1,133 @@
-﻿using DemoApp;
+using DemoApp;
 using NUnit.Framework;
 using UserFlow;
 using Xamarin.Forms;
 
 namespace Tests
 {
-	public class NavigationTests : UserTest<App>
-	{
-		[Test]
-		public void TestNavigationStack()
-		{
-			OpenMenu("Navigation");
-			ShouldSee("Navigation demo");
+    public class NavigationTests : IntegrationTest<App>
+    {
+        [Test]
+        public void TestNavigationStack()
+        {
+            Tap("PushAsync");
+            ShouldSee("Navigation demo >");
+            ShouldNotSee("Navigation demo", "Menu");
 
-			Tap("PushAsync");
-			ShouldSee("Navigation demo >");
-			ShouldNotSee("Navigation demo", "Menu");
+            Tap("PushAsync");
+            ShouldSee("Navigation demo > >");
 
-			Tap("PushAsync");
-			ShouldSee("Navigation demo > >");
+            Tap("PopAsync");
+            ShouldSee("Navigation demo >");
+        }
 
-			Tap("PopAsync");
-			ShouldSee("Navigation demo >");
-		}
+        [Test]
+        public void TestModalStack()
+        {
+            Tap("PushModalAsync");
+            ShouldSee("Navigation demo ^");
+            ShouldNotSee("Navigation demo", "Menu");
 
-		[Test]
-		public void TestModalStack()
-		{
-			OpenMenu("Navigation");
-			ShouldSee("Navigation demo");
+            Tap("PushModalAsync");
+            ShouldSee("Navigation demo ^ ^");
 
-			Tap("PushModalAsync");
-			ShouldSee("Navigation demo ^");
-			ShouldNotSee("Navigation demo", "Menu");
+            Tap("PopModalAsync");
+            ShouldSee("Navigation demo ^");
+        }
 
-			Tap("PushModalAsync");
-			ShouldSee("Navigation demo ^ ^");
+        [Test]
+        public void TestNavigationPageOnModalStack()
+        {
+            Tap("PushModalAsync NavigationPage");
+            ShouldSee("Navigation demo ^");
 
-			Tap("PopModalAsync");
-			ShouldSee("Navigation demo ^");
-		}
+            Tap("PushAsync");
+            ShouldSee("Navigation demo ^ >");
 
-		[Test]
-		public void TestPopToRoot()
-		{
-			OpenMenu("Navigation");
-			ShouldSee("Navigation demo");
+            Tap("PopAsync");
+            ShouldSee("Navigation demo ^");
 
-			Tap("PushAsync");
-			Tap("PushAsync");
-			Tap("PushAsync");
-			ShouldSee("Navigation demo > > >");
+            Tap("PopModalAsync");
+            ShouldSee("Navigation demo");
+        }
 
-			Tap("PopToRootAsync");
-			ShouldSee("Navigation demo");
-		}
+        [Test]
+        public void TestPopToRoot()
+        {
+            Tap("PushAsync");
+            Tap("PushAsync");
+            Tap("PushAsync");
+            ShouldSee("Navigation demo > > >");
 
-		[Test]
-		public void TestPageAppearingOnAppStart()
-		{
-			Assert.That(App.PageLog, Is.EqualTo(" Appeared"));
-		}
+            Tap("PopToRootAsync");
+            ShouldSee("Navigation demo");
+        }
 
-		[Test]
-		public void TestPageDisAppearingOnPushPop()
-		{
-			Tap("PushAsync");
-			Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared"));
+        [Test]
+        public void TestPageAppearingOnAppStart()
+        {
+            Assert.That(App.PageLog, Is.EqualTo(" Appeared"));
+        }
 
-			GoBack();
-			Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared Disappeared Appeared"));
-		}
+        [Test]
+        public void TestPageDisAppearingOnPushPop()
+        {
+            Tap("PushAsync");
+            Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared"));
 
-		[Test]
-		public void TestPageDisAppearingOnMenuChange()
-		{
-			OpenMenu("Elements");
-			OpenMenu("Navigation");
-			Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared"));
-		}
+            GoBack();
+            Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared Disappeared Appeared"));
+        }
 
-		[Test]
-		[Ignore("Not working yet")]
-		public void TestPopToRootEvent()
-		{
-			Tap("Dis-/Appearing");
-			App.MainPage.Navigation.PopToRootAsync();
-			ShouldSee("Disappeared");
+        [Test]
+        public void TestPageDisAppearingOnMenuChange()
+        {
+            OpenMenu("Elements");
+            OpenMenu("Navigation");
+            Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared"));
+        }
 
-			Tap("Ok");
-			ShouldSee("Demo page");
-		}
+        [Test]
+        [Ignore("Not working yet")]
+        public void TestPopToRootEvent()
+        {
+            Tap("Dis-/Appearing");
+            App.MainPage.Navigation.PopToRootAsync();
+            ShouldSee("Disappeared");
 
-		[Test]
-		public void ToggleMainPageBetweenMasterDetailAndNavigation()
-		{
-			Tap("Toggle MasterDetail MainPage");
-			ShouldSee("Navigation demo");
+            Tap("Ok");
+            ShouldSee("Demo page");
+        }
 
-			var expectedLog = " Appeared Disappeared Appeared";
-			Assert.That(App.PageLog, Is.EqualTo(expectedLog));
+        [Test]
+        public void ToggleMainPageBetweenMasterDetailAndNavigation()
+        {
+            Tap("Toggle MasterDetail MainPage");
+            ShouldSee("Navigation demo");
 
-			Tap("PushAsync");
-			ShouldSee("Navigation demo >");
-			Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            var expectedLog = " Appeared Disappeared Appeared";
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog));
 
-			Tap("PopAsync");
-			ShouldSee("Navigation demo");
-			Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            Tap("PushAsync");
+            ShouldSee("Navigation demo >");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
 
-			Tap("Toggle MasterDetail MainPage");
-			Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            Tap("PopAsync");
+            ShouldSee("Navigation demo");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
 
-			OpenMenu("Elements");
-			ShouldSee("Element demo");
-		}
+            Tap("Toggle MasterDetail MainPage");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
 
-		[Test]
-		public void TestOnlyContentPagesAreSupported()
-		{
-			App.CurrentNavigationPage.PushAsync(new Page());
-			ShouldSee("The expected page is not of type 'ContentPage'");
-		}
-	}
+            OpenMenu("Elements");
+            ShouldSee("Element demo");
+        }
+
+        [Test]
+        public void TestOnlyContentPagesAreSupported()
+        {
+            App.CurrentNavigationPage.PushAsync(new Page());
+            ShouldSee("The expected page is not of type \"ContentPage\"");
+        }
+    }
 }

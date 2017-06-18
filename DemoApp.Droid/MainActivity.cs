@@ -1,4 +1,4 @@
-﻿using Android.App;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using DemoApp;
@@ -7,21 +7,21 @@ using Xamarin.Forms.Platform.Android;
 
 namespace FormsTest.Droid
 {
-	[Activity(
-		Label = nameof(DemoApp),
-		Icon = "@drawable/icon",
-		Theme = "@style/MyTheme",
-		MainLauncher = true,
-		ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	public class MainActivity : FormsAppCompatActivity
-	{
-		protected override void OnCreate(Bundle savedInstanceState)
-		{
-			base.OnCreate(savedInstanceState);
+    [Activity(
+        Label = nameof(DemoApp),
+        Icon = "@drawable/icon",
+        Theme = "@style/MyTheme",
+        MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : FormsAppCompatActivity
+    {
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
 
-			Forms.Init(this, savedInstanceState);
+            Forms.Init(this, savedInstanceState);
 
-			LoadApplication(new App());
-		}
-	}
+            LoadApplication(new App());
+        }
+    }
 }
