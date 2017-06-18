@@ -12,6 +12,11 @@ namespace DemoApp
             Content = new ScrollView {
                 Content = new StackLayout {
                     Children = {
+                        new SearchBar {
+                            AutomationId = "searchbar_automation_id",
+                            BackgroundColor = Color.White,
+                            HeightRequest = 48, // HACK: https://bugzilla.xamarin.com/show_bug.cgi?id=43975
+                        },
                         new DemoButton("Button"),
                         new DemoLabel("Label").WithGestureRecognizer(),
                         new DemoStack(),

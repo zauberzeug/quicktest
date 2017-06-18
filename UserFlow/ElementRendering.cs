@@ -25,6 +25,11 @@ namespace UserFlow
             result += (element as Button)?.Text;
             result += (element as Entry)?.Text;
             result += (element as Editor)?.Text;
+            result += (element as SearchBar)?.Text;
+
+            var automationId = (element as VisualElement)?.AutomationId;
+            if (automationId != null)
+                result += $" ({automationId})";
 
             result = "\n" + result.Replace("\n", "\n  ");
 

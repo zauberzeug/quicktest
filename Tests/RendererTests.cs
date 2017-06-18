@@ -23,9 +23,11 @@ Message
         {
             OpenMenu("Elements");
             Input("entry_automation_id", "some text input");
+            Input("searchbar_automation_id", "search text");
             Assert.That(Render(), Is.EqualTo(@"· Element demo [ToolbarItem]
   · 
     · 
+      · search text (searchbar_automation_id)
       · Button
       · Label
       · 
@@ -35,8 +37,8 @@ Message
         · Cell B
         · Cell C
         · Cell D
-      · some text input
-      · editor content
+      · some text input (entry_automation_id)
+      · editor content (editor_automation_id)
       · bound text 2
       · Countdown"));
         }

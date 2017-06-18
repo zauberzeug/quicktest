@@ -106,7 +106,7 @@ namespace UserFlow
 
         public void Input(string automationId, string text)
         {
-            var elements = CurrentPage.Find(automationId).Select(i => i.Element).OfType<InputView>().ToList();
+            var elements = CurrentPage.Find(automationId).Select(i => i.Element).OfType<VisualElement>().ToList();
             Assert.That(elements, Is.Not.Empty, $"Did not find entry \"{automationId}\" on current page");
             Assert.That(elements, Has.Count.LessThan(2), $"Found multiple entries \"{automationId}\" on current page");
 
@@ -114,6 +114,8 @@ namespace UserFlow
                 (elements.First() as Entry).Text = text;
             if (elements.First() is Editor)
                 (elements.First() as Editor).Text = text;
+            if (elements.First() is SearchBar)
+                (elements.First() as SearchBar).Text = text;
         }
 
         public void OpenMenu()
