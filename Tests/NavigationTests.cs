@@ -146,12 +146,5 @@ namespace Tests
             OpenMenu("Elements");
             ShouldSee("Element demo");
         }
-
-        [Test]
-        public void TestOnlyContentPagesAreSupported()
-        {
-            App.CurrentNavigationPage.PushAsync(new Page());
-            ShouldSee("The expected page is not of type \"ContentPage\"");
-        }
     }
 }

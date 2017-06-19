@@ -25,34 +25,30 @@ namespace UserFlow
 
         public NavigationPage CurrentNavigationPage {
             get {
-                var navigationPage = (app.MainPage as NavigationPage) ?? ((app.MainPage as MasterDetailPage)?.Detail as NavigationPage);
-                if (navigationPage == null)
-                    Assert.Fail("We must have a NavigationPage");
-
-                return navigationPage;
+                return (app.MainPage.Navigation.ModalStack.LastOrDefault() as NavigationPage)
+                    ?? (app.MainPage as NavigationPage)
+                    ?? (app.MainPage as MasterDetailPage).Detail as NavigationPage;
             }
         }
 
         ContentPage CurrentPage {
             get {
-                var badPage = new ContentPage {
-                    Title = "Error",
-                    Content = new Label {
-                        Text = "The expected page is not of type \"ContentPage\"",
-                    },
-                };
-
                 var modalStack = app.MainPage.Navigation.ModalStack;
-                if (modalStack.Any())
-                    return modalStack.Last() as ContentPage
-                                     ?? (modalStack.Last() as NavigationPage).CurrentPage as ContentPage
-                                     ?? badPage;
+                var currentPage = (modalStack.LastOrDefault() as ContentPage)
+                    ?? ((modalStack.LastOrDefault() as NavigationPage)?.CurrentPage as ContentPage);
 
-                if ((app.MainPage as MasterDetailPage)?.IsPresented ?? false)
-                    return (app.MainPage as MasterDetailPage).Master as ContentPage ?? badPage;
+                var masterDetailPage = app.MainPage as MasterDetailPage;
+                if (currentPage == null && masterDetailPage != null && masterDetailPage.IsPresented)
+                    currentPage = masterDetailPage.Master as ContentPage;
 
-                var rootPage = (app.MainPage as MasterDetailPage)?.Detail ?? app.MainPage;
-                return rootPage.Navigation.NavigationStack.Last() as ContentPage ?? badPage;
+                var rootPage = masterDetailPage?.Detail ?? app.MainPage;
+                if (currentPage == null)
+                    currentPage = rootPage.Navigation.NavigationStack.Last() as ContentPage;
+
+                if (currentPage == null)
+                    Assert.Fail("CurrentPage is no ContentPage");
+
+                return currentPage;
             }
         }
 

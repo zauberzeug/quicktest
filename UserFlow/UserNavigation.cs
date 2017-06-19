@@ -51,20 +51,14 @@ namespace UserFlow
 
         void HandleMasterDetailPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
-            if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
-                var page = (app.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.Last();
-                Console.WriteLine("disappearing: " + page.Title);
-                page.SendDisappearing();
-            }
+            if (e.PropertyName == nameof(MasterDetailPage.Detail))
+                (app.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.LastOrDefault()?.SendDisappearing();
         }
 
         void HandleMasterDetailPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
-                var page = (app.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.Last();
-                Console.WriteLine("appearing: " + page.Title);
-                page.SendAppearing();
-            }
+            if (e.PropertyName == nameof(MasterDetailPage.Detail))
+                (app.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.LastOrDefault()?.SendAppearing();
         }
 
         void HandlePushed(object sender, NavigationEventArgs e)
