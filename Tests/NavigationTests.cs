@@ -88,15 +88,15 @@ namespace Tests
         }
 
         [Test]
-        [Ignore("Not working yet")]
         public void TestPopToRootEvent()
         {
-            Tap("Dis-/Appearing");
-            App.MainPage.Navigation.PopToRootAsync();
-            ShouldSee("Disappeared");
+            var expectedLog = " Appeared";
 
-            Tap("Ok");
-            ShouldSee("Demo page");
+            Tap("PushAsync");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+
+            Tap("PopToRootAsync");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
         }
 
         [Test]

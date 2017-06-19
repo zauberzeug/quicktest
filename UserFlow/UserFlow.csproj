@@ -63,6 +63,7 @@
     <Compile Include="ElementInfo.cs" />
     <Compile Include="AlertArgumentExtensions.cs" />
     <Compile Include="PatientUser.cs" />
+    <Compile Include="UserNavigation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
