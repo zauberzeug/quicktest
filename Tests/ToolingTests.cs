@@ -25,7 +25,7 @@ namespace Tests
         public void TestTap()
         {
             Tap("PushAsync", "PopAsync");
-            ShouldSee("Navigation demo");
+            ShouldSee("Navigation");
         }
 
         [Test]

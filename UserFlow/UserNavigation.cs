@@ -97,6 +97,11 @@ namespace UserFlow
         void HandleModalPushed(object sender, ModalPushedEventArgs e)
         {
             (e.Modal as IPageController).SendAppearing();
+            if (e.Modal is NavigationPage) {
+                (e.Modal as NavigationPage).Pushed += HandlePushed;
+                (e.Modal as NavigationPage).Popped += HandlePopped;
+                (e.Modal as NavigationPage).PoppedToRoot += HandlePoppedToRoot;
+            }
         }
 
         void HandleModalPopping(object sender, ModalPoppingEventArgs e)
@@ -107,6 +112,11 @@ namespace UserFlow
         void HandleModalPopped(object sender, ModalPoppedEventArgs e)
         {
             (e.Modal as IPageController).SendAppearing();
+            if (e.Modal is NavigationPage) {
+                (e.Modal as NavigationPage).Pushed -= HandlePushed;
+                (e.Modal as NavigationPage).Popped -= HandlePopped;
+                (e.Modal as NavigationPage).PoppedToRoot -= HandlePoppedToRoot;
+            }
         }
     }
 }
