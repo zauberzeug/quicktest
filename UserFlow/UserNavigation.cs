@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -33,6 +32,11 @@ namespace UserFlow
             CurrentNavigationPage.Pushed -= HandlePushed;
             CurrentNavigationPage.Popped -= HandlePopped;
             CurrentNavigationPage.PoppedToRoot -= HandlePoppedToRoot;
+
+            app.ModalPushing -= HandleModalPushing;
+            app.ModalPushed -= HandleModalPushed;
+            app.ModalPopping -= HandleModalPopping;
+            app.ModalPopped -= HandleModalPopped;
         }
 
         void HandleAppearing()
@@ -47,6 +51,11 @@ namespace UserFlow
             CurrentNavigationPage.Pushed += HandlePushed;
             CurrentNavigationPage.Popped += HandlePopped;
             CurrentNavigationPage.PoppedToRoot += HandlePoppedToRoot;
+
+            app.ModalPushing += HandleModalPushing;
+            app.ModalPushed += HandleModalPushed;
+            app.ModalPopping += HandleModalPopping;
+            app.ModalPopped += HandleModalPopped;
         }
 
         void HandleMasterDetailPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
@@ -78,6 +87,26 @@ namespace UserFlow
         {
             ((e as PoppedToRootEventArgs).PoppedPages.Last() as IPageController).SendDisappearing();
             (CurrentPage as IPageController).SendAppearing();
+        }
+
+        void HandleModalPushing(object sender, ModalPushingEventArgs e)
+        {
+            (CurrentPage as IPageController).SendDisappearing();
+        }
+
+        void HandleModalPushed(object sender, ModalPushedEventArgs e)
+        {
+            (e.Modal as IPageController).SendAppearing();
+        }
+
+        void HandleModalPopping(object sender, ModalPoppingEventArgs e)
+        {
+            (e.Modal as IPageController).SendDisappearing();
+        }
+
+        void HandleModalPopped(object sender, ModalPoppedEventArgs e)
+        {
+            (e.Modal as IPageController).SendAppearing();
         }
     }
 }
