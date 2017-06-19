@@ -5,7 +5,7 @@ namespace DemoApp
 {
     public class NavigationDemoPage : ContentPage
     {
-        public NavigationDemoPage(string title = "Navigation demo")
+        public NavigationDemoPage(string title = "Navigation")
         {
             Title = title;
 
@@ -47,12 +47,12 @@ namespace DemoApp
         {
             base.OnAppearing();
 
-            App.PageLog += " Appeared";
+            App.PageLog += $"A({Title}) ";
         }
 
         protected override void OnDisappearing()
         {
-            App.PageLog += " Disappeared";
+            App.PageLog += $"D({Title}) ";
 
             base.OnDisappearing();
         }

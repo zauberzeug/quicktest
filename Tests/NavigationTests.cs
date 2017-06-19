@@ -1,7 +1,6 @@
 using DemoApp;
 using NUnit.Framework;
 using UserFlow;
-using Xamarin.Forms;
 
 namespace Tests
 {
@@ -11,44 +10,44 @@ namespace Tests
         public void TestNavigationStack()
         {
             Tap("PushAsync");
-            ShouldSee("Navigation demo >");
-            ShouldNotSee("Navigation demo", "Menu");
+            ShouldSee("Navigation >");
+            ShouldNotSee("Navigation", "Menu");
 
             Tap("PushAsync");
-            ShouldSee("Navigation demo > >");
+            ShouldSee("Navigation > >");
 
             Tap("PopAsync");
-            ShouldSee("Navigation demo >");
+            ShouldSee("Navigation >");
         }
 
         [Test]
         public void TestModalStack()
         {
             Tap("PushModalAsync");
-            ShouldSee("Navigation demo ^");
-            ShouldNotSee("Navigation demo", "Menu");
+            ShouldSee("Navigation ^");
+            ShouldNotSee("Navigation", "Menu");
 
             Tap("PushModalAsync");
-            ShouldSee("Navigation demo ^ ^");
+            ShouldSee("Navigation ^ ^");
 
             Tap("PopModalAsync");
-            ShouldSee("Navigation demo ^");
+            ShouldSee("Navigation ^");
         }
 
         [Test]
         public void TestNavigationPageOnModalStack()
         {
             Tap("PushModalAsync NavigationPage");
-            ShouldSee("Navigation demo ^");
+            ShouldSee("Navigation ^");
 
             Tap("PushAsync");
-            ShouldSee("Navigation demo ^ >");
+            ShouldSee("Navigation ^ >");
 
             Tap("PopAsync");
-            ShouldSee("Navigation demo ^");
+            ShouldSee("Navigation ^");
 
             Tap("PopModalAsync");
-            ShouldSee("Navigation demo");
+            ShouldSee("Navigation");
         }
 
         [Test]
@@ -57,94 +56,95 @@ namespace Tests
             Tap("PushAsync");
             Tap("PushAsync");
             Tap("PushAsync");
-            ShouldSee("Navigation demo > > >");
+            ShouldSee("Navigation > > >");
 
             Tap("PopToRootAsync");
-            ShouldSee("Navigation demo");
+            ShouldSee("Navigation");
         }
 
         [Test]
         public void TestPageAppearingOnAppStart()
         {
-            Assert.That(App.PageLog, Is.EqualTo(" Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo("A(Navigation) "));
         }
 
         [Test]
         public void TestPageDisAppearingOnPushPop()
         {
-            var expectedLog = " Appeared";
+            var expectedLog = "A(Navigation) ";
 
             Tap("PushAsync");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) A(Navigation >) "));
 
             GoBack();
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation >) A(Navigation) "));
 
             Tap("PushModalAsync");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) A(Navigation ^) "));
         }
 
         [Test]
         public void TestPageDisAppearingOnMenuChange()
         {
-            var expectedLog = " Appeared";
+            var expectedLog = "A(Navigation) ";
 
             OpenMenu("Elements");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) "));
 
             OpenMenu("Navigation");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "A(Navigation) "));
         }
 
         [Test]
         public void TestPopToRootEvent()
         {
-            var expectedLog = " Appeared";
+            var expectedLog = "A(Navigation) ";
 
             Tap("PushAsync");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) A(Navigation >) "));
 
             Tap("PopToRootAsync");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation >) A(Navigation) "));
         }
 
         [Test]
         public void TestModalPopToRootEvent()
         {
-            var expectedLog = " Appeared";
+            var expectedLog = "A(Navigation) ";
 
-            Tap("PushModalAsync");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            Tap("PushModalAsync NavigationPage");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) A(Navigation ^) "));
 
             Tap("PushAsync");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation ^) A(Navigation ^ >) "));
 
             Tap("PopToRootAsync");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation ^ >) A(Navigation ^) "));
         }
 
         [Test]
         public void ToggleMainPageBetweenMasterDetailAndNavigation()
         {
-            Tap("Toggle MasterDetail MainPage");
-            ShouldSee("Navigation demo");
+            var expectedLog = "A(Navigation) ";
 
-            var expectedLog = " Appeared Disappeared Appeared";
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog));
+            Tap("Toggle MasterDetail MainPage");
+            ShouldSee("Navigation");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) A(Navigation) "));
 
             Tap("PushAsync");
-            ShouldSee("Navigation demo >");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            ShouldSee("Navigation >");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) A(Navigation >) "));
 
             Tap("PopAsync");
-            ShouldSee("Navigation demo");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            ShouldSee("Navigation");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation >) A(Navigation) "));
 
             Tap("Toggle MasterDetail MainPage");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) A(Navigation) "));
 
             OpenMenu("Elements");
             ShouldSee("Element demo");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) "));
         }
     }
 }
