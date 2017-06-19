@@ -72,25 +72,49 @@ namespace Tests
         [Test]
         public void TestPageDisAppearingOnPushPop()
         {
+            var expectedLog = " Appeared";
+
             Tap("PushAsync");
-            Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
 
             GoBack();
-            Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared Disappeared Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+
+            Tap("PushModalAsync");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
         }
 
         [Test]
         public void TestPageDisAppearingOnMenuChange()
         {
+            var expectedLog = " Appeared";
+
             OpenMenu("Elements");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared"));
+
             OpenMenu("Navigation");
-            Assert.That(App.PageLog, Is.EqualTo(" Appeared Disappeared Appeared"));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Appeared"));
         }
 
         [Test]
         public void TestPopToRootEvent()
         {
             var expectedLog = " Appeared";
+
+            Tap("PushAsync");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+
+            Tap("PopToRootAsync");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
+        }
+
+        [Test]
+        public void TestModalPopToRootEvent()
+        {
+            var expectedLog = " Appeared";
+
+            Tap("PushModalAsync");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
 
             Tap("PushAsync");
             Assert.That(App.PageLog, Is.EqualTo(expectedLog += " Disappeared Appeared"));
