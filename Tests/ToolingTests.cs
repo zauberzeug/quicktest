@@ -29,6 +29,14 @@ namespace Tests
         }
 
         [Test]
+        public void TestFind()
+        {
+            var element = Find("PushAsync");
+            Assert.That(element, Is.TypeOf<DemoButton>());
+            Assert.That((element as DemoButton).Text, Is.EqualTo("PushAsync"));
+        }
+
+        [Test]
         public void TestDelay()
         {
             OpenMenu("Elements");

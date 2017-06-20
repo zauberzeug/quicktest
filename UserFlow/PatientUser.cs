@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using Xamarin.Forms;
 
 namespace UserFlow
 {
@@ -32,6 +33,12 @@ namespace UserFlow
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
             Assert.That(() => !list.Any(user.CanSee), Is.True.After((int)timeSpan.TotalMilliseconds, 10),
                         $"User can see any: {string.Join(", ", texts)}");
+        }
+
+        protected Element Find(string text)
+        {
+            ShouldSee(text);
+            return user.Find(text);
         }
 
         public void Tap(params string[] texts)
