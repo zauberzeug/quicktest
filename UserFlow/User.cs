@@ -65,13 +65,9 @@ namespace UserFlow
             return CurrentPage.Find(text).Any();
         }
 
-        public Element Find(string text)
+        public List<Element> Find(string text)
         {
-            var elements = CurrentPage.Find(text).Select(i => i.Element).ToList();
-            Assert.That(elements, Is.Not.Empty, $"Did not find \"{text}\" on current page");
-            Assert.That(elements, Has.Count.LessThan(2), $"Found multiple \"{text}\" on current page");
-
-            return elements.First();
+            return CurrentPage.Find(text).Select(i => i.Element).ToList();
         }
 
         public void Tap(string text)

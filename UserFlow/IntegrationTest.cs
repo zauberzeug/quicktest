@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
@@ -41,8 +41,8 @@ namespace UserFlow
             Now.ShouldNotSee(texts);
         }
 
-        protected Element Find(string text){
-            return user.Find(text);
+        protected List<Element> Find(string text) {
+            return Now.Find(text);
         }
 
         protected void OpenMenu(string textToTap = null)

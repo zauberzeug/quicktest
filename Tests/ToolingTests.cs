@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using DemoApp;
 using NUnit.Framework;
 using UserFlow;
@@ -31,9 +32,10 @@ namespace Tests
         [Test]
         public void TestFind()
         {
-            var element = Find("PushAsync");
-            Assert.That(element, Is.TypeOf<DemoButton>());
-            Assert.That((element as DemoButton).Text, Is.EqualTo("PushAsync"));
+            var elements = Find("PushAsync");
+            Assert.That(elements, Has.Count.EqualTo(1));
+            Assert.That(elements.First(), Is.TypeOf<DemoButton>());
+            Assert.That((elements.First() as DemoButton).Text, Is.EqualTo("PushAsync"));
         }
 
         [Test]

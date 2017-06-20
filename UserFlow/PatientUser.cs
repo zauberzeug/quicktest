@@ -35,9 +35,8 @@ namespace UserFlow
                         $"User can see any: {string.Join(", ", texts)}");
         }
 
-        protected Element Find(string text)
+        public List<Element> Find(string text)
         {
-            ShouldSee(text);
             return user.Find(text);
         }
 
