@@ -20,13 +20,14 @@ namespace DemoApp
                         new DemoButton("Button"),
                         new DemoLabel("Label").WithGestureRecognizer(),
                         new DemoStack(),
+                        new DemoStack() { IsVisible = false },
                         new DemoGrid(),
                         new DemoEntry("entry_automation_id", "Placeholder"),
                         new DemoEditor("editor_automation_id", "editor content"),
                         new DemoLabel("Invisible Label").Invisible(),
                         new DemoLabel().BindTo(bindableText, BindableText.TextProperty, Label.TextProperty),
                         new DemoCountdown(),
-        },
+                    },
                 },
             };
 
