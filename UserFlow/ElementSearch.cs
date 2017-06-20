@@ -7,17 +7,20 @@ namespace UserFlow
 {
     public static class ElementSearch
     {
-        public static List<ElementInfo> Find(this Element element, Predicate<Element> predicate)
+        public static List<ElementInfo> Find(this Element element, Predicate<Element> predicate, Predicate<Element> containerPredicate)
         {
             var result = new List<ElementInfo>();
-            
+
+            if (!containerPredicate.Invoke(element))
+                return result;
+
             IEnumerable<ElementInfo> empty = new List<ElementInfo>();
 
             result.AddRange((element as Page)?.ToolbarItems.Where(predicate.Invoke).Select(ElementInfo.FromElement) ?? empty);
-            result.AddRange((element as ContentPage)?.Content.Find(predicate) ?? empty);
-            result.AddRange((element as ScrollView)?.Content.Find(predicate) ?? empty);
-            result.AddRange((element as Layout<View>)?.Children.SelectMany(child => child.Find(predicate)) ?? empty);
-            result.AddRange((element as ListView)?.Find(predicate) ?? empty);
+            result.AddRange((element as ContentPage)?.Content.Find(predicate, containerPredicate) ?? empty);
+            result.AddRange((element as ScrollView)?.Content.Find(predicate, containerPredicate) ?? empty);
+            result.AddRange((element as Layout<View>)?.Children.SelectMany(child => child.Find(predicate, containerPredicate)) ?? empty);
+            result.AddRange((element as ListView)?.Find(predicate, containerPredicate) ?? empty);
 
             if (predicate.Invoke(element))
                 result.Add(ElementInfo.FromElement(element));
@@ -32,14 +35,11 @@ namespace UserFlow
             if (text == null)
                 throw new InvalidOperationException("Can't search for (null) text");
 
-            return element.Find(e => e.HasText(text));
+            return element.Find(e => e.HasText(text), c => (c as VisualElement)?.IsVisible ?? true);
         }
 
         public static bool HasText(this Element element, string text)
         {
-            if (!(element as VisualElement)?.IsVisible ?? false)
-                return false;
-            
             return
                 (element as ToolbarItem)?.Text == text ||
                 (element as ContentPage)?.Title == text ||
@@ -64,13 +64,13 @@ namespace UserFlow
                 info.InvokeTap = () => tapGestureRecognizers.ForEach(r => r.Invoke("SendTapped", sourceElement));
         }
 
-        public static List<ElementInfo> Find(this ListView listView, Predicate<Element> predicate)
+        public static List<ElementInfo> Find(this ListView listView, Predicate<Element> predicate, Predicate<Element> containerPredicate)
         {
             var result = new List<ElementInfo>();
             foreach (var item in listView.ItemsSource) {
                 var content = listView.ItemTemplate.CreateContent();
                 (content as Cell).BindingContext = item;
-                if (predicate.Invoke(content as Cell) || ((content as ViewCell)?.View.Find(predicate).Any() ?? false))
+                if (predicate.Invoke(content as Cell) || ((content as ViewCell)?.View.Find(predicate, containerPredicate).Any() ?? false))
                     result.Add(new ElementInfo {
                         InvokeTap = () => listView.Invoke("NotifyRowTapped", listView.ItemsSource.Cast<object>().ToList().IndexOf(item), null),
                     });
