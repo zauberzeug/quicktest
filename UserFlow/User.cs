@@ -106,7 +106,7 @@ namespace UserFlow
             else if (elementInfo.InvokeTap != null)
                 elementInfo.InvokeTap.Invoke();
             else
-                throw new InvalidOperationException($"element with text {text} is not tappable");
+                throw new InvalidOperationException($"element with text '{text}' is not tappable");
         }
 
         public void Input(string automationId, string text)
