@@ -14,23 +14,23 @@ namespace DemoApp
                 Children = {
                     new DemoLabel("Navigation stack:"),
                     new DemoButton("PushAsync") {
-                        Command = new Command(o => App.PushAsync(new NavigationDemoPage(title + " >"))),
+                        Command = new Command(o => Navigation.PushAsync(new NavigationDemoPage(title + " >"))),
                     },
                     new DemoButton("PopAsync") {
-                        Command = new Command(obj => App.PopAsync()),
+                        Command = new Command(obj => Navigation.PopAsync()),
                     },
                     new DemoButton("PopToRootAsync") {
-                        Command = new Command(obj => App.PopToRootAsync()),
+                        Command = new Command(obj => Navigation.PopToRootAsync()),
                     },
                     new DemoLabel("Modal stack:"),
                     new DemoButton("PushModalAsync") {
-                        Command = new Command(o => App.PushModalAsync(new NavigationDemoPage(title + " ^"))),
+                        Command = new Command(o => Navigation.PushModalAsync(new NavigationDemoPage(title + " ^"))),
                     },
                     new DemoButton("PopModalAsync") {
-                        Command = new Command(obj => App.PopModalAsync()),
+                        Command = new Command(obj => Navigation.PopModalAsync()),
                     },
                     new DemoButton("PushModalAsync NavigationPage") {
-                        Command = new Command(o => App.PushModalAsync(new NavigationPage(new NavigationDemoPage(title + " ^")))),
+                        Command = new Command(o => Navigation.PushModalAsync(new NavigationPage(new NavigationDemoPage(title + " ^")))),
                     },
                     new DemoLabel("MasterDetail:"),
                     new DemoButton("Toggle MasterDetail MainPage") {
