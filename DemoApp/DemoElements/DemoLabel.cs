@@ -7,7 +7,6 @@ namespace DemoApp
         public DemoLabel(string text = null)
         {
             Text = text;
-
             BackgroundColor = Color.FloralWhite;
             HorizontalTextAlignment = TextAlignment.Center;
         }
