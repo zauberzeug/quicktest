@@ -30,6 +30,14 @@ namespace Tests
         }
 
         [Test]
+        public void TestTapNth()
+        {
+            OpenMenu("Elements");
+            Input("Placeholder", "Label");
+            TapNth("Label", 0);
+        }
+
+        [Test]
         public void TestFind()
         {
             var elements = Find("PushAsync");
