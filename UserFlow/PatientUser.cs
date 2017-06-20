@@ -47,5 +47,12 @@ namespace UserFlow
                 user.Tap(text);
             }
         }
+
+        public void TapNth(string text, int index)
+        {
+            Assert.That(() => user.Find(text), Has.Count.GreaterThan(index).After((int)timeSpan.TotalMilliseconds, 10),
+                        $"User can't see {index+1}th \"{text}\"");
+            user.Tap(text, index);
+        }
     }
 }

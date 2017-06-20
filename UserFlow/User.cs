@@ -70,9 +70,11 @@ namespace UserFlow
             return CurrentPage.Find(text).Select(i => i.Element).ToList();
         }
 
-        public void Tap(string text)
+        public void Tap(string text, int index=0)
         {
             if (alerts.Any()) {
+                Assert.That(index, Is.Zero, "Tap indices are not supported on alerts");
+
                 var alert = alerts.Peek();
                 if (alert.Accept == text)
                     alert.SetResult(true);
@@ -87,9 +89,15 @@ namespace UserFlow
 
             var elementInfos = CurrentPage.Find(text);
             Assert.That(elementInfos, Is.Not.Empty, $"Did not find \"{text}\" on current page");
-            Assert.That(elementInfos, Has.Count.LessThan(2), $"Found multiple \"{text}\" on current page");
 
-            var elementInfo = elementInfos.First();
+            ElementInfo elementInfo;
+            if (index == 0) {
+                Assert.That(elementInfos, Has.Count.LessThan(2), $"Found multiple \"{text}\" on current page");
+                elementInfo = elementInfos.First();
+            } else {
+                Assert.That(elementInfos, Has.Count.GreaterThan(index), $"Did not find enough \"{text}\" on current page");
+                elementInfo = elementInfos.Skip(index).First();
+            }
 
             (elementInfo.Element as ToolbarItem)?.Command.Execute(null);
             (elementInfo.Element as Button)?.Command.Execute(null);

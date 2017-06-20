@@ -26,6 +26,11 @@ namespace UserFlow
             Now.Tap(texts);
         }
 
+        protected void TapNth(string text, int index)
+        {
+            Now.TapNth(text, index);
+        }
+
         protected void Input(string automationId, string text)
         {
             user.Input(automationId, text);
