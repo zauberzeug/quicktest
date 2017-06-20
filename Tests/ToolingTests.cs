@@ -3,6 +3,7 @@ using System.Linq;
 using DemoApp;
 using NUnit.Framework;
 using UserFlow;
+using NUnit.Framework.Constraints;
 
 namespace Tests
 {
@@ -27,6 +28,12 @@ namespace Tests
         {
             Tap("PushAsync", "PopAsync");
             ShouldSee("Navigation");
+        }
+
+        [Test]
+        public void TestTapFailsForNotTappableElements()
+        {
+            Assert.Throws<InvalidOperationException>(() => Tap("Navigation stack:"));
         }
 
         [Test]

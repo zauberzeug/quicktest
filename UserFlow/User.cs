@@ -99,9 +99,14 @@ namespace UserFlow
                 elementInfo = elementInfos.Skip(index.Value).First();
             }
 
-            (elementInfo.Element as ToolbarItem)?.Command.Execute(null);
-            (elementInfo.Element as Button)?.Command.Execute(null);
-            elementInfo.InvokeTap?.Invoke();
+            if (elementInfo.Element is ToolbarItem)
+                (elementInfo.Element as ToolbarItem).Command.Execute(null);
+            else if (elementInfo.Element is Button)
+                (elementInfo.Element as Button).Command.Execute(null);
+            else if (elementInfo.InvokeTap != null)
+                elementInfo.InvokeTap.Invoke();
+            else
+                throw new InvalidOperationException($"element with text {text} is not tappable");
         }
 
         public void Input(string automationId, string text)
