@@ -37,6 +37,12 @@ namespace Tests
         }
 
         [Test]
+        public void TestTapFailsWhenTappingTitle()
+        {
+            Assert.Throws<InvalidOperationException>(() => Tap("Navigation"));
+        }
+
+        [Test]
         public void TestTapNth()
         {
             OpenMenu("Elements");
