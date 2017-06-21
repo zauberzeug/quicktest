@@ -29,9 +29,7 @@ namespace UserFlow
                 (app.MainPage as MasterDetailPage).PropertyChanged -= HandleMasterDetailPropertyChanged;
             }
 
-            CurrentNavigationPage.Pushed -= HandlePushed;
-            CurrentNavigationPage.Popped -= HandlePopped;
-            CurrentNavigationPage.PoppedToRoot -= HandlePoppedToRoot;
+            OnNavigationPageRemoved();
 
             app.ModalPushing -= HandleModalPushing;
             app.ModalPushed -= HandleModalPushed;
@@ -48,9 +46,7 @@ namespace UserFlow
                 (app.MainPage as MasterDetailPage).PropertyChanged += HandleMasterDetailPropertyChanged;
             }
 
-            CurrentNavigationPage.Pushed += HandlePushed;
-            CurrentNavigationPage.Popped += HandlePopped;
-            CurrentNavigationPage.PoppedToRoot += HandlePoppedToRoot;
+            OnNavigationPageAdded();
 
             app.ModalPushing += HandleModalPushing;
             app.ModalPushed += HandleModalPushed;
@@ -58,16 +54,34 @@ namespace UserFlow
             app.ModalPopped += HandleModalPopped;
         }
 
+        void OnNavigationPageAdded()
+        {
+            CurrentNavigationPage.Pushed += HandlePushed;
+            CurrentNavigationPage.Popped += HandlePopped;
+            CurrentNavigationPage.PoppedToRoot += HandlePoppedToRoot;
+        }
+
+        void OnNavigationPageRemoved()
+        {
+            CurrentNavigationPage.Pushed -= HandlePushed;
+            CurrentNavigationPage.Popped -= HandlePopped;
+            CurrentNavigationPage.PoppedToRoot -= HandlePoppedToRoot;
+        }
+
         void HandleMasterDetailPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
-            if (e.PropertyName == nameof(MasterDetailPage.Detail))
+            if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
                 (app.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.LastOrDefault()?.SendDisappearing();
+                OnNavigationPageRemoved();
+            }
         }
 
         void HandleMasterDetailPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(MasterDetailPage.Detail))
+            if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
                 (app.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.LastOrDefault()?.SendAppearing();
+                OnNavigationPageAdded();
+            }
         }
 
         void HandlePushed(object sender, NavigationEventArgs e)
