@@ -76,6 +76,10 @@ namespace UserFlow
             return user.Find(text);
         }
 
+        /// <summary>
+        /// Find elements matching the predicate.
+        /// Containers like StackLayouts or ListViews are only traversed if they match the containerPredicate.
+        /// </summary>
         protected List<Element> Find(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
             return user.Find(predicate, containerPredicate);
