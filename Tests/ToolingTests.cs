@@ -3,7 +3,6 @@ using System.Linq;
 using DemoApp;
 using NUnit.Framework;
 using UserFlow;
-using NUnit.Framework.Constraints;
 
 namespace Tests
 {

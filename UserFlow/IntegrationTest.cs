@@ -1,16 +1,27 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
 
 namespace UserFlow
 {
-    public abstract class IntegrationTest<T> where T : Application, new()
+    public class IntegrationTest<T> where T : Application, new()
     {
         User user;
+        TimeSpan timeout;
 
         protected T App { get; private set; }
+
+        static IntegrationTest<T> CreateWithTimeout(T app, User user, TimeSpan timeout)
+        {
+            return new IntegrationTest<T> {
+                App = app,
+                user = user,
+                timeout = timeout,
+            };
+        }
 
         [SetUp]
         protected virtual void SetUp()
@@ -19,16 +30,22 @@ namespace UserFlow
 
             App = new T();
             user = new User(App);
+            timeout = TimeSpan.FromSeconds(0.1);
         }
 
-        protected void Tap(params string[] texts)
+        public void Tap(params string[] texts)
         {
-            Now.Tap(texts);
+            foreach (var text in texts) {
+                ShouldSee(text);
+                user.Tap(text);
+            }
         }
 
-        protected void TapNth(string text, int index)
+        public void TapNth(string text, int index)
         {
-            Now.TapNth(text, index);
+            Assert.That(() => user.Find(text), Has.Count.GreaterThan(index).After((int)timeout.TotalMilliseconds, 10),
+                        $"User can't see {index + 1}th \"{text}\"");
+            user.Tap(text, index);
         }
 
         protected void Input(string automationId, string text)
@@ -36,18 +53,27 @@ namespace UserFlow
             user.Input(automationId, text);
         }
 
-        protected void ShouldSee(params string[] texts)
+        public void ShouldSee(params string[] texts)
         {
-            Now.ShouldSee(texts);
+            var list = new List<string>(texts);
+            if (list.All(user.CanSee))
+                return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
+            Assert.That(() => list.All(user.CanSee), Is.True.After((int)timeout.TotalMilliseconds, 10),
+                        $"User can't see {{ {string.Join(", ", texts)} }}");
         }
 
-        protected void ShouldNotSee(params string[] texts)
+        public void ShouldNotSee(params string[] texts)
         {
-            Now.ShouldNotSee(texts);
+            var list = new List<string>(texts);
+            if (!list.Any(user.CanSee))
+                return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
+            Assert.That(() => !list.Any(user.CanSee), Is.True.After((int)timeout.TotalMilliseconds, 10),
+                        $"User can see any of {{ {string.Join(", ", texts)} }}");
         }
 
-        protected List<Element> Find(string text) {
-            return Now.Find(text);
+        protected List<Element> Find(string text)
+        {
+            return user.Find(text);
         }
 
         protected void OpenMenu(string textToTap = null)
@@ -74,13 +100,13 @@ namespace UserFlow
             user?.Print();
         }
 
-        protected PatientUser After(double seconds)
+        protected IntegrationTest<T> After(double seconds)
         {
-            return new PatientUser(user, TimeSpan.FromSeconds(seconds));
+            return CreateWithTimeout(App, user, TimeSpan.FromSeconds(seconds));
         }
 
-        protected PatientUser Now {
-            get { return new PatientUser(user, TimeSpan.FromSeconds(0.1)); }
+        protected IntegrationTest<T> Now {
+            get { return CreateWithTimeout(App, user, TimeSpan.FromSeconds(0.1)); }
         }
     }
 }
