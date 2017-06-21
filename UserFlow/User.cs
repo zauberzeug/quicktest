@@ -70,7 +70,7 @@ namespace UserFlow
             return CurrentPage.Find(text).Select(i => i.Element).ToList();
         }
 
-        public void Tap(string text, int? index=null)
+        public void Tap(string text, int? index = null)
         {
             if (alerts.Any()) {
                 Assert.That(index, Is.Null, "Tap indices are not supported on alerts");
@@ -117,9 +117,9 @@ namespace UserFlow
 
             if (elements.First() is Entry)
                 (elements.First() as Entry).Text = text;
-            if (elements.First() is Editor)
+            else if (elements.First() is Editor)
                 (elements.First() as Editor).Text = text;
-            if (elements.First() is SearchBar)
+            else if (elements.First() is SearchBar)
                 (elements.First() as SearchBar).Text = text;
             else
                 throw new InvalidOperationException($"element '{text}' can not be used for input");
