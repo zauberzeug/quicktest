@@ -18,6 +18,7 @@ namespace UserFlow
 
             result.AddRange((element as Page)?.ToolbarItems.Where(predicate.Invoke).Select(ElementInfo.FromElement) ?? empty);
             result.AddRange((element as ContentPage)?.Content.Find(predicate, containerPredicate) ?? empty);
+            result.AddRange((element as ContentView)?.Content.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as ScrollView)?.Content.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as Layout<View>)?.Children.SelectMany(child => child.Find(predicate, containerPredicate)) ?? empty);
             result.AddRange((element as ListView)?.Find(predicate, containerPredicate) ?? empty);

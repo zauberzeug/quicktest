@@ -53,9 +53,11 @@ namespace DemoApp
         {
             var label = new DemoLabel();
             label.SetBinding(Label.TextProperty, ".");
-            View = new StackLayout {
-                Children = { label },
-                BackgroundColor = Color.Gray.MultiplyAlpha(0.2),
+            View = new ContentView {
+                Content = new StackLayout {
+                    Children = { label },
+                    BackgroundColor = Color.Gray.MultiplyAlpha(0.2),
+                },
             };
         }
     }

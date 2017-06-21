@@ -21,6 +21,7 @@ namespace DemoApp
                         new DemoLabel("Label").WithGestureRecognizer(),
                         new DemoStack(),
                         new DemoGrid(),
+                        new ContentView{Content = new DemoLabel("label within ContentView")},
                         new DemoEntry("entry_automation_id", "Placeholder"),
                         new DemoEditor("editor_automation_id", "editor content"),
                         new DemoLabel("Invisible Label").Invisible(),

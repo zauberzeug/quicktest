@@ -37,6 +37,8 @@ Message
         · Cell B
         · Cell C
         · Cell D
+      · 
+        · label within ContentView
       · some text input (entry_automation_id)
       · editor content (editor_automation_id)
       · bound text 2

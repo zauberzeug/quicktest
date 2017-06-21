@@ -59,6 +59,12 @@ namespace Tests
         }
 
         [Test]
+        public void TestLabelWithinContentView()
+        {
+            ShouldSee("label within ContentView");
+        }
+
+        [Test]
         public void TestInvisible()
         {
             ShouldNotSee("Invisible Label");

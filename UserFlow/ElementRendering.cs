@@ -17,6 +17,7 @@ namespace UserFlow
                 result += (element as ContentPage).Title + " " + string.Join(" ", (element as Page).ToolbarItems.Select(t => $"[{t.Text}]"));
             result += (element as ContentPage)?.Content.Render();
 
+            result += (element as ContentView)?.Content.Render();
             result += (element as ScrollView)?.Content.Render();
             result += string.Join("", (element as Layout<View>)?.Children.Select(c => c.Render()) ?? new[] { "" });
             result += (element as ListView)?.Render();
