@@ -93,6 +93,9 @@ namespace Tests
 
             OpenMenu("Navigation");
             Assert.That(App.PageLog, Is.EqualTo(expectedLog += "A(Navigation) "));
+
+            Tap("PushAsync");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += " D(Navigation) A(Navigation >)"), "normal navigation should still be possible after menu change");
         }
 
         [Test]
