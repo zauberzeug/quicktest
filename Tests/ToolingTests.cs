@@ -3,6 +3,7 @@ using System.Linq;
 using DemoApp;
 using NUnit.Framework;
 using UserFlow;
+using Xamarin.Forms;
 
 namespace Tests
 {
@@ -64,6 +65,15 @@ namespace Tests
             Assert.That((elements.First() as DemoButton).Text, Is.EqualTo("PushAsync"));
         }
 
+        [Test]
+        public void TestFindPredicate()
+        {
+            OpenMenu("Elements");
+            var elements = Find(e => (e as VisualElement)?.IsVisible == false);
+            Assert.That(elements, Has.Count.EqualTo(1));
+            Assert.That(elements.First(), Is.TypeOf<DemoLabel>());
+        }
+        
         [Test]
         public void TestDelay()
         {

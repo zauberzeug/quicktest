@@ -70,6 +70,11 @@ namespace UserFlow
             return CurrentPage.Find(text).Select(i => i.Element).ToList();
         }
 
+        public List<Element> Find(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
+        {
+            return CurrentPage.Find(predicate, containerPredicate).Select(i => i.Element).ToList();
+        }
+
         public void Tap(string text, int? index = null)
         {
             if (alerts.Any()) {
