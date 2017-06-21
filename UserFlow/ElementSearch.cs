@@ -7,11 +7,11 @@ namespace UserFlow
 {
     public static class ElementSearch
     {
-        public static List<ElementInfo> Find(this Element element, Predicate<Element> predicate, Predicate<Element> containerPredicate)
+        public static List<ElementInfo> Find(this Element element, Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
             var result = new List<ElementInfo>();
 
-            if (!containerPredicate.Invoke(element))
+            if (containerPredicate != null && !containerPredicate.Invoke(element))
                 return result;
 
             IEnumerable<ElementInfo> empty = new List<ElementInfo>();

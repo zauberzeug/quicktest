@@ -76,6 +76,11 @@ namespace UserFlow
             return user.Find(text);
         }
 
+        protected List<Element> Find(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
+        {
+            return user.Find(predicate, containerPredicate);
+        }
+
         protected void OpenMenu(string textToTap = null)
         {
             user.OpenMenu();
