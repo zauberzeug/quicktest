@@ -43,6 +43,12 @@ namespace Tests
         }
 
         [Test]
+        public void TestInputFailsOnLabel()
+        {
+            Assert.Throws<InvalidOperationException>(() => Input("Navigation stack:", "some text"));
+        }
+
+        [Test]
         public void TestTapNth()
         {
             OpenMenu("Elements");

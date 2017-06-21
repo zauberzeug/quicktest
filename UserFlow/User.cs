@@ -121,6 +121,8 @@ namespace UserFlow
                 (elements.First() as Editor).Text = text;
             if (elements.First() is SearchBar)
                 (elements.First() as SearchBar).Text = text;
+            else
+                throw new InvalidOperationException($"element '{text}' can not be used for input");
         }
 
         public void OpenMenu()
