@@ -1,5 +1,10 @@
-  #!/bin/bash
+#!/bin/bash
 set -x
+
+if [[ $(git status -s) ]]; then
+    echo "You have uncommitted files. Commit and push them before running this script."
+    exit 1
+fi
 
 # get latest git tag and increase by one (see https://stackoverflow.com/questions/4485399/how-can-i-bump-a-version-number-using-bash)
 VERSION=`git describe --abbrev=0 | awk -F. '/[0-9]+\./{$NF+=1;OFS=".";print}'`
