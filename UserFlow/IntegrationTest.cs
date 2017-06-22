@@ -50,6 +50,7 @@ namespace UserFlow
 
         protected void Input(string automationId, string text)
         {
+            ShouldSee(automationId);
             user.Input(automationId, text);
         }
 
