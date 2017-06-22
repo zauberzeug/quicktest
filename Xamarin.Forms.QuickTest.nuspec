@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata>
-      <id>UserFlow</id>
-      <version>0.1.28-pre</version>
+      <id>Xamarin.Forms.QuickTest</id>
+      <version>0.1.29-pre</version>
       <authors>Perpetual Mobile GmbH</authors>
       <owners>Perpetual Mobile GmbH</owners>
       <description>Library to write NUnit Integration Tests for Xamarin.Forms Edit</description>
@@ -16,8 +16,8 @@
      </dependencies>
   </metadata>
     <files>
-        <file src="UserFlow/bin/Release/UserFlow.dll" target="lib/net45" />
-        <file src="UserFlow/bin/Release/UserFlow.pdb" target="lib/net45" />
-        <file src="UserFlow/bin/Release/UserFlow.xml" target="lib/net45" />
+        <file src="QuickTest/bin/Release/Xamarin.Forms.QuickTest.dll" target="lib/net45" />
+        <file src="QuickTest/bin/Release/Xamarin.Forms.QuickTest.pdb" target="lib/net45" />
+        <file src="QuickTest/bin/Release/Xamarin.Forms.QuickTest.xml" target="lib/net45" />
     </files>
 </package>

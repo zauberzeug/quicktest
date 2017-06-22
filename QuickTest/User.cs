@@ -5,7 +5,7 @@ using NUnit.Framework;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace UserFlow
+namespace QuickTest
 {
     public partial class User
     {

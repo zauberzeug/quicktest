@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-run id="2" testcasecount="35" result="Passed" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="191" engine-version="3.6.1.0" clr-version="4.0.30319.42000" start-time="2017-06-22 07:33:28Z" end-time="2017-06-22 07:33:31Z" duration="3.444558">
+<test-run id="2" testcasecount="35" result="Passed" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="191" engine-version="3.6.1.0" clr-version="4.0.30319.42000" start-time="2017-06-22 12:20:26Z" end-time="2017-06-22 12:20:29Z" duration="3.357892">
   <command-line><![CDATA[/Users/christopher/Documents/userflow/packages/NUnit.ConsoleRunner.3.6.1/tools/nunit3-console.exe -config=Release Tests/Tests.csproj]]></command-line>
-  <test-suite type="Assembly" id="1-1040" name="NUnitTest.dll" fullname="/Users/christopher/Documents/userflow/Tests/bin/Release/NUnitTest.dll" runstate="Runnable" testcasecount="35" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:31Z" duration="2.516115" total="35" passed="35" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="191">
+  <test-suite type="Assembly" id="1-1040" name="NUnitTest.dll" fullname="/Users/christopher/Documents/userflow/Tests/bin/Release/NUnitTest.dll" runstate="Runnable" testcasecount="35" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:29Z" duration="2.498920" total="35" passed="35" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="191">
     <environment framework-version="3.7.1.0" clr-version="4.0.30319.42000" os-version="Unix 16.5.0.0" platform="Unix" cwd="/Users/christopher/Documents/userflow" machine-name="MacBook-Pro-2.local" user="christopher" user-domain="MacBook-Pro-2.local" culture="de-DE" uiculture="de-DE" os-architecture="x86" />
     <settings>
       <setting name="BasePath" value="/Users/christopher/Documents/userflow/Tests/bin/Release" />
@@ -15,12 +15,12 @@
       <setting name="NumberOfTestWorkers" value="8" />
     </settings>
     <properties>
-      <property name="_PID" value="70461" />
+      <property name="_PID" value="80767" />
       <property name="_APPDOMAIN" value="domain-3026b9a2-Tests.csproj" />
     </properties>
-    <test-suite type="TestSuite" id="1-1041" name="Tests" fullname="Tests" runstate="Runnable" testcasecount="35" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:31Z" duration="2.500953" total="35" passed="35" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="191">
-      <test-suite type="TestFixture" id="1-1000" name="ElementTests" fullname="Tests.ElementTests" classname="Tests.ElementTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.240449" total="13" passed="13" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="58">
-        <test-case id="1-1013" name="TestAlert" fullname="Tests.ElementTests.TestAlert" methodname="TestAlert" classname="Tests.ElementTests" runstate="Runnable" seed="1336957751" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.156040" asserts="5">
+    <test-suite type="TestSuite" id="1-1041" name="Tests" fullname="Tests" runstate="Runnable" testcasecount="35" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:29Z" duration="2.484226" total="35" passed="35" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="191">
+      <test-suite type="TestFixture" id="1-1000" name="ElementTests" fullname="Tests.ElementTests" classname="Tests.ElementTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.217193" total="13" passed="13" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="58">
+        <test-case id="1-1013" name="TestAlert" fullname="Tests.ElementTests.TestAlert" methodname="TestAlert" classname="Tests.ElementTests" runstate="Runnable" seed="1645928131" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.132759" asserts="5">
           <output><![CDATA[· Menu 
   · 
     · Menu
@@ -30,7 +30,7 @@
     · Alert
 ]]></output>
         </test-case>
-        <test-case id="1-1008" name="TestBinding" fullname="Tests.ElementTests.TestBinding" methodname="TestBinding" classname="Tests.ElementTests" runstate="Runnable" seed="416716527" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.002214" asserts="2">
+        <test-case id="1-1008" name="TestBinding" fullname="Tests.ElementTests.TestBinding" methodname="TestBinding" classname="Tests.ElementTests" runstate="Runnable" seed="84523700" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.002118" asserts="2">
           <output><![CDATA[· Element demo [ToolbarItem]
   · 
     · 
@@ -52,14 +52,14 @@
       · Countdown
 ]]></output>
         </test-case>
-        <test-case id="1-1002" name="TestButton" fullname="Tests.ElementTests.TestButton" methodname="TestButton" classname="Tests.ElementTests" runstate="Runnable" seed="524560061" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.001321" asserts="4">
+        <test-case id="1-1002" name="TestButton" fullname="Tests.ElementTests.TestButton" methodname="TestButton" classname="Tests.ElementTests" runstate="Runnable" seed="227877616" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.001636" asserts="4">
           <output><![CDATA[Success
 Button tapped
 
 [] [Ok]
 ]]></output>
         </test-case>
-        <test-case id="1-1010" name="TestEditor" fullname="Tests.ElementTests.TestEditor" methodname="TestEditor" classname="Tests.ElementTests" runstate="Runnable" seed="736323777" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.003532" asserts="6">
+        <test-case id="1-1010" name="TestEditor" fullname="Tests.ElementTests.TestEditor" methodname="TestEditor" classname="Tests.ElementTests" runstate="Runnable" seed="2131103454" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.004092" asserts="6">
           <output><![CDATA[· Element demo [ToolbarItem]
   · 
     · 
@@ -81,7 +81,7 @@ Button tapped
       · Countdown
 ]]></output>
         </test-case>
-        <test-case id="1-1009" name="TestEntry" fullname="Tests.ElementTests.TestEntry" methodname="TestEntry" classname="Tests.ElementTests" runstate="Runnable" seed="1073221204" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.001789" asserts="8">
+        <test-case id="1-1009" name="TestEntry" fullname="Tests.ElementTests.TestEntry" methodname="TestEntry" classname="Tests.ElementTests" runstate="Runnable" seed="1778263983" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.001690" asserts="8">
           <output><![CDATA[· Element demo [ToolbarItem]
   · 
     · 
@@ -103,14 +103,14 @@ Button tapped
       · Countdown
 ]]></output>
         </test-case>
-        <test-case id="1-1005" name="TestGrid" fullname="Tests.ElementTests.TestGrid" methodname="TestGrid" classname="Tests.ElementTests" runstate="Runnable" seed="460922995" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.002500" asserts="4">
+        <test-case id="1-1005" name="TestGrid" fullname="Tests.ElementTests.TestGrid" methodname="TestGrid" classname="Tests.ElementTests" runstate="Runnable" seed="596679302" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.002428" asserts="4">
           <output><![CDATA[Success
 Cell D tapped
 
 [] [Ok]
 ]]></output>
         </test-case>
-        <test-case id="1-1007" name="TestInvisible" fullname="Tests.ElementTests.TestInvisible" methodname="TestInvisible" classname="Tests.ElementTests" runstate="Runnable" seed="422198916" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.001006" asserts="2">
+        <test-case id="1-1007" name="TestInvisible" fullname="Tests.ElementTests.TestInvisible" methodname="TestInvisible" classname="Tests.ElementTests" runstate="Runnable" seed="1633324467" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.000987" asserts="2">
           <output><![CDATA[· Element demo [ToolbarItem]
   · 
     · 
@@ -132,14 +132,14 @@ Cell D tapped
       · Countdown
 ]]></output>
         </test-case>
-        <test-case id="1-1001" name="TestLabel" fullname="Tests.ElementTests.TestLabel" methodname="TestLabel" classname="Tests.ElementTests" runstate="Runnable" seed="1205803780" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.001240" asserts="4">
+        <test-case id="1-1001" name="TestLabel" fullname="Tests.ElementTests.TestLabel" methodname="TestLabel" classname="Tests.ElementTests" runstate="Runnable" seed="2128188491" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.001188" asserts="4">
           <output><![CDATA[Success
 Label tapped
 
 [] [Ok]
 ]]></output>
         </test-case>
-        <test-case id="1-1006" name="TestLabelWithinContentView" fullname="Tests.ElementTests.TestLabelWithinContentView" methodname="TestLabelWithinContentView" classname="Tests.ElementTests" runstate="Runnable" seed="1329784620" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.000945" asserts="2">
+        <test-case id="1-1006" name="TestLabelWithinContentView" fullname="Tests.ElementTests.TestLabelWithinContentView" methodname="TestLabelWithinContentView" classname="Tests.ElementTests" runstate="Runnable" seed="678345527" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.000860" asserts="2">
           <output><![CDATA[· Element demo [ToolbarItem]
   · 
     · 
@@ -161,21 +161,21 @@ Label tapped
       · Countdown
 ]]></output>
         </test-case>
-        <test-case id="1-1004" name="TestListViews" fullname="Tests.ElementTests.TestListViews" methodname="TestListViews" classname="Tests.ElementTests" runstate="Runnable" seed="1958806471" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.028554" asserts="9">
+        <test-case id="1-1004" name="TestListViews" fullname="Tests.ElementTests.TestListViews" methodname="TestListViews" classname="Tests.ElementTests" runstate="Runnable" seed="891840705" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.028271" asserts="9">
           <output><![CDATA[Success
 Item A2 tapped
 
 [] [Ok]
 ]]></output>
         </test-case>
-        <test-case id="1-1003" name="TestNestedLabel" fullname="Tests.ElementTests.TestNestedLabel" methodname="TestNestedLabel" classname="Tests.ElementTests" runstate="Runnable" seed="996642284" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.001197" asserts="4">
+        <test-case id="1-1003" name="TestNestedLabel" fullname="Tests.ElementTests.TestNestedLabel" methodname="TestNestedLabel" classname="Tests.ElementTests" runstate="Runnable" seed="916962990" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.001191" asserts="4">
           <output><![CDATA[Success
 StackLayout tapped
 
 [] [Ok]
 ]]></output>
         </test-case>
-        <test-case id="1-1012" name="TestSearchbar" fullname="Tests.ElementTests.TestSearchbar" methodname="TestSearchbar" classname="Tests.ElementTests" runstate="Runnable" seed="891331756" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.001273" asserts="4">
+        <test-case id="1-1012" name="TestSearchbar" fullname="Tests.ElementTests.TestSearchbar" methodname="TestSearchbar" classname="Tests.ElementTests" runstate="Runnable" seed="1930727248" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.001290" asserts="4">
           <output><![CDATA[· Element demo [ToolbarItem]
   · 
     · 
@@ -197,7 +197,7 @@ StackLayout tapped
       · Countdown
 ]]></output>
         </test-case>
-        <test-case id="1-1011" name="TestToolbarItem" fullname="Tests.ElementTests.TestToolbarItem" methodname="TestToolbarItem" classname="Tests.ElementTests" runstate="Runnable" seed="448415380" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.001154" asserts="4">
+        <test-case id="1-1011" name="TestToolbarItem" fullname="Tests.ElementTests.TestToolbarItem" methodname="TestToolbarItem" classname="Tests.ElementTests" runstate="Runnable" seed="781385429" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.001125" asserts="4">
           <output><![CDATA[Success
 ToolbarItem tapped
 
@@ -205,8 +205,8 @@ ToolbarItem tapped
 ]]></output>
         </test-case>
       </test-suite>
-      <test-suite type="TestFixture" id="1-1019" name="NavigationTests" fullname="Tests.NavigationTests" classname="Tests.NavigationTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.066046" total="10" passed="10" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="75">
-        <test-case id="1-1028" name="TestModalPopToRootEvent" fullname="Tests.NavigationTests.TestModalPopToRootEvent" methodname="TestModalPopToRootEvent" classname="Tests.NavigationTests" runstate="Runnable" seed="1366789073" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.017246" asserts="9">
+      <test-suite type="TestFixture" id="1-1019" name="NavigationTests" fullname="Tests.NavigationTests" classname="Tests.NavigationTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.064709" total="10" passed="10" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="75">
+        <test-case id="1-1028" name="TestModalPopToRootEvent" fullname="Tests.NavigationTests.TestModalPopToRootEvent" methodname="TestModalPopToRootEvent" classname="Tests.NavigationTests" runstate="Runnable" seed="38289655" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.017032" asserts="9">
           <output><![CDATA[· Navigation ^ 
   · 
     · Navigation ^
@@ -222,7 +222,7 @@ ToolbarItem tapped
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1021" name="TestModalStack" fullname="Tests.NavigationTests.TestModalStack" methodname="TestModalStack" classname="Tests.NavigationTests" runstate="Runnable" seed="990075799" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.005769" asserts="6">
+        <test-case id="1-1021" name="TestModalStack" fullname="Tests.NavigationTests.TestModalStack" methodname="TestModalStack" classname="Tests.NavigationTests" runstate="Runnable" seed="712409798" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.005099" asserts="6">
           <output><![CDATA[· Navigation ^ 
   · 
     · Navigation ^
@@ -238,7 +238,7 @@ ToolbarItem tapped
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1022" name="TestNavigationPageOnModalStack" fullname="Tests.NavigationTests.TestNavigationPageOnModalStack" methodname="TestNavigationPageOnModalStack" classname="Tests.NavigationTests" runstate="Runnable" seed="253685146" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.003478" asserts="8">
+        <test-case id="1-1022" name="TestNavigationPageOnModalStack" fullname="Tests.NavigationTests.TestNavigationPageOnModalStack" methodname="TestNavigationPageOnModalStack" classname="Tests.NavigationTests" runstate="Runnable" seed="2147019697" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.003528" asserts="8">
           <output><![CDATA[· Navigation 
   · 
     · Navigation stack:
@@ -253,7 +253,7 @@ ToolbarItem tapped
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1020" name="TestNavigationStack" fullname="Tests.NavigationTests.TestNavigationStack" methodname="TestNavigationStack" classname="Tests.NavigationTests" runstate="Runnable" seed="1555792962" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.001131" asserts="6">
+        <test-case id="1-1020" name="TestNavigationStack" fullname="Tests.NavigationTests.TestNavigationStack" methodname="TestNavigationStack" classname="Tests.NavigationTests" runstate="Runnable" seed="1942941602" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.001115" asserts="6">
           <output><![CDATA[· Navigation > 
   · 
     · Navigation stack:
@@ -268,7 +268,7 @@ ToolbarItem tapped
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1024" name="TestPageAppearingOnAppStart" fullname="Tests.NavigationTests.TestPageAppearingOnAppStart" methodname="TestPageAppearingOnAppStart" classname="Tests.NavigationTests" runstate="Runnable" seed="1623437844" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.000564" asserts="1">
+        <test-case id="1-1024" name="TestPageAppearingOnAppStart" fullname="Tests.NavigationTests.TestPageAppearingOnAppStart" methodname="TestPageAppearingOnAppStart" classname="Tests.NavigationTests" runstate="Runnable" seed="511627824" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.000510" asserts="1">
           <output><![CDATA[· Navigation 
   · 
     · Navigation stack:
@@ -283,7 +283,7 @@ ToolbarItem tapped
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1026" name="TestPageDisAppearingOnMenuChange" fullname="Tests.NavigationTests.TestPageDisAppearingOnMenuChange" methodname="TestPageDisAppearingOnMenuChange" classname="Tests.NavigationTests" runstate="Runnable" seed="2012565080" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.001533" asserts="9">
+        <test-case id="1-1026" name="TestPageDisAppearingOnMenuChange" fullname="Tests.NavigationTests.TestPageDisAppearingOnMenuChange" methodname="TestPageDisAppearingOnMenuChange" classname="Tests.NavigationTests" runstate="Runnable" seed="1852399735" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.001533" asserts="9">
           <output><![CDATA[· Navigation > 
   · 
     · Navigation stack:
@@ -298,7 +298,7 @@ ToolbarItem tapped
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1025" name="TestPageDisAppearingOnPushPop" fullname="Tests.NavigationTests.TestPageDisAppearingOnPushPop" methodname="TestPageDisAppearingOnPushPop" classname="Tests.NavigationTests" runstate="Runnable" seed="1465261239" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.006776" asserts="7">
+        <test-case id="1-1025" name="TestPageDisAppearingOnPushPop" fullname="Tests.NavigationTests.TestPageDisAppearingOnPushPop" methodname="TestPageDisAppearingOnPushPop" classname="Tests.NavigationTests" runstate="Runnable" seed="851530517" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.006779" asserts="7">
           <output><![CDATA[· Navigation ^ 
   · 
     · Navigation ^
@@ -314,7 +314,7 @@ ToolbarItem tapped
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1023" name="TestPopToRoot" fullname="Tests.NavigationTests.TestPopToRoot" methodname="TestPopToRoot" classname="Tests.NavigationTests" runstate="Runnable" seed="2076439520" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.001702" asserts="8">
+        <test-case id="1-1023" name="TestPopToRoot" fullname="Tests.NavigationTests.TestPopToRoot" methodname="TestPopToRoot" classname="Tests.NavigationTests" runstate="Runnable" seed="49691566" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.001500" asserts="8">
           <output><![CDATA[· Navigation 
   · 
     · Navigation stack:
@@ -329,7 +329,7 @@ ToolbarItem tapped
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1027" name="TestPopToRootEvent" fullname="Tests.NavigationTests.TestPopToRootEvent" methodname="TestPopToRootEvent" classname="Tests.NavigationTests" runstate="Runnable" seed="179955173" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.000984" asserts="6">
+        <test-case id="1-1027" name="TestPopToRootEvent" fullname="Tests.NavigationTests.TestPopToRootEvent" methodname="TestPopToRootEvent" classname="Tests.NavigationTests" runstate="Runnable" seed="729362621" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.000887" asserts="6">
           <output><![CDATA[· Navigation 
   · 
     · Navigation stack:
@@ -344,7 +344,7 @@ ToolbarItem tapped
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1029" name="ToggleMainPageBetweenMasterDetailAndNavigation" fullname="Tests.NavigationTests.ToggleMainPageBetweenMasterDetailAndNavigation" methodname="ToggleMainPageBetweenMasterDetailAndNavigation" classname="Tests.NavigationTests" runstate="Runnable" seed="1936616017" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.003421" asserts="15">
+        <test-case id="1-1029" name="ToggleMainPageBetweenMasterDetailAndNavigation" fullname="Tests.NavigationTests.ToggleMainPageBetweenMasterDetailAndNavigation" methodname="ToggleMainPageBetweenMasterDetailAndNavigation" classname="Tests.NavigationTests" runstate="Runnable" seed="1125939123" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.003409" asserts="15">
           <output><![CDATA[· Element demo [ToolbarItem]
   · 
     · 
@@ -367,8 +367,8 @@ ToolbarItem tapped
 ]]></output>
         </test-case>
       </test-suite>
-      <test-suite type="TestFixture" id="1-1017" name="ReflectionTests" fullname="Tests.ReflectionTests" classname="Tests.ReflectionTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.101554" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="0">
-        <test-case id="1-1018" name="ScanForSendMethods" fullname="Tests.ReflectionTests.ScanForSendMethods" methodname="ScanForSendMethods" classname="Tests.ReflectionTests" runstate="Runnable" seed="670231265" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.099112" asserts="0">
+      <test-suite type="TestFixture" id="1-1017" name="ReflectionTests" fullname="Tests.ReflectionTests" classname="Tests.ReflectionTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.111514" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="0">
+        <test-case id="1-1018" name="ScanForSendMethods" fullname="Tests.ReflectionTests.ScanForSendMethods" methodname="ScanForSendMethods" classname="Tests.ReflectionTests" runstate="Runnable" seed="159743040" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.109031" asserts="0">
           <output><![CDATA[Application: SendOnAppLinkRequestReceived
 Application: SendResume
 Application: SendSleepAsync
@@ -508,15 +508,15 @@ NavigationMenu: SendTargetSelected
 ]]></output>
         </test-case>
       </test-suite>
-      <test-suite type="TestFixture" id="1-1014" name="RendererTests" fullname="Tests.RendererTests" classname="Tests.RendererTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.006692" total="2" passed="2" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="10">
-        <test-case id="1-1015" name="TestAlertRendering" fullname="Tests.RendererTests.TestAlertRendering" methodname="TestAlertRendering" classname="Tests.RendererTests" runstate="Runnable" seed="597752296" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.000836" asserts="3">
+      <test-suite type="TestFixture" id="1-1014" name="RendererTests" fullname="Tests.RendererTests" classname="Tests.RendererTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.006749" total="2" passed="2" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="10">
+        <test-case id="1-1015" name="TestAlertRendering" fullname="Tests.RendererTests.TestAlertRendering" methodname="TestAlertRendering" classname="Tests.RendererTests" runstate="Runnable" seed="1672952159" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.000821" asserts="3">
           <output><![CDATA[Alert
 Message
 
 [] [Ok]
 ]]></output>
         </test-case>
-        <test-case id="1-1016" name="TestElementRendering" fullname="Tests.RendererTests.TestElementRendering" methodname="TestElementRendering" classname="Tests.RendererTests" runstate="Runnable" seed="521635359" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:29Z" duration="0.001089" asserts="7">
+        <test-case id="1-1016" name="TestElementRendering" fullname="Tests.RendererTests.TestElementRendering" methodname="TestElementRendering" classname="Tests.RendererTests" runstate="Runnable" seed="559602541" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:27Z" duration="0.001204" asserts="7">
           <output><![CDATA[· Element demo [ToolbarItem]
   · 
     · 
@@ -539,8 +539,8 @@ Message
 ]]></output>
         </test-case>
       </test-suite>
-      <test-suite type="TestFixture" id="1-1030" name="ToolingTests" fullname="Tests.ToolingTests" classname="Tests.ToolingTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:31Z" duration="2.074079" total="9" passed="9" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="48">
-        <test-case id="1-1039" name="TestDelay" fullname="Tests.ToolingTests.TestDelay" methodname="TestDelay" classname="Tests.ToolingTests" runstate="Runnable" seed="255426110" result="Passed" start-time="2017-06-22 07:33:29Z" end-time="2017-06-22 07:33:31Z" duration="2.023674" asserts="11">
+      <test-suite type="TestFixture" id="1-1030" name="ToolingTests" fullname="Tests.ToolingTests" classname="Tests.ToolingTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:29Z" duration="2.070999" total="9" passed="9" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="48">
+        <test-case id="1-1039" name="TestDelay" fullname="Tests.ToolingTests.TestDelay" methodname="TestDelay" classname="Tests.ToolingTests" runstate="Runnable" seed="1077961579" result="Passed" start-time="2017-06-22 12:20:27Z" end-time="2017-06-22 12:20:29Z" duration="2.017866" asserts="11">
           <output><![CDATA[· Element demo [ToolbarItem]
   · 
     · 
@@ -562,7 +562,7 @@ Message
       · 3
 ]]></output>
         </test-case>
-        <test-case id="1-1037" name="TestFind" fullname="Tests.ToolingTests.TestFind" methodname="TestFind" classname="Tests.ToolingTests" runstate="Runnable" seed="1900216550" result="Passed" start-time="2017-06-22 07:33:31Z" end-time="2017-06-22 07:33:31Z" duration="0.003568" asserts="5">
+        <test-case id="1-1037" name="TestFind" fullname="Tests.ToolingTests.TestFind" methodname="TestFind" classname="Tests.ToolingTests" runstate="Runnable" seed="420945299" result="Passed" start-time="2017-06-22 12:20:29Z" end-time="2017-06-22 12:20:29Z" duration="0.003600" asserts="5">
           <output><![CDATA[· Navigation 
   · 
     · Navigation stack:
@@ -577,7 +577,7 @@ Message
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1038" name="TestFindPredicate" fullname="Tests.ToolingTests.TestFindPredicate" methodname="TestFindPredicate" classname="Tests.ToolingTests" runstate="Runnable" seed="2140592177" result="Passed" start-time="2017-06-22 07:33:31Z" end-time="2017-06-22 07:33:31Z" duration="0.001908" asserts="6">
+        <test-case id="1-1038" name="TestFindPredicate" fullname="Tests.ToolingTests.TestFindPredicate" methodname="TestFindPredicate" classname="Tests.ToolingTests" runstate="Runnable" seed="1785476850" result="Passed" start-time="2017-06-22 12:20:29Z" end-time="2017-06-22 12:20:29Z" duration="0.001948" asserts="6">
           <output><![CDATA[· Element demo [ToolbarItem]
   · 
     · 
@@ -599,7 +599,7 @@ Message
       · Countdown
 ]]></output>
         </test-case>
-        <test-case id="1-1035" name="TestInputFailsOnLabel" fullname="Tests.ToolingTests.TestInputFailsOnLabel" methodname="TestInputFailsOnLabel" classname="Tests.ToolingTests" runstate="Runnable" seed="1310166033" result="Passed" start-time="2017-06-22 07:33:31Z" end-time="2017-06-22 07:33:31Z" duration="0.002471" asserts="3">
+        <test-case id="1-1035" name="TestInputFailsOnLabel" fullname="Tests.ToolingTests.TestInputFailsOnLabel" methodname="TestInputFailsOnLabel" classname="Tests.ToolingTests" runstate="Runnable" seed="1979111805" result="Passed" start-time="2017-06-22 12:20:29Z" end-time="2017-06-22 12:20:29Z" duration="0.002404" asserts="3">
           <output><![CDATA[· Navigation 
   · 
     · Navigation stack:
@@ -614,7 +614,7 @@ Message
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1031" name="TestShouldSee" fullname="Tests.ToolingTests.TestShouldSee" methodname="TestShouldSee" classname="Tests.ToolingTests" runstate="Runnable" seed="2049691419" result="Passed" start-time="2017-06-22 07:33:31Z" end-time="2017-06-22 07:33:31Z" duration="0.000830" asserts="2">
+        <test-case id="1-1031" name="TestShouldSee" fullname="Tests.ToolingTests.TestShouldSee" methodname="TestShouldSee" classname="Tests.ToolingTests" runstate="Runnable" seed="1676648792" result="Passed" start-time="2017-06-22 12:20:29Z" end-time="2017-06-22 12:20:29Z" duration="0.005688" asserts="2">
           <output><![CDATA[· Navigation 
   · 
     · Navigation stack:
@@ -629,7 +629,7 @@ Message
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1032" name="TestTap" fullname="Tests.ToolingTests.TestTap" methodname="TestTap" classname="Tests.ToolingTests" runstate="Runnable" seed="985340467" result="Passed" start-time="2017-06-22 07:33:31Z" end-time="2017-06-22 07:33:31Z" duration="0.001023" asserts="6">
+        <test-case id="1-1032" name="TestTap" fullname="Tests.ToolingTests.TestTap" methodname="TestTap" classname="Tests.ToolingTests" runstate="Runnable" seed="1593269439" result="Passed" start-time="2017-06-22 12:20:29Z" end-time="2017-06-22 12:20:29Z" duration="0.001013" asserts="6">
           <output><![CDATA[· Navigation 
   · 
     · Navigation stack:
@@ -644,7 +644,7 @@ Message
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1033" name="TestTapFailsForNotTappableElements" fullname="Tests.ToolingTests.TestTapFailsForNotTappableElements" methodname="TestTapFailsForNotTappableElements" classname="Tests.ToolingTests" runstate="Runnable" seed="1307259366" result="Passed" start-time="2017-06-22 07:33:31Z" end-time="2017-06-22 07:33:31Z" duration="0.000878" asserts="3">
+        <test-case id="1-1033" name="TestTapFailsForNotTappableElements" fullname="Tests.ToolingTests.TestTapFailsForNotTappableElements" methodname="TestTapFailsForNotTappableElements" classname="Tests.ToolingTests" runstate="Runnable" seed="699560495" result="Passed" start-time="2017-06-22 12:20:29Z" end-time="2017-06-22 12:20:29Z" duration="0.000954" asserts="3">
           <output><![CDATA[· Navigation 
   · 
     · Navigation stack:
@@ -659,7 +659,7 @@ Message
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1034" name="TestTapFailsWhenTappingTitle" fullname="Tests.ToolingTests.TestTapFailsWhenTappingTitle" methodname="TestTapFailsWhenTappingTitle" classname="Tests.ToolingTests" runstate="Runnable" seed="1911999690" result="Passed" start-time="2017-06-22 07:33:31Z" end-time="2017-06-22 07:33:31Z" duration="0.000868" asserts="3">
+        <test-case id="1-1034" name="TestTapFailsWhenTappingTitle" fullname="Tests.ToolingTests.TestTapFailsWhenTappingTitle" methodname="TestTapFailsWhenTappingTitle" classname="Tests.ToolingTests" runstate="Runnable" seed="601740705" result="Passed" start-time="2017-06-22 12:20:29Z" end-time="2017-06-22 12:20:29Z" duration="0.000896" asserts="3">
           <output><![CDATA[· Navigation 
   · 
     · Navigation stack:
@@ -674,7 +674,7 @@ Message
     · Toggle MasterDetail MainPage
 ]]></output>
         </test-case>
-        <test-case id="1-1036" name="TestTapNth" fullname="Tests.ToolingTests.TestTapNth" methodname="TestTapNth" classname="Tests.ToolingTests" runstate="Runnable" seed="603778338" result="Passed" start-time="2017-06-22 07:33:31Z" end-time="2017-06-22 07:33:31Z" duration="0.014301" asserts="9">
+        <test-case id="1-1036" name="TestTapNth" fullname="Tests.ToolingTests.TestTapNth" methodname="TestTapNth" classname="Tests.ToolingTests" runstate="Runnable" seed="99144605" result="Passed" start-time="2017-06-22 12:20:29Z" end-time="2017-06-22 12:20:29Z" duration="0.015637" asserts="9">
           <output><![CDATA[Success
 Label tapped
 

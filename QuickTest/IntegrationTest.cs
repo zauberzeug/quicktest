@@ -5,7 +5,7 @@ using NUnit.Framework;
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
 
-namespace UserFlow
+namespace QuickTest
 {
     public class IntegrationTest<T> where T : Application, new()
     {

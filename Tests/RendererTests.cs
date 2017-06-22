@@ -1,6 +1,6 @@
 using DemoApp;
 using NUnit.Framework;
-using UserFlow;
+using QuickTest;
 
 namespace Tests
 {

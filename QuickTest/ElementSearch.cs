@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace UserFlow
+namespace QuickTest
 {
     public static class ElementSearch
     {

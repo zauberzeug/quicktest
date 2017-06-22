@@ -1,6 +1,6 @@
 using System;
 using Xamarin.Forms.Internals;
-namespace UserFlow
+namespace QuickTest
 {
     public static class AlertArgumentExtensions
     {

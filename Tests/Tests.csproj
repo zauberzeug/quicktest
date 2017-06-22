@@ -62,9 +62,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UserFlow\UserFlow.csproj">
+    <ProjectReference Include="..\QuickTest\QuickTest.csproj">
       <Project>{A11334E1-28E5-43CE-AA56-D66C9E117159}</Project>
-      <Name>UserFlow</Name>
+      <Name>QuickTest</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\DemoApp\DemoApp.projitems" Label="Shared" Condition="Exists('..\DemoApp\DemoApp.projitems')" />

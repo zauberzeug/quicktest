@@ -9,7 +9,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DemoApp", "DemoApp\DemoApp.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{9E0BC72C-E2A5-41CE-B33B-BFA9233733DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserFlow", "UserFlow\UserFlow.csproj", "{A11334E1-28E5-43CE-AA56-D66C9E117159}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTest", "QuickTest\QuickTest.csproj", "{A11334E1-28E5-43CE-AA56-D66C9E117159}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,7 +94,7 @@ Global
 		$4.scope = application/config+xml
 		$4.inheritsScope = application/xml
 		$0.StandardHeader = $5
-		$5.Text = 
+		$5.Text =
 		$5.IncludeInNewFiles = True
 	EndGlobalSection
 EndGlobal

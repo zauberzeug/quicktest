@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace UserFlow
+namespace QuickTest
 {
     public static class InvokeAnything
     {

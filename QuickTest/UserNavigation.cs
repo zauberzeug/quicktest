@@ -1,8 +1,8 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace UserFlow
+namespace QuickTest
 {
     public partial class User
     {

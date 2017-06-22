@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using DemoApp;
 using NUnit.Framework;
-using UserFlow;
+using QuickTest;
 using Xamarin.Forms;
 
 namespace Tests
