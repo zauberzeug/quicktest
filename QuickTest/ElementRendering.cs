@@ -40,6 +40,8 @@ namespace QuickTest
         public static string Render(this ListView listView)
         {
             var result = "";
+            if (listView.ItemsSource == null)
+                return result;
 
             foreach (var item in listView.ItemsSource) {
                 var content = listView.ItemTemplate.CreateContent();
