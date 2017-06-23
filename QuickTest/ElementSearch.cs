@@ -68,6 +68,8 @@ namespace QuickTest
         public static List<ElementInfo> Find(this ListView listView, Predicate<Element> predicate, Predicate<Element> containerPredicate)
         {
             var result = new List<ElementInfo>();
+            if (listView.ItemsSource == null)
+                return result;
             foreach (var item in listView.ItemsSource) {
                 var content = listView.ItemTemplate.CreateContent();
                 (content as Cell).BindingContext = item;
