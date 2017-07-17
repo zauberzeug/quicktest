@@ -49,6 +49,12 @@ namespace Tests
 
             Tap("Item A2");
             ShouldSee("Item A2 tapped");
+
+            Tap("Ok");
+            ShouldSee("ListView demo");
+
+            Tap("Item A3");
+            ShouldSee("Item A3 tapped");
         }
 
         [Test]
