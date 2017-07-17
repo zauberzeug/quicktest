@@ -79,7 +79,7 @@ namespace Tests
         [Test]
         public void TestBinding()
         {
-            ShouldSee("bound text 2");
+            ShouldSee("updated bound text");
         }
 
         [Test]

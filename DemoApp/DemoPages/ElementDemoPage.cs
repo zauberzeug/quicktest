@@ -8,7 +8,8 @@ namespace DemoApp
         {
             Title = "Element demo";
 
-            var bindableText = new BindableText("bound text");
+            var bindableText = new BindableText("initial bound text");
+
             Content = new ScrollView {
                 Content = new StackLayout {
                     Children = {
@@ -32,13 +33,13 @@ namespace DemoApp
             };
 
             ToolbarItems.Add(new DemoToolbarItem());
-            bindableText.Text = "bound text 2";
+            bindableText.Text = "updated bound text";
         }
     }
 
     public class BindableText : BindableObject
     {
-        public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(string), "");
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(string), null);
 
         public BindableText(string text)
         {
