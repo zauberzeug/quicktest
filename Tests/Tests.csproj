@@ -57,6 +57,7 @@
     <Compile Include="ReflectionTests.cs" />
     <Compile Include="NavigationTests.cs" />
     <Compile Include="ToolingTests.cs" />
+    <Compile Include="BindingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

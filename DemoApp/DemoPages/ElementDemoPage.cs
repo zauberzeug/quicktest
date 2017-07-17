@@ -8,8 +8,6 @@ namespace DemoApp
         {
             Title = "Element demo";
 
-            var bindableText = new BindableText("initial bound text");
-
             Content = new ScrollView {
                 Content = new StackLayout {
                     Children = {
@@ -26,29 +24,12 @@ namespace DemoApp
                         new DemoEntry("entry_automation_id", "Placeholder"),
                         new DemoEditor("editor_automation_id", "editor content"),
                         new DemoLabel("Invisible Label").Invisible(),
-                        new DemoLabel().BindTo(bindableText, BindableText.TextProperty, Label.TextProperty),
                         new DemoCountdown(),
                     },
                 },
             };
 
             ToolbarItems.Add(new DemoToolbarItem());
-            bindableText.Text = "updated bound text";
-        }
-    }
-
-    public class BindableText : BindableObject
-    {
-        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(string), null);
-
-        public BindableText(string text)
-        {
-            Text = text;
-        }
-
-        public string Text {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
         }
     }
 }

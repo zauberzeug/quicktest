@@ -16,6 +16,7 @@ namespace DemoApp
                     CreateMenuButton("Navigation", () => new NavigationDemoPage()),
                     CreateMenuButton("Elements", () => new ElementDemoPage()),
                     CreateMenuButton("ListViews", () => new ListViewDemoPage()),
+                    CreateMenuButton("Binding", () => new BindingDemoPage()),
                     new DemoButton("Alert") { Command = new Command(o => Application.Current.MainPage.DisplayAlert("Alert", "Message", "Ok")) },
                 },
             };

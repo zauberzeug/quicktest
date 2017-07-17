@@ -41,7 +41,6 @@ Message
         · label within ContentView
       · some text input (entry_automation_id)
       · editor content (editor_automation_id)
-      · updated bound text
       · Countdown"));
         }
     }
