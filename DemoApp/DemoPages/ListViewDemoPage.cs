@@ -53,12 +53,7 @@ namespace DemoApp
             {
                 var label = new DemoLabel();
                 label.SetBinding(Label.TextProperty, ".");
-                View = new ContentView {
-                    Content = new StackLayout {
-                        Children = { label },
-                        BackgroundColor = Color.Gray.MultiplyAlpha(0.2),
-                    },
-                };
+                View = label;
             }
         }
     }
@@ -92,12 +87,7 @@ namespace DemoApp
             {
                 var label = new DemoLabel();
                 label.SetBinding(Label.TextProperty, nameof(Item.NameProperty));
-                View = new ContentView {
-                    Content = new StackLayout {
-                        Children = { label },
-                        BackgroundColor = Color.Gray.MultiplyAlpha(0.2),
-                    },
-                };
+                View = label;
             }
         }
     }
