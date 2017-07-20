@@ -68,7 +68,7 @@ namespace DemoApp
             BackgroundColor = Color.GhostWhite;
             HeightRequest = 200;
 
-            ItemTapped += (sender, e) => App.ShowMessage("Success", e.Item + " tapped");
+            ItemTapped += (sender, e) => App.ShowMessage("Success", (e.Item as Item).Name + " tapped");
         }
 
         class Item : BindableObject
@@ -86,7 +86,7 @@ namespace DemoApp
             public ItemDemoCell()
             {
                 var label = new DemoLabel();
-                label.SetBinding(Label.TextProperty, nameof(Item.NameProperty));
+                label.SetBinding(Label.TextProperty, nameof(Item.Name));
                 View = label;
             }
         }
