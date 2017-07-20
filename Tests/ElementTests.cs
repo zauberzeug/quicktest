@@ -36,28 +36,6 @@ namespace Tests
         }
 
         [Test]
-        public void TestListViews()
-        {
-            OpenMenu("ListViews");
-            ShouldSee("ListView demo");
-
-            Tap("Item A1");
-            ShouldSee("Item A1 tapped");
-
-            Tap("Ok");
-            ShouldSee("ListView demo");
-
-            Tap("Item A2");
-            ShouldSee("Item A2 tapped");
-
-            Tap("Ok");
-            ShouldSee("ListView demo");
-
-            Tap("Item A3");
-            ShouldSee("Item A3 tapped");
-        }
-
-        [Test]
         public void TestGrid()
         {
             Tap("Cell D");
