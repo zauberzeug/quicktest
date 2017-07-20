@@ -79,10 +79,7 @@ namespace QuickTest
                         (content as Cell).BindingContext = item.Value;
                         if (predicate.Invoke(content as Cell) || ((content as ViewCell)?.View.Find(predicate, containerPredicate).Any() ?? false))
                             result.Add(new ElementInfo {
-                                InvokeTap = () => {
-                                    Console.WriteLine(grp.Index);
-                                    listView.Invoke("NotifyRowTapped", grp.Index, item.Index, null);
-                                },
+                                InvokeTap = () => listView.Invoke("NotifyRowTapped", grp.Index, item.Index, null),
                             });
                     }
                 }
