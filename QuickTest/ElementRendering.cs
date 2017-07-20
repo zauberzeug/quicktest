@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -43,10 +44,20 @@ namespace QuickTest
             if (listView.ItemsSource == null)
                 return result;
 
-            foreach (var item in listView.ItemsSource) {
-                var content = listView.ItemTemplate.CreateContent();
-                (content as Cell).BindingContext = item;
-                result += $"- {(content as TextCell)?.Text + (content as ViewCell)?.View.Render().Trim()}\n";
+            if (listView.IsGroupingEnabled) {
+                foreach (var grp in listView.ItemsSource.Cast<IEnumerable<object>>()) {
+                    foreach (var item in grp) {
+                        var content = listView.ItemTemplate.CreateContent();
+                        (content as Cell).BindingContext = item;
+                        result += $"- {(content as TextCell)?.Text + (content as ViewCell)?.View.Render().Trim()}\n";
+                    }
+                }
+            } else {
+                foreach (var item in listView.ItemsSource) {
+                    var content = listView.ItemTemplate.CreateContent();
+                    (content as Cell).BindingContext = item;
+                    result += $"- {(content as TextCell)?.Text + (content as ViewCell)?.View.Render().Trim()}\n";
+                }
             }
 
             return result;
