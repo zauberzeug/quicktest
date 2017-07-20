@@ -41,6 +41,10 @@ namespace Tests
         {
             Tap("A4");
             ShouldSee("A4 tapped");
+
+            Tap("Ok");
+            Tap("A5");
+            ShouldSee("A5 tapped");
         }
 
         protected override void TearDown()

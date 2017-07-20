@@ -80,8 +80,8 @@ namespace QuickTest
                         if (predicate.Invoke(content as Cell) || ((content as ViewCell)?.View.Find(predicate, containerPredicate).Any() ?? false))
                             result.Add(new ElementInfo {
                                 InvokeTap = () => listView.Invoke("NotifyRowTapped",
-                                                                  grp.ToList().IndexOf(item),
                                                                   listView.ItemsSource.Cast<object>().ToList().IndexOf(grp),
+                                                                  grp.ToList().IndexOf(item),
                                                                   null),
                             });
                     }
