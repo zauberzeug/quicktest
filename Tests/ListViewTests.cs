@@ -39,8 +39,8 @@ namespace Tests
         [Test]
         public void TestGroups()
         {
-            Tap("Item A4");
-            ShouldSee("Item A4 tapped");
+            Tap("A4");
+            ShouldSee("A4 tapped");
         }
 
         protected override void TearDown()
