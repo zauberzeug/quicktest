@@ -14,6 +14,7 @@ namespace DemoApp
                     new DemoListViewWithTextCell(),
                     new DemoListViewWithStringViewCell(),
                     new DemoListViewWithItemViewCell(),
+                    new DemoListViewWithGroups(),
                 },
             };
         }
@@ -88,6 +89,46 @@ namespace DemoApp
                 var label = new DemoLabel();
                 label.SetBinding(Label.TextProperty, nameof(Item.Name));
                 View = label;
+            }
+        }
+    }
+
+    public class DemoListViewWithGroups : ListView
+    {
+        public DemoListViewWithGroups()
+        {
+            ItemsSource = new List<List<string>> {
+                new StringGroup(new [] { "A4", "B4", "C4" }, "Group 4"),
+                new StringGroup(new [] { "A5", "B5", "C5" }, "Group 5"),
+            };
+            ItemTemplate = new DataTemplate(typeof(StringDemoCell));
+            IsGroupingEnabled = true;
+            GroupDisplayBinding = new Binding(nameof(StringGroup.Title));
+
+            BackgroundColor = Color.GhostWhite;
+            HeightRequest = 200;
+
+            ItemTapped += (sender, e) => App.ShowMessage("Success", (e.Item as string) + " tapped");
+        }
+
+        class StringDemoCell : ViewCell
+        {
+            public StringDemoCell()
+            {
+                var label = new DemoLabel();
+                label.SetBinding(Label.TextProperty, ".");
+                View = label;
+            }
+        }
+
+        class StringGroup : List<string>
+        {
+            public string Title { get; private set; }
+
+            public StringGroup(IEnumerable<string> items, string title)
+            {
+                Title = title;
+                AddRange(items);
             }
         }
     }
