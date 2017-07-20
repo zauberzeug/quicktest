@@ -2,7 +2,7 @@
 <package>
   <metadata>
       <id>Xamarin.Forms.QuickTest</id>
-      <version>0.1.31-pre</version>
+      <version>0.1.32-pre</version>
       <authors>Perpetual Mobile GmbH</authors>
       <owners>Perpetual Mobile GmbH</owners>
       <description>Library to write NUnit Integration Tests for Xamarin.Forms Edit</description>
