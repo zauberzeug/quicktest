@@ -116,7 +116,7 @@ namespace QuickTest
         }
 
         protected IntegrationTest<T> Now {
-            get { return CreateWithTimeout(App, user, TimeSpan.FromSeconds(0.1)); }
+            get { return CreateWithTimeout(App, user, TimeSpan.FromSeconds(0.2)); }
         }
     }
 }
