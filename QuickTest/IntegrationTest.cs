@@ -30,7 +30,7 @@ namespace QuickTest
 
             App = new T();
             user = new User(App);
-            timeout = TimeSpan.FromSeconds(0.1);
+            timeout = TimeSpan.FromSeconds(0.2);
         }
 
         public void Tap(params string[] texts)
