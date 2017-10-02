@@ -9,9 +9,8 @@
       <copyright>Perpetual Mobile GmbH Copyright 2017</copyright>
       <dependencies>
          <group>
-             <dependency id="NUnit" version="3.7.1" />
-             <dependency id="Xamarin.Forms" version="2.3.5.239-pre3" />
-             <dependency id="Xamarin.Forms.Mocks" version="2.3.5.1" />
+             <dependency id="NUnit" version="3.8.1" />
+             <dependency id="Xamarin.Forms.Mocks" version="2.4" />
          </group>
      </dependencies>
   </metadata>
