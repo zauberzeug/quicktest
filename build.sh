@@ -6,6 +6,8 @@ if [[ $(git status -s) ]]; then
     exit 1
 fi
 
+git fetch --tags
+
 # get latest git tag and increase by one (see https://stackoverflow.com/questions/4485399/how-can-i-bump-a-version-number-using-bash)
 VERSION=`git describe --abbrev=0 | awk -F. '/[0-9]+\./{$NF+=1;OFS=".";print}'`
 
@@ -21,15 +23,10 @@ function packNuGet {
 }
 
 function publishNuGet {
-  git add $1
-  git commit -am "nuget package ${VERSION}" || exit 1
   git tag -a $VERSION -m ''  || exit 1
-
-  git push
   git push --tags
 
-  echo "not publishing to nuget.org yet"
-  #nuget push $1
+  nuget push $1
 }
 
 nuget restore QuickTest.sln || exit 1
