@@ -12,7 +12,7 @@ VERSION=`git describe --abbrev=0 | awk -F. '/[0-9]+\./{$NF+=1;OFS=".";print}'`
 echo "setting version to $VERSION"
 
 function setVersion_Nupkg {
-  sed -i '' "s/\(<version>\).*\(<\/version>\)/\1$VERSION-pre\2/" $1
+  sed -i '' "s/\(<version>\).*\(<\/version>\)/\1$VERSION\2/" $1
 }
 
 function packNuGet {
@@ -43,4 +43,4 @@ NUNIT=(packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe)
 mono ${NUNIT[0]} --config=Release "Tests/Tests.csproj" || exit 1
 
 packNuGet Xamarin.Forms.QuickTest.nuspec
-publishNuGet Xamarin.Forms.QuickTest.$VERSION-pre.nupkg
+publishNuGet Xamarin.Forms.QuickTest.$VERSION.nupkg
