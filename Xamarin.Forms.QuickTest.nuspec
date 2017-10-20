@@ -2,10 +2,12 @@
 <package>
   <metadata>
       <id>Xamarin.Forms.QuickTest</id>
-      <version>0.1.38-pre</version>
+      <version>1.0</version>
       <authors>Perpetual Mobile GmbH</authors>
       <owners>Perpetual Mobile GmbH</owners>
-      <description>Library to write NUnit Integration Tests for Xamarin.Forms Edit</description>
+      <projectUrl>https://github.com/perpetual-mobile/quicktest</projectUrl>
+      <licenseUrl>https://github.com/perpetual-mobile/quicktest/blob/master/LICENSE</licenseUrl>
+      <description>Library to write NUnit Integration Tests for Xamarin.Forms</description>
       <copyright>Perpetual Mobile GmbH Copyright 2017</copyright>
       <dependencies>
          <group>
