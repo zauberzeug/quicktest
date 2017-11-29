@@ -73,7 +73,7 @@ namespace Tests
             Assert.That(elements, Has.Count.EqualTo(1));
             Assert.That(elements.First(), Is.TypeOf<DemoLabel>());
         }
-        
+
         [Test]
         public void TestDelay()
         {
@@ -81,7 +81,7 @@ namespace Tests
             Tap("Countdown");
             ShouldNotSee("Countdown");
             var time = DateTime.Now;
-            After(2).ShouldSee("2");
+            After(1).ShouldSee("2");
             After(1).Tap("1");
             After(1).ShouldNotSee("1");
             Assert.That(DateTime.Now - time, Is.GreaterThan(TimeSpan.FromSeconds(1)));
