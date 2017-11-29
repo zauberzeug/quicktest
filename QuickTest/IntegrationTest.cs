@@ -44,7 +44,7 @@ namespace QuickTest
         public void TapNth(string text, int index)
         {
             Assert.That(() => user.Find(text), Has.Count.GreaterThan(index).After((int)timeout.TotalMilliseconds, 10),
-                        $"User can't see {index + 1}th \"{text}\"");
+                        $"User can't see {index + 1}th \"{text}\"  in \n{ user?.Render() }");
             user.Tap(text, index);
         }
 
@@ -60,7 +60,7 @@ namespace QuickTest
             if (list.All(user.CanSee))
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
             Assert.That(() => list.All(user.CanSee), Is.True.After((int)timeout.TotalMilliseconds, 10),
-                        $"User can't see {{ {string.Join(", ", texts)} }}");
+                        $"User can't see {{ {string.Join(", ", texts)} }} in \n{ user?.Render() }");
         }
 
         public void ShouldNotSee(params string[] texts)
@@ -69,7 +69,7 @@ namespace QuickTest
             if (!list.Any(user.CanSee))
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
             Assert.That(() => !list.Any(user.CanSee), Is.True.After((int)timeout.TotalMilliseconds, 10),
-                        $"User can see any of {{ {string.Join(", ", texts)} }}");
+                        $"User can see any of {{ {string.Join(", ", texts)} }} in \n{ user?.Render() }");
         }
 
         protected List<Element> Find(string text)
