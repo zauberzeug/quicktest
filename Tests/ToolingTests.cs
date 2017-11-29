@@ -81,9 +81,9 @@ namespace Tests
             Tap("Countdown");
             ShouldNotSee("Countdown");
             var time = DateTime.Now;
-            After(1).ShouldSee("2");
-            After(1.5).Tap("1");
-            After(1).ShouldNotSee("1");
+            After(2).ShouldSee("2");
+            After(2).Tap("1");
+            After(2).ShouldNotSee("1");
             Assert.That(DateTime.Now - time, Is.GreaterThan(TimeSpan.FromSeconds(1)));
         }
     }
