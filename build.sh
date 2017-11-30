@@ -26,7 +26,7 @@ function publishNuGet {
   git tag -a $VERSION -m ''  || exit 1
   git push --tags
 
-  nuget push -source https://www.nuget.org/api/v2/ $1
+  nuget push -Source https://www.nuget.org/api/v2/package $1
 }
 
 nuget restore QuickTest.sln || exit 1
