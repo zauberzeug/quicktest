@@ -28,9 +28,14 @@ namespace QuickTest
         {
             MockForms.Init();
 
-            App = new T();
+            App = CreateApp();
             user = new User(App);
             timeout = TimeSpan.FromSeconds(0.2);
+        }
+
+        protected T CreateApp()
+        {
+            return new T();
         }
 
         public void Tap(params string[] texts)
