@@ -33,7 +33,7 @@ namespace QuickTest
             timeout = TimeSpan.FromSeconds(0.2);
         }
 
-        protected T CreateApp()
+        virtual protected T CreateApp()
         {
             return new T();
         }
