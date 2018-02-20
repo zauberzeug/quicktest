@@ -117,14 +117,17 @@ namespace QuickTest
         public void Input(string automationId, string text)
         {
             var elements = CurrentPage.Find(automationId).Select(i => i.Element).OfType<VisualElement>().ToList();
+
             Assert.That(elements, Is.Not.Empty, $"Did not find entry \"{automationId}\" on current page");
             Assert.That(elements, Has.Count.LessThan(2), $"Found multiple entries \"{automationId}\" on current page");
 
-            if (elements.First() is Entry)
+            if (elements.First() is Entry) {
                 (elements.First() as Entry).Text = text;
-            else if (elements.First() is Editor)
+                (elements.First() as Entry).SendCompleted();
+            } else if (elements.First() is Editor) {
                 (elements.First() as Editor).Text = text;
-            else if (elements.First() is SearchBar)
+                (elements.First() as Editor).SendCompleted();
+            } else if (elements.First() is SearchBar)
                 (elements.First() as SearchBar).Text = text;
             else
                 throw new InvalidOperationException($"element '{automationId}' can not be used for input");
