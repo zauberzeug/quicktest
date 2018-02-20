@@ -1,6 +1,9 @@
 using DemoApp;
 using NUnit.Framework;
 using QuickTest;
+using System.Linq;
+using Xamarin.Forms;
+using System;
 
 namespace Tests
 {
@@ -60,14 +63,39 @@ namespace Tests
             ShouldSee("Placeholder", "entry_automation_id");
 
             Input("Placeholder", "Text1");
-            ShouldSee("Text1<completed>");
+            ShouldSee("Text1");
             ShouldNotSee("Placeholder");
 
             Input("entry_automation_id", "Text2");
-            ShouldSee("Text2<completed>");
+            ShouldSee("Text2");
 
-            Input("Text2<completed>", "Text3");
-            ShouldSee("Text3<completed>");
+            Input("Text2", "Text3");
+            ShouldSee("Text3");
+        }
+
+        [Test]
+        public void TestEntryCompletionAndFocus()
+        {
+            var entry = Find("entry_automation_id").First() as Entry;
+            EventHandler onCompleted = (object sender, EventArgs args) => {
+                (sender as Entry).Text += "<completed>";
+            };
+
+            EventHandler<FocusEventArgs> onUnfocused = (object sender, FocusEventArgs args) => {
+                (sender as Entry).Text += "<unfocused>";
+            };
+
+            entry.Completed += onCompleted;
+            entry.Unfocused += onUnfocused;
+
+            Input("entry_automation_id", "text");
+            ShouldSee("text<completed><unfocused>");
+
+            entry.Completed -= onCompleted;
+            entry.Unfocused -= onUnfocused;
+
+            Input("entry_automation_id", "text");
+            ShouldSee("text");
         }
 
         [Test]

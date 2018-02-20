@@ -120,7 +120,7 @@ namespace QuickTest
 
             Assert.That(elements, Is.Not.Empty, $"Did not find entry \"{automationId}\" on current page");
             Assert.That(elements, Has.Count.LessThan(2), $"Found multiple entries \"{automationId}\" on current page");
-
+            elements.First().SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, true);
             if (elements.First() is Entry) {
                 (elements.First() as Entry).Text = text;
                 (elements.First() as Entry).SendCompleted();
@@ -131,6 +131,8 @@ namespace QuickTest
                 (elements.First() as SearchBar).Text = text;
             else
                 throw new InvalidOperationException($"element '{automationId}' can not be used for input");
+
+            elements.First().SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, false);
         }
 
         public void OpenMenu()

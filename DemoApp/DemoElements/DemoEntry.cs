@@ -1,4 +1,3 @@
-using System;
 using Xamarin.Forms;
 
 namespace DemoApp
@@ -10,18 +9,6 @@ namespace DemoApp
             AutomationId = automationId;
             Placeholder = placeholder;
             Text = text;
-            Completed += OnCompleted;
-            Unfocused += OnUnfocused;
-        }
-
-        void OnCompleted(object sender, EventArgs args)
-        {
-            Text += "<completed>";
-        }
-
-        void OnUnfocused(object sender, EventArgs args)
-        {
-            Text += "<unfocused>";
         }
     }
 }
