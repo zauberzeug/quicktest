@@ -59,6 +59,12 @@ namespace QuickTest
             user.Input(automationId, text);
         }
 
+        protected void Cancel(string automationId)
+        {
+            ShouldSee(automationId);
+            user.Cancel(automationId);
+        }
+
         public void ShouldSee(params string[] texts)
         {
             var list = new List<string>(texts);

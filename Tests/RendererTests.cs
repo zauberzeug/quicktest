@@ -24,6 +24,7 @@ Message
             OpenMenu("Elements");
             Input("entry_automation_id", "some text input");
             Input("searchbar_automation_id", "search text");
+            Tap("Ok");
             Assert.That(Render(), Is.EqualTo(@"· Element demo [ToolbarItem]
   · 
     · 

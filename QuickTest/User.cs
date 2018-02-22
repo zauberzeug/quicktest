@@ -135,6 +135,22 @@ namespace QuickTest
             elements.First().SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, false);
         }
 
+        public void Cancel(string automationId)
+        {
+            var elements = CurrentPage.Find(automationId).Select(i => i.Element).OfType<VisualElement>().ToList();
+
+            Assert.That(elements, Is.Not.Empty, $"Did not find entry \"{automationId}\" on current page");
+            Assert.That(elements, Has.Count.LessThan(2), $"Found multiple entries \"{automationId}\" on current page");
+            elements.First().SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, true);
+
+            if (elements.First() is SearchBar)
+                (elements.First() as SearchBar).Text = null;
+            else
+                throw new InvalidOperationException($"element '{automationId}' can not be used for input");
+
+            elements.First().SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, false);
+        }
+
         public void OpenMenu()
         {
             (app.MainPage as MasterDetailPage).IsPresented = true;

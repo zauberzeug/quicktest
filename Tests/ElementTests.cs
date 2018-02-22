@@ -120,10 +120,16 @@ namespace Tests
         [Test]
         public void TestSearchbar()
         {
-            ShouldSee("searchbar_automation_id");
+            Input("searchbar_automation_id", "");
+            ShouldSee("<>");
+            Tap("Ok");
 
             Input("searchbar_automation_id", "Search Text");
-            ShouldSee("Search Text");
+            ShouldSee("<Search Text>");
+            Tap("Ok");
+
+            Cancel("searchbar_automation_id");
+            ShouldSee("null");
         }
 
         [Test]
