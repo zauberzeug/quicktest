@@ -8,11 +8,11 @@
       <projectUrl>https://github.com/perpetual-mobile/quicktest</projectUrl>
       <licenseUrl>https://github.com/perpetual-mobile/quicktest/blob/master/LICENSE</licenseUrl>
       <description>Library to write NUnit Integration Tests for Xamarin.Forms</description>
-      <copyright>Perpetual Mobile GmbH Copyright 2018</copyright>
+      <copyright>Perpetual Mobile GmbH Copyright 2017</copyright>
       <dependencies>
          <group>
              <dependency id="NUnit" version="3.8.1" />
-             <dependency id="Xamarin.Forms.Mocks" version="2.5.0.4" />
+             <dependency id="Xamarin.Forms.Mocks" version="2.4" />
          </group>
      </dependencies>
   </metadata>
