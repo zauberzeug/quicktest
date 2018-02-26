@@ -31,8 +31,8 @@ function publishNuGet {
 
 nuget restore QuickTest.sln || exit 1
 
-xbuild /p:Configuration=Release QuickTest/QuickTest.csproj || exit 1
-xbuild /p:Configuration=Release Tests/Tests.csproj || exit 1
+msbuild /p:Configuration=Release QuickTest/QuickTest.csproj || exit 1
+msbuild /p:Configuration=Release Tests/Tests.csproj || exit 1
 
 pushd packages && nuget install Nunit.Runners && popd
 export MONO_IOMAP=all # this fixes slash, backslash path seperator problems within nunit test runner
