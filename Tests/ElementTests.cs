@@ -25,6 +25,12 @@ namespace Tests
         }
 
         [Test]
+        public void TestFormattedLabel()
+        {
+            ShouldSee("first line\nsecond line");
+        }
+
+        [Test]
         public void TestButton()
         {
             Tap("Button");

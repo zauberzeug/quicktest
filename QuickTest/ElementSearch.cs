@@ -46,6 +46,7 @@ namespace QuickTest
                 (element as ContentPage)?.Title == text ||
                 (element as Button)?.Text == text ||
                 (element as Label)?.Text == text ||
+                (element as Label)?.FormattedText?.ToString() == text ||
                 (element as Editor)?.Text == text ||
                 (element as Entry)?.Text == text ||
                 (element as SearchBar)?.Text == text ||

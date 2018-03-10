@@ -27,6 +27,7 @@ namespace DemoApp
                         searchbar,
                         new DemoButton("Button"),
                         new DemoLabel("Label").WithGestureRecognizer(),
+                        CreateFormattedLabel(),
                         new DemoStack(),
                         new DemoGrid(),
                         new ContentView{Content = new DemoLabel("label within ContentView")},
@@ -39,6 +40,20 @@ namespace DemoApp
             };
 
             ToolbarItems.Add(new DemoToolbarItem());
+        }
+
+        DemoLabel CreateFormattedLabel()
+        {
+
+            return new DemoLabel("Label") {
+                FormattedText = new FormattedString() {
+                    Spans = {
+                        new Span {
+                            Text = "first line\nsecond line",
+                        }
+                    }
+                }
+            };
         }
     }
 }
