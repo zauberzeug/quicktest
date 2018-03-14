@@ -78,9 +78,12 @@ namespace QuickTest
                     foreach (var item in grp.Value.Select((v, i) => new { Value = v, Index = i })) {
                         var content = listView.ItemTemplate.CreateContent();
                         (content as Cell).BindingContext = item.Value;
-                        if (predicate.Invoke(content as Cell) || ((content as ViewCell)?.View.Find(predicate, containerPredicate).Any() ?? false))
+
+                        var element = GetElement(predicate, containerPredicate, content);
+                        if (element != null)
                             result.Add(new ElementInfo {
                                 InvokeTap = () => listView.Invoke("NotifyRowTapped", grp.Index, item.Index, null),
+                                Element = element,
                             });
                     }
                 }
@@ -88,14 +91,31 @@ namespace QuickTest
                 foreach (var item in listView.ItemsSource.Cast<object>().Select((v, i) => new { Value = v, Index = i })) {
                     var content = listView.ItemTemplate.CreateContent();
                     (content as Cell).BindingContext = item.Value;
-                    if (predicate.Invoke(content as Cell) || ((content as ViewCell)?.View.Find(predicate, containerPredicate).Any() ?? false))
+
+                    var element = GetElement(predicate, containerPredicate, content);
+                    if (element != null)
                         result.Add(new ElementInfo {
                             InvokeTap = () => listView.Invoke("NotifyRowTapped", item.Index, null),
+                            Element = element,
                         });
                 }
             }
 
             return result;
+        }
+
+        static Element GetElement(Predicate<Element> predicate, Predicate<Element> containerPredicate, object cell)
+        {
+            if (predicate.Invoke(cell as Cell)) {
+                return cell as Cell;
+            }
+
+            var viewCellResults = (cell as ViewCell)?.View.Find(predicate, containerPredicate);
+            if (viewCellResults?.Any() ?? false) {
+                return viewCellResults.First().Element;
+            }
+
+            return null;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DemoApp;
+﻿using System.Linq;
+using DemoApp;
 using NUnit.Framework;
 using QuickTest;
 
@@ -18,6 +19,7 @@ namespace Tests
         [Test]
         public void TestTextCell()
         {
+            Assert.That(Find("Item A1").First(), Is.Not.Null);
             Tap("Item A1");
             ShouldSee("Item A1 tapped");
         }
@@ -25,6 +27,7 @@ namespace Tests
         [Test]
         public void TestStringViewCell()
         {
+            Assert.That(Find("Item A2").First(), Is.Not.Null);
             Tap("Item A2");
             ShouldSee("Item A2 tapped");
         }
@@ -32,6 +35,7 @@ namespace Tests
         [Test]
         public void TestItemViewCell()
         {
+            Assert.That(Find("Item A3").First(), Is.Not.Null);
             Tap("Item A3");
             ShouldSee("Item A3 tapped");
         }
