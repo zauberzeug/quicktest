@@ -89,7 +89,6 @@ namespace QuickTest
         /// </summary>
         protected List<Element> Find(string text)
         {
-            ShouldSee(text);
             return user.Find(text);
         }
 
@@ -99,7 +98,6 @@ namespace QuickTest
         /// </summary>
         protected Element FindFirst(string text)
         {
-            ShouldSee(text);
             return user.Find(text).FirstOrDefault();
         }
 
