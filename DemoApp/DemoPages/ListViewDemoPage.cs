@@ -111,7 +111,7 @@ namespace DemoApp
             ItemTapped += (sender, e) => App.ShowMessage("Success", (e.Item as string) + " tapped");
         }
 
-        class StringDemoCell : ViewCell
+        public class StringDemoCell : ViewCell
         {
             public StringDemoCell()
             {

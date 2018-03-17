@@ -93,6 +93,20 @@ namespace Tests
         }
 
         [Test]
+        public void TestGetParent()
+        {
+            OpenMenu("ListViews");
+            var label = FindFirst("B4");
+            Assert.That(label, Is.Not.Null);
+            var cell = label.GetParent<DemoListViewWithGroups.StringDemoCell>();
+
+            Assert.That(cell, Is.Not.Null);
+            Assert.That(cell.View, Is.TypeOf(typeof(DemoLabel)));
+
+            Assert.That(FindFirst("B5").GetParent<BoxView>(), Is.Null);
+        }
+
+        [Test]
         public void TestDelay()
         {
             OpenMenu("Elements");
