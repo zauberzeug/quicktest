@@ -83,9 +83,22 @@ namespace QuickTest
                         $"User can see any of {{ {string.Join(", ", texts)} }} in \n{ user?.Render() }");
         }
 
+        /// <summary>
+        /// Find elements matching the exact string.
+        /// Containers like StackLayouts or ListViews are only traversed.
+        /// </summary>
         protected List<Element> Find(string text)
         {
             return user.Find(text);
+        }
+
+        /// <summary>
+        /// Find first element matching the exact string.
+        /// Containers like StackLayouts or ListViews are only traversed.
+        /// </summary>
+        protected Element FindFirst(string text)
+        {
+            return user.Find(text).FirstOrDefault();
         }
 
         /// <summary>
@@ -95,6 +108,15 @@ namespace QuickTest
         protected List<Element> Find(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
             return user.Find(predicate, containerPredicate);
+        }
+
+        /// <summary>
+        /// Finds first element matching the predicate.
+        /// Containers like StackLayouts or ListViews are only traversed if they match the containerPredicate.
+        /// </summary>
+        protected Element FindFirst(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
+        {
+            return user.Find(predicate, containerPredicate).FirstOrDefault();
         }
 
         protected void OpenMenu(string textToTap = null)

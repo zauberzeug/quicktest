@@ -66,12 +66,30 @@ namespace Tests
         }
 
         [Test]
+        public void TestFindFirst()
+        {
+            var element = FindFirst("PushAsync");
+            Assert.That(element, Is.Not.Null);
+            Assert.That(element, Is.TypeOf<DemoButton>());
+            Assert.That((element as DemoButton).Text, Is.EqualTo("PushAsync"));
+        }
+
+        [Test]
         public void TestFindPredicate()
         {
             OpenMenu("Elements");
             var elements = Find(e => (e as VisualElement)?.IsVisible == false);
             Assert.That(elements, Has.Count.EqualTo(1));
             Assert.That(elements.First(), Is.TypeOf<DemoLabel>());
+        }
+
+        [Test]
+        public void TestFindFirstPredicate()
+        {
+            OpenMenu("Elements");
+            var element = FindFirst(e => (e as VisualElement)?.IsVisible == false);
+            Assert.That(element, Is.Not.Null);
+            Assert.That(element, Is.TypeOf<DemoLabel>());
         }
 
         [Test]
