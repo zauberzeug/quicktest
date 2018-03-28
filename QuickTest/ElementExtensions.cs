@@ -5,14 +5,14 @@ namespace QuickTest
     public static class ElementExtensions
     {
         /// <summary>
-        /// Returns parent XForms.Element with type T.
+        /// Returns first XForms.Element with type T in the view hierarchy (self or ancestor).
         /// </summary>
-        public static T GetParent<T>(this Element result) where T : Element
+        public static T FindParent<T>(this Element element) where T : Element
         {
-            while (!(result is T) && result != null)
-                result = result.Parent;
+            while (!(element is T) && element != null)
+                element = element.Parent;
 
-            return (T)result;
+            return (T)element;
         }
     }
 }
