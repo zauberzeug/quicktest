@@ -9,7 +9,7 @@ namespace QuickTest
 {
     public class IntegrationTest<T> where T : Application, new()
     {
-        User user;
+        public User User { get; private set; }
         TimeSpan timeout;
 
         protected T App { get; private set; }
@@ -18,7 +18,7 @@ namespace QuickTest
         {
             return new IntegrationTest<T> {
                 App = app,
-                user = user,
+                User = user,
                 timeout = timeout,
             };
         }
@@ -29,7 +29,7 @@ namespace QuickTest
             MockForms.Init();
 
             App = CreateApp();
-            user = new User(App);
+            User = new User(App);
             timeout = TimeSpan.FromSeconds(0.2);
         }
 
@@ -42,45 +42,53 @@ namespace QuickTest
         {
             foreach (var text in texts) {
                 ShouldSee(text);
-                user.Tap(text);
+                User.Tap(text);
             }
         }
 
         public void TapNth(string text, int index)
         {
-            Assert.That(() => user.Find(text), Has.Count.GreaterThan(index).After((int)timeout.TotalMilliseconds, 10),
-                        $"User can't see {index + 1}th \"{text}\"  in \n{ user?.Render() }");
-            user.Tap(text, index);
+            Assert.That(() => User.Find(text), Has.Count.GreaterThan(index).After((int)timeout.TotalMilliseconds, 10),
+                        $"User can't see {index + 1}th \"{text}\"  in \n{ User?.Render() }");
+            User.Tap(text, index);
         }
 
         protected void Input(string automationId, string text)
         {
             ShouldSee(automationId);
-            user.Input(automationId, text);
+            User.Input(automationId, text);
         }
 
         protected void Cancel(string automationId)
         {
             ShouldSee(automationId);
-            user.Cancel(automationId);
+            User.Cancel(automationId);
         }
 
         public void ShouldSee(params string[] texts)
         {
             var list = new List<string>(texts);
-            if (list.All(user.CanSee))
+            if (list.All(User.CanSee))
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
-            Assert.That(() => list.All(user.CanSee), Is.True.After((int)timeout.TotalMilliseconds, 10),
-                        $"User can't see {{ {string.Join(", ", texts)} }} in \n{ user?.Render() }");
+            Assert.That(() => list.All(User.CanSee), Is.True.After((int)timeout.TotalMilliseconds, 10),
+                        $"User can't see {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
         }
 
         public void ShouldNotSee(params string[] texts)
         {
             var list = new List<string>(texts);
-            if (!list.Any(user.CanSee))
+            if (!list.Any(User.CanSee))
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
-            Assert.That(() => !list.Any(user.CanSee), Is.True.After((int)timeout.TotalMilliseconds, 10),
-                        $"User can see any of {{ {string.Join(", ", texts)} }} in \n{ user?.Render() }");
+            Assert.That(() => !list.Any(User.CanSee), Is.True.After((int)timeout.TotalMilliseconds, 10),
+                        $"User can see any of {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
+        }
+
+        /// <summary>
+        /// Weather a given text is visible to the user or not.
+        /// </summary>
+        protected bool CanSee(string text)
+        {
+            return User.CanSee(text);
         }
 
         /// <summary>
@@ -89,7 +97,7 @@ namespace QuickTest
         /// </summary>
         protected List<Element> Find(string text)
         {
-            return user.Find(text);
+            return User.Find(text);
         }
 
         /// <summary>
@@ -98,7 +106,7 @@ namespace QuickTest
         /// </summary>
         protected Element FindFirst(string text)
         {
-            return user.Find(text).FirstOrDefault();
+            return User.Find(text).FirstOrDefault();
         }
 
         /// <summary>
@@ -107,7 +115,7 @@ namespace QuickTest
         /// </summary>
         protected List<Element> Find(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
-            return user.Find(predicate, containerPredicate);
+            return User.Find(predicate, containerPredicate);
         }
 
         /// <summary>
@@ -116,12 +124,16 @@ namespace QuickTest
         /// </summary>
         protected Element FindFirst(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
-            return user.Find(predicate, containerPredicate).FirstOrDefault();
+            return User.Find(predicate, containerPredicate).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Opens the menu.
+        /// </summary>
+        /// <param name="textToTap">If provided the text will be selected.</param>
         protected void OpenMenu(string textToTap = null)
         {
-            user.OpenMenu();
+            User.OpenMenu();
 
             if (textToTap != null)
                 Tap(textToTap);
@@ -129,27 +141,27 @@ namespace QuickTest
 
         protected void GoBack()
         {
-            user.GoBack();
+            User.GoBack();
         }
 
         protected string Render()
         {
-            return user.Render();
+            return User.Render();
         }
 
         [TearDown]
         protected virtual void TearDown()
         {
-            user?.Print();
+            User?.Print();
         }
 
         protected IntegrationTest<T> After(double seconds)
         {
-            return CreateWithTimeout(App, user, TimeSpan.FromSeconds(seconds));
+            return CreateWithTimeout(App, User, TimeSpan.FromSeconds(seconds));
         }
 
         protected IntegrationTest<T> Now {
-            get { return CreateWithTimeout(App, user, TimeSpan.FromSeconds(0.2)); }
+            get { return CreateWithTimeout(App, User, TimeSpan.FromSeconds(0.2)); }
         }
     }
 }
