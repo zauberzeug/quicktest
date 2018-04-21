@@ -31,7 +31,7 @@ namespace QuickTest
             }
         }
 
-        ContentPage CurrentPage {
+        public ContentPage CurrentPage {
             get {
                 var modalStack = app.MainPage.Navigation.ModalStack;
                 var currentPage = (modalStack.LastOrDefault() as ContentPage)
