@@ -65,6 +65,8 @@ namespace QuickTest
             return CurrentPage.Find(text).Any();
         }
 
+        public bool SeesAlert() => alerts.Any();
+
         public List<Element> Find(string text)
         {
             return CurrentPage.Find(text).Select(i => i.Element).ToList();

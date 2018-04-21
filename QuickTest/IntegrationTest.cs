@@ -92,6 +92,14 @@ namespace QuickTest
         }
 
         /// <summary>
+        /// Weather a popup is shown.
+        /// </summary>
+        protected bool SeesAlert()
+        {
+            return User.SeesAlert();
+        }
+
+        /// <summary>
         /// Find elements matching the exact string.
         /// Containers like StackLayouts or ListViews are only traversed.
         /// </summary>
