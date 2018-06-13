@@ -11,8 +11,8 @@
       <copyright>Perpetual Mobile GmbH Copyright 2017</copyright>
       <dependencies>
          <group>
-             <dependency id="NUnit" version="3.8.1" />
-             <dependency id="Xamarin.Forms.Mocks" version="2.5.0.4" />
+             <dependency id="NUnit" version="3.10.1" />
+             <dependency id="Xamarin.Forms.Mocks" version="3.0.0.2" />
          </group>
      </dependencies>
   </metadata>
