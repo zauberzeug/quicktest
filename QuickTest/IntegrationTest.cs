@@ -24,7 +24,7 @@ namespace QuickTest
         }
 
         [SetUp]
-        protected virtual void SetUp()
+        virtual protected void SetUp()
         {
             MockForms.Init();
 
@@ -38,7 +38,7 @@ namespace QuickTest
             return new T();
         }
 
-        public void Tap(params string[] texts)
+        virtual public void Tap(params string[] texts)
         {
             foreach (var text in texts) {
                 ShouldSee(text);
@@ -46,26 +46,26 @@ namespace QuickTest
             }
         }
 
-        public void TapNth(string text, int index)
+        virtual public void TapNth(string text, int index)
         {
             Assert.That(() => User.Find(text), Has.Count.GreaterThan(index).After((int)timeout.TotalMilliseconds, 10),
                         $"User can't see {index + 1}th \"{text}\"  in \n{ User?.Render() }");
             User.Tap(text, index);
         }
 
-        protected void Input(string automationId, string text)
+        virtual protected void Input(string automationId, string text)
         {
             ShouldSee(automationId);
             User.Input(automationId, text);
         }
 
-        protected void Cancel(string automationId)
+        virtual protected void Cancel(string automationId)
         {
             ShouldSee(automationId);
             User.Cancel(automationId);
         }
 
-        public void ShouldSee(params string[] texts)
+        virtual public void ShouldSee(params string[] texts)
         {
             var list = new List<string>(texts);
             if (list.All(User.CanSee))
@@ -74,7 +74,7 @@ namespace QuickTest
                         $"User can't see {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
         }
 
-        public void ShouldNotSee(params string[] texts)
+        virtual public void ShouldNotSee(params string[] texts)
         {
             var list = new List<string>(texts);
             if (!list.Any(User.CanSee))
@@ -86,7 +86,7 @@ namespace QuickTest
         /// <summary>
         /// Weather a given text is visible to the user or not.
         /// </summary>
-        protected bool CanSee(string text)
+        virtual protected bool CanSee(string text)
         {
             return User.CanSee(text);
         }
@@ -94,7 +94,7 @@ namespace QuickTest
         /// <summary>
         /// Weather a popup is shown.
         /// </summary>
-        protected bool SeesAlert()
+        virtual protected bool SeesAlert()
         {
             return User.SeesAlert();
         }
@@ -103,7 +103,7 @@ namespace QuickTest
         /// Find elements matching the exact string.
         /// Containers like StackLayouts or ListViews are only traversed.
         /// </summary>
-        protected List<Element> Find(string text)
+        virtual protected List<Element> Find(string text)
         {
             return User.Find(text);
         }
@@ -112,7 +112,7 @@ namespace QuickTest
         /// Find first element matching the exact string.
         /// Containers like StackLayouts or ListViews are only traversed.
         /// </summary>
-        protected Element FindFirst(string text)
+        virtual protected Element FindFirst(string text)
         {
             return User.Find(text).FirstOrDefault();
         }
@@ -121,7 +121,7 @@ namespace QuickTest
         /// Find elements matching the predicate.
         /// Containers like StackLayouts or ListViews are only traversed if they match the containerPredicate.
         /// </summary>
-        protected List<Element> Find(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
+        virtual protected List<Element> Find(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
             return User.Find(predicate, containerPredicate);
         }
@@ -130,7 +130,7 @@ namespace QuickTest
         /// Finds first element matching the predicate.
         /// Containers like StackLayouts or ListViews are only traversed if they match the containerPredicate.
         /// </summary>
-        protected Element FindFirst(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
+        virtual protected Element FindFirst(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
             return User.Find(predicate, containerPredicate).FirstOrDefault();
         }
@@ -139,7 +139,7 @@ namespace QuickTest
         /// Opens the menu.
         /// </summary>
         /// <param name="textToTap">If provided the text will be selected.</param>
-        protected void OpenMenu(string textToTap = null)
+        virtual protected void OpenMenu(string textToTap = null)
         {
             User.OpenMenu();
 
@@ -147,18 +147,18 @@ namespace QuickTest
                 Tap(textToTap);
         }
 
-        protected void GoBack()
+        virtual protected void GoBack()
         {
             User.GoBack();
         }
 
-        protected string Render()
+        virtual protected string Render()
         {
             return User.Render();
         }
 
         [TearDown]
-        protected virtual void TearDown()
+        virtual protected void TearDown()
         {
             User?.Print();
         }
