@@ -80,40 +80,29 @@ namespace QuickTest
             if (listView.ItemsSource == null)
                 return result;
 
-            if (listView.IsGroupingEnabled) {
+            if (listView.IsGroupingEnabled)
+                foreach (var templatedItems in listView.TemplatedItems.Cast<TemplatedItemsList<ItemsView<Cell>, Cell>>())
+                    result.AddRange(templatedItems.Find(listView, predicate, containerPredicate));
+            else
+                result.AddRange(listView.TemplatedItems.Find(listView, predicate, containerPredicate));
 
-                foreach (var currentGroup in listView.ItemsSource.Cast<IEnumerable<object>>().Select((v, i) => new { Value = v, Index = i })) {
+            return result;
+        }
 
-                    var currentList = (TemplatedItemsList<ItemsView<Cell>, Cell>)((IList)listView.TemplatedItems)[currentGroup.Index];
-                    var cell = currentList.HeaderContent;
-                    result.AddRange(cell.Find(predicate, containerPredicate));
+        static List<ElementInfo> Find(this TemplatedItemsList<ItemsView<Cell>, Cell> tempatedItems, ListView listView, Predicate<Element> predicate, Predicate<Element> containerPredicate)
+        {
+            var result = new List<ElementInfo>();
 
-                    foreach (var item in currentGroup.Value.Select((v, i) => new { Value = v, Index = i })) {
-                        var content = listView.ItemTemplate.CreateContent();
-                        (content as Cell).BindingContext = item.Value;
+            result.AddRange(tempatedItems.HeaderContent.Find(predicate, containerPredicate));
 
-                        var element = GetElement(predicate, containerPredicate, content);
-                        if (element != null)
-                            result.Add(new ElementInfo {
-                                InvokeTap = () => listView.Invoke("NotifyRowTapped", currentGroup.Index, item.Index, null),
-                                Element = element,
-                            });
-                    }
-                }
-            } else {
-                foreach (var item in listView.ItemsSource.Cast<object>().Select((v, i) => new { Value = v, Index = i })) {
-                    var content = listView.ItemTemplate.CreateContent();
-                    (content as Cell).BindingContext = item.Value;
-
-                    var element = GetElement(predicate, containerPredicate, content);
-                    if (element != null)
-                        result.Add(new ElementInfo {
-                            InvokeTap = () => listView.Invoke("NotifyRowTapped", item.Index, null),
-                            Element = element,
-                        });
-                }
+            foreach (var cell in tempatedItems) {
+                var element = GetElement(predicate, containerPredicate, cell);
+                if (element != null)
+                    result.Add(new ElementInfo {
+                        InvokeTap = () => listView.Invoke("NotifyRowTapped", cell.GetIndex<ItemsView<Cell>, Cell>(), cell),
+                        Element = element,
+                    });
             }
-
             return result;
         }
 
