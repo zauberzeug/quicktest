@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
+using NUnit.Framework;
 
 namespace QuickTest
 {
@@ -44,6 +45,8 @@ namespace QuickTest
             if (listView.ItemsSource == null)
                 return result;
 
+            result += Render(listView.Header);
+
             if (listView.IsGroupingEnabled) {
                 foreach (var grp in listView.ItemsSource.Cast<IEnumerable<object>>()) {
                     foreach (var item in grp) {
@@ -59,8 +62,20 @@ namespace QuickTest
                     result += $"- {(content as TextCell)?.Text + (content as ViewCell)?.View.Render().Trim()}\n";
                 }
             }
+            result.TrimEnd('\n');
+            result += Render(listView.Footer);
 
             return result;
+        }
+
+        static string Render(object stringBindingOrView)
+        {
+            if (stringBindingOrView is string)
+                return stringBindingOrView.ToString() + "\n";
+            if (stringBindingOrView is View)
+                return (stringBindingOrView as View).Render().TrimStart('\n') + "\n";
+
+            return stringBindingOrView?.ToString() ?? "";
         }
     }
 }

@@ -11,8 +11,8 @@ namespace DemoApp
 
             Content = new StackLayout {
                 Children = {
-                    new DemoListViewWithTextCell(),
-                    new DemoListViewWithStringViewCell(),
+                    new DemoListViewWithTextCell(){Header = "plain header", Footer = "plain footer"},
+                    new DemoListViewWithStringViewCell(){Header = new DemoLabel("header label"), Footer = new DemoLabel("footer label")},
                     new DemoListViewWithItemViewCell(),
                     new DemoListViewWithGroups(),
                 },

@@ -71,6 +71,9 @@ namespace QuickTest
         {
             var result = new List<ElementInfo>();
 
+            result.AddRange(Find(listView.Header, predicate, containerPredicate));
+            result.AddRange(Find(listView.Footer, predicate, containerPredicate));
+
             if (listView.ItemsSource == null)
                 return result;
 
@@ -103,6 +106,16 @@ namespace QuickTest
             }
 
             return result;
+        }
+
+        static List<ElementInfo> Find(object stringBindingOrView, Predicate<Element> predicate, Predicate<Element> containerPredicate)
+        {
+            if (stringBindingOrView is string)
+                return new Label { Text = stringBindingOrView.ToString() }.Find(predicate, containerPredicate);
+            if (stringBindingOrView is View)
+                return (stringBindingOrView as View).Find(predicate, containerPredicate);
+
+            return new List<ElementInfo>();
         }
 
         static Element GetElement(Predicate<Element> predicate, Predicate<Element> containerPredicate, object cell)

@@ -16,12 +16,20 @@ namespace Tests
             ShouldSee("ListView demo");
         }
 
+        protected override void TearDown()
+        {
+            ShouldSee("ListView demo");
+
+            base.TearDown();
+        }
+
         [Test]
         public void TestTextCell()
         {
             Assert.That(FindFirst("Item A1"), Is.Not.Null);
             Tap("Item A1");
             ShouldSee("Item A1 tapped");
+            Tap("Ok");
         }
 
         [Test]
@@ -30,6 +38,7 @@ namespace Tests
             Assert.That(FindFirst("Item A2"), Is.Not.Null);
             Tap("Item A2");
             ShouldSee("Item A2 tapped");
+            Tap("Ok");
         }
 
         [Test]
@@ -38,6 +47,7 @@ namespace Tests
             Assert.That(FindFirst("Item A3"), Is.Not.Null);
             Tap("Item A3");
             ShouldSee("Item A3 tapped");
+            Tap("Ok");
         }
 
         [Test]
@@ -49,14 +59,16 @@ namespace Tests
             Tap("Ok");
             Tap("A5");
             ShouldSee("A5 tapped");
+            Tap("Ok");
         }
 
-        protected override void TearDown()
+        [Test]
+        public void TestHeadersAndFooters()
         {
-            Tap("Ok");
-            ShouldSee("ListView demo");
-
-            base.TearDown();
+            ShouldSee("plain header");
+            ShouldSee("plain footer");
+            ShouldSee("header label");
+            ShouldSee("footer label");
         }
     }
 }
