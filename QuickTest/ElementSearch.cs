@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 using System.Threading;
+using Xamarin.Forms.Internals;
+using System.Collections;
 
 namespace QuickTest
 {
@@ -78,15 +80,21 @@ namespace QuickTest
                 return result;
 
             if (listView.IsGroupingEnabled) {
-                foreach (var grp in listView.ItemsSource.Cast<IEnumerable<object>>().Select((v, i) => new { Value = v, Index = i })) {
-                    foreach (var item in grp.Value.Select((v, i) => new { Value = v, Index = i })) {
+
+                foreach (var currentGroup in listView.ItemsSource.Cast<IEnumerable<object>>().Select((v, i) => new { Value = v, Index = i })) {
+
+                    var currentList = (TemplatedItemsList<ItemsView<Cell>, Cell>)((IList)listView.TemplatedItems)[currentGroup.Index];
+                    var cell = currentList.HeaderContent;
+                    result.AddRange(cell.Find(predicate, containerPredicate));
+
+                    foreach (var item in currentGroup.Value.Select((v, i) => new { Value = v, Index = i })) {
                         var content = listView.ItemTemplate.CreateContent();
                         (content as Cell).BindingContext = item.Value;
 
                         var element = GetElement(predicate, containerPredicate, content);
                         if (element != null)
                             result.Add(new ElementInfo {
-                                InvokeTap = () => listView.Invoke("NotifyRowTapped", grp.Index, item.Index, null),
+                                InvokeTap = () => listView.Invoke("NotifyRowTapped", currentGroup.Index, item.Index, null),
                                 Element = element,
                             });
                     }

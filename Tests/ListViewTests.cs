@@ -53,10 +53,13 @@ namespace Tests
         [Test]
         public void TestGroups()
         {
+            ShouldSee("Group 4");
+
             Tap("A4");
             ShouldSee("A4 tapped");
-
             Tap("Ok");
+
+            ShouldSee("Group 5");
             Tap("A5");
             ShouldSee("A5 tapped");
             Tap("Ok");

@@ -46,5 +46,37 @@ Message
       · editor content (editor_automation_id)
       · Countdown"));
         }
+
+        [Test]
+        public void TestListViewRendering()
+        {
+            OpenMenu("ListViews");
+            Assert.That(Render(), Is.EqualTo(@"· ListView demo 
+  · 
+    · plain header
+      - Item A1
+      - Item B1
+      - Item C1
+      plain footer
+      
+    · · header label
+      - · Item A2
+      - · Item B2
+      - · Item C2
+      · footer label
+      
+    · - · Item A3
+      - · Item B3
+      - · Item C3
+      
+    · · Group 4
+      - · A4
+      - · B4
+      - · C4
+      · Group 5
+      - · A5
+      - · B5
+      - · C5"));
+        }
     }
 }

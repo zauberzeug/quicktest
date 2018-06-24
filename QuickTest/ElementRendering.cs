@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 using NUnit.Framework;
+using Xamarin.Forms.Internals;
+using System.Collections;
 
 namespace QuickTest
 {
@@ -30,6 +32,9 @@ namespace QuickTest
             result += (element as Editor)?.Text;
             result += (element as SearchBar)?.Text;
 
+            result += (element as TextCell)?.Text;
+            result += (element as ViewCell)?.View.Render();
+
             var automationId = (element as VisualElement)?.AutomationId;
             if (automationId != null)
                 result += $" ({automationId})";
@@ -48,10 +53,12 @@ namespace QuickTest
             result += Render(listView.Header);
 
             if (listView.IsGroupingEnabled) {
-                foreach (var grp in listView.ItemsSource.Cast<IEnumerable<object>>()) {
+                foreach (var grp in listView.TemplatedItems.Cast<TemplatedItemsList<ItemsView<Cell>, Cell>>()) {
+
+                    var cell = grp.HeaderContent;
+                    result += Render(cell).TrimStart('\n') + "\n";
                     foreach (var item in grp) {
-                        var content = listView.ItemTemplate.CreateContent();
-                        (content as Cell).BindingContext = item;
+                        var content = item as Cell;
                         result += $"- {(content as TextCell)?.Text + (content as ViewCell)?.View.Render().Trim()}\n";
                     }
                 }
