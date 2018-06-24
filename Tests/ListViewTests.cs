@@ -13,65 +13,80 @@ namespace Tests
             base.SetUp();
 
             OpenMenu("ListViews");
-            ShouldSee("ListView demo");
+            ShouldSee("ListView demos");
         }
 
         protected override void TearDown()
         {
-            ShouldSee("ListView demo");
-
             base.TearDown();
         }
 
         [Test]
         public void TestTextCell()
         {
+            Tap("DemoListViewWithTextCell");
             Assert.That(FindFirst("Item A1"), Is.Not.Null);
-            Tap("Item A1");
-            ShouldSee("Item A1 tapped");
-            Tap("Ok");
+            TapCell("Item A1");
         }
 
         [Test]
         public void TestStringViewCell()
         {
+            Tap("DemoListViewWithStringViewCell");
             Assert.That(FindFirst("Item A2"), Is.Not.Null);
-            Tap("Item A2");
-            ShouldSee("Item A2 tapped");
-            Tap("Ok");
+            TapCell("Item A2");
         }
 
         [Test]
         public void TestItemViewCell()
         {
+            Tap("DemoListViewWithItemViewCell");
             Assert.That(FindFirst("Item A3"), Is.Not.Null);
-            Tap("Item A3");
-            ShouldSee("Item A3 tapped");
-            Tap("Ok");
+            TapCell("Item A3");
         }
 
         [Test]
         public void TestGroups()
         {
-            ShouldSee("Group 4");
+            Tap("DemoListViewWithGroups");
 
-            Tap("A4");
-            ShouldSee("A4 tapped");
-            Tap("Ok");
+            ShouldSee("Group 4");
+            TapCell("A4");
 
             ShouldSee("Group 5");
-            Tap("A5");
-            ShouldSee("A5 tapped");
-            Tap("Ok");
+            TapCell("A5");
+        }
+
+        [Test]
+        public void TestGroupsWithHeaderTemplate()
+        {
+            Tap("DemoListViewWithGroupsAndHeaderTemplate");
+
+            ShouldSee("Group 6");
+            TapCell("A6");
+
+            ShouldSee("Group 7");
+            TapCell("A7");
         }
 
         [Test]
         public void TestHeadersAndFooters()
         {
+            Tap("DemoListViewWithTextCell");
             ShouldSee("plain header");
             ShouldSee("plain footer");
+            GoBack();
+
+            Tap("DemoListViewWithStringViewCell");
             ShouldSee("header label");
             ShouldSee("footer label");
+        }
+
+        void TapCell(string name)
+        {
+            Tap(name);
+            ShouldSee($"{name} tapped");
+            Tap("Ok");
         }
     }
 }

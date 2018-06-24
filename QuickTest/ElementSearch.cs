@@ -25,6 +25,7 @@ namespace QuickTest
             result.AddRange((element as ScrollView)?.Content.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as Layout<View>)?.Children.ToList().SelectMany(child => child.Find(predicate, containerPredicate)) ?? empty);
             result.AddRange((element as ListView)?.Find(predicate, containerPredicate) ?? empty);
+            result.AddRange((element as ViewCell)?.View?.Find(predicate, containerPredicate) ?? empty);
 
             if (predicate.Invoke(element))
                 result.Add(ElementInfo.FromElement(element));

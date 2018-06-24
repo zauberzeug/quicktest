@@ -33,7 +33,7 @@ namespace QuickTest
             result += (element as SearchBar)?.Text;
 
             result += (element as TextCell)?.Text;
-            result += (element as ViewCell)?.View.Render();
+            result += (element as ViewCell)?.View?.Render();
 
             var automationId = (element as VisualElement)?.AutomationId;
             if (automationId != null)

@@ -7,15 +7,23 @@ namespace DemoApp
     {
         public ListViewDemoPage()
         {
-            Title = "ListView demo";
+            Title = "ListView demos";
 
             Content = new StackLayout {
                 Children = {
-                    new DemoListViewWithTextCell(){Header = "plain header", Footer = "plain footer"},
-                    new DemoListViewWithStringViewCell(){Header = new DemoLabel("header label"), Footer = new DemoLabel("footer label")},
-                    new DemoListViewWithItemViewCell(),
-                    new DemoListViewWithGroups(),
+                    CreateSubpageButton(new DemoListViewWithTextCell(){Header = "plain header", Footer = "plain footer"}),
+                    CreateSubpageButton(new DemoListViewWithStringViewCell(){Header = new DemoLabel("header label"), Footer = new DemoLabel("footer label")}),
+                    CreateSubpageButton(new DemoListViewWithItemViewCell()),
+                    CreateSubpageButton(new DemoListViewWithGroups()),
+                    CreateSubpageButton(new DemoListViewWithGroupsAndHeaderTemplate()),
                 },
+            };
+        }
+
+        DemoButton CreateSubpageButton(ListView listView)
+        {
+            return new DemoButton(listView.GetType().Name) {
+                Command = new Command(o => Navigation.PushAsync(new NavigationDemoPage(listView.GetType().Name) { Content = listView })),
             };
         }
     }
@@ -28,7 +36,6 @@ namespace DemoApp
             ItemTemplate = new DataTemplate(typeof(TextCell));
 
             BackgroundColor = Color.GhostWhite;
-            HeightRequest = 200;
 
             ItemTemplate.SetBinding(TextCell.TextProperty, ".");
             ItemTapped += (sender, e) => App.ShowMessage("Success", e.Item + " tapped");
@@ -67,7 +74,6 @@ namespace DemoApp
             ItemTemplate = new DataTemplate(typeof(ItemDemoCell));
 
             BackgroundColor = Color.GhostWhite;
-            HeightRequest = 200;
 
             ItemTapped += (sender, e) => App.ShowMessage("Success", (e.Item as Item).Name + " tapped");
         }
@@ -106,30 +112,57 @@ namespace DemoApp
             GroupDisplayBinding = new Binding(nameof(StringGroup.Title));
 
             BackgroundColor = Color.GhostWhite;
-            HeightRequest = 200;
 
             ItemTapped += (sender, e) => App.ShowMessage("Success", (e.Item as string) + " tapped");
         }
+    }
 
-        public class StringDemoCell : ViewCell
+    public class DemoListViewWithGroupsAndHeaderTemplate : ListView
+    {
+        public DemoListViewWithGroupsAndHeaderTemplate()
         {
-            public StringDemoCell()
-            {
-                var label = new DemoLabel();
-                label.SetBinding(Label.TextProperty, ".");
-                View = label;
-            }
+            ItemsSource = new List<List<string>> {
+                new StringGroup(new [] { "A6", "B6", "C6" }, "Group 6"),
+                new StringGroup(new [] { "A7", "B7", "C7" }, "Group 7"),
+            };
+            ItemTemplate = new DataTemplate(typeof(StringDemoCell));
+            IsGroupingEnabled = true;
+            GroupHeaderTemplate = new DataTemplate(typeof(GroupHeaderCell));
+            BackgroundColor = Color.GhostWhite;
+
+            ItemTapped += (sender, e) => App.ShowMessage("Success", (e.Item as string) + " tapped");
         }
+    }
 
-        class StringGroup : List<string>
+
+    public class StringDemoCell : ViewCell
+    {
+        public StringDemoCell()
         {
-            public string Title { get; private set; }
+            var label = new DemoLabel();
+            label.SetBinding(Label.TextProperty, ".");
+            View = label;
+        }
+    }
 
-            public StringGroup(IEnumerable<string> items, string title)
-            {
-                Title = title;
-                AddRange(items);
-            }
+    public class GroupHeaderCell : ViewCell
+    {
+        public GroupHeaderCell()
+        {
+            var label = new DemoLabel();
+            label.SetBinding(Label.TextProperty, "Title");
+            View = label;
+        }
+    }
+
+    class StringGroup : List<string>
+    {
+        public string Title { get; private set; }
+
+        public StringGroup(IEnumerable<string> items, string title)
+        {
+            Title = title;
+            AddRange(items);
         }
     }
 }

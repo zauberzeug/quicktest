@@ -96,9 +96,10 @@ namespace Tests
         public void TestGetParent()
         {
             OpenMenu("ListViews");
+            Tap("DemoListViewWithGroups");
             var label = FindFirst("B4");
             Assert.That(label, Is.Not.Null);
-            var cell = label.FindParent<DemoListViewWithGroups.StringDemoCell>();
+            var cell = label.FindParent<StringDemoCell>();
 
             Assert.That(cell, Is.Not.Null);
             Assert.That(cell.View, Is.TypeOf(typeof(DemoLabel)));

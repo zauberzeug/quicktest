@@ -48,35 +48,87 @@ Message
         }
 
         [Test]
-        public void TestListViewRendering()
+        public void TestListViewWithTextCell()
         {
             OpenMenu("ListViews");
-            Assert.That(Render(), Is.EqualTo(@"· ListView demo 
-  · 
-    · plain header
-      - Item A1
-      - Item B1
-      - Item C1
-      plain footer
-      
-    · · header label
-      - · Item A2
-      - · Item B2
-      - · Item C2
-      · footer label
-      
-    · - · Item A3
-      - · Item B3
-      - · Item C3
-      
-    · · Group 4
-      - · A4
-      - · B4
-      - · C4
-      · Group 5
-      - · A5
-      - · B5
-      - · C5"));
+
+            Tap("DemoListViewWithTextCell");
+            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithTextCell 
+  · plain header
+    - Item A1
+    - Item B1
+    - Item C1
+    plain footer"));
+            GoBack();
+        }
+
+        [Test]
+        public void TestListViewWithStringViewCell()
+        {
+            OpenMenu("ListViews");
+
+            Tap("DemoListViewWithStringViewCell");
+            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithStringViewCell 
+  · · header label
+    - · Item A2
+    - · Item B2
+    - · Item C2
+    · footer label"));
+            GoBack();
+
+        }
+
+        [Test]
+        public void TestListViewWithItemViewCell()
+        {
+            OpenMenu("ListViews");
+
+            Tap("DemoListViewWithItemViewCell");
+            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithItemViewCell 
+  · - · Item A3
+    - · Item B3
+    - · Item C3"));
+            GoBack();
+
+        }
+
+        [Test]
+        public void TestListViewWithGroups()
+        {
+            OpenMenu("ListViews");
+
+            Tap("DemoListViewWithGroups");
+            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithGroups 
+  · · Group 4
+    - · A4
+    - · B4
+    - · C4
+    · Group 5
+    - · A5
+    - · B5
+    - · C5"));
+            GoBack();
+
+        }
+
+        [Test]
+        public void TestListViewWithGroupsAndHeaderTemplate()
+        {
+            OpenMenu("ListViews");
+
+            Tap("DemoListViewWithGroupsAndHeaderTemplate");
+            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithGroupsAndHeaderTemplate 
+  · · 
+      · Group 6
+    - · A6
+    - · B6
+    - · C6
+    · 
+      · Group 7
+    - · A7
+    - · B7
+    - · C7"));
+            GoBack();
         }
     }
 }
