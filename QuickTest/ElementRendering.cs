@@ -52,25 +52,28 @@ namespace QuickTest
 
             result += Render(listView.Header);
 
-            if (listView.IsGroupingEnabled) {
-                foreach (var grp in listView.TemplatedItems.Cast<TemplatedItemsList<ItemsView<Cell>, Cell>>()) {
+            if (listView.IsGroupingEnabled)
+                foreach (var templatedItems in listView.TemplatedItems.Cast<TemplatedItemsList<ItemsView<Cell>, Cell>>())
+                    result += Render(templatedItems);
+            else
+                result += Render(listView.TemplatedItems);
 
-                    var cell = grp.HeaderContent;
-                    result += Render(cell).TrimStart('\n') + "\n";
-                    foreach (var item in grp) {
-                        var content = item as Cell;
-                        result += $"- {(content as TextCell)?.Text + (content as ViewCell)?.View.Render().Trim()}\n";
-                    }
-                }
-            } else {
-                foreach (var item in listView.ItemsSource) {
-                    var content = listView.ItemTemplate.CreateContent();
-                    (content as Cell).BindingContext = item;
-                    result += $"- {(content as TextCell)?.Text + (content as ViewCell)?.View.Render().Trim()}\n";
-                }
-            }
             result.TrimEnd('\n');
             result += Render(listView.Footer);
+
+            return result;
+        }
+
+        static string Render(TemplatedItemsList<ItemsView<Cell>, Cell> tempatedItems)
+        {
+            string result = "";
+
+            var headerCell = tempatedItems.HeaderContent;
+            if (headerCell != null)
+                result += Render(headerCell).TrimStart('\n') + "\n";
+
+            foreach (var cell in tempatedItems)
+                result += $"- {(cell as TextCell)?.Text + (cell as ViewCell)?.View.Render().Trim()}\n";
 
             return result;
         }
