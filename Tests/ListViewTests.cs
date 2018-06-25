@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using DemoApp;
 using NUnit.Framework;
 using QuickTest;
+using Xamarin.Forms;
 
 namespace Tests
 {
@@ -80,6 +82,14 @@ namespace Tests
             Tap("DemoListViewWithStringViewCell");
             ShouldSee("header label");
             ShouldSee("footer label");
+        }
+
+        [Test]
+        public void TestChangingSource()
+        {
+            Tap("DemoListViewWithTextCell");
+            FindFirst("Item A1").FindParent<ListView>().ItemsSource = new List<string> { "new 1", "new 2" };
+            ShouldSee("new 1");
         }
 
         void TapCell(string name)
