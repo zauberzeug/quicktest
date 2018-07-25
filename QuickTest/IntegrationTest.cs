@@ -53,6 +53,11 @@ namespace QuickTest
             User.Tap(text, index);
         }
 
+        virtual public void TapNth(char text, int index)
+        {
+            TapNth(text.ToString(), index);
+        }
+
         virtual protected void Input(string automationId, string text)
         {
             ShouldSee(automationId);
@@ -74,6 +79,22 @@ namespace QuickTest
                         $"User can't see {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
         }
 
+        virtual public void ShouldSee(char match)
+        {
+            ShouldSee(match.ToString());
+        }
+
+        virtual public void ShouldSee(string match, int count)
+        {
+            var matchCount = Find(match).Count;
+            Assert.That(matchCount, Is.EqualTo(count), $"The count of '{match}' should be {count}, but was {matchCount}");
+        }
+
+        virtual public void ShouldSee(char match, int count)
+        {
+            ShouldSee(match.ToString(), count);
+        }
+
         virtual public void ShouldNotSee(params string[] texts)
         {
             var list = new List<string>(texts);
@@ -81,6 +102,11 @@ namespace QuickTest
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
             Assert.That(() => !list.Any(User.CanSee), Is.True.After((int)timeout.TotalMilliseconds, 10),
                         $"User can see any of {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
+        }
+
+        virtual public void ShouldNotSee(char match)
+        {
+            ShouldNotSee(match.ToString());
         }
 
         /// <summary>
