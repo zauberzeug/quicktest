@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using DemoApp;
 using NUnit.Framework;
 using QuickTest;

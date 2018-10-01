@@ -1,9 +1,8 @@
+using System;
+using System.Linq;
 using DemoApp;
 using NUnit.Framework;
-using QuickTest;
-using System.Linq;
 using Xamarin.Forms;
-using System;
 
 namespace Tests
 {
