@@ -25,7 +25,7 @@ namespace Tests
         }
 
         [SetUp]
-        virtual protected void SetUp()
+        protected virtual void SetUp()
         {
             MockForms.Init();
 
@@ -34,12 +34,12 @@ namespace Tests
             timeout = TimeSpan.FromSeconds(0.2);
         }
 
-        virtual protected T CreateApp()
+        protected virtual T CreateApp()
         {
             return new T();
         }
 
-        virtual public void Tap(params string[] texts)
+        public virtual void Tap(params string[] texts)
         {
             foreach (var text in texts) {
                 ShouldSee(text);
@@ -47,31 +47,31 @@ namespace Tests
             }
         }
 
-        virtual public void TapNth(string text, int index)
+        public virtual void TapNth(string text, int index)
         {
             Assert.That(() => User.Find(text), Has.Count.GreaterThan(index).After((int)timeout.TotalMilliseconds, 10),
                         $"User can't see {index + 1}th \"{text}\"  in \n{ User?.Render() }");
             User.Tap(text, index);
         }
 
-        virtual public void TapNth(char text, int index)
+        public virtual void TapNth(char text, int index)
         {
             TapNth(text.ToString(), index);
         }
 
-        virtual protected void Input(string automationId, string text)
+        protected virtual void Input(string automationId, string text)
         {
             ShouldSee(automationId);
             User.Input(automationId, text);
         }
 
-        virtual protected void Cancel(string automationId)
+        protected virtual void Cancel(string automationId)
         {
             ShouldSee(automationId);
             User.Cancel(automationId);
         }
 
-        virtual public void ShouldSee(params string[] texts)
+        public virtual void ShouldSee(params string[] texts)
         {
             var list = new List<string>(texts);
             if (list.All(User.CanSee))
@@ -80,23 +80,23 @@ namespace Tests
                         $"User can't see {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
         }
 
-        virtual public void ShouldSee(char match)
+        public virtual void ShouldSee(char match)
         {
             ShouldSee(match.ToString());
         }
 
-        virtual public void ShouldSee(string match, int count)
+        public virtual void ShouldSee(string match, int count)
         {
             var matchCount = Find(match).Count;
             Assert.That(matchCount, Is.EqualTo(count), $"The count of '{match}' should be {count}, but was {matchCount}");
         }
 
-        virtual public void ShouldSee(char match, int count)
+        public virtual void ShouldSee(char match, int count)
         {
             ShouldSee(match.ToString(), count);
         }
 
-        virtual public void ShouldNotSee(params string[] texts)
+        public virtual void ShouldNotSee(params string[] texts)
         {
             var list = new List<string>(texts);
             if (!list.Any(User.CanSee))
@@ -105,7 +105,7 @@ namespace Tests
                         $"User can see any of {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
         }
 
-        virtual public void ShouldNotSee(char match)
+        public virtual void ShouldNotSee(char match)
         {
             ShouldNotSee(match.ToString());
         }
@@ -113,7 +113,7 @@ namespace Tests
         /// <summary>
         /// Weather a given text is visible to the user or not.
         /// </summary>
-        virtual protected bool CanSee(string text)
+        protected virtual bool CanSee(string text)
         {
             return User.CanSee(text);
         }
@@ -121,7 +121,7 @@ namespace Tests
         /// <summary>
         /// Weather a popup is shown.
         /// </summary>
-        virtual protected bool SeesAlert()
+        protected virtual bool SeesAlert()
         {
             return User.SeesAlert();
         }
@@ -130,7 +130,7 @@ namespace Tests
         /// Find elements matching the exact string.
         /// Containers like StackLayouts or ListViews are only traversed.
         /// </summary>
-        virtual protected List<Element> Find(string text)
+        protected virtual List<Element> Find(string text)
         {
             return User.Find(text);
         }
@@ -139,7 +139,7 @@ namespace Tests
         /// Find first element matching the exact string.
         /// Containers like StackLayouts or ListViews are only traversed.
         /// </summary>
-        virtual protected Element FindFirst(string text)
+        protected virtual Element FindFirst(string text)
         {
             return User.Find(text).FirstOrDefault();
         }
@@ -148,7 +148,7 @@ namespace Tests
         /// Find elements matching the predicate.
         /// Containers like StackLayouts or ListViews are only traversed if they match the containerPredicate.
         /// </summary>
-        virtual protected List<Element> Find(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
+        protected virtual List<Element> Find(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
             return User.Find(predicate, containerPredicate);
         }
@@ -157,7 +157,7 @@ namespace Tests
         /// Finds first element matching the predicate.
         /// Containers like StackLayouts or ListViews are only traversed if they match the containerPredicate.
         /// </summary>
-        virtual protected Element FindFirst(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
+        protected virtual Element FindFirst(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
             return User.Find(predicate, containerPredicate).FirstOrDefault();
         }
@@ -166,7 +166,7 @@ namespace Tests
         /// Opens the menu.
         /// </summary>
         /// <param name="textToTap">If provided the text will be selected.</param>
-        virtual protected void OpenMenu(string textToTap = null)
+        protected virtual void OpenMenu(string textToTap = null)
         {
             User.OpenMenu();
 
@@ -174,18 +174,18 @@ namespace Tests
                 Tap(textToTap);
         }
 
-        virtual protected void GoBack()
+        protected virtual void GoBack()
         {
             User.GoBack();
         }
 
-        virtual protected string Render()
+        protected virtual string Render()
         {
             return User.Render();
         }
 
         [TearDown]
-        virtual protected void TearDown()
+        protected virtual void TearDown()
         {
             User?.Print();
         }
