@@ -1,5 +1,5 @@
-using System;
 using Xamarin.Forms.Internals;
+
 namespace QuickTest
 {
     public static class AlertArgumentExtensions

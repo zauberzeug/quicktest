@@ -1,5 +1,5 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+
 namespace QuickTest
 {
     public static class ElementExtensions

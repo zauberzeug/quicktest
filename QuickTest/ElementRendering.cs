@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
-using System.Collections;
 
 namespace QuickTest
 {
