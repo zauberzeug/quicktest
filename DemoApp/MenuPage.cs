@@ -18,11 +18,12 @@ namespace DemoApp
                     CreateMenuButton("ListViews", () => new ListViewDemoPage()),
                     CreateMenuButton("Binding", () => new BindingDemoPage()),
                     new DemoButton("Alert") { Command = new Command(o => Application.Current.MainPage.DisplayAlert("Alert", "Message", "Ok")) },
+                    CreateMenuButton("TabbedPage", () => new TabbedPageDemoPage()),
                 },
             };
         }
 
-        DemoButton CreateMenuButton(string title, Func<ContentPage> pageCreator)
+        DemoButton CreateMenuButton(string title, Func<Page> pageCreator)
         {
             return new DemoButton(title) {
                 Command = new Command(o => {
