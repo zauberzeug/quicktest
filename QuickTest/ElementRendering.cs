@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
-using NUnit.Framework;
 using Xamarin.Forms.Internals;
 using System.Collections;
 

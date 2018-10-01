@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using QuickTest;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace QuickTest
+namespace Tests
 {
     public partial class User
     {
