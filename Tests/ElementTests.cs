@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using DemoApp;
 using NUnit.Framework;
+using QuickTest;
 using Xamarin.Forms;
 
 namespace Tests

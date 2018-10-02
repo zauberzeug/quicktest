@@ -1,5 +1,6 @@
 ﻿using DemoApp;
 using NUnit.Framework;
+using QuickTest;
 
 namespace Tests
 {
