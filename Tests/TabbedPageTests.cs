@@ -17,13 +17,11 @@ namespace Tests
         [Test]
         public void SwitchTab()
         {
-            ShouldSee("TabbedPage");
-
-            ShouldSeeCurrentTab("Tab A");
+            ShouldSee("This is content on tab A");
 
             SwitchToTab("Tab B");
 
-            ShouldSeeCurrentTab("Tab B");
+            ShouldSee("This is content on tab B");
         }
     }
 }
