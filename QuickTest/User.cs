@@ -31,7 +31,7 @@ namespace QuickTest
             }
         }
 
-        public ContentPage CurrentPage {
+        public Page CurrentPage {
             get {
                 var modalStack = app.MainPage.Navigation.ModalStack;
                 var currentPage = (modalStack.LastOrDefault() as ContentPage)
@@ -42,8 +42,13 @@ namespace QuickTest
                     currentPage = masterDetailPage.Master as ContentPage;
 
                 var rootPage = masterDetailPage?.Detail ?? app.MainPage;
-                if (currentPage == null)
-                    currentPage = rootPage.Navigation.NavigationStack.Last() as ContentPage;
+                if (currentPage == null) {
+                    var lastPage = rootPage.Navigation.NavigationStack.Last();
+                    if (lastPage is TabbedPage)
+                        return lastPage as TabbedPage;
+                    else
+                        currentPage = lastPage as ContentPage;
+                }
 
                 if (currentPage == null)
                     Assert.Fail("CurrentPage is no ContentPage");
@@ -106,7 +111,11 @@ namespace QuickTest
                 elementInfo = elementInfos.Skip(index.Value).First();
             }
 
-            if (elementInfo.Element is ToolbarItem)
+            if (elementInfo.Element is TabbedPage) {
+                var tabbedPage = elementInfo.Element as TabbedPage;
+                var targetPage = tabbedPage.Children.FirstOrDefault(p => p.Title == text);
+                tabbedPage.CurrentPage = targetPage;
+            } else if (elementInfo.Element is ToolbarItem)
                 (elementInfo.Element as ToolbarItem).Command.Execute(null);
             else if (elementInfo.Element is Button)
                 (elementInfo.Element as Button).Command.Execute(null);

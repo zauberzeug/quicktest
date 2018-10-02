@@ -43,9 +43,10 @@ namespace QuickTest
 
         public static bool HasText(this Element element, string text)
         {
-            return
-                (element as ToolbarItem)?.Text == text ||
-                (element as ContentPage)?.Title == text ||
+            return element != null && element is TabbedPage
+                ? (element as TabbedPage).Children.Any(p => p.Title == text)
+                : (element as ToolbarItem)?.Text == text ||
+                (element as Page)?.Title == text ||
                 (element as Button)?.Text == text ||
                 (element as Label)?.Text == text ||
                 (element as Label)?.FormattedText?.ToString() == text ||
