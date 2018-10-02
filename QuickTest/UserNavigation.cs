@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace Tests
+namespace QuickTest
 {
     public partial class User
     {

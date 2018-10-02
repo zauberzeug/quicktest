@@ -1,5 +1,6 @@
 using System.Linq;
 using Xamarin.Forms;
+using NUnit.Framework;
 using Xamarin.Forms.Internals;
 
 namespace QuickTest
