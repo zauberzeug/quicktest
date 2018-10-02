@@ -55,7 +55,6 @@
     <Compile Include="ToolingTests.cs" />
     <Compile Include="BindingTests.cs" />
     <Compile Include="ListViewTests.cs" />
-    <Compile Include="IntegrationTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuickTest\QuickTest.csproj">

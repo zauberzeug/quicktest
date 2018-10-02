@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using QuickTest;
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
 
-namespace Tests
+namespace QuickTest
 {
     public class IntegrationTest<T> where T : Application, new()
     {
