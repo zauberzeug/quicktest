@@ -17,9 +17,11 @@ namespace Tests
         [Test]
         public void SwitchTab()
         {
+            ShouldSee("TabbedPage");
+
             ShouldSeeCurrentTab("Tab A");
 
-            Tap("Tab B");
+            SwitchToTab("Tab B");
 
             ShouldSeeCurrentTab("Tab B");
         }

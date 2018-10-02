@@ -122,11 +122,7 @@ namespace QuickTest
                 elementInfo = elementInfos.Skip(index.Value).First();
             }
 
-            if (elementInfo.Element is TabbedPage) {
-                var tabbedPage = elementInfo.Element as TabbedPage;
-                var targetPage = tabbedPage.Children.FirstOrDefault(p => p.Title == text);
-                tabbedPage.CurrentPage = targetPage;
-            } else if (elementInfo.Element is ToolbarItem)
+            if (elementInfo.Element is ToolbarItem)
                 (elementInfo.Element as ToolbarItem).Command.Execute(null);
             else if (elementInfo.Element is Button)
                 (elementInfo.Element as Button).Command.Execute(null);

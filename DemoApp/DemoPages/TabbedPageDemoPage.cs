@@ -6,6 +6,8 @@ namespace DemoApp
     {
         public TabbedPageDemoPage()
         {
+            Title = "TabbedPage";
+
             var contentPageA = new ContentPage { Title = "Tab A" };
             var contentPageB = new ContentPage { Title = "Tab B" };
 
