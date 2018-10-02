@@ -70,6 +70,11 @@ namespace QuickTest
             User.Cancel(automationId);
         }
 
+        public virtual void ShouldSeeCurrentTab(string text)
+        {
+            Assert.That(User.CurrentTab.Title, Is.EqualTo(text));
+        }
+
         public virtual void ShouldSee(params string[] texts)
         {
             var list = new List<string>(texts);

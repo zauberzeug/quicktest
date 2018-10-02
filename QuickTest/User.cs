@@ -57,6 +57,17 @@ namespace QuickTest
             }
         }
 
+        public Page CurrentTab {
+            get {
+                var currentPage = CurrentPage;
+                if (currentPage is TabbedPage)
+                    return (currentPage as TabbedPage).CurrentPage;
+
+                Assert.Fail("CurrentPage is no TabbedPage");
+                return null;
+            }
+        }
+
         public bool CanSee(string text)
         {
             if (alerts.Any()) {

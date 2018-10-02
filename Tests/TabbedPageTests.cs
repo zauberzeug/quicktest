@@ -15,11 +15,13 @@ namespace Tests
         }
 
         [Test]
-        public void SwitchBetweenTabs()
+        public void SwitchTab()
         {
-            ShouldSee("Tab A");
+            ShouldSeeCurrentTab("Tab A");
+
             Tap("Tab B");
-            ShouldSee("Tab B");
+
+            ShouldSeeCurrentTab("Tab B");
         }
     }
 }
