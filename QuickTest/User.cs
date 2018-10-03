@@ -181,8 +181,8 @@ namespace QuickTest
         {
             if (alerts.Any())
                 return alerts.Peek().Render();
-            else
-                return CurrentPage.Render().Trim();
+
+            return CurrentPage.Render().Trim();
         }
     }
 }
