@@ -16,6 +16,9 @@ namespace DemoApp
                     }
                 }
             };
+            contentPageA.Appearing += (s, e) => App.PageLog += $"A(Tab A) ";
+            contentPageA.Disappearing += (s, e) => App.PageLog += $"D(Tab A) ";
+
             var contentPageB = new ContentPage {
                 Title = "Tab B",
                 Content = new StackLayout {
@@ -24,6 +27,9 @@ namespace DemoApp
                     }
                 }
             };
+            contentPageB.Appearing += (s, e) => App.PageLog += $"A(Tab B) ";
+            contentPageB.Disappearing += (s, e) => App.PageLog += $"D(Tab B) ";
+
             Children.Add(contentPageA);
             Children.Add(contentPageB);
         }
