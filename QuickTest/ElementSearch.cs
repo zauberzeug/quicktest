@@ -44,7 +44,7 @@ namespace QuickTest
 
         public static bool HasText(this Element element, string text)
         {
-            return (element as TabbedPage)?.Title == text ||
+            return
                 (element as ToolbarItem)?.Text == text ||
                 (element as Page)?.Title == text ||
                 (element as Button)?.Text == text ||
@@ -55,6 +55,8 @@ namespace QuickTest
                 (element as SearchBar)?.Text == text ||
                 ((element as Entry)?.Placeholder == text && string.IsNullOrEmpty((element as Entry)?.Text)) ||
                 (element as TextCell)?.Text == text ||
+                (element as TabbedPage)?.Title == text ||
+                ((element as TabbedPage)?.Children.Any(page => page.Title == text) ?? false) ||
                 element?.AutomationId == text;
         }
 

@@ -18,10 +18,12 @@ namespace Tests
         public void SwitchTab()
         {
             ShouldSee("This is content on tab A");
+            ShouldNotSee("This is content on tab B");
 
-            SwitchToTab("Tab B");
+            Tap("Tab B");
 
             ShouldSee("This is content on tab B");
+            ShouldNotSee("This is content on tab A");
         }
     }
 }

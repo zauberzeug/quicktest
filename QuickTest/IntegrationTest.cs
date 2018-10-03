@@ -46,17 +46,6 @@ namespace QuickTest
             }
         }
 
-        public virtual void SwitchToTab(string text)
-        {
-            var tabbedPage = User.CurrentPage as TabbedPage;
-            if (tabbedPage == null)
-                return;
-
-            var targetTab = tabbedPage.Children.FirstOrDefault(p => p.Title == text);
-            if (targetTab != null)
-                tabbedPage.CurrentPage = targetTab;
-        }
-
         public virtual void TapNth(string text, int index)
         {
             Assert.That(() => User.Find(text), Has.Count.GreaterThan(index).After((int)timeout.TotalMilliseconds, 10),
