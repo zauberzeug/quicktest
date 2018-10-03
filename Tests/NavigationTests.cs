@@ -24,14 +24,15 @@ namespace Tests
         public void TestModalStack()
         {
             Tap("PushModalAsync");
-            ShouldSee("Navigation ^");
+            ShouldSee("Title: Navigation ^"); // label is visible
+            ShouldNotSee("Navigation ^"); // title is not visible because we have no navigation page with title bar
             ShouldNotSee("Navigation", "Menu");
 
             Tap("PushModalAsync");
-            ShouldSee("Navigation ^ ^");
+            ShouldSee("Title: Navigation ^ ^");
 
             Tap("PopModalAsync");
-            ShouldSee("Navigation ^");
+            ShouldSee("Title: Navigation ^");
         }
 
         [Test]
@@ -39,6 +40,7 @@ namespace Tests
         {
             Tap("PushModalAsync NavigationPage");
             ShouldSee("Navigation ^");
+            ShouldSee("Title: Navigation ^");
 
             Tap("PushAsync");
             ShouldSee("Navigation ^ >");

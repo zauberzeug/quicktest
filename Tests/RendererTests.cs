@@ -130,5 +130,18 @@ Message
     - · C7"));
             GoBack();
         }
+
+        [Test]
+        public void TestTitleRendering()
+        {
+            OpenMenu("Navigation");
+            Assert.That(Render(), Does.StartWith("· Navigation \n"));
+
+            Tap("PushModalAsync");
+            Assert.That(Render(), Does.StartWith("· \n  · \n    · Title: Navigation ^\n    · Navigation stack:\n"), "modal pages without navigation do not show a title");
+
+            Tap("PushModalAsync NavigationPage");
+            Assert.That(Render(), Does.StartWith("· Navigation ^ ^ \n"));
+        }
     }
 }

@@ -12,8 +12,9 @@ namespace QuickTest
         {
             var result = new List<ElementInfo>();
 
-            if (containerPredicate != null && !containerPredicate.Invoke(element))
-                return result;
+            if (element == null) return result;
+
+            if (containerPredicate != null && !containerPredicate.Invoke(element)) return result;
 
             IEnumerable<ElementInfo> empty = new List<ElementInfo>();
 
@@ -24,7 +25,7 @@ namespace QuickTest
             result.AddRange((element as Layout<View>)?.Children.ToList().SelectMany(child => child.Find(predicate, containerPredicate)) ?? empty);
             result.AddRange((element as ListView)?.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as ViewCell)?.View?.Find(predicate, containerPredicate) ?? empty);
-            result.AddRange((element as TabbedPage)?.CurrentPage.Find(predicate, containerPredicate) ?? empty);
+            result.AddRange((element as TabbedPage)?.CurrentPage?.Find(predicate, containerPredicate) ?? empty);
 
             if (predicate.Invoke(element))
                 result.Add(ElementInfo.FromElement(element));
@@ -45,8 +46,8 @@ namespace QuickTest
         public static bool HasText(this Element element, string text)
         {
             return
-                (element as ToolbarItem)?.Text == text ||
-                (element as Page)?.Title == text ||
+                ((element.Parent is NavigationPage && (element as Page)?.Title == text)) ||
+                ((element.Parent?.Parent is NavigationPage && (element as ToolbarItem)?.Text == text)) ||
                 (element as Button)?.Text == text ||
                 (element as Label)?.Text == text ||
                 (element as Label)?.FormattedText?.ToString() == text ||

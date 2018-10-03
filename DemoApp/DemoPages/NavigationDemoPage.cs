@@ -40,7 +40,7 @@ namespace DemoApp
             };
 
             if (title.EndsWith("^", StringComparison.Ordinal))
-                (Content as StackLayout).Children.Insert(0, new DemoLabel(title));
+                (Content as StackLayout).Children.Insert(0, new DemoLabel("Title: " + title));
         }
 
         protected override void OnAppearing()

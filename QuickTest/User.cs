@@ -25,9 +25,10 @@ namespace QuickTest
 
         public NavigationPage CurrentNavigationPage {
             get {
-                return (app.MainPage.Navigation.ModalStack.LastOrDefault() as NavigationPage)
-                    ?? (app.MainPage as NavigationPage)
-                    ?? (app.MainPage as MasterDetailPage).Detail as NavigationPage;
+                if (app.MainPage.Navigation.ModalStack.Any())
+                    return (app.MainPage.Navigation.ModalStack.LastOrDefault() as NavigationPage);
+                return (app.MainPage as NavigationPage)
+                ?? (app.MainPage as MasterDetailPage).Detail as NavigationPage;
             }
         }
 

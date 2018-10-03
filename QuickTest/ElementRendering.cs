@@ -15,7 +15,7 @@ namespace QuickTest
             var result = "· ";
 
             result += (element as NavigationPage)?.CurrentPage.Render();
-            if (element is ContentPage)
+            if (element is ContentPage && element.Parent is NavigationPage)
                 result += (element as ContentPage).Title + " " + string.Join(" ", (element as Page).ToolbarItems.Select(t => $"[{t.Text}]"));
             result += (element as ContentPage)?.Content.Render();
 
