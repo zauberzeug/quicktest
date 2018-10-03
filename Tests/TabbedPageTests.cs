@@ -21,13 +21,13 @@ namespace Tests
 
             ShouldSee("This is content on tab A");
             ShouldNotSee("This is content on tab B");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "A(Tab A) "));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "A(TabbedPage) A(Tab A) "));
 
             Tap("Tab B");
 
             ShouldSee("This is content on tab B");
             ShouldNotSee("This is content on tab A");
-            //Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Tab A) A(Tab B)")); // TODO appearing/disappearing is not jet called correctly
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Tab A) A(Tab B) "));
         }
     }
 }

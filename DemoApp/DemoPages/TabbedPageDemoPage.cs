@@ -8,6 +8,9 @@ namespace DemoApp
         {
             Title = "TabbedPage";
 
+            Appearing += (s, e) => App.PageLog += $"A({Title}) ";
+            Disappearing += (s, e) => App.PageLog += $"D({Title}) ";
+
             var contentPageA = new ContentPage {
                 Title = "Tab A",
                 Content = new StackLayout {

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
@@ -10,19 +12,19 @@ namespace QuickTest
         {
             app.PropertyChanging += (s, args) => {
                 if (args.PropertyName == nameof(Application.MainPage))
-                    HandleDisappearing();
+                    HandleAppDisappearing();
             };
             app.PropertyChanged += (s, args) => {
                 if (args.PropertyName == nameof(Application.MainPage))
-                    HandleAppearing();
+                    HandleAppAppearing();
             };
 
-            HandleAppearing();
+            HandleAppAppearing();
         }
 
-        void HandleDisappearing()
+        void HandleAppDisappearing()
         {
-            (CurrentPage as IPageController).SendDisappearing();
+            HandleDisappearing(CurrentPage);
 
             if (app.MainPage is MasterDetailPage) {
                 (app.MainPage as MasterDetailPage).PropertyChanging -= HandleMasterDetailPropertyChanging;
@@ -37,9 +39,9 @@ namespace QuickTest
             app.ModalPopped -= HandleModalPopped;
         }
 
-        void HandleAppearing()
+        void HandleAppAppearing()
         {
-            (CurrentPage as IPageController).SendAppearing();
+            HandleAppearing(CurrentPage);
 
             if (app.MainPage is MasterDetailPage) {
                 (app.MainPage as MasterDetailPage).PropertyChanging += HandleMasterDetailPropertyChanging;
@@ -52,6 +54,34 @@ namespace QuickTest
             app.ModalPushed += HandleModalPushed;
             app.ModalPopping += HandleModalPopping;
             app.ModalPopped += HandleModalPopped;
+        }
+
+        void HandleAppearing(Page page)
+        {
+            (page as IPageController).SendAppearing();
+
+            if (page is MultiPage<Page>) {
+                var multiPage = page as MultiPage<Page>;
+                multiPage.PropertyChanging += HandleMultiPagePropertyChanging;
+                multiPage.PropertyChanged += HandleMultiPagePropertyChanged;
+            }
+        }
+
+        private void HandleMultiPagePropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
+        {
+            var multiPage = sender as MultiPage<Page>;
+            HandleDisappearing(multiPage.CurrentPage);
+        }
+
+        private void HandleMultiPagePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var multiPage = sender as MultiPage<Page>;
+            HandleAppearing(multiPage.CurrentPage);
+        }
+
+        void HandleDisappearing(Page page)
+        {
+            (page as IPageController).SendDisappearing();
         }
 
         void OnNavigationPageAdded()
@@ -71,7 +101,7 @@ namespace QuickTest
         void HandleMasterDetailPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
             if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
-                (app.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.LastOrDefault()?.SendDisappearing();
+                HandleDisappearing((app.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.LastOrDefault());
                 OnNavigationPageRemoved();
             }
         }
@@ -79,7 +109,7 @@ namespace QuickTest
         void HandleMasterDetailPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
-                (app.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.LastOrDefault()?.SendAppearing();
+                HandleAppearing((app.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.LastOrDefault());
                 OnNavigationPageAdded();
             }
         }
@@ -88,29 +118,29 @@ namespace QuickTest
         {
             var stack = CurrentPage.Navigation.NavigationStack;
             (stack[stack.Count - 2]).SendDisappearing();
-            (e.Page as IPageController).SendAppearing();
+            HandleAppearing(e.Page);
         }
 
         void HandlePopped(object sender, NavigationEventArgs e)
         {
-            (e.Page as IPageController).SendDisappearing();
-            (CurrentPage as IPageController).SendAppearing();
+            HandleDisappearing(e.Page);
+            HandleAppearing(CurrentPage);
         }
 
         void HandlePoppedToRoot(object sender, NavigationEventArgs e)
         {
             ((e as PoppedToRootEventArgs).PoppedPages.Last() as IPageController).SendDisappearing();
-            (CurrentPage as IPageController).SendAppearing();
+            HandleAppearing(e.Page);
         }
 
         void HandleModalPushing(object sender, ModalPushingEventArgs e)
         {
-            (CurrentPage as IPageController).SendDisappearing();
+            HandleDisappearing(CurrentPage);
         }
 
         void HandleModalPushed(object sender, ModalPushedEventArgs e)
         {
-            (e.Modal as IPageController).SendAppearing();
+            HandleAppearing(e.Modal);
             if (e.Modal is NavigationPage) {
                 (e.Modal as NavigationPage).Pushed += HandlePushed;
                 (e.Modal as NavigationPage).Popped += HandlePopped;
@@ -120,12 +150,12 @@ namespace QuickTest
 
         void HandleModalPopping(object sender, ModalPoppingEventArgs e)
         {
-            (e.Modal as IPageController).SendDisappearing();
+            HandleDisappearing(e.Modal);
         }
 
         void HandleModalPopped(object sender, ModalPoppedEventArgs e)
         {
-            (e.Modal as IPageController).SendAppearing();
+            HandleDisappearing(e.Modal);
             if (e.Modal is NavigationPage) {
                 (e.Modal as NavigationPage).Pushed -= HandlePushed;
                 (e.Modal as NavigationPage).Popped -= HandlePopped;
