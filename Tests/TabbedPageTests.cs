@@ -19,8 +19,9 @@ namespace Tests
         {
             var expectedLog = "A(Navigation) D(Navigation) ";
 
-            ShouldSee("This is content on tab A");
+            ShouldSee("Tab A", "Tab B", "This is content on tab A");
             ShouldNotSee("This is content on tab B");
+            ShouldNotSee("ToolbarItem");
             Assert.That(App.PageLog, Is.EqualTo(expectedLog += "A(TabbedPage) A(Tab A) "));
 
             Tap("Tab B");
@@ -28,6 +29,9 @@ namespace Tests
             ShouldSee("This is content on tab B");
             ShouldNotSee("This is content on tab A");
             Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Tab A) A(Tab B) "));
+
+            Tap("ToolbarItem");
+            ShouldSee("ToolbarItem tapped");
         }
     }
 }

@@ -12,11 +12,12 @@ namespace QuickTest
             if (!(element as VisualElement)?.IsVisible ?? false)
                 return "";
 
-            var result = "· ";
+            var result = "· ";// + $"<{element.GetType().Name}> ";
 
-            result += (element as NavigationPage)?.CurrentPage.Render();
-            if (element is ContentPage && element.Parent is NavigationPage)
-                result += (element as ContentPage).Title + " " + string.Join(" ", (element as Page).ToolbarItems.Select(t => $"[{t.Text}]"));
+            var navigation = (element as ContentPage)?.Navigation;
+            if (navigation != null) {
+                result += navigation.NavigationStack.FirstOrDefault()?.Title + " " + string.Join(" ", (element as Page).ToolbarItems.Select(t => $"[{t.Text}]"));
+            }
             result += (element as ContentPage)?.Content.Render();
 
             result += (element as ContentView)?.Content.Render();

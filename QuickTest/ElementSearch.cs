@@ -47,7 +47,6 @@ namespace QuickTest
         {
             return
                 ((element.Parent is NavigationPage && (element as Page)?.Title == text)) ||
-                ((element.Parent?.Parent is NavigationPage && (element as ToolbarItem)?.Text == text)) ||
                 (element as Button)?.Text == text ||
                 (element as Label)?.Text == text ||
                 (element as Label)?.FormattedText?.ToString() == text ||
@@ -56,8 +55,8 @@ namespace QuickTest
                 (element as SearchBar)?.Text == text ||
                 ((element as Entry)?.Placeholder == text && string.IsNullOrEmpty((element as Entry)?.Text)) ||
                 (element as TextCell)?.Text == text ||
-                (element as TabbedPage)?.Title == text ||
-                ((element as TabbedPage)?.Children.Any(page => page.Title == text) ?? false) ||
+                (((element.Parent as TabbedPage)?.Children.Any(p => p.Title == text) ?? false)) ||
+                ((element.FindParent<NavigationPage>() != null && (element as ToolbarItem)?.Text == text)) ||
                 element?.AutomationId == text;
         }
 

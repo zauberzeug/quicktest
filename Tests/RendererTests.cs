@@ -53,7 +53,7 @@ Message
             OpenMenu("ListViews");
 
             Tap("DemoListViewWithTextCell");
-            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithTextCell 
+            Assert.That(Render(), Is.EqualTo(@"· ListView demos 
   · plain header
     - Item A1
     - Item B1
@@ -68,7 +68,7 @@ Message
             OpenMenu("ListViews");
 
             Tap("DemoListViewWithStringViewCell");
-            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithStringViewCell 
+            Assert.That(Render(), Is.EqualTo(@"· ListView demos 
   · · header label
     - · Item A2
     - · Item B2
@@ -84,7 +84,7 @@ Message
             OpenMenu("ListViews");
 
             Tap("DemoListViewWithItemViewCell");
-            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithItemViewCell 
+            Assert.That(Render(), Is.EqualTo(@"· ListView demos 
   · - · Item A3
     - · Item B3
     - · Item C3"));
@@ -98,7 +98,7 @@ Message
             OpenMenu("ListViews");
 
             Tap("DemoListViewWithGroups");
-            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithGroups 
+            Assert.That(Render(), Is.EqualTo(@"· ListView demos 
   · · Group 4
     - · A4
     - · B4
@@ -117,7 +117,7 @@ Message
             OpenMenu("ListViews");
 
             Tap("DemoListViewWithGroupsAndHeaderTemplate");
-            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithGroupsAndHeaderTemplate 
+            Assert.That(Render(), Is.EqualTo(@"· ListView demos 
   · · 
       · Group 6
     - · A6
@@ -138,7 +138,7 @@ Message
             Assert.That(Render(), Does.StartWith("· Navigation \n"));
 
             Tap("PushModalAsync");
-            Assert.That(Render(), Does.StartWith("· \n  · \n    · Title: Navigation ^\n    · Navigation stack:\n"), "modal pages without navigation do not show a title");
+            Assert.That(Render(), Does.StartWith("·  \n  · \n    · Title: Navigation ^\n    · Navigation stack:\n"), "modal pages without navigation do not show a title");
 
             Tap("PushModalAsync NavigationPage");
             Assert.That(Render(), Does.StartWith("· Navigation ^ ^ \n"));

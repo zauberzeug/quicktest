@@ -44,11 +44,11 @@ namespace QuickTest
 
                 var rootPage = masterDetailPage?.Detail ?? app.MainPage;
                 if (currentPage == null) {
-                    var lastPage = rootPage.Navigation.NavigationStack.Last();
-                    if (lastPage is TabbedPage)
-                        return lastPage as TabbedPage;
+                    var page = rootPage.Navigation.NavigationStack.Last();
+                    if (page is TabbedPage)
+                        return (page as TabbedPage).CurrentPage as ContentPage;
                     else
-                        currentPage = lastPage as ContentPage;
+                        currentPage = page as ContentPage;
                 }
 
                 if (currentPage == null)
@@ -118,8 +118,8 @@ namespace QuickTest
                 (elementInfo.Element as Button).Command.Execute(null);
             else if (elementInfo.InvokeTap != null)
                 elementInfo.InvokeTap.Invoke();
-            else if (elementInfo.Element is TabbedPage) {
-                var tabbedPage = (elementInfo.Element as TabbedPage);
+            else if (elementInfo.Element.Parent is TabbedPage) {
+                var tabbedPage = (elementInfo.Element.Parent as TabbedPage);
                 tabbedPage.CurrentPage = tabbedPage.Children.FirstOrDefault(p => p.Title == text);
             } else
                 throw new InvalidOperationException($"element with text '{text}' is not tappable");

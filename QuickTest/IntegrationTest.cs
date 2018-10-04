@@ -76,7 +76,7 @@ namespace QuickTest
             if (list.All(User.CanSee))
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
             Assert.That(() => list.All(User.CanSee), Is.True.After((int)timeout.TotalMilliseconds, 10),
-                        $"User can't see {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
+                        $"User should see {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
         }
 
         public virtual void ShouldSee(char match)

@@ -27,8 +27,9 @@ namespace DemoApp
                 Content = new StackLayout {
                     Children = {
                         new Label{Text = "This is content on tab B"}
-                    }
-                }
+                    },
+                },
+                ToolbarItems = { new DemoToolbarItem() }
             };
             contentPageB.Appearing += (s, e) => App.PageLog += $"A(Tab B) ";
             contentPageB.Disappearing += (s, e) => App.PageLog += $"D(Tab B) ";
