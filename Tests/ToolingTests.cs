@@ -93,7 +93,7 @@ namespace Tests
         }
 
         [Test]
-        public void TestGetParent()
+        public void TestFindParentInListViews()
         {
             OpenMenu("ListViews");
             Tap("DemoListViewWithGroups");
@@ -105,6 +105,16 @@ namespace Tests
             Assert.That(cell.View, Is.TypeOf(typeof(DemoLabel)));
 
             Assert.That(FindFirst("B5").FindParent<BoxView>(), Is.Null);
+        }
+
+        [Test]
+        public void TestFindParentWithNestedStackLayouts()
+        {
+            OpenMenu("Elements");
+            var tappableStack = FindFirst("label in tap-able layout").FindParent<StackLayout>();
+            Assert.That(tappableStack.AutomationId, Is.EqualTo("tappable-stack"));
+            var pageStack = tappableStack.FindParent<StackLayout>();
+            Assert.That(pageStack.AutomationId, Is.EqualTo("page-stack"));
         }
 
         [Test]

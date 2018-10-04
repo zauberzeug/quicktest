@@ -23,6 +23,7 @@ namespace DemoApp
 
             Content = new ScrollView {
                 Content = new StackLayout {
+                    AutomationId = "page-stack",
                     Children = {
                         searchbar,
                         new DemoButton("Button"),

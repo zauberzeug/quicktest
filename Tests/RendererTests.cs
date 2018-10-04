@@ -27,13 +27,13 @@ Message
             Tap("Ok");
             Assert.That(Render(), Is.EqualTo(@"· Element demo [ToolbarItem]
   · 
-    · 
-      · search text (searchbar_automation_id)
+    · (page-stack) 
+      · (searchbar_automation_id) search text
       · Button
       · Label
       · first line
         second line
-      · 
+      · (tappable-stack) 
         · label in tap-able layout
       · 
         · Cell A
@@ -42,8 +42,8 @@ Message
         · Cell D
       · 
         · label within ContentView
-      · some text input (entry_automation_id)
-      · editor content (editor_automation_id)
+      · (entry_automation_id) some text input
+      · (editor_automation_id) editor content
       · Countdown"));
         }
 

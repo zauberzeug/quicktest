@@ -22,6 +22,10 @@ namespace QuickTest
             if (tabbedPage != null)
                 result += "\n|" + string.Join("|", tabbedPage.Children.Select(p => tabbedPage.CurrentPage == p ? $"> {p.Title} <" : $" {p.Title} ")) + "|";
 
+            var automationId = (element as VisualElement)?.AutomationId;
+            if (automationId != null)
+                result += $"({automationId}) ";
+
             result += (element as ContentPage)?.Content.Render();
 
             result += (element as ContentView)?.Content.Render();
@@ -37,10 +41,6 @@ namespace QuickTest
 
             result += (element as TextCell)?.Text;
             result += (element as ViewCell)?.View?.Render();
-
-            var automationId = (element as VisualElement)?.AutomationId;
-            if (automationId != null)
-                result += $" ({automationId})";
 
             result = "\n" + result.Replace("\n", "\n  ");
 

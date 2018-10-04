@@ -9,8 +9,9 @@ namespace QuickTest
         /// </summary>
         public static T FindParent<T>(this Element element) where T : Element
         {
-            while (!(element is T) && element != null)
+            do
                 element = element.Parent;
+            while (!(element is T) && element != null);
 
             return (T)element;
         }
