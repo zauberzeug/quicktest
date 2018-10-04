@@ -55,6 +55,7 @@ namespace QuickTest
                 (element as SearchBar)?.Text == text ||
                 ((element as Entry)?.Placeholder == text && string.IsNullOrEmpty((element as Entry)?.Text)) ||
                 (element as TextCell)?.Text == text ||
+                ((element.Parent is TabbedPage && (element.Parent as Page)?.Title == text)) ||
                 (((element.Parent as TabbedPage)?.Children.Any(p => p.Title == text) ?? false)) ||
                 ((element.FindParent<NavigationPage>() != null && (element as ToolbarItem)?.Text == text)) ||
                 element?.AutomationId == text;
