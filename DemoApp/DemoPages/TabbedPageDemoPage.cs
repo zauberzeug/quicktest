@@ -17,6 +17,7 @@ namespace DemoApp
                     Children = {
                         new Label{Text = "This is content on tab A"},
                         new Button{Text = "Open ModalPage", Command = new Command(OpenModalPage)},
+                        new Button{Text = "Open Subpage", Command = new Command(OpenSubpage)},
                     }
                 }
             };
@@ -52,6 +53,21 @@ namespace DemoApp
             page.Appearing += (s, e) => App.PageLog += $"A(Modal) ";
             page.Disappearing += (s, e) => App.PageLog += $"D(Modal) ";
             await Navigation.PushModalAsync(page);
+        }
+
+        async void OpenSubpage()
+        {
+            var page = new ContentPage {
+                Title = "Some Subpage",
+                Content = new StackLayout {
+                    Children = {
+                        new Label{Text = "This is a sub page"},
+                    }
+                }
+            };
+            page.Appearing += (s, e) => App.PageLog += $"A(Subpage) ";
+            page.Disappearing += (s, e) => App.PageLog += $"D(Subpage) ";
+            await Navigation.PushAsync(page);
         }
     }
 }

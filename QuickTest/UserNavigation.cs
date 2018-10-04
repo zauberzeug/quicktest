@@ -82,12 +82,14 @@ namespace QuickTest
 
         void HandleDisappearing(Page page)
         {
-            (page as IPageController).SendDisappearing();
 
             if (page is MultiPage<Page>) {
                 var multiPage = page as MultiPage<Page>;
+                (multiPage.CurrentPage as IPageController).SendDisappearing();
                 multiPage.PropertyChanging -= HandleMultiPagePropertyChanging;
                 multiPage.PropertyChanged -= HandleMultiPagePropertyChanged;
+            } else {
+                (page as IPageController).SendDisappearing();
             }
         }
 
@@ -124,7 +126,7 @@ namespace QuickTest
         void HandlePushed(object sender, NavigationEventArgs e)
         {
             var stack = CurrentPage.Navigation.NavigationStack;
-            (stack[stack.Count - 2]).SendDisappearing();
+            HandleDisappearing(stack[stack.Count - 2]);
             HandleAppearing(e.Page);
         }
 
@@ -136,7 +138,7 @@ namespace QuickTest
 
         void HandlePoppedToRoot(object sender, NavigationEventArgs e)
         {
-            ((e as PoppedToRootEventArgs).PoppedPages.Last() as IPageController).SendDisappearing();
+            HandleDisappearing((e as PoppedToRootEventArgs).PoppedPages.Last());
             HandleAppearing(e.Page);
         }
 

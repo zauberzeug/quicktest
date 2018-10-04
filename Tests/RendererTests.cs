@@ -148,12 +148,12 @@ Message
         public void TestTabbedPageRendering()
         {
             OpenMenu("TabbedPage");
-            var tabbedPageRendering = "· TabbedPage \n  |> Tab A <| Tab B |\n  · \n    · This is content on tab A\n    · Open ModalPage";
-            Assert.That(Render(), Is.EqualTo(tabbedPageRendering));
+            var tabbedPageRendering = "· TabbedPage \n  |> Tab A <| Tab B |\n  · \n    · This is content on tab A\n";
+            Assert.That(Render(), Does.StartWith(tabbedPageRendering));
             Tap("Open ModalPage");
             Assert.That(Render(), Is.EqualTo("·  \n  · \n    · This is a modal page\n    · Close"));
             Tap("Close");
-            Assert.That(Render(), Is.EqualTo(tabbedPageRendering));
+            Assert.That(Render(), Does.StartWith(tabbedPageRendering));
         }
     }
 }

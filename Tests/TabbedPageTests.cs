@@ -47,5 +47,20 @@ namespace Tests
             Tap("Close");
             Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Modal) A(Tab A) "));
         }
+
+        [Test]
+        public void NavigationFromTabbedPage()
+        {
+            var expectedLog = "A(Navigation) D(Navigation) A(TabbedPage) A(Tab A) ";
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog));
+            ShouldSee("TabbedPage");
+
+            Tap("Open Subpage");
+            ShouldSee("This is a sub page");
+            ShouldNotSee("TabbedPage");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Tab A) A(Subpage) "));
+            GoBack();
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Subpage) A(Tab A) "));
+        }
     }
 }
