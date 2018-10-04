@@ -48,7 +48,8 @@ namespace QuickTest
                 (app.MainPage as MasterDetailPage).PropertyChanged += HandleMasterDetailPropertyChanged;
             }
 
-            OnNavigationPageAdded();
+            if (CurrentNavigationPage != null)
+                OnNavigationPageAdded();
 
             app.ModalPushing += HandleModalPushing;
             app.ModalPushed += HandleModalPushed;
