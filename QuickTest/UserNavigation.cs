@@ -68,13 +68,13 @@ namespace QuickTest
             }
         }
 
-        private void HandleMultiPagePropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
+        void HandleMultiPagePropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
             var multiPage = sender as MultiPage<Page>;
             HandleDisappearing(multiPage.CurrentPage);
         }
 
-        private void HandleMultiPagePropertyChanged(object sender, PropertyChangedEventArgs e)
+        void HandleMultiPagePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             var multiPage = sender as MultiPage<Page>;
             HandleAppearing(multiPage.CurrentPage);
