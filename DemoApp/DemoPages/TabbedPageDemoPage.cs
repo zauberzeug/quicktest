@@ -15,7 +15,8 @@ namespace DemoApp
                 Title = "Tab A",
                 Content = new StackLayout {
                     Children = {
-                        new Label{Text = "This is content on tab A"}
+                        new Label{Text = "This is content on tab A"},
+                        new Button{Text = "Open ModalPage", Command = new Command(OpenModalPage)},
                     }
                 }
             };
@@ -36,6 +37,21 @@ namespace DemoApp
 
             Children.Add(contentPageA);
             Children.Add(contentPageB);
+        }
+
+        async void OpenModalPage()
+        {
+            var page = new ContentPage {
+                Content = new StackLayout {
+                    Children = {
+                        new Label{Text = "This is a modal page"},
+                        new Button{Text = "Close", Command = new Command(() => Navigation.PopModalAsync())},
+                    }
+                }
+            };
+            page.Appearing += (s, e) => App.PageLog += $"A(Modal) ";
+            page.Disappearing += (s, e) => App.PageLog += $"D(Modal) ";
+            await Navigation.PushModalAsync(page);
         }
     }
 }

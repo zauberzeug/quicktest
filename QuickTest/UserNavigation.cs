@@ -83,6 +83,12 @@ namespace QuickTest
         void HandleDisappearing(Page page)
         {
             (page as IPageController).SendDisappearing();
+
+            if (page is MultiPage<Page>) {
+                var multiPage = page as MultiPage<Page>;
+                multiPage.PropertyChanging -= HandleMultiPagePropertyChanging;
+                multiPage.PropertyChanged -= HandleMultiPagePropertyChanged;
+            }
         }
 
         void OnNavigationPageAdded()
@@ -162,6 +168,7 @@ namespace QuickTest
                 (e.Modal as NavigationPage).Popped -= HandlePopped;
                 (e.Modal as NavigationPage).PoppedToRoot -= HandlePoppedToRoot;
             }
+            HandleAppearing(CurrentPage);
         }
     }
 }

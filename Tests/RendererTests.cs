@@ -148,7 +148,12 @@ Message
         public void TestTabbedPageRendering()
         {
             OpenMenu("TabbedPage");
-            Assert.That(Render(), Is.EqualTo("· TabbedPage \n  |> Tab A <| Tab B |\n  · \n    · This is content on tab A"), "modal pages without navigation do not show a title");
+            var tabbedPageRendering = "· TabbedPage \n  |> Tab A <| Tab B |\n  · \n    · This is content on tab A\n    · Open ModalPage";
+            Assert.That(Render(), Is.EqualTo(tabbedPageRendering));
+            Tap("Open ModalPage");
+            Assert.That(Render(), Is.EqualTo("·  \n  · \n    · This is a modal page\n    · Close"));
+            Tap("Close");
+            Assert.That(Render(), Is.EqualTo(tabbedPageRendering));
         }
     }
 }
