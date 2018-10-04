@@ -143,5 +143,12 @@ Message
             Tap("PushModalAsync NavigationPage");
             Assert.That(Render(), Does.StartWith("· Navigation ^ ^ \n"));
         }
+
+        [Test]
+        public void TestTabbedPageRendering()
+        {
+            OpenMenu("TabbedPage");
+            Assert.That(Render(), Is.EqualTo("· TabbedPage \n  |> Tab A <| Tab B |\n  · \n    · This is content on tab A"), "modal pages without navigation do not show a title");
+        }
     }
 }

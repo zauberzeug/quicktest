@@ -15,9 +15,13 @@ namespace QuickTest
             var result = "· ";// + $"<{element.GetType().Name}> ";
 
             var navigation = (element as ContentPage)?.Navigation;
-            if (navigation != null) {
+            if (navigation != null)
                 result += navigation.NavigationStack.FirstOrDefault()?.Title + " " + string.Join(" ", (element as Page).ToolbarItems.Select(t => $"[{t.Text}]"));
-            }
+
+            var tabbedPage = element.Parent as TabbedPage;
+            if (tabbedPage != null)
+                result += "\n|" + string.Join("|", tabbedPage.Children.Select(p => tabbedPage.CurrentPage == p ? $"> {p.Title} <" : $" {p.Title} ")) + "|";
+
             result += (element as ContentPage)?.Content.Render();
 
             result += (element as ContentView)?.Content.Render();
