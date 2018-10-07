@@ -66,12 +66,33 @@ namespace Tests
         }
 
         [Test]
+        public void FindWithNullObjectFails()
+        {
+            Element element = null;
+            Assert.That(() => element.Find("PushAsync"), Throws.Exception);
+        }
+
+        [Test]
+        public void FindIsEmptyWhenNothingIsFound()
+        {
+            var elements = Find("some text which is not on the screen");
+            Assert.That(elements, Has.Count.EqualTo(0));
+        }
+
+        [Test]
         public void TestFindFirst()
         {
             var element = FindFirst("PushAsync");
             Assert.That(element, Is.Not.Null);
             Assert.That(element, Is.TypeOf<DemoButton>());
             Assert.That((element as DemoButton).Text, Is.EqualTo("PushAsync"));
+        }
+
+        [Test]
+        public void FindFirstIsNullWhenNothingIsFound()
+        {
+            var element = FindFirst("some text which is not on the screen");
+            Assert.That(element, Is.Null);
         }
 
         [Test]

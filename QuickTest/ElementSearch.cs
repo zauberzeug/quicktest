@@ -12,7 +12,7 @@ namespace QuickTest
         {
             var result = new List<ElementInfo>();
 
-            if (element == null) return result;
+            if (element == null) throw new NullReferenceException("can not search for items in null element");
 
             if (containerPredicate != null && !containerPredicate.Invoke(element)) return result;
 
@@ -95,7 +95,9 @@ namespace QuickTest
         {
             var result = new List<ElementInfo>();
 
-            result.AddRange(tempatedItems.HeaderContent.Find(predicate, containerPredicate));
+
+            if (tempatedItems.HeaderContent != null)
+                result.AddRange(tempatedItems.HeaderContent.Find(predicate, containerPredicate));
 
             foreach (var cell in tempatedItems) {
                 var element = GetElement(predicate, containerPredicate, cell);
