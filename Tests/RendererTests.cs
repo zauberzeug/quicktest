@@ -44,6 +44,7 @@ Message
         · label within ContentView
       · (entry_automation_id) some text input
       · (editor_automation_id) editor content
+      · (slider_automation_id) --o---- 42
       · Countdown"));
         }
 

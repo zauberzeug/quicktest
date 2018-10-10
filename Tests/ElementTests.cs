@@ -148,5 +148,18 @@ namespace Tests
             Tap("Ok");
             ShouldSee("Menu");
         }
+
+        [Test]
+        public void Slider()
+        {
+            var expectedLog = "A(Navigation) D(Navigation) ";
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog));
+
+            Input("slider_automation_id", 10);
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "slider:10 "));
+
+            Input("slider_automation_id", 130);
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "slider:120 "), "max value should be 120");
+        }
     }
 }

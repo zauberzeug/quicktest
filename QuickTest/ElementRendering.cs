@@ -38,6 +38,8 @@ namespace QuickTest
             result += (element as Entry)?.Text;
             result += (element as Editor)?.Text;
             result += (element as SearchBar)?.Text;
+            if (element is Slider)
+                result += "--o---- " + (element as Slider).Value;
 
             result += (element as TextCell)?.Text;
             result += (element as ViewCell)?.View?.Render();

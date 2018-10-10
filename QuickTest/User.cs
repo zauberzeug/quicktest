@@ -140,10 +140,17 @@ namespace QuickTest
                 (elements.First() as Editor).SendCompleted();
             } else if (elements.First() is SearchBar)
                 (elements.First() as SearchBar).Text = text;
+            else if (elements.First() is Slider)
+                (elements.First() as Slider).Value = double.Parse(text);
             else
                 throw new InvalidOperationException($"element '{automationId}' can not be used for input");
 
             elements.First().SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, false);
+        }
+
+        public void Input(string automationId, int value)
+        {
+            Input(automationId, value.ToString());
         }
 
         public void Cancel(string automationId)

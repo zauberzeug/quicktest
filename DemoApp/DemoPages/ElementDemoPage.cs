@@ -35,6 +35,7 @@ namespace DemoApp
                         new DemoEntry("entry_automation_id", "Placeholder"),
                         new DemoEditor("editor_automation_id", "editor content"),
                         new DemoLabel("Invisible Label").Invisible(),
+                        new DemoSlider("slider_automation_id", 0, 120, 42),
                         new DemoCountdown(),
                     },
                 },
