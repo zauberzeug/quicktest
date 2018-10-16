@@ -85,6 +85,13 @@ namespace QuickTest
                         $"User should see {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
         }
 
+        public virtual void ShouldSeeOnce(params string[] texts)
+        {
+            var list = new List<string>(texts);
+            Assert.That(() => list.All(User.CanSeeOnce), Is.True.After((int)timeout.TotalMilliseconds, 10),
+                        $"User should see {{ {string.Join(", ", texts)} }} only once in \n{ User?.Render() }");
+        }
+
         public virtual void ShouldSee(char match)
         {
             ShouldSee(match.ToString());

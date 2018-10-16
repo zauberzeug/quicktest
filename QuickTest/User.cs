@@ -60,6 +60,22 @@ namespace QuickTest
 
         public bool CanSee(string text)
         {
+            if (CanSeeAlertWith(text))
+                return true;
+
+            return CurrentPage.Find(text).Any();
+        }
+
+        public bool CanSeeOnce(string text)
+        {
+            if (CanSeeAlertWith(text))
+                return true;
+
+            return CurrentPage.Find(text).Count == 1;
+        }
+
+        public bool CanSeeAlertWith(string text)
+        {
             if (alerts.Any()) {
                 var alert = alerts.Peek();
                 return alert.Title == text
@@ -67,8 +83,7 @@ namespace QuickTest
                     || alert.Cancel == text
                     || alert.Accept == text;
             }
-
-            return CurrentPage.Find(text).Any();
+            return false;
         }
 
         public bool SeesAlert() => alerts.Any();

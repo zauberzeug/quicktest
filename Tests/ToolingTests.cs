@@ -24,6 +24,16 @@ namespace Tests
         }
 
         [Test]
+        public void TestShouldSeeOnce()
+        {
+            OpenMenu("Elements");
+            ShouldSeeOnce("editor content");
+            Input("entry_automation_id", "editor content");
+            ShouldSee("editor content");
+            Assert.Throws<AssertionException>(() => ShouldSeeOnce("editor content"));
+        }
+
+        [Test]
         public void TestTap()
         {
             Tap("PushAsync", "PopAsync");
