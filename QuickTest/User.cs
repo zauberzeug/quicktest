@@ -15,7 +15,6 @@ namespace QuickTest
         public User(Application app)
         {
             this.app = app;
-            app.Invoke("OnStart");
 
             MessagingCenter.Subscribe<Page, AlertArguments>(this, Page.AlertSignalName, (page, alert) => {
                 alerts.Push(alert);
