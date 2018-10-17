@@ -5,10 +5,11 @@ namespace DemoApp
     public class App : Application
     {
         public static string PageLog;
+        public static string LifecycleLog;
 
         public App()
         {
-            PageLog = "";
+            PageLog = LifecycleLog = "";
 
             ToggleMasterDetail();
         }
@@ -27,6 +28,12 @@ namespace DemoApp
         public static void ShowMessage(string title, string message)
         {
             Current.MainPage.DisplayAlert(title, message, "Ok");
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            LifecycleLog += "OnStart ";
         }
     }
 }
