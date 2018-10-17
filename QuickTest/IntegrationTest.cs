@@ -28,14 +28,19 @@ namespace QuickTest
         {
             MockForms.Init();
 
-            App = CreateApp();
-            User = new User(App);
             timeout = TimeSpan.FromSeconds(0.2);
         }
 
-        protected virtual T CreateApp()
+        [TearDown]
+        protected virtual void TearDown()
         {
-            return new T();
+            User?.Print();
+        }
+
+        public void LaunchApp(T app = null)
+        {
+            App = app ?? new T();
+            User = new User(App);
         }
 
         public virtual void Tap(params string[] texts)
@@ -194,12 +199,6 @@ namespace QuickTest
         protected virtual string Render()
         {
             return User.Render();
-        }
-
-        [TearDown]
-        protected virtual void TearDown()
-        {
-            User?.Print();
         }
 
         protected IntegrationTest<T> After(double seconds)

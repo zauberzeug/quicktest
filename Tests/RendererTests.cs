@@ -6,6 +6,14 @@ namespace Tests
 {
     public class RendererTests : IntegrationTest<App>
     {
+        [SetUp]
+        protected override void SetUp()
+        {
+            base.SetUp();
+
+            LaunchApp();
+        }
+
         [Test]
         public void TestAlertRendering()
         {

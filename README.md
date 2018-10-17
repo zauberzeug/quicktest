@@ -1,8 +1,17 @@
 # Xamarin.Quicktest
 
-Quicktest provides infrastructure to write full integration tests inside NUnit. With a little care (mocking HTTP, etc) you can archive a very fast executing set of tests to ensure high level requirements are working as expected.
+Quicktest provides infrastructure to write acceptance and integration tests with NUnit and Xamarin.Forms. With a little care (mocking HTTP, etc) you can archive a very fast executing set of tests to ensure high level requirements are working as expected.
 
 ```csharp
+
+[SetUp]
+protected override void SetUp()
+{
+    base.SetUp();
+
+    LaunchApp();
+}
+
 [Test]
 public void TestLoginGreetsUser()
 {

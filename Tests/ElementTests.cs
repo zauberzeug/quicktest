@@ -14,6 +14,7 @@ namespace Tests
         {
             base.SetUp();
 
+            LaunchApp();
             OpenMenu("Elements");
         }
 

@@ -13,6 +13,7 @@ namespace Tests
         {
             base.SetUp();
 
+            LaunchApp();
             OpenMenu("ListViews");
             ShouldSee("ListView demos");
         }

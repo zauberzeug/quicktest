@@ -11,6 +11,7 @@ namespace Tests
         {
             base.SetUp();
 
+            LaunchApp();
             OpenMenu("TabbedPage");
         }
 

@@ -10,6 +10,7 @@ namespace Tests
         protected override void SetUp()
         {
             base.SetUp();
+            LaunchApp();
 
             OpenMenu("Binding");
         }

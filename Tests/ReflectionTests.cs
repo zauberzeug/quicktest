@@ -9,6 +9,15 @@ namespace Tests
 {
     public class ReflectionTests : IntegrationTest<App>
     {
+
+        [SetUp]
+        protected override void SetUp()
+        {
+            base.SetUp();
+
+            LaunchApp();
+        }
+
         [Test]
         public void ScanForSendMethods()
         {
