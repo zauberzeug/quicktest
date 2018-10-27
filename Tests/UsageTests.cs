@@ -2,6 +2,7 @@
 using DemoApp;
 using NUnit.Framework;
 using QuickTest;
+using Xamarin.Forms;
 
 namespace Tests
 {
@@ -15,5 +16,15 @@ namespace Tests
             Launch(new App());
             ShouldSee("Navigation");
         }
+
+        [Test]
+        public void SettingNavigationPageWhileModalPageIsShown()
+        {
+            Launch(new App());
+            App.MainPage.Navigation.PushModalAsync(new ContentPage { Content = new Label { Text = "Modal Page" } });
+            App.MasterDetail.Detail = new NavigationPage(new ContentPage { Content = new Label { Text = "New Page" } });
+            ShouldSee("Modal Page");
+        }
+
     }
 }

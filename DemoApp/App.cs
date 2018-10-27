@@ -14,6 +14,8 @@ namespace DemoApp
             ToggleMasterDetail();
         }
 
+        public MasterDetailPage MasterDetail { get => MainPage as MasterDetailPage; }
+
         public void ToggleMasterDetail()
         {
             if (MainPage is MasterDetailPage)
