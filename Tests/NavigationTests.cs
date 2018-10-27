@@ -4,14 +4,14 @@ using QuickTest;
 
 namespace Tests
 {
-    public class NavigationTests : IntegrationTest<App>
+    public class NavigationTests : QuickTest<App>
     {
         [SetUp]
         protected override void SetUp()
         {
             base.SetUp();
 
-            LaunchApp();
+            Launch(new App());
         }
 
         [Test]

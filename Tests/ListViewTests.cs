@@ -6,14 +6,14 @@ using Xamarin.Forms;
 
 namespace Tests
 {
-    public class ListViewTests : IntegrationTest<App>
+    public class ListViewTests : QuickTest<App>
     {
         [SetUp]
         protected override void SetUp()
         {
             base.SetUp();
 
-            LaunchApp();
+            Launch(new App());
             OpenMenu("ListViews");
             ShouldSee("ListView demos");
         }

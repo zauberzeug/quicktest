@@ -4,13 +4,13 @@ using QuickTest;
 
 namespace Tests
 {
-    public class BindingTests : IntegrationTest<App>
+    public class BindingTests : QuickTest<App>
     {
         [SetUp]
         protected override void SetUp()
         {
             base.SetUp();
-            LaunchApp();
+            Launch(new App());
 
             OpenMenu("Binding");
         }

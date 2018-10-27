@@ -4,14 +4,14 @@ using QuickTest;
 
 namespace Tests
 {
-    public class TabbedPageTests : IntegrationTest<App>
+    public class TabbedPageTests : QuickTest<App>
     {
         [SetUp]
         protected override void SetUp()
         {
             base.SetUp();
 
-            LaunchApp();
+            Launch(new App());
             OpenMenu("TabbedPage");
         }
 

@@ -7,14 +7,14 @@ using Xamarin.Forms;
 
 namespace Tests
 {
-    public class ToolingTests : IntegrationTest<App>
+    public class ToolingTests : QuickTest<App>
     {
         [SetUp]
         protected override void SetUp()
         {
             base.SetUp();
 
-            LaunchApp();
+            Launch(new App());
             OpenMenu("Navigation");
         }
 

@@ -7,21 +7,22 @@ using Xamarin.Forms.Mocks;
 
 namespace QuickTest
 {
-    public class IntegrationTest<T> where T : Application, new()
+    public class QuickTest<T> where T : Application
     {
-        public User User { get; private set; }
+        User user;
+        public User User {
+            get {
+                if (user == null)
+                    throw new LaunchException();
+                return user;
+            }
+            private set {
+                user = value;
+            }
+        }
         TimeSpan timeout;
 
         protected T App { get; private set; }
-
-        static IntegrationTest<T> CreateWithTimeout(T app, User user, TimeSpan timeout)
-        {
-            return new IntegrationTest<T> {
-                App = app,
-                User = user,
-                timeout = timeout,
-            };
-        }
 
         [SetUp]
         protected virtual void SetUp()
@@ -37,9 +38,9 @@ namespace QuickTest
             User?.Print();
         }
 
-        public void LaunchApp(T app = null)
+        public void Launch(T app)
         {
-            App = app ?? new T();
+            App = app;
             User = new User(App);
         }
 
@@ -201,12 +202,21 @@ namespace QuickTest
             return User.Render();
         }
 
-        protected IntegrationTest<T> After(double seconds)
+        static QuickTest<T> CreateWithTimeout(T app, User user, TimeSpan timeout)
+        {
+            return new QuickTest<T> {
+                App = app,
+                User = user,
+                timeout = timeout,
+            };
+        }
+
+        protected QuickTest<T> After(double seconds)
         {
             return CreateWithTimeout(App, User, TimeSpan.FromSeconds(seconds));
         }
 
-        protected IntegrationTest<T> Now {
+        protected QuickTest<T> Now {
             get { return CreateWithTimeout(App, User, TimeSpan.FromSeconds(0.2)); }
         }
     }

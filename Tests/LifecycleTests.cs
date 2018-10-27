@@ -4,14 +4,14 @@ using QuickTest;
 
 namespace Tests
 {
-    public class LifecycleTests : IntegrationTest<App>
+    public class LifecycleTests : QuickTest<App>
     {
 
 
         [Test]
         public void AppStartStop()
         {
-            LaunchApp();
+            Launch(new App());
             Assert.That(App.LifecycleLog, Is.EqualTo("OnStart "));
         }
 

@@ -4,14 +4,14 @@ using QuickTest;
 
 namespace Tests
 {
-    public class RendererTests : IntegrationTest<App>
+    public class RendererTests : QuickTest<App>
     {
         [SetUp]
         protected override void SetUp()
         {
             base.SetUp();
 
-            LaunchApp();
+            Launch(new App());
         }
 
         [Test]

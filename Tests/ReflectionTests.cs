@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Tests
 {
-    public class ReflectionTests : IntegrationTest<App>
+    public class ReflectionTests : QuickTest<App>
     {
 
         [SetUp]
@@ -15,7 +15,7 @@ namespace Tests
         {
             base.SetUp();
 
-            LaunchApp();
+            Launch(new App());
         }
 
         [Test]

@@ -57,6 +57,7 @@
     <Compile Include="ListViewTests.cs" />
     <Compile Include="TabbedPageTests.cs" />
     <Compile Include="LifecycleTests.cs" />
+    <Compile Include="UsageTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuickTest\QuickTest.csproj">

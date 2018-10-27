@@ -53,7 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IntegrationTest.cs" />
+    <Compile Include="QuickTest.cs" />
     <Compile Include="User.cs" />
     <Compile Include="InvokeAnything.cs" />
     <Compile Include="ElementRendering.cs" />
@@ -62,6 +62,7 @@
     <Compile Include="AlertArgumentExtensions.cs" />
     <Compile Include="UserNavigation.cs" />
     <Compile Include="ElementExtensions.cs" />
+    <Compile Include="LaunchException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

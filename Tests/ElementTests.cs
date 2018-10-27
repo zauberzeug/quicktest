@@ -7,14 +7,14 @@ using Xamarin.Forms;
 
 namespace Tests
 {
-    public class ElementTests : IntegrationTest<App>
+    public class ElementTests : QuickTest<App>
     {
         [SetUp]
         protected override void SetUp()
         {
             base.SetUp();
 
-            LaunchApp();
+            Launch(new App());
             OpenMenu("Elements");
         }
 
