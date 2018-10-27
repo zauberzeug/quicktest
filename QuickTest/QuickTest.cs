@@ -44,6 +44,12 @@ namespace QuickTest
             User = new User(App);
         }
 
+        public virtual void Tap(string text)
+        {
+            ShouldSee(text);
+            User.Tap(text);
+        }
+
         public virtual void Tap(params string[] texts)
         {
             foreach (var text in texts) {
