@@ -100,12 +100,13 @@ namespace QuickTest
                 result.AddRange(tempatedItems.HeaderContent.Find(predicate, containerPredicate));
 
             foreach (var cell in tempatedItems) {
-                var element = GetElement(predicate, containerPredicate, cell);
-                if (element != null)
-                    result.Add(new ElementInfo {
-                        InvokeTap = () => listView.Invoke("NotifyRowTapped", cell.GetIndex<ItemsView<Cell>, Cell>(), cell),
-                        Element = element,
-                    });
+                var info = GetElementInfo(predicate, containerPredicate, cell);
+                if (info != null) {
+                    if (info.InvokeTap == null)
+                        info.InvokeTap = () => listView.Invoke("NotifyRowTapped", cell.GetIndex<ItemsView<Cell>, Cell>(), cell);
+
+                    result.Add(info);
+                }
             }
             return result;
         }
@@ -120,16 +121,15 @@ namespace QuickTest
             return new List<ElementInfo>();
         }
 
-        static Element GetElement(Predicate<Element> predicate, Predicate<Element> containerPredicate, object cell)
+        static ElementInfo GetElementInfo(Predicate<Element> predicate, Predicate<Element> containerPredicate, object cell)
         {
             if (predicate.Invoke(cell as Cell)) {
-                return cell as Cell;
+                return new ElementInfo { Element = cell as Cell };
             }
 
             var viewCellResults = (cell as ViewCell)?.View.Find(predicate, containerPredicate);
-            if (viewCellResults?.Any() ?? false) {
-                return viewCellResults.First().Element;
-            }
+            if (viewCellResults?.Any() ?? false)
+                return viewCellResults.First();
 
             return null;
         }
