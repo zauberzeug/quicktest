@@ -82,7 +82,6 @@ namespace QuickTest
 
         void HandleDisappearing(Page page)
         {
-
             if (page is MultiPage<Page>) {
                 var multiPage = page as MultiPage<Page>;
                 (multiPage.CurrentPage as IPageController).SendDisappearing();

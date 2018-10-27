@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using System;
 
 namespace QuickTest
 {
@@ -9,6 +10,8 @@ namespace QuickTest
         /// </summary>
         public static T FindParent<T>(this Element element) where T : Element
         {
+            if (element == null)
+                throw new NullReferenceException("can not find parent on null reference");
             do
                 element = element.Parent;
             while (!(element is T) && element != null);
