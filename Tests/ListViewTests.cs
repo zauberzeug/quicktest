@@ -92,6 +92,18 @@ namespace Tests
             ShouldSee("new 1");
         }
 
+        [Test]
+        public void TestTappingGestureRecognizersWithinListViews()
+        {
+            Tap("DemoListViewWithGestureRecognizers");
+            TapCell("Item");
+            Tap("tap me");
+            Tap("tap me!");
+            Tap("tap me!!");
+            ShouldSee("tap me!!!");
+            TapCell("Item");
+        }
+
         void TapCell(string name)
         {
             Tap(name);
