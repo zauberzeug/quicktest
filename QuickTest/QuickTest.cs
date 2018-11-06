@@ -20,7 +20,8 @@ namespace QuickTest
                 user = value;
             }
         }
-        TimeSpan timeout;
+
+        TimeSpan Timeout { get; set; }
 
         protected T App { get; private set; }
 
@@ -29,7 +30,7 @@ namespace QuickTest
         {
             MockForms.Init();
 
-            timeout = TimeSpan.FromSeconds(0.2);
+            Timeout = TimeSpan.FromSeconds(0.2);
         }
 
         [TearDown]
@@ -60,7 +61,7 @@ namespace QuickTest
 
         public virtual void TapNth(string text, int index)
         {
-            Assert.That(() => User.Find(text), Has.Count.GreaterThan(index).After((int)timeout.TotalMilliseconds, 10),
+            Assert.That(() => User.Find(text), Has.Count.GreaterThan(index).After((int)Timeout.TotalMilliseconds, 10),
                         $"User can't see {index + 1}th \"{text}\"  in \n{ User?.Render() }");
             User.Tap(text, index);
         }
@@ -93,14 +94,14 @@ namespace QuickTest
             var list = new List<string>(texts);
             if (list.All(User.CanSee))
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
-            Assert.That(() => list.All(User.CanSee), Is.True.After((int)timeout.TotalMilliseconds, 10),
+            Assert.That(() => list.All(User.CanSee), Is.True.After((int)Timeout.TotalMilliseconds, 10),
                         $"User should see {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
         }
 
         public virtual void ShouldSeeOnce(params string[] texts)
         {
             var list = new List<string>(texts);
-            Assert.That(() => list.All(User.CanSeeOnce), Is.True.After((int)timeout.TotalMilliseconds, 10),
+            Assert.That(() => list.All(User.CanSeeOnce), Is.True.After((int)Timeout.TotalMilliseconds, 10),
                         $"User should see {{ {string.Join(", ", texts)} }} only once in \n{ User?.Render() }");
         }
 
@@ -125,7 +126,7 @@ namespace QuickTest
             var list = new List<string>(texts);
             if (!list.Any(User.CanSee))
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
-            Assert.That(() => !list.Any(User.CanSee), Is.True.After((int)timeout.TotalMilliseconds, 10),
+            Assert.That(() => !list.Any(User.CanSee), Is.True.After((int)Timeout.TotalMilliseconds, 10),
                         $"User should not see any of {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
         }
 
@@ -213,7 +214,7 @@ namespace QuickTest
             return new QuickTest<T> {
                 App = app,
                 User = user,
-                timeout = timeout,
+                Timeout = timeout,
             };
         }
 
