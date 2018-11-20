@@ -1,6 +1,5 @@
 using System.Linq;
 using Xamarin.Forms;
-using NUnit.Framework;
 using Xamarin.Forms.Internals;
 
 namespace QuickTest
@@ -38,6 +37,7 @@ namespace QuickTest
             result += (element as Entry)?.Text;
             result += (element as Editor)?.Text;
             result += (element as SearchBar)?.Text;
+            result += (element as Picker)?.Title;
             if (element is Slider)
                 result += "--o---- " + (element as Slider).Value;
 

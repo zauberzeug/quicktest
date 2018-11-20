@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\BindingDemoPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\TabbedPageDemoPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoSlider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoPicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DemoPages\" />

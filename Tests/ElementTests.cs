@@ -162,5 +162,11 @@ namespace Tests
             Input("slider_automation_id", 130);
             Assert.That(App.PageLog, Is.EqualTo(expectedLog += "slider:120 "), "max value should be 120");
         }
+
+        [Test]
+        public void Picker()
+        {
+            ShouldSee("Pick an item");
+        }
     }
 }

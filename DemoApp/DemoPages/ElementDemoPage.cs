@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace DemoApp
@@ -36,6 +37,7 @@ namespace DemoApp
                         new DemoEditor("editor_automation_id", "editor content"),
                         new DemoLabel("Invisible Label").Invisible(),
                         new DemoSlider("slider_automation_id", 0, 120, 42),
+                        new DemoPicker("picker_automation_id", "Pick an item", new List<string>{"Item A", "Item B", "Item C"}),
                         new DemoCountdown(),
                     },
                 },
