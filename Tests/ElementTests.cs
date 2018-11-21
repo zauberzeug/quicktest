@@ -167,6 +167,13 @@ namespace Tests
         public void Picker()
         {
             ShouldSee("Pick an item");
+            ShouldNotSee("Item B");
+
+            Pick("picker_automation_id", "Item B");
+            ShouldSee("Item B");
+
+            Assert.Throws<InvalidOperationException>(() => Pick("picker_automation_id", "Item D"));
+            Assert.Throws<InvalidOperationException>(() => Pick("slider_automation_id", "Item A"));
         }
     }
 }

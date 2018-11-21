@@ -83,6 +83,12 @@ namespace QuickTest
             User.Input(automationId, value);
         }
 
+        protected virtual void Pick(string automationId, string text)
+        {
+            ShouldSee(automationId);
+            User.Pick(automationId, text);
+        }
+
         protected virtual void Cancel(string automationId)
         {
             ShouldSee(automationId);

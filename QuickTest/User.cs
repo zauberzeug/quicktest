@@ -168,6 +168,19 @@ namespace QuickTest
             Input(automationId, value.ToString());
         }
 
+        public void Pick(string automationId, string text)
+        {
+            var elements = FindElements(automationId);
+            if (elements.First() is Picker) {
+                var picker = elements.First() as Picker;
+                var itemToSelect = picker.Items.FirstOrDefault(i => i.ToString() == text);
+                if (itemToSelect == null)
+                    throw new InvalidOperationException($"picker does not contain item '{text}'");
+                picker.SelectedItem = itemToSelect;
+            } else
+                throw new InvalidOperationException($"element '{automationId}' is not a Picker");
+        }
+
         public void Cancel(string automationId)
         {
             var elements = FindElements(automationId);
