@@ -144,10 +144,8 @@ namespace QuickTest
 
         public void Input(string automationId, string text)
         {
-            var elements = CurrentPage.Find(automationId).Select(i => i.Element).OfType<VisualElement>().ToList();
+            var elements = FindElements(automationId);
 
-            Assert.That(elements, Is.Not.Empty, $"Did not find entry \"{automationId}\" on current page");
-            Assert.That(elements, Has.Count.LessThan(2), $"Found multiple entries \"{automationId}\" on current page");
             elements.First().SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, true);
             if (elements.First() is Entry) {
                 (elements.First() as Entry).Text = text;
@@ -172,10 +170,8 @@ namespace QuickTest
 
         public void Cancel(string automationId)
         {
-            var elements = CurrentPage.Find(automationId).Select(i => i.Element).OfType<VisualElement>().ToList();
+            var elements = FindElements(automationId);
 
-            Assert.That(elements, Is.Not.Empty, $"Did not find entry \"{automationId}\" on current page");
-            Assert.That(elements, Has.Count.LessThan(2), $"Found multiple entries \"{automationId}\" on current page");
             elements.First().SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, true);
 
             if (elements.First() is SearchBar)
@@ -207,6 +203,16 @@ namespace QuickTest
                 return alerts.Peek().Render();
 
             return CurrentPage.Render().Trim();
+        }
+
+        List<VisualElement> FindElements(string automationId)
+        {
+            var elements = CurrentPage.Find(automationId).Select(i => i.Element).OfType<VisualElement>().ToList();
+
+            Assert.That(elements, Is.Not.Empty, $"Did not find entry \"{automationId}\" on current page");
+            Assert.That(elements, Has.Count.LessThan(2), $"Found multiple entries \"{automationId}\" on current page");
+
+            return elements;
         }
     }
 }
