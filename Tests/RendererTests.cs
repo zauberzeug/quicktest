@@ -165,5 +165,18 @@ Message
             Tap("Close");
             Assert.That(Render(), Does.StartWith(tabbedPageRendering));
         }
+
+        [Test]
+        public void TestPickerRendering()
+        {
+            OpenMenu("Elements");
+            var rendering = Render();
+            Assert.That(rendering.Contains("· (picker_automation_id) Pick an item"), Is.True);
+
+            Pick("picker_automation_id", "Item B");
+            rendering = Render();
+            Assert.That(rendering.Contains("· (picker_automation_id) Pick an item"), Is.False);
+            Assert.That(rendering.Contains("· (picker_automation_id) Item B"), Is.True);
+        }
     }
 }

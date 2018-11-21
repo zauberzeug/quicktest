@@ -37,7 +37,15 @@ namespace QuickTest
             result += (element as Entry)?.Text;
             result += (element as Editor)?.Text;
             result += (element as SearchBar)?.Text;
-            result += (element as Picker)?.Title;
+
+            if (element is Picker) {
+                var picker = element as Picker;
+                if (picker.SelectedIndex >= 0)
+                    result += picker.SelectedItem.ToString();
+                else
+                    result += picker.Title;
+            }
+
             if (element is Slider)
                 result += "--o---- " + (element as Slider).Value;
 
