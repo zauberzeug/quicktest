@@ -8,6 +8,7 @@
       <projectUrl>https://github.com/perpetual-mobile/quicktest</projectUrl>
       <licenseUrl>https://github.com/perpetual-mobile/quicktest/blob/master/LICENSE</licenseUrl>
       <description>Library to write NUnit Integration Tests for Xamarin.Forms</description>
+      <releaseNotes>Release notes can be found under https://github.com/perpetual-mobile/quicktest/releases</releaseNotes>
       <copyright>Perpetual Mobile GmbH Copyright 2017</copyright>
       <dependencies>
          <group>
