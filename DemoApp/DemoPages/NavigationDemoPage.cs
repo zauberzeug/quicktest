@@ -74,6 +74,7 @@ namespace DemoApp
             user.OpenMenu();
             user.Tap("Elements");
             var screenshotData = DependencyService.Get<IScreenshotService>().Capture();
+            DependencyService.Get<IScreenshotService>().Save("test.jpg", screenshotData);
 
             user.OpenMenu();
             user.Tap("ListViews");

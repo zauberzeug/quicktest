@@ -20,5 +20,10 @@ namespace FormsTest.iOS
                 return bytes;
             }
         }
+
+        public void Save(string filename, byte[] image)
+        {
+
+        }
     }
 }
