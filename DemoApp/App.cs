@@ -1,3 +1,4 @@
+using QuickTest;
 using Xamarin.Forms;
 
 namespace DemoApp
@@ -12,9 +13,12 @@ namespace DemoApp
             PageLog = LifecycleLog = "";
 
             ToggleMasterDetail();
+
+            User = new User(this);
         }
 
         public MasterDetailPage MasterDetail { get => MainPage as MasterDetailPage; }
+        public User User { get; }
 
         public void ToggleMasterDetail()
         {

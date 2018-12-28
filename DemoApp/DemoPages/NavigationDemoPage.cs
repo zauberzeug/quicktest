@@ -1,4 +1,5 @@
 using System;
+using QuickTest;
 using Xamarin.Forms;
 
 namespace DemoApp
@@ -36,6 +37,9 @@ namespace DemoApp
                     new DemoButton("Toggle MasterDetail MainPage") {
                         Command = new Command(obj => (Application.Current as App).ToggleMasterDetail()),
                     },
+                    new DemoButton("Walkthrough") {
+                        Command = new Command(obj => WalkThroughApp()),
+                    },
                 },
             };
 
@@ -55,6 +59,41 @@ namespace DemoApp
             App.PageLog += $"D({Title}) ";
 
             base.OnDisappearing();
+        }
+
+        private void WalkThroughApp()
+        {
+            var user = (Application.Current as App).User;
+
+            user.Tap("PushAsync");
+            user.Tap("PopAsync");
+            user.Tap("PushModalAsync");
+            user.Tap("PopModalAsync");
+
+            user.OpenMenu();
+            user.Tap("Elements");
+
+            user.OpenMenu();
+            user.Tap("ListViews");
+            user.Tap("DemoListViewWithTextCell");
+            user.GoBack();
+
+            user.OpenMenu();
+            user.Tap("Binding");
+
+            //Alerts don't work yet: How to dismiss alert programmatically?
+            //user.OpenMenu();
+            //user.Tap("Alert");
+            //user.Tap("Ok");
+
+            user.OpenMenu();
+            user.Tap("TabbedPage");
+            user.Tap("Tab B");
+            user.Tap("Tab A");
+            user.Tap("Open ModalPage");
+            user.Tap("Close");
+            user.Tap("Open Subpage");
+            user.GoBack();
         }
     }
 }

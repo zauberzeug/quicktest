@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -15,7 +14,6 @@ namespace QuickTest
         public User(Application app)
         {
             this.app = app;
-            app.Invoke("OnStart");
 
             MessagingCenter.Subscribe<Page, AlertArguments>(this, Page.AlertSignalName, (page, alert) => {
                 alerts.Push(alert);
@@ -54,7 +52,8 @@ namespace QuickTest
                 }
 
                 if (currentPage == null)
-                    Assert.Fail("CurrentPage is no ContentPage");
+                    //Assert.Fail("CurrentPage is no ContentPage");
+                    throw new NullReferenceException("CurrentPage is no ContentPage");
 
                 return currentPage;
             }
@@ -103,29 +102,31 @@ namespace QuickTest
         public void Tap(string text, int? index = null)
         {
             if (alerts.Any()) {
-                Assert.That(index, Is.Null, "Tap indices are not supported on alerts");
+                //Assert.That(index, Is.Null, "Tap indices are not supported on alerts");
 
                 var alert = alerts.Peek();
                 if (alert.Accept == text)
                     alert.SetResult(true);
                 else if (alert.Cancel == text)
                     alert.SetResult(false);
-                else
-                    Assert.Fail($"Could not tap \"{text}\" on alert\n{alert}");
+                //else
+                //Assert.Fail($"Could not tap \"{text}\" on alert\n{alert}");
 
                 alerts.Pop();
                 return;
             }
 
             var elementInfos = CurrentPage.Find(text);
-            Assert.That(elementInfos, Is.Not.Empty, $"Did not find \"{text}\" on current page");
+            //Assert.That(elementInfos, Is.Not.Empty, $"Did not find \"{text}\" on current page");
+            if (elementInfos.Any() == false)
+                throw new KeyNotFoundException($"Did not find \"{text}\" on current page");
 
             ElementInfo elementInfo;
             if (index == null) {
-                Assert.That(elementInfos, Has.Count.LessThan(2), $"Found multiple \"{text}\" on current page");
+                //Assert.That(elementInfos, Has.Count.LessThan(2), $"Found multiple \"{text}\" on current page");
                 elementInfo = elementInfos.First();
             } else {
-                Assert.That(elementInfos, Has.Count.GreaterThan(index), $"Did not find enough \"{text}\" on current page");
+                //Assert.That(elementInfos, Has.Count.GreaterThan(index), $"Did not find enough \"{text}\" on current page");
                 elementInfo = elementInfos.Skip(index.Value).First();
             }
 
@@ -212,18 +213,19 @@ namespace QuickTest
 
         public string Render()
         {
-            if (alerts.Any())
-                return alerts.Peek().Render();
-
-            return CurrentPage.Render().Trim();
+            return "rendering disabled";
         }
 
         List<VisualElement> FindElements(string automationId)
         {
             var elements = CurrentPage.Find(automationId).Select(i => i.Element).OfType<VisualElement>().ToList();
 
-            Assert.That(elements, Is.Not.Empty, $"Did not find entry \"{automationId}\" on current page");
-            Assert.That(elements, Has.Count.LessThan(2), $"Found multiple entries \"{automationId}\" on current page");
+            //Assert.That(elements, Is.Not.Empty, $"Did not find entry \"{automationId}\" on current page");
+            //Assert.That(elements, Has.Count.LessThan(2), $"Found multiple entries \"{automationId}\" on current page");
+            if (elements.Any() == false)
+                throw new KeyNotFoundException($"Did not find entry \"{automationId}\" on current page");
+            if (elements.Count() > 1)
+                throw new Exception($"Found multiple entries \"{automationId}\" on current page");
 
             return elements;
         }
