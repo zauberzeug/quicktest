@@ -137,12 +137,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\QuickTest\QuickTest.csproj">
-      <Project>{A11334E1-28E5-43CE-AA56-D66C9E117159}</Project>
-      <Name>QuickTest</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <Import Project="..\QuickTestShared\QuickTestShared.projitems" Label="Shared" Condition="Exists('..\QuickTestShared\QuickTestShared.projitems')" />
   <Import Project="..\DemoApp\DemoApp.projitems" Label="Shared" Condition="Exists('..\DemoApp\DemoApp.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Arch.Core.Common.1.0.0\build\MonoAndroid80\Xamarin.Android.Arch.Core.Common.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Core.Common.1.0.0\build\MonoAndroid80\Xamarin.Android.Arch.Core.Common.targets')" />
