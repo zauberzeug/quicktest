@@ -121,6 +121,7 @@
     <BundleResource Include="Resources\menu%402x.png" />
     <BundleResource Include="Resources\menu%403x.png" />
   </ItemGroup>
+  <Import Project="..\QuickTestShared\QuickTestShared.projitems" Label="Shared" Condition="Exists('..\QuickTestShared\QuickTestShared.projitems')" />
   <Import Project="..\DemoApp\DemoApp.projitems" Label="Shared" Condition="Exists('..\DemoApp\DemoApp.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.3.2.0.839982\build\netstandard2.0\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.3.2.0.839982\build\netstandard2.0\Xamarin.Forms.targets')" />

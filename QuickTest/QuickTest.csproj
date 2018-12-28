@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\QuickTestShared\QuickTestShared.projitems" Label="Shared" Condition="Exists('..\QuickTestShared\QuickTestShared.projitems')" />
   <Import Project="..\packages\Xamarin.Forms.3.2.0.839982\build\netstandard2.0\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.3.2.0.839982\build\netstandard2.0\Xamarin.Forms.props')" />
   <Import Project="..\packages\NUnit.3.10.1\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" />
   <PropertyGroup>
@@ -54,14 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="QuickTest.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="InvokeAnything.cs" />
     <Compile Include="ElementRendering.cs" />
-    <Compile Include="ElementSearch.cs" />
-    <Compile Include="ElementInfo.cs" />
-    <Compile Include="AlertArgumentExtensions.cs" />
-    <Compile Include="UserNavigation.cs" />
-    <Compile Include="ElementExtensions.cs" />
     <Compile Include="LaunchException.cs" />
   </ItemGroup>
   <ItemGroup>

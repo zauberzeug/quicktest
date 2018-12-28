@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTest", "QuickTest\QuickTest.csproj", "{A11334E1-28E5-43CE-AA56-D66C9E117159}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "QuickTestShared", "QuickTestShared\QuickTestShared.shproj", "{8641687F-7F62-446C-A8F1-43B5123ABCEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
