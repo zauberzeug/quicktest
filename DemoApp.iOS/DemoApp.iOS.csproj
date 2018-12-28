@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="ScreenshotService.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\menu.png" />

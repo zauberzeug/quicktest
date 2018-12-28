@@ -16,5 +16,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ElementExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AlertArgumentExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InvokeAnything.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IScreenshotService.cs" />
   </ItemGroup>
 </Project>

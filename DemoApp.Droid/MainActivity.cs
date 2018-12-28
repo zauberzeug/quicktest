@@ -15,6 +15,8 @@ namespace FormsTest.Droid
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsAppCompatActivity
     {
+        public static MainActivity Instance { get; private set; }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -22,6 +24,9 @@ namespace FormsTest.Droid
             Forms.Init(this, savedInstanceState);
 
             LoadApplication(new App());
+
+            Instance = this;
+            DependencyService.Register<ScreenshotService>();
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using QuickTest;
+using QuickTestShared;
 using Xamarin.Forms;
 
 namespace DemoApp
@@ -72,6 +73,7 @@ namespace DemoApp
 
             user.OpenMenu();
             user.Tap("Elements");
+            var screenshotData = DependencyService.Get<IScreenshotService>().Capture();
 
             user.OpenMenu();
             user.Tap("ListViews");
