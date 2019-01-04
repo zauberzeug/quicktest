@@ -39,6 +39,7 @@ namespace DemoApp
                         new DemoSlider("slider_automation_id", 0, 120, 42),
                         new DemoPicker("picker_automation_id", "Pick an item", new List<string>{"Item A", "Item B", "Item C"}),
                         new DemoCountdown(),
+                        new DemoImage("logo.png"),
                     },
                 },
             };

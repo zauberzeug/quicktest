@@ -27,8 +27,18 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\TabbedPageDemoPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoSlider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoPicker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoImage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DemoPages\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assets\logo.svg">
+      <LogicalName>logo.svg</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assets\logo.png">
+      <LogicalName>logo.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -175,5 +175,11 @@ namespace Tests
             Assert.Throws<InvalidOperationException>(() => Pick("picker_automation_id", "Item D"));
             Assert.Throws<InvalidOperationException>(() => Pick("slider_automation_id", "Item A"));
         }
+
+        [Test]
+        public void ImageFromRessource()
+        {
+            ShouldSee("logo.png");
+        }
     }
 }

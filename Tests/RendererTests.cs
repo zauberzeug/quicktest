@@ -54,7 +54,8 @@ Message
       · (editor_automation_id) editor content
       · (slider_automation_id) --o---- 42
       · (picker_automation_id) Pick an item
-      · Countdown"));
+      · Countdown
+      · logo.png"));
         }
 
         [Test]

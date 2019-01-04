@@ -56,6 +56,7 @@ namespace QuickTest
                 (element as Picker)?.Title == text ||
                 (element as Picker)?.SelectedItem?.ToString() == text ||
                 ((element as Entry)?.Placeholder == text && string.IsNullOrEmpty((element as Entry)?.Text)) ||
+                (element as Image)?.Source?.AutomationId == text ||
                 (element as TextCell)?.Text == text ||
                 ((element.Parent is TabbedPage && (element.Parent as Page)?.Title == text)) ||
                 (((element.Parent as TabbedPage)?.Children.Any(p => p.Title == text) ?? false)) ||
