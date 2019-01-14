@@ -37,8 +37,8 @@ namespace QuickTest
         public Page CurrentPage {
             get {
                 var modalStack = app.MainPage.Navigation.ModalStack;
-                var currentPage = (modalStack.LastOrDefault() as ContentPage)
-                    ?? ((modalStack.LastOrDefault() as NavigationPage)?.CurrentPage as ContentPage);
+                var currentPage = (modalStack.LastOrDefault() as Page)
+                    ?? ((modalStack.LastOrDefault() as NavigationPage)?.CurrentPage as Page);
 
                 var masterDetailPage = app.MainPage as MasterDetailPage;
                 if (currentPage == null && masterDetailPage != null && masterDetailPage.IsPresented)
@@ -48,13 +48,15 @@ namespace QuickTest
                 if (currentPage == null) {
                     var page = rootPage.Navigation.NavigationStack.Last();
                     if (page is TabbedPage)
-                        return (page as TabbedPage).CurrentPage as ContentPage;
+                        currentPage = (page as TabbedPage).CurrentPage as ContentPage;
+                    else if (page is CarouselPage)
+                        currentPage = (page as CarouselPage).CurrentPage;
                     else
-                        currentPage = page as ContentPage;
+                        currentPage = page;
                 }
 
                 if (currentPage == null)
-                    Assert.Fail("CurrentPage is no ContentPage");
+                    Assert.Fail("TypeOf CurrentPage is supported yet");
 
                 return currentPage;
             }

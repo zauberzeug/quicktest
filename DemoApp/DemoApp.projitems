@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoSlider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoPicker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoImage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\CarouselDemoPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DemoPages\" />
