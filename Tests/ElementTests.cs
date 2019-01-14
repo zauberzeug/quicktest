@@ -172,6 +172,11 @@ namespace Tests
             Pick("picker_automation_id", "Item B");
             ShouldSee("Item B");
 
+            var picker = FindFirst("picker_automation_id") as Picker;
+            var pickerObject = picker.SelectedItem as PickerObject;
+            Assert.That(pickerObject, Is.Not.Null);
+            Assert.That(pickerObject.Name, Is.EqualTo("Item B"));
+
             Assert.Throws<InvalidOperationException>(() => Pick("picker_automation_id", "Item D"));
             Assert.Throws<InvalidOperationException>(() => Pick("slider_automation_id", "Item A"));
         }
