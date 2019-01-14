@@ -60,9 +60,8 @@ namespace DemoApp
                 }
             };
         }
-
-
     }
+
     public class PickerObject
     {
         public string Name;
