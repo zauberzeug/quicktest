@@ -38,6 +38,7 @@ namespace QuickTest
                 } else {
                     cell = templatedItems[i];
                     cellCache.AddUsedCell(cell);
+                    cell.SendAppearing();
                 }
 
                 result.Content.Add(cell);

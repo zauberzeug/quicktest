@@ -133,16 +133,16 @@ namespace Tests
                 ShouldSee("Instance7:Item4-OBC1-OA0-OD0");
                 ShouldSee("Instance8:Item5-OBC1-OA0-OD0");
             } else if ((cachingStrategy & ListViewCachingStrategy.RecycleElement) != 0) {
-                ShouldSee("Instance1:Item1-OBC1-OA0-OD0");
-                ShouldSee("Instance2:Item2-OBC1-OA1-OD1");
-                ShouldSee("Instance3:Item3-OBC1-OA2-OD2");
+                ShouldSee("Instance1:Item1-OBC1-OA1-OD0");
+                ShouldSee("Instance2:Item2-OBC1-OA2-OD1");
+                ShouldSee("Instance3:Item3-OBC1-OA3-OD2");
                 Tap("Reload Same"); // tapping traverses the hierarchy twice
-                ShouldSee("Instance1:Item1-OBC1-OA5-OD5");
-                ShouldSee("Instance2:Item2-OBC1-OA6-OD6");
-                ShouldSee("Instance3:Item3-OBC1-OA7-OD7");
+                ShouldSee("Instance1:Item1-OBC1-OA6-OD5");
+                ShouldSee("Instance2:Item2-OBC1-OA7-OD6");
+                ShouldSee("Instance3:Item3-OBC1-OA8-OD7");
                 Tap("Reload Different");
-                ShouldSee("Instance1:Item4-OBC2-OA10-OD10");
-                ShouldSee("Instance2:Item5-OBC2-OA11-OD11");
+                ShouldSee("Instance1:Item4-OBC2-OA11-OD10");
+                ShouldSee("Instance2:Item5-OBC2-OA12-OD11");
             }
         }
 
