@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -66,11 +67,9 @@ namespace QuickTest
 
             result += Render(listView.Header);
 
-            if (listView.IsGroupingEnabled)
-                foreach (var templatedItems in listView.TemplatedItems.Cast<TemplatedItemsList<ItemsView<Cell>, Cell>>())
-                    result += Render(templatedItems);
-            else
-                result += Render(listView.TemplatedItems);
+            var groups = ListViewCrawler.GetCellGroups(listView);
+            foreach (var group in groups)
+                result += Render(group);
 
             result.TrimEnd('\n');
             result += Render(listView.Footer);
@@ -78,15 +77,14 @@ namespace QuickTest
             return result;
         }
 
-        static string Render(TemplatedItemsList<ItemsView<Cell>, Cell> tempatedItems)
+        static string Render(CellGroup cellGroup)
         {
             string result = "";
 
-            var headerCell = tempatedItems.HeaderContent;
-            if (headerCell != null)
-                result += Render(headerCell).TrimStart('\n') + "\n";
+            if (cellGroup.Header != null)
+                result += Render(cellGroup.Header).TrimStart('\n') + "\n";
 
-            foreach (var cell in tempatedItems)
+            foreach (var cell in cellGroup.Content)
                 result += $"- {(cell as TextCell)?.Text + (cell as ViewCell)?.View.Render().Trim()}\n";
 
             return result;

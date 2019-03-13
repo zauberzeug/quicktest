@@ -85,24 +85,22 @@ namespace QuickTest
             if (listView.ItemsSource == null)
                 return result;
 
-            if (listView.IsGroupingEnabled)
-                foreach (var templatedItems in listView.TemplatedItems.Cast<TemplatedItemsList<ItemsView<Cell>, Cell>>())
-                    result.AddRange(templatedItems.Find(listView, predicate, containerPredicate));
-            else
-                result.AddRange(listView.TemplatedItems.Find(listView, predicate, containerPredicate));
+            var groups = ListViewCrawler.GetCellGroups(listView);
+            foreach (var group in groups)
+                result.AddRange(Find(group, listView, predicate, containerPredicate));
 
             return result;
         }
 
-        static List<ElementInfo> Find(this TemplatedItemsList<ItemsView<Cell>, Cell> tempatedItems, ListView listView, Predicate<Element> predicate, Predicate<Element> containerPredicate)
+        static List<ElementInfo> Find(CellGroup cellGroup, ListView listView, Predicate<Element> predicate, Predicate<Element> containerPredicate)
         {
             var result = new List<ElementInfo>();
 
 
-            if (tempatedItems.HeaderContent != null)
-                result.AddRange(tempatedItems.HeaderContent.Find(predicate, containerPredicate));
+            if (cellGroup.Header != null)
+                result.AddRange(cellGroup.Header.Find(predicate, containerPredicate));
 
-            foreach (var cell in tempatedItems) {
+            foreach (var cell in cellGroup.Content) {
                 var info = GetElementInfo(predicate, containerPredicate, cell);
                 if (info != null) {
                     if (info.InvokeTap == null)

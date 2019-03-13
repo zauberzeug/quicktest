@@ -63,6 +63,7 @@
     <Compile Include="UserNavigation.cs" />
     <Compile Include="ElementExtensions.cs" />
     <Compile Include="LaunchException.cs" />
+    <Compile Include="ListViewCrawler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
