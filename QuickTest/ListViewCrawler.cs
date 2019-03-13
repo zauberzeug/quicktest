@@ -9,7 +9,7 @@ namespace QuickTest
 {
     public static class ListViewCrawler
     {
-        static ConditionalWeakTable<ListView, CellCache> cellCaches = new ConditionalWeakTable<ListView, CellCache>();
+        static ConditionalWeakTable<ListView, ListViewCellCache> cellCaches = new ConditionalWeakTable<ListView, ListViewCellCache>();
 
         public static List<CellGroup> GetCellGroups(ListView listView)
         {
@@ -30,20 +30,22 @@ namespace QuickTest
         static List<CellGroup> GetCellGroupsRecyclingCells(ListView listView)
         {
             var cellCache = cellCaches.GetOrCreateValue(listView);
-            cellCache.ResetReuse();
+            cellCache.ResetAll();
             if (listView.IsGroupingEnabled)
-                return listView.TemplatedItems.Cast<ListViewItemsList>().Select(t => GetCellGroup(t, cellCache)).ToList();
+                return listView.TemplatedItems.Cast<ListViewItemsList>().Select(t => GetCellGroup(listView, t, cellCache)).ToList();
             else
-                return new List<CellGroup> { GetCellGroup(listView.TemplatedItems, cellCache) };
+                return new List<CellGroup> { GetCellGroup(listView, listView.TemplatedItems, cellCache) };
         }
 
-        static CellGroup GetCellGroup(ListViewItemsList templatedItems, CellCache cellCache)
+        static CellGroup GetCellGroup(ListView listView, ListViewItemsList templatedItems, ListViewCellCache cellCache)
         {
             var result = new CellGroup();
             result.Header = templatedItems.HeaderContent;
             result.Content = new List<Cell>();
             for (int i = 0; i < templatedItems.Count; i++) {
-                var reusedCell = cellCache.GetNextCell();
+                var item = (templatedItems as ITemplatedItemsList<Cell>).ListProxy[i];
+                var realCache = cellCache.GetCache(listView, item);
+                var reusedCell = realCache.GetNextCell();
                 if (reusedCell != null) {
                     reusedCell.SendDisappearing();
                     (templatedItems as ITemplatedItemsList<Cell>).UpdateContent(reusedCell, i);
@@ -51,7 +53,7 @@ namespace QuickTest
                     result.Content.Add(reusedCell);
                 } else {
                     var cell = templatedItems[i];
-                    cellCache.Add(cell);
+                    realCache.Add(cell);
                     result.Content.Add(cell);
                 }
             }
@@ -64,6 +66,38 @@ namespace QuickTest
                 Header = templatedItems.HeaderContent,
                 Content = templatedItems.ToList(),
             };
+        }
+    }
+
+    class ListViewCellCache
+    {
+        Dictionary<DataTemplate, CellCache> cellCaches = new Dictionary<DataTemplate, CellCache>();
+        CellCache defaultCache = new CellCache();
+
+        public void ResetAll()
+        {
+            defaultCache.ResetReuse();
+            foreach (var cellCache in cellCaches.Values)
+                cellCache.ResetReuse();
+        }
+
+        public CellCache GetCache(ListView listView, object item)
+        {
+            DataTemplate template;
+
+            var selector = listView.ItemTemplate as DataTemplateSelector;
+            if (selector == null)
+                return defaultCache;
+
+            template = selector.SelectTemplate(item, listView);
+
+            if (cellCaches.ContainsKey(template))
+                return cellCaches[template];
+            else {
+                var cellCache = new CellCache();
+                cellCaches.Add(template, cellCache);
+                return cellCache;
+            }
         }
     }
 

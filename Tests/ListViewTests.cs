@@ -143,6 +143,28 @@ namespace Tests
             }
         }
 
+        [Test]
+        public void TestRecyclingWithTemplateSelector()
+        {
+            Tap("DemoListViewWithRecyclingAndTemplateSelector");
+            ShouldSee("I1:T1:A1");
+            ShouldSee("I2:T1:A2");
+            ShouldSee("I3:T2:B1");
+            ShouldSee("I4:T2:B2");
+            Tap("Reverse");
+            if (cachingStrategy == ListViewCachingStrategy.RetainElement) {
+                ShouldSee("I5:T2:B2");
+                ShouldSee("I6:T2:B1");
+                ShouldSee("I7:T1:A2");
+                ShouldSee("I8:T1:A1");
+            } else if ((cachingStrategy & ListViewCachingStrategy.RecycleElement) != 0) {
+                ShouldSee("I3:T2:B2");
+                ShouldSee("I4:T2:B1");
+                ShouldSee("I1:T1:A2");
+                ShouldSee("I2:T1:A1");
+            }
+        }
+
         void TapCell(string name)
         {
             Tap(name);
