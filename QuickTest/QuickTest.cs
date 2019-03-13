@@ -28,6 +28,7 @@ namespace QuickTest
         [SetUp]
         protected virtual void SetUp()
         {
+            Console.WriteLine("!!!!!!!!!!!!!!! test version --3-- !!!!!!!!!!!!!!!!!");
             MockForms.Init(runtimePlatform: null);
 
             Timeout = TimeSpan.FromSeconds(0.2);

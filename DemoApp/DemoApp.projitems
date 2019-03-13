@@ -16,7 +16,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoToolbarItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\NavigationDemoPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListViewDemoPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoStack.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ElementDemoPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoEntry.cs" />
@@ -29,10 +28,23 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoPicker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoElements\DemoImage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\CarouselDemoPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\ListViewDemoPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithTextCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithGestureRecognizers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithGroups.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithGroupsAndHeaderTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithItemViewCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithRecycling.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithRecyclingAndTemplateSelector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithStringViewCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\StringDemoCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\StringGroup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DemoPages\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\" />
+    <Folder Include="$(MSBuildThisFileDirectory)DemoPages\ListView\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assets\logo.svg">

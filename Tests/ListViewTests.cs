@@ -118,6 +118,8 @@ namespace Tests
         {
             Tap("DemoListViewWithRecycling");
 
+            // "Item:Instance-OnBindingContextChangedCount,...";
+            //var test = "A:#1-Ctx1-Appear1-Disapp1";
             if (cachingStrategy == ListViewCachingStrategy.RetainElement) {
                 ShouldSee("Instance1:Item1-OBC1-OA0-OD0");
                 ShouldSee("Instance2:Item2-OBC1-OA0-OD0");
