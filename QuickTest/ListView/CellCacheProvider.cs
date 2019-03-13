@@ -31,14 +31,7 @@ namespace QuickTest
                 return defaultCache;
 
             template = selector.SelectTemplate(item, listView);
-
-            if (cellCaches.ContainsKey(template))
-                return cellCaches[template];
-            else {
-                var cellCache = new CellCache();
-                cellCaches.Add(template, cellCache);
-                return cellCache;
-            }
+            return cellCaches.GetOrCreate(template);
         }
     }
 }

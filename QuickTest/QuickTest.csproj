@@ -70,6 +70,7 @@
     <Compile Include="ListView\RecycleElementCrawlingStrategy.cs" />
     <Compile Include="ListView\CellCacheProvider.cs" />
     <Compile Include="ListView\CellCache.cs" />
+    <Compile Include="DictionaryExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

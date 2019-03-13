@@ -24,6 +24,8 @@ namespace QuickTest
 
         public void AddUsedCell(Cell cell)
         {
+            if (cell == null)
+                throw new ArgumentException($"Cell must not be null");
             if (reuseIndex < cells.Count)
                 throw new InvalidOperationException("Cells can only be added after all cached cells have been reused.");
             cells.Add(cell);
