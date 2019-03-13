@@ -114,57 +114,75 @@ namespace Tests
             TapCell("Item");
         }
 
+        // The cells contain information in the following format:
+        // "Item:#N-CtxN-AppearN-DisappN"
+        //
+        // - Item - The displayed string
+        // - #N - Identifies the cell instance
+        // - CtxN- Number of OnBindingContextChanged calls
+        // - AppearN - Number of OnAppearing calls
+        // - DisappN - Number of OnDisappearing calls
+        //
+        // For each view hierarchy traversal by QuickTest, cells are reused once, which causes
+        // an OnDisappearing and an OnAppearing call.
+        // If (and only if) a cell is reused for a different object, an OnBindingContextChanged call is executed.
         [Test]
-        public void TestRecycling()
+        public void TestCellReuse()
         {
             Tap("DemoListViewWithRecycling");
 
-            // "Item:Instance-OnBindingContextChangedCount,...";
-            //var test = "A:#1-Ctx1-Appear1-Disapp1";
             if (cachingStrategy == ListViewCachingStrategy.RetainElement) {
-                ShouldSee("Instance1:Item1-OBC1-OA0-OD0");
-                ShouldSee("Instance2:Item2-OBC1-OA0-OD0");
-                ShouldSee("Instance3:Item3-OBC1-OA0-OD0");
+                // no reuse expected
+                ShouldSee("A:#1-Ctx1-Appear0-Disapp0");
+                ShouldSee("B:#2-Ctx1-Appear0-Disapp0");
+                ShouldSee("C:#3-Ctx1-Appear0-Disapp0");
                 Tap("Reload Same");
-                ShouldSee("Instance4:Item1-OBC1-OA0-OD0");
-                ShouldSee("Instance5:Item2-OBC1-OA0-OD0");
-                ShouldSee("Instance6:Item3-OBC1-OA0-OD0");
+                ShouldSee("A:#4-Ctx1-Appear0-Disapp0");
+                ShouldSee("B:#5-Ctx1-Appear0-Disapp0");
+                ShouldSee("C:#6-Ctx1-Appear0-Disapp0");
                 Tap("Reload Different");
-                ShouldSee("Instance7:Item4-OBC1-OA0-OD0");
-                ShouldSee("Instance8:Item5-OBC1-OA0-OD0");
+                ShouldSee("D:#7-Ctx1-Appear0-Disapp0");
+                ShouldSee("E:#8-Ctx1-Appear0-Disapp0");
             } else if ((cachingStrategy & ListViewCachingStrategy.RecycleElement) != 0) {
-                ShouldSee("Instance1:Item1-OBC1-OA1-OD0");
-                ShouldSee("Instance2:Item2-OBC1-OA2-OD1");
-                ShouldSee("Instance3:Item3-OBC1-OA3-OD2");
+                ShouldSee("A:#1-Ctx1-Appear1-Disapp0");
+                ShouldSee("B:#2-Ctx1-Appear2-Disapp1");
+                ShouldSee("C:#3-Ctx1-Appear3-Disapp2");
                 Tap("Reload Same"); // tapping traverses the hierarchy twice
-                ShouldSee("Instance1:Item1-OBC1-OA6-OD5");
-                ShouldSee("Instance2:Item2-OBC1-OA7-OD6");
-                ShouldSee("Instance3:Item3-OBC1-OA8-OD7");
+                ShouldSee("A:#1-Ctx1-Appear6-Disapp5");
+                ShouldSee("B:#2-Ctx1-Appear7-Disapp6");
+                ShouldSee("C:#3-Ctx1-Appear8-Disapp7");
                 Tap("Reload Different");
-                ShouldSee("Instance1:Item4-OBC2-OA11-OD10");
-                ShouldSee("Instance2:Item5-OBC2-OA12-OD11");
+                ShouldSee("D:#1-Ctx2-Appear11-Disapp10");
+                ShouldSee("E:#2-Ctx2-Appear12-Disapp11");
             }
         }
 
+        // The cells contain information in the following format:
+        // "Item:#N-Template"
+        //
+        // - Item - The displayed string
+        // - #N - Identifies the cell instance
+        // - Template- Identifies the cell template
         [Test]
-        public void TestRecyclingWithTemplateSelector()
+        public void TestCellReuseWithTemplateSelector()
         {
             Tap("DemoListViewWithRecyclingAndTemplateSelector");
-            ShouldSee("I1:T1:A1");
-            ShouldSee("I2:T1:A2");
-            ShouldSee("I3:T2:B1");
-            ShouldSee("I4:T2:B2");
+            ShouldSee("A1:#1-T1");
+            ShouldSee("A2:#2-T1");
+            ShouldSee("B1:#3-T2");
+            ShouldSee("B2:#4-T2");
             Tap("Reverse");
             if (cachingStrategy == ListViewCachingStrategy.RetainElement) {
-                ShouldSee("I5:T2:B2");
-                ShouldSee("I6:T2:B1");
-                ShouldSee("I7:T1:A2");
-                ShouldSee("I8:T1:A1");
+                // no reuse expected
+                ShouldSee("B2:#5-T2");
+                ShouldSee("B1:#6-T2");
+                ShouldSee("A2:#7-T1");
+                ShouldSee("A1:#8-T1");
             } else if ((cachingStrategy & ListViewCachingStrategy.RecycleElement) != 0) {
-                ShouldSee("I3:T2:B2");
-                ShouldSee("I4:T2:B1");
-                ShouldSee("I1:T1:A2");
-                ShouldSee("I2:T1:A1");
+                ShouldSee("B2:#3-T2");
+                ShouldSee("B1:#4-T2");
+                ShouldSee("A2:#1-T1");
+                ShouldSee("A1:#2-T1");
             }
         }
 

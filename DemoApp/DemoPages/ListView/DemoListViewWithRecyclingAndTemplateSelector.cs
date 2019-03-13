@@ -71,12 +71,12 @@ namespace DemoApp
         class TemplateCell : ViewCell
         {
             readonly int instanceNumber;
-            string prefix;
+            string templateName;
             Label label;
 
-            public TemplateCell(string prefix)
+            public TemplateCell(string templateName)
             {
-                this.prefix = prefix;
+                this.templateName = templateName;
                 View = label = new Label();
                 instanceNumber = ++InstanceCount;
             }
@@ -86,7 +86,7 @@ namespace DemoApp
             protected override void OnBindingContextChanged()
             {
                 base.OnBindingContextChanged();
-                label.Text = $"I{instanceNumber}:{prefix}:{BindingContext}";
+                label.Text = $"{BindingContext}:#{instanceNumber}-{templateName}";
             }
         }
     }

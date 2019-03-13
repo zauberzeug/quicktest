@@ -7,7 +7,7 @@ namespace DemoApp
     {
         public DemoListViewWithRecycling(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
-            ItemsSource = new List<string> { "Item1", "Item2", "Item3" };
+            ItemsSource = new List<string> { "A", "B", "C" };
             ItemTemplate = new DataTemplate(typeof(RecyclingCell));
             BackgroundColor = Color.GhostWhite;
 
@@ -15,7 +15,7 @@ namespace DemoApp
             Header = header = new Label() { Text = "Reload Same" };
             header.GestureRecognizers.Add(new TapGestureRecognizer {
                 Command = new Command(o => {
-                    ItemsSource = new List<string> { "Item1", "Item2", "Item3" };
+                    ItemsSource = new List<string> { "A", "B", "C" };
                 })
             });
 
@@ -23,7 +23,7 @@ namespace DemoApp
             Footer = footer = new Label() { Text = "Reload Different" };
             footer.GestureRecognizers.Add(new TapGestureRecognizer {
                 Command = new Command(o => {
-                    ItemsSource = new List<string> { "Item4", "Item5" };
+                    ItemsSource = new List<string> { "D", "E" };
                 })
             });
 
@@ -50,7 +50,7 @@ namespace DemoApp
 
             void UpdateText()
             {
-                label.Text = $"Instance{instanceNumber}:{BindingContext as string}-OBC{bindingContextChangeCount}-OA{appearingCount}-OD{disappearingCount}";
+                label.Text = $"{BindingContext as string}:#{instanceNumber}-Ctx{bindingContextChangeCount}-Appear{appearingCount}-Disapp{disappearingCount}";
             }
 
             protected override void OnBindingContextChanged()
