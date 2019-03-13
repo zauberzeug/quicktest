@@ -3,19 +3,26 @@ using Xamarin.Forms;
 
 namespace QuickTest
 {
-    class ListViewCellCache
+    class CellCacheProvider
     {
         Dictionary<DataTemplate, CellCache> cellCaches = new Dictionary<DataTemplate, CellCache>();
         CellCache defaultCache = new CellCache();
+        ListView listView;
 
-        public void ResetAll()
+
+        public CellCacheProvider(ListView listView)
+        {
+            this.listView = listView;
+        }
+
+        public void ResetReuse()
         {
             defaultCache.ResetReuse();
             foreach (var cellCache in cellCaches.Values)
                 cellCache.ResetReuse();
         }
 
-        public CellCache GetCache(ListView listView, object item)
+        public CellCache GetCellCache(object item)
         {
             DataTemplate template;
 

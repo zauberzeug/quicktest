@@ -68,7 +68,7 @@
     <Compile Include="ListView\CrawlingStrategy.cs" />
     <Compile Include="ListView\RetainElementCrawlingStrategy.cs" />
     <Compile Include="ListView\RecycleElementCrawlingStrategy.cs" />
-    <Compile Include="ListView\ListViewCellCache.cs" />
+    <Compile Include="ListView\CellCacheProvider.cs" />
     <Compile Include="ListView\CellCache.cs" />
   </ItemGroup>
   <ItemGroup>
