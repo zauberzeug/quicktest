@@ -8,6 +8,7 @@ namespace Tests
 {
     [TestFixture(ListViewCachingStrategy.RetainElement)]
     [TestFixture(ListViewCachingStrategy.RecycleElement)]
+    [TestFixture(ListViewCachingStrategy.RecycleElementAndDataTemplate)]
     public class ListViewTests : QuickTest<App>
     {
         ListViewCachingStrategy cachingStrategy;

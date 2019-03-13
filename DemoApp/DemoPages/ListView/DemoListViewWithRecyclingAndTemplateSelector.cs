@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace DemoApp
@@ -8,7 +9,7 @@ namespace DemoApp
     {
         public DemoListViewWithRecyclingAndTemplateSelector(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
-            ItemsSource = new List<string> { "A1", "A2", "B1", "B2" };
+            ItemsSource = new List<object> { new A(1), new A(2), new B(1), new B(2) };
             ItemTemplate = new Selector();
 
             BackgroundColor = Color.GhostWhite;
@@ -17,7 +18,7 @@ namespace DemoApp
             Header = header = new Label() { Text = "Reverse" };
             header.GestureRecognizers.Add(new TapGestureRecognizer {
                 Command = new Command(o => {
-                    ItemsSource = new List<string> { "B2", "B1", "A2", "A1" };
+                    ItemsSource = (ItemsSource as IEnumerable<object>).Reverse().ToList();
                 })
             });
 
@@ -25,19 +26,46 @@ namespace DemoApp
             TemplateCell.InstanceCount = 0;
         }
 
+        class A
+        {
+            public A(int suffix) { Text = $"{nameof(A)}{suffix}"; }
+
+            public string Text { get; private set; }
+
+            public override string ToString() { return Text; }
+        }
+
+        class B
+        {
+            public B(int suffix) { Text = $"{nameof(B)}{suffix}"; }
+
+            public string Text { get; private set; }
+
+            public override string ToString() { return Text; }
+        }
+
         class Selector : DataTemplateSelector
         {
-            DataTemplate templateOne = new DataTemplate(() => { return new TemplateCell("T1"); });
-            DataTemplate templateTwo = new DataTemplate(() => { return new TemplateCell("T2"); });
+            DataTemplate templateOne = new DataTemplate(typeof(CellForA));
+            DataTemplate templateTwo = new DataTemplate(typeof(CellForB));
 
             protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
             {
-                var s = item as string;
-                if (s.StartsWith("A", StringComparison.InvariantCulture))
+                if (item is A)
                     return templateOne;
                 else
                     return templateTwo;
             }
+        }
+
+        class CellForA : TemplateCell
+        {
+            public CellForA() : base("T1") { }
+        }
+
+        class CellForB : TemplateCell
+        {
+            public CellForB() : base("T2") { }
         }
 
         class TemplateCell : ViewCell
@@ -58,7 +86,7 @@ namespace DemoApp
             protected override void OnBindingContextChanged()
             {
                 base.OnBindingContextChanged();
-                label.Text = $"I{instanceNumber}:{prefix}:{BindingContext as string}";
+                label.Text = $"I{instanceNumber}:{prefix}:{BindingContext}";
             }
         }
     }
