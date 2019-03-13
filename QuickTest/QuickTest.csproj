@@ -64,6 +64,7 @@
     <Compile Include="ElementExtensions.cs" />
     <Compile Include="LaunchException.cs" />
     <Compile Include="ListViewCrawler.cs" />
+    <Compile Include="CellGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
@@ -17,6 +18,7 @@ namespace DemoApp
                     CreateSubpageButton(new DemoListViewWithGroups()),
                     CreateSubpageButton(new DemoListViewWithGroupsAndHeaderTemplate()),
                     CreateSubpageButton(new DemoListViewWithGestureRecognizers()),
+                    CreateSubpageButton(new DemoListViewWithRecycling()),
                 },
             };
         }
@@ -29,7 +31,21 @@ namespace DemoApp
         }
     }
 
-    public class DemoListViewWithTextCell : ListView
+    public class DemoListView : ListView
+    {
+        public DemoListView() : base(ConstructionCachingStrategy)
+        {
+            // ListView ignores caching stragey on platforms where recycling is not supported.
+            // ListView will use caching strategy when runtimePlatform is null ("unit test mode"),
+            // which can be set when initialising Xamarin.Forms.Mocks.
+            if (CachingStrategy != ConstructionCachingStrategy)
+                throw new ArgumentException("Caching strategy must not be ignored.");
+        }
+
+        public static ListViewCachingStrategy ConstructionCachingStrategy { get; set; }
+    }
+
+    public class DemoListViewWithTextCell : DemoListView
     {
         public DemoListViewWithTextCell()
         {
@@ -43,7 +59,7 @@ namespace DemoApp
         }
     }
 
-    public class DemoListViewWithStringViewCell : ListView
+    public class DemoListViewWithStringViewCell : DemoListView
     {
         public DemoListViewWithStringViewCell()
         {
@@ -67,7 +83,7 @@ namespace DemoApp
         }
     }
 
-    public class DemoListViewWithItemViewCell : ListView
+    public class DemoListViewWithItemViewCell : DemoListView
     {
         public DemoListViewWithItemViewCell()
         {
@@ -100,7 +116,7 @@ namespace DemoApp
         }
     }
 
-    public class DemoListViewWithGroups : ListView
+    public class DemoListViewWithGroups : DemoListView
     {
         public DemoListViewWithGroups()
         {
@@ -118,7 +134,7 @@ namespace DemoApp
         }
     }
 
-    public class DemoListViewWithGroupsAndHeaderTemplate : ListView
+    public class DemoListViewWithGroupsAndHeaderTemplate : DemoListView
     {
         public DemoListViewWithGroupsAndHeaderTemplate()
         {
@@ -167,7 +183,7 @@ namespace DemoApp
         }
     }
 
-    public class DemoListViewWithGestureRecognizers : ListView
+    public class DemoListViewWithGestureRecognizers : DemoListView
     {
         public DemoListViewWithGestureRecognizers()
         {
@@ -211,6 +227,79 @@ namespace DemoApp
                         }
                 };
             }
+        }
+    }
+
+    public class DemoListViewWithRecycling : DemoListView
+    {
+        public DemoListViewWithRecycling()
+        {
+            ItemsSource = new List<string> { "Item1", "Item2", "Item3" };
+            ItemTemplate = new DataTemplate(typeof(RecyclingCell));
+            BackgroundColor = Color.GhostWhite;
+
+            Label header;
+            Header = header = new Label() { Text = "Reload Same" };
+            header.GestureRecognizers.Add(new TapGestureRecognizer {
+                Command = new Command(o => {
+                    ItemsSource = new List<string> { "Item1", "Item2", "Item3" };
+                })
+            });
+
+            Label footer;
+            Footer = footer = new Label() { Text = "Reload Different" };
+            footer.GestureRecognizers.Add(new TapGestureRecognizer {
+                Command = new Command(o => {
+                    ItemsSource = new List<string> { "Item4", "Item5" };
+                })
+            });
+
+            // Reset instance count for each test
+            RecyclingCell.InstanceCount = 0;
+        }
+    }
+
+    public class RecyclingCell : ViewCell
+    {
+        DemoLabel label;
+        readonly int instanceNumber;
+        int bindingContextChangeCount = 0;
+        int appearingCount = 0;
+        int disappearingCount = 0;
+
+        public RecyclingCell()
+        {
+            instanceNumber = ++InstanceCount;
+            label = new DemoLabel();
+            View = label;
+        }
+
+        public static int InstanceCount { get; set; } = 0;
+
+        void UpdateText()
+        {
+            label.Text = $"Instance{instanceNumber}:{BindingContext as string}-OBC{bindingContextChangeCount}-OA{appearingCount}-OD{disappearingCount}";
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            bindingContextChangeCount++;
+            UpdateText();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            appearingCount++;
+            UpdateText();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            disappearingCount++;
+            UpdateText();
         }
     }
 }

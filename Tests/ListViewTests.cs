@@ -6,8 +6,17 @@ using Xamarin.Forms;
 
 namespace Tests
 {
+    [TestFixture(ListViewCachingStrategy.RetainElement)]
+    [TestFixture(ListViewCachingStrategy.RecycleElement)]
     public class ListViewTests : QuickTest<App>
     {
+        ListViewCachingStrategy cachingStrategy;
+
+        public ListViewTests(ListViewCachingStrategy cachingStrategy)
+        {
+            DemoListView.ConstructionCachingStrategy = this.cachingStrategy = cachingStrategy;
+        }
+
         [SetUp]
         protected override void SetUp()
         {
@@ -102,6 +111,36 @@ namespace Tests
             Tap("tap me!!");
             ShouldSee("tap me!!!");
             TapCell("Item");
+        }
+
+        [Test]
+        public void TestRecycling()
+        {
+            Tap("DemoListViewWithRecycling");
+
+            if (cachingStrategy == ListViewCachingStrategy.RetainElement) {
+                ShouldSee("Instance1:Item1-OBC1-OA0-OD0");
+                ShouldSee("Instance2:Item2-OBC1-OA0-OD0");
+                ShouldSee("Instance3:Item3-OBC1-OA0-OD0");
+                Tap("Reload Same");
+                ShouldSee("Instance4:Item1-OBC1-OA0-OD0");
+                ShouldSee("Instance5:Item2-OBC1-OA0-OD0");
+                ShouldSee("Instance6:Item3-OBC1-OA0-OD0");
+                Tap("Reload Different");
+                ShouldSee("Instance7:Item4-OBC1-OA0-OD0");
+                ShouldSee("Instance8:Item5-OBC1-OA0-OD0");
+            } else if ((cachingStrategy & ListViewCachingStrategy.RecycleElement) != 0) {
+                ShouldSee("Instance1:Item1-OBC1-OA0-OD0");
+                ShouldSee("Instance2:Item2-OBC1-OA1-OD1");
+                ShouldSee("Instance3:Item3-OBC1-OA2-OD2");
+                Tap("Reload Same"); // tapping traverses the hierarchy twice
+                ShouldSee("Instance1:Item1-OBC1-OA5-OD5");
+                ShouldSee("Instance2:Item2-OBC1-OA6-OD6");
+                ShouldSee("Instance3:Item3-OBC1-OA7-OD7");
+                Tap("Reload Different");
+                ShouldSee("Instance1:Item4-OBC2-OA10-OD10");
+                ShouldSee("Instance2:Item5-OBC2-OA11-OD11");
+            }
         }
 
         void TapCell(string name)
