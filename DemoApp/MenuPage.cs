@@ -15,13 +15,19 @@ namespace DemoApp
                     new DemoLabel("Menu"),
                     CreateMenuButton("Navigation", () => new NavigationDemoPage()),
                     CreateMenuButton("Elements", () => new ElementDemoPage()),
-                    CreateMenuButton("ListViews", () => new ListViewDemoPage()),
+                    CreateListViewButton(ListViewCachingStrategy.RetainElement),
+                    CreateListViewButton(ListViewCachingStrategy.RecycleElement),
                     CreateMenuButton("Binding", () => new BindingDemoPage()),
                     new DemoButton("Alert") { Command = new Command(o => Application.Current.MainPage.DisplayAlert("Alert", "Message", "Ok")) },
                     CreateMenuButton("TabbedPage", () => new TabbedPageDemoPage()),
                     CreateMenuButton("CarouselPage", () => new CarouselDemoPage()),
                 },
             };
+        }
+
+        DemoButton CreateListViewButton(ListViewCachingStrategy cachingStrategy)
+        {
+            return CreateMenuButton($"ListViews ({cachingStrategy})", () => new ListViewDemoPage(cachingStrategy));
         }
 
         DemoButton CreateMenuButton(string title, Func<Page> pageCreator)

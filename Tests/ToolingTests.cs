@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using DemoApp;
 using NUnit.Framework;
@@ -127,7 +127,7 @@ namespace Tests
         [Test]
         public void TestFindParentInListViews()
         {
-            OpenMenu("ListViews");
+            OpenMenu("ListViews (RetainElement)");
             Tap("DemoListViewWithGroups");
             var label = FindFirst("B4");
             Assert.That(label, Is.Not.Null);

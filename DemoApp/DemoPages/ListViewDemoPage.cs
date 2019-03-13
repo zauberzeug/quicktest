@@ -6,9 +6,11 @@ namespace DemoApp
 {
     public class ListViewDemoPage : ContentPage
     {
-        public ListViewDemoPage()
+        public ListViewDemoPage(ListViewCachingStrategy cachingStrategy)
         {
             Title = "ListView demos";
+
+            DemoListView.ConstructionCachingStrategy = cachingStrategy;
 
             Content = new StackLayout {
                 Children = {

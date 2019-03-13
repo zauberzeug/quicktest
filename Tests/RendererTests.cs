@@ -61,7 +61,7 @@ Message
         [Test]
         public void TestListViewWithTextCell()
         {
-            OpenMenu("ListViews");
+            OpenMenu("ListViews (RetainElement)");
 
             Tap("DemoListViewWithTextCell");
             Assert.That(Render(), Is.EqualTo(@"· ListView demos 
@@ -76,7 +76,7 @@ Message
         [Test]
         public void TestListViewWithStringViewCell()
         {
-            OpenMenu("ListViews");
+            OpenMenu("ListViews (RetainElement)");
 
             Tap("DemoListViewWithStringViewCell");
             Assert.That(Render(), Is.EqualTo(@"· ListView demos 
@@ -92,7 +92,7 @@ Message
         [Test]
         public void TestListViewWithItemViewCell()
         {
-            OpenMenu("ListViews");
+            OpenMenu("ListViews (RetainElement)");
 
             Tap("DemoListViewWithItemViewCell");
             Assert.That(Render(), Is.EqualTo(@"· ListView demos 
@@ -106,7 +106,7 @@ Message
         [Test]
         public void TestListViewWithGroups()
         {
-            OpenMenu("ListViews");
+            OpenMenu("ListViews (RetainElement)");
 
             Tap("DemoListViewWithGroups");
             Assert.That(Render(), Is.EqualTo(@"· ListView demos 
@@ -125,7 +125,7 @@ Message
         [Test]
         public void TestListViewWithGroupsAndHeaderTemplate()
         {
-            OpenMenu("ListViews");
+            OpenMenu("ListViews (RetainElement)");
 
             Tap("DemoListViewWithGroupsAndHeaderTemplate");
             Assert.That(Render(), Is.EqualTo(@"· ListView demos 

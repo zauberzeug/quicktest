@@ -14,7 +14,7 @@ namespace Tests
 
         public ListViewTests(ListViewCachingStrategy cachingStrategy)
         {
-            DemoListView.ConstructionCachingStrategy = this.cachingStrategy = cachingStrategy;
+            this.cachingStrategy = cachingStrategy;
         }
 
         [SetUp]
@@ -23,7 +23,7 @@ namespace Tests
             base.SetUp();
 
             Launch(new App());
-            OpenMenu("ListViews");
+            OpenMenu($"ListViews ({cachingStrategy})");
             ShouldSee("ListView demos");
         }
 
