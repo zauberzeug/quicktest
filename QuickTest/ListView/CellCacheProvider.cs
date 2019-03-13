@@ -15,11 +15,11 @@ namespace QuickTest
             this.listView = listView;
         }
 
-        public void ResetReuse()
+        public void RestartReuse()
         {
-            defaultCache.ResetReuse();
+            defaultCache.RestartReuse();
             foreach (var cellCache in cellCaches.Values)
-                cellCache.ResetReuse();
+                cellCache.RestartReuse();
         }
 
         public CellCache GetCellCache(object item)

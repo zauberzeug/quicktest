@@ -9,12 +9,12 @@ namespace QuickTest
         List<Cell> cells = new List<Cell>();
         int reuseIndex = 0;
 
-        public void ResetReuse()
+        public void RestartReuse()
         {
             reuseIndex = 0;
         }
 
-        public Cell GetNextCell()
+        public Cell GetNextUnusedCell()
         {
             if (cells.Count > reuseIndex)
                 return cells[reuseIndex++];
@@ -22,10 +22,10 @@ namespace QuickTest
                 return null;
         }
 
-        public void Add(Cell cell)
+        public void AddUsedCell(Cell cell)
         {
             if (reuseIndex < cells.Count)
-                throw new InvalidOperationException("Cells can only be added after cached cells have been used.");
+                throw new InvalidOperationException("Cells can only be added after all cached cells have been reused.");
             cells.Add(cell);
             reuseIndex++;
         }
