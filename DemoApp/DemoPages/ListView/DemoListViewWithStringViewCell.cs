@@ -5,7 +5,7 @@ namespace DemoApp
 {
     public class DemoListViewWithStringViewCell : DemoListView
     {
-        public DemoListViewWithStringViewCell()
+        public DemoListViewWithStringViewCell(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
             ItemsSource = new List<string> { "Item A2", "Item B2", "Item C2" };
             ItemTemplate = new DataTemplate(typeof(StringDemoCell));

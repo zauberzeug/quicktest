@@ -5,7 +5,7 @@ namespace DemoApp
 {
     public class DemoListViewWithRecycling : DemoListView
     {
-        public DemoListViewWithRecycling()
+        public DemoListViewWithRecycling(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
             ItemsSource = new List<string> { "Item1", "Item2", "Item3" };
             ItemTemplate = new DataTemplate(typeof(RecyclingCell));

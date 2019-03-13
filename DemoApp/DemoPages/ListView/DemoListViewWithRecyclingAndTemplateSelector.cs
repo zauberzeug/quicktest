@@ -6,7 +6,7 @@ namespace DemoApp
 {
     public class DemoListViewWithRecyclingAndTemplateSelector : DemoListView
     {
-        public DemoListViewWithRecyclingAndTemplateSelector()
+        public DemoListViewWithRecyclingAndTemplateSelector(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
             ItemsSource = new List<string> { "A1", "A2", "B1", "B2" };
             ItemTemplate = new Selector();

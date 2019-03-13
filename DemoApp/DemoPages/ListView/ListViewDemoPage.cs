@@ -10,18 +10,20 @@ namespace DemoApp
         {
             Title = "ListView demos";
 
-            DemoListView.ConstructionCachingStrategy = cachingStrategy;
-
             Content = new StackLayout {
                 Children = {
-                    CreateSubpageButton(new DemoListViewWithTextCell(){Header = "plain header", Footer = "plain footer"}),
-                    CreateSubpageButton(new DemoListViewWithStringViewCell(){Header = new DemoLabel("header label"), Footer = new DemoLabel("footer label")}),
-                    CreateSubpageButton(new DemoListViewWithItemViewCell()),
-                    CreateSubpageButton(new DemoListViewWithGroups()),
-                    CreateSubpageButton(new DemoListViewWithGroupsAndHeaderTemplate()),
-                    CreateSubpageButton(new DemoListViewWithGestureRecognizers()),
-                    CreateSubpageButton(new DemoListViewWithRecycling()),
-                    CreateSubpageButton(new DemoListViewWithRecyclingAndTemplateSelector()),
+                    CreateSubpageButton(new DemoListViewWithTextCell(cachingStrategy) {
+                        Header = "plain header", Footer = "plain footer"
+                    }),
+                    CreateSubpageButton(new DemoListViewWithStringViewCell(cachingStrategy) {
+                        Header = new DemoLabel("header label"), Footer = new DemoLabel("footer label")
+                    }),
+                    CreateSubpageButton(new DemoListViewWithItemViewCell(cachingStrategy)),
+                    CreateSubpageButton(new DemoListViewWithGroups(cachingStrategy)),
+                    CreateSubpageButton(new DemoListViewWithGroupsAndHeaderTemplate(cachingStrategy)),
+                    CreateSubpageButton(new DemoListViewWithGestureRecognizers(cachingStrategy)),
+                    CreateSubpageButton(new DemoListViewWithRecycling(cachingStrategy)),
+                    CreateSubpageButton(new DemoListViewWithRecyclingAndTemplateSelector(cachingStrategy)),
                 },
             };
         }

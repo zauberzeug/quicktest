@@ -5,7 +5,7 @@ namespace DemoApp
 {
     public class DemoListViewWithGroupsAndHeaderTemplate : DemoListView
     {
-        public DemoListViewWithGroupsAndHeaderTemplate()
+        public DemoListViewWithGroupsAndHeaderTemplate(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
             ItemsSource = new List<List<string>> {
                 new StringGroup(new [] { "A6", "B6", "C6" }, "Group 6"),

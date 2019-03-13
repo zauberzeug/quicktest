@@ -5,7 +5,7 @@ namespace DemoApp
 {
     public class DemoListViewWithItemViewCell : DemoListView
     {
-        public DemoListViewWithItemViewCell()
+        public DemoListViewWithItemViewCell(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
             ItemsSource = new List<Item> { new Item { Name = "Item A3" }, new Item { Name = "Item B3" }, new Item { Name = "Item C3" } };
             ItemTemplate = new DataTemplate(typeof(ItemDemoCell));

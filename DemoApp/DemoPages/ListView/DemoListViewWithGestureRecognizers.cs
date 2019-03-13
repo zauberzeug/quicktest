@@ -5,7 +5,7 @@ namespace DemoApp
 {
     public class DemoListViewWithGestureRecognizers : DemoListView
     {
-        public DemoListViewWithGestureRecognizers()
+        public DemoListViewWithGestureRecognizers(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
             ItemsSource = new List<Item> { new Item { Name = "Item" } };
             ItemTemplate = new DataTemplate(typeof(ItemGestureCell));
