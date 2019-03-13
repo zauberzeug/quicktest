@@ -106,8 +106,6 @@ namespace QuickTest
         List<Cell> cells = new List<Cell>();
         int reuseIndex = 0;
 
-        Guid guid = Guid.NewGuid();
-
         public void ResetReuse()
         {
             reuseIndex = 0;
@@ -123,6 +121,8 @@ namespace QuickTest
 
         public void Add(Cell cell)
         {
+            if (reuseIndex < cells.Count)
+                throw new InvalidOperationException("Cells can only be added after cached cells have been used.");
             cells.Add(cell);
             reuseIndex++;
         }
