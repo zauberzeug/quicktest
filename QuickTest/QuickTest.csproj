@@ -63,11 +63,14 @@
     <Compile Include="UserNavigation.cs" />
     <Compile Include="ElementExtensions.cs" />
     <Compile Include="LaunchException.cs" />
-    <Compile Include="ListViewCrawler.cs" />
-    <Compile Include="CellGroup.cs" />
+    <Compile Include="ListView\CellGroup.cs" />
+    <Compile Include="ListView\ListViewCrawler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ListView\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.3.2.0.839982\build\netstandard2.0\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.3.2.0.839982\build\netstandard2.0\Xamarin.Forms.targets')" />
