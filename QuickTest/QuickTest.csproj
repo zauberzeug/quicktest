@@ -65,6 +65,11 @@
     <Compile Include="LaunchException.cs" />
     <Compile Include="ListView\CellGroup.cs" />
     <Compile Include="ListView\ListViewCrawler.cs" />
+    <Compile Include="ListView\CrawlingStrategy.cs" />
+    <Compile Include="ListView\RetainElementCrawlingStrategy.cs" />
+    <Compile Include="ListView\RecycleElementCrawlingStrategy.cs" />
+    <Compile Include="ListView\ListViewCellCache.cs" />
+    <Compile Include="ListView\CellCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -74,4 +79,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.3.2.0.839982\build\netstandard2.0\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.3.2.0.839982\build\netstandard2.0\Xamarin.Forms.targets')" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="None" ResourceNamePolicy="FileFormatDefault" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>
