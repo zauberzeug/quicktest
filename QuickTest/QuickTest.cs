@@ -28,7 +28,7 @@ namespace QuickTest
         [SetUp]
         protected virtual void SetUp()
         {
-            Console.WriteLine("!!!!!!!!!!!!!!! test version --3-- !!!!!!!!!!!!!!!!!");
+            // Use null as runtimePlatform to be able to set all caching strategies in ListView
             MockForms.Init(runtimePlatform: null);
 
             Timeout = TimeSpan.FromSeconds(0.2);
