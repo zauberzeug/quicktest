@@ -124,13 +124,16 @@ namespace Tests
             Assert.That(element, Is.TypeOf<DemoLabel>());
         }
 
-        [Test]
-        public void TestFindParentInListViews()
+        [TestCase("ListViews (RetainElement)")]
+        [TestCase("ListViews (RecycleElement)")]
+        [TestCase("ListViews (RecycleElementAndDataTemplate)")]
+        public void TestFindParentInListViews(string menuEntry)
         {
-            OpenMenu("ListViews (RetainElement)");
+            OpenMenu(menuEntry);
             Tap("DemoListViewWithGroups");
             var label = FindFirst("B4");
             Assert.That(label, Is.Not.Null);
+            Assert.That(label.FindParent<ListView>(), Is.Not.Null);
             var cell = label.FindParent<StringDemoCell>();
 
             Assert.That(cell, Is.Not.Null);
