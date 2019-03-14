@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace DemoApp
 {
-    public class DemoListViewWithRecycling : DemoListView
+    public class DemoListViewForRecycling : DemoListView
     {
-        public DemoListViewWithRecycling(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
+        public DemoListViewForRecycling(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
             ItemsSource = new List<string> { "A", "B", "C" };
             ItemTemplate = new DataTemplate(typeof(RecyclingCell));

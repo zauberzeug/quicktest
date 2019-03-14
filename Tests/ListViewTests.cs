@@ -129,7 +129,7 @@ namespace Tests
         [Test]
         public void TestCellReuse()
         {
-            Tap("DemoListViewWithRecycling");
+            Tap("DemoListViewForRecycling");
 
             if (cachingStrategy == ListViewCachingStrategy.RetainElement) {
                 // no reuse expected
@@ -166,7 +166,7 @@ namespace Tests
         [Test]
         public void TestCellReuseWithTemplateSelector()
         {
-            Tap("DemoListViewWithRecyclingAndTemplateSelector");
+            Tap("DemoListViewForRecyclingWithTemplateSelector");
             ShouldSee("A1:#1-T1");
             ShouldSee("A2:#2-T1");
             ShouldSee("B1:#3-T2");
@@ -183,6 +183,40 @@ namespace Tests
                 ShouldSee("B1:#4-T2");
                 ShouldSee("A2:#1-T1");
                 ShouldSee("A1:#2-T1");
+            }
+        }
+
+        // The cells contain information in the following format:
+        // "Item:#N"
+        //
+        // - Item - The displayed string
+        // - #N - Identifies the cell instance
+        [Test]
+        public void TestCellReuseWithGroups()
+        {
+            Tap("DemoListViewForRecyclingWithGroups");
+            ShouldSee("Group 4");
+            ShouldSee("A4:#1");
+            ShouldSee("B4:#2");
+            ShouldSee("Group 5");
+            ShouldSee("A5:#3");
+            ShouldSee("B5:#4");
+            Tap("Reverse");
+            if (cachingStrategy == ListViewCachingStrategy.RetainElement) {
+                // no reuse expected
+                ShouldSee("Group 5");
+                ShouldSee("B5:#5");
+                ShouldSee("A5:#6");
+                ShouldSee("Group 4");
+                ShouldSee("B4:#7");
+                ShouldSee("A4:#8");
+            } else if ((cachingStrategy & ListViewCachingStrategy.RecycleElement) != 0) {
+                ShouldSee("Group 5");
+                ShouldSee("B5:#1");
+                ShouldSee("A5:#2");
+                ShouldSee("Group 4");
+                ShouldSee("B4:#3");
+                ShouldSee("A4:#4");
             }
         }
 

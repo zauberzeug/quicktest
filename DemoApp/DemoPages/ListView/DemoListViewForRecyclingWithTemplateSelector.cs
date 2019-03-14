@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace DemoApp
 {
-    public class DemoListViewWithRecyclingAndTemplateSelector : DemoListView
+    public class DemoListViewForRecyclingWithTemplateSelector : DemoListView
     {
-        public DemoListViewWithRecyclingAndTemplateSelector(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
+        public DemoListViewForRecyclingWithTemplateSelector(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
             ItemsSource = new List<object> { new A(1), new A(2), new B(1), new B(2) };
             ItemTemplate = new Selector();

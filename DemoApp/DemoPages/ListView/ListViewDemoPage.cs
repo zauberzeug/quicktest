@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace DemoApp
@@ -22,8 +20,9 @@ namespace DemoApp
                     CreateSubpageButton(new DemoListViewWithGroups(cachingStrategy)),
                     CreateSubpageButton(new DemoListViewWithGroupsAndHeaderTemplate(cachingStrategy)),
                     CreateSubpageButton(new DemoListViewWithGestureRecognizers(cachingStrategy)),
-                    CreateSubpageButton(new DemoListViewWithRecycling(cachingStrategy)),
-                    CreateSubpageButton(new DemoListViewWithRecyclingAndTemplateSelector(cachingStrategy)),
+                    CreateSubpageButton(new DemoListViewForRecycling(cachingStrategy)),
+                    CreateSubpageButton(new DemoListViewForRecyclingWithTemplateSelector(cachingStrategy)),
+                    CreateSubpageButton(new DemoListViewForRecyclingWithGroups(cachingStrategy)),
                 },
             };
         }

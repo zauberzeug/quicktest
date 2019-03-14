@@ -34,12 +34,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithGroups.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithGroupsAndHeaderTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithItemViewCell.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithRecycling.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithRecyclingAndTemplateSelector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewForRecycling.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewForRecyclingWithTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewWithStringViewCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\StringDemoCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\StringGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewForRecyclingWithGroups.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DemoPages\" />
