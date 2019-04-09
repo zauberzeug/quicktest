@@ -20,5 +20,12 @@ namespace Tests
         {
             ShouldSee("TitleViewLabel");
         }
+
+        [Test]
+        public void TapOnButton()
+        {
+            ShouldSee("TitleViewButton");
+            Tap("TitleViewButton");
+        }
     }
 }
