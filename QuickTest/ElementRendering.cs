@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 
 namespace QuickTest
 {
@@ -13,6 +11,13 @@ namespace QuickTest
                 return "";
 
             var result = "· ";// + $"<{element.GetType().Name}> ";
+
+            var page = element as Page;
+            if (page != null) {
+                var titleView = NavigationPage.GetTitleView(page);
+                if (titleView != null)
+                    result += $"[TitleView]{titleView.Render()}";
+            }
 
             var navigation = (element as ContentPage)?.Navigation;
             if (navigation != null)

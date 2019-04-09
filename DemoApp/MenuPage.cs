@@ -22,6 +22,8 @@ namespace DemoApp
                     new DemoButton("Alert") { Command = new Command(o => Application.Current.MainPage.DisplayAlert("Alert", "Message", "Ok")) },
                     CreateMenuButton("TabbedPage", () => new TabbedPageDemoPage()),
                     CreateMenuButton("CarouselPage", () => new CarouselDemoPage()),
+                    CreateMenuButton("TitleViewPage", () => new TitleViewPage()),
+                    CreateMenuButton("TabbedTitleViewPage", () => new TabbedTitleViewPage())
                 },
             };
         }
