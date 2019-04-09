@@ -18,8 +18,6 @@ namespace Tests
         [Test, Ignore("Not working yet")]
         public void Test()
         {
-            ShouldSee("Some content");
-
             Tap("TitleViewPage");
             Tap("TitleViewLabel");
             ShouldSee("Tapped on Label");

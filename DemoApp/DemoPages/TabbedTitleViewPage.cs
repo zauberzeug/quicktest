@@ -8,8 +8,8 @@ namespace DemoApp
         {
             Title = "TabbedTitleViewPage";
 
-            Children.Add(CreateContentPage());
             Children.Add(CreateTitleViewPage());
+            Children.Add(CreateContentPage());
         }
 
         TitleViewPage CreateTitleViewPage()
