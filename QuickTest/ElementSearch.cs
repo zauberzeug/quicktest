@@ -18,9 +18,9 @@ namespace QuickTest
 
             IEnumerable<ElementInfo> empty = new List<ElementInfo>();
 
-            var page = element as Page;
-            if (page != null)
-                result.AddRange(NavigationPage.GetTitleView(page)?.Find(predicate, containerPredicate) ?? empty);
+            //var page = element as Page;
+            //if (page != null)
+            //result.AddRange(NavigationPage.GetTitleView(page)?.Find(predicate, containerPredicate) ?? empty);
 
             result.AddRange((element as Page)?.ToolbarItems.ToList().Where(predicate.Invoke).Select(ElementInfo.FromElement) ?? empty);
             result.AddRange((element as ContentPage)?.Content.Find(predicate, containerPredicate) ?? empty);

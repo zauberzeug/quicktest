@@ -15,7 +15,7 @@ namespace Tests
             OpenMenu("TabbedTitleViewPage");
         }
 
-        [Test, Ignore("Not working yet")]
+        [Test]
         public void Test()
         {
             Tap("TitleViewPage");

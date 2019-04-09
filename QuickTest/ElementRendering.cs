@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -12,16 +13,7 @@ namespace QuickTest
 
             var result = "· ";// + $"<{element.GetType().Name}> ";
 
-            var page = element as Page;
-            if (page != null) {
-                var titleView = NavigationPage.GetTitleView(page);
-                if (titleView != null)
-                    result += $"[TitleView]{titleView.Render()}";
-            }
-
-            var navigation = (element as ContentPage)?.Navigation;
-            if (navigation != null)
-                result += navigation.NavigationStack.FirstOrDefault()?.Title + " " + string.Join(" ", (element as Page).ToolbarItems.Select(t => $"[{t.Text}]"));
+            result += GetTitle(element as ContentPage);
 
             var tabbedPage = element.Parent as TabbedPage;
             if (tabbedPage != null)
@@ -62,6 +54,19 @@ namespace QuickTest
             result = "\n" + result.Replace("\n", "\n  ");
 
             return result;
+        }
+
+        static string GetTitle(ContentPage page)
+        {
+            var navigation = page?.Navigation;
+            if (navigation == null)
+                return ""; // without navigation the user can't see the title
+
+            var titleView = NavigationPage.GetTitleView(page);
+            if (titleView != null)
+                return $"*** Custom TitleView ***";
+
+            return navigation.NavigationStack.FirstOrDefault()?.Title + " " + string.Join(" ", page.ToolbarItems.Select(t => $"[{t.Text}]"));
         }
 
         public static string Render(this ListView listView)
