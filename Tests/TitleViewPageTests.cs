@@ -16,16 +16,29 @@ namespace Tests
         }
 
         [Test]
-        public void ShouldSeeTitleView()
+        public void ShouldSeeTitleViewLabel()
         {
             ShouldSee("TitleViewLabel");
         }
 
         [Test]
-        public void TapOnButton()
+        public void ShouldSeeTitleViewButton()
         {
             ShouldSee("TitleViewButton");
+        }
+
+        [Test]
+        public void TapOnLabel()
+        {
+            Tap("TitleViewLabel");
+            ShouldSee("Tapped on Label");
+        }
+
+        [Test]
+        public void TapOnButton()
+        {
             Tap("TitleViewButton");
+            ShouldSee("Tapped on Button");
         }
     }
 }

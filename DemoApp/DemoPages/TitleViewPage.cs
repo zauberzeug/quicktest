@@ -4,13 +4,23 @@ namespace DemoApp
 {
     public class TitleViewPage : ContentPage
     {
+        Label infoLabel;
+
         public TitleViewPage()
         {
+            infoLabel = new Label();
+            var titelViewLabel = new Label {
+                Text = "TitleViewLabel",
+                VerticalOptions = LayoutOptions.Center
+            };
+            titelViewLabel.GestureRecognizers.Add(new TapGestureRecognizer() { Command = new Command(OnTitleViewLabelTapped) });
+
+
             var titleView = new StackLayout {
                 Orientation = StackOrientation.Horizontal,
                 Spacing = 10,
                 Children = {
-                    new Label { Text = "TitleViewLabel", VerticalOptions = LayoutOptions.Center },
+                    titelViewLabel,
                     new Button {
                         Text = "TitleViewButton",
                         Command = new Command(OnTitleViewButtonTapped),
@@ -18,12 +28,14 @@ namespace DemoApp
                 }
             };
             NavigationPage.SetTitleView(this, titleView);
-            Content = new StackLayout { };
+            Content = new StackLayout {
+                Margin = 20,
+                Children = { infoLabel }
+            };
         }
 
-        public void OnTitleViewButtonTapped()
-        {
-            (Content as StackLayout).Children.Add(new Label { Text = "Label added by button" });
-        }
+        public void OnTitleViewLabelTapped() => infoLabel.Text = "Tapped on Label";
+
+        public void OnTitleViewButtonTapped() => infoLabel.Text = "Tapped on Button";
     }
 }
