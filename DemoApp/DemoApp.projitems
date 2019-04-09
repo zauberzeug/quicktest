@@ -41,6 +41,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\StringGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\ListView\DemoListViewForRecyclingWithGroups.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\TitleViewPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DemoPages\" />
