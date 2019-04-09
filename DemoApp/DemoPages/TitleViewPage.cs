@@ -8,34 +8,53 @@ namespace DemoApp
 
         public TitleViewPage()
         {
+            Title = "TitleViewPage";
+
             infoLabel = new Label();
-            var titelViewLabel = new Label {
-                Text = "TitleViewLabel",
-                VerticalOptions = LayoutOptions.Center
-            };
-            titelViewLabel.GestureRecognizers.Add(new TapGestureRecognizer() { Command = new Command(OnTitleViewLabelTapped) });
 
+            TitleView = CreateTitelView();
+            NavigationPage.SetTitleView(this, TitleView);
 
-            var titleView = new StackLayout {
-                Orientation = StackOrientation.Horizontal,
-                Spacing = 10,
-                Children = {
-                    titelViewLabel,
-                    new Button {
-                        Text = "TitleViewButton",
-                        Command = new Command(OnTitleViewButtonTapped),
-                    },
-                }
-            };
-            NavigationPage.SetTitleView(this, titleView);
             Content = new StackLayout {
                 Margin = 20,
                 Children = { infoLabel }
             };
         }
 
-        public void OnTitleViewLabelTapped() => infoLabel.Text = "Tapped on Label";
+        public StackLayout TitleView { get; private set; }
 
-        public void OnTitleViewButtonTapped() => infoLabel.Text = "Tapped on Button";
+        StackLayout CreateTitelView()
+        {
+            return new StackLayout {
+                Orientation = StackOrientation.Horizontal,
+                Spacing = 10,
+                Children = {
+                    CreateTitleViewLabel(),
+                    CreateTitleViewButton(),
+                }
+            };
+        }
+
+        Label CreateTitleViewLabel()
+        {
+            var titelViewLabel = new Label {
+                Text = "TitleViewLabel",
+                VerticalOptions = LayoutOptions.Center
+            };
+            titelViewLabel.GestureRecognizers.Add(new TapGestureRecognizer() { Command = new Command(OnTitleViewLabelTapped) });
+            return titelViewLabel;
+        }
+
+        Button CreateTitleViewButton()
+        {
+            return new Button {
+                Text = "TitleViewButton",
+                Command = new Command(OnTitleViewButtonTapped),
+            };
+        }
+
+        void OnTitleViewLabelTapped() => infoLabel.Text = "Tapped on Label";
+
+        void OnTitleViewButtonTapped() => infoLabel.Text = "Tapped on Button";
     }
 }
