@@ -19,11 +19,22 @@ namespace QuickTest
             if (tabbedPage != null)
                 result += "\n|" + string.Join("|", tabbedPage.Children.Select(p => tabbedPage.CurrentPage == p ? $"> {p.Title} <" : $" {p.Title} ")) + "|";
 
+            result += (element as ContentPage)?.Content.Render();
+
+            result += RenderContent(element);
+
+            result = "\n" + result.Replace("\n", "\n  ");
+
+            return result;
+        }
+
+        static string RenderContent(Element element)
+        {
+            var result = "";
+
             var automationId = (element as VisualElement)?.AutomationId;
             if (automationId != null)
                 result += $"({automationId}) ";
-
-            result += (element as ContentPage)?.Content.Render();
 
             result += (element as ContentView)?.Content.Render();
             result += (element as ScrollView)?.Content.Render();
@@ -51,8 +62,6 @@ namespace QuickTest
             result += (element as TextCell)?.Text;
             result += (element as ViewCell)?.View?.Render();
 
-            result = "\n" + result.Replace("\n", "\n  ");
-
             return result;
         }
 
@@ -64,7 +73,7 @@ namespace QuickTest
 
             var titleView = NavigationPage.GetTitleView(page);
             if (titleView != null)
-                return $"*** Custom TitleView ***";
+                return $"*{RenderContent(titleView).Replace("\n", "").Replace("· ", " ").Replace("  ", "")} *";
 
             return navigation.NavigationStack.FirstOrDefault()?.Title + " " + string.Join(" ", page.ToolbarItems.Select(t => $"[{t.Text}]"));
         }

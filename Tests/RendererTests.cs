@@ -179,5 +179,16 @@ Message
             Assert.That(rendering.Contains("· (picker_automation_id) Pick an item"), Is.False);
             Assert.That(rendering.Contains("· (picker_automation_id) Item B"), Is.True);
         }
+
+        [Test]
+        public void TestTitleViewRendering()
+        {
+            OpenMenu("TabbedTitleViewPage");
+            System.Console.WriteLine(Render());
+            Assert.That(Render(), Is.EqualTo(@"· * TitleViewLabel TitleViewButton *
+  |> TitleViewPage <| ContentPage |
+  · 
+    ·"));
+        }
     }
 }
