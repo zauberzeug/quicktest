@@ -18,18 +18,24 @@ namespace QuickTest
 
             IEnumerable<ElementInfo> empty = new List<ElementInfo>();
 
-            //var page = element as Page;
-            //if (page != null)
-            //result.AddRange(NavigationPage.GetTitleView(page)?.Find(predicate, containerPredicate) ?? empty);
+            View titleView = null;
+            if (element is Page && element.Parent is TabbedPage && TitleViewIsVisible(element.Parent))
+                titleView = NavigationPage.GetTitleView(element.Parent as Page);
+            else if (TitleViewIsVisible(element))
+                titleView = NavigationPage.GetTitleView(element as Page);
 
-            result.AddRange((element as Page)?.ToolbarItems.ToList().Where(predicate.Invoke).Select(ElementInfo.FromElement) ?? empty);
+            if (titleView != null)
+                result.AddRange(titleView.Find(predicate, containerPredicate) ?? empty);
+            else
+                result.AddRange((element as Page)?.ToolbarItems.ToList().Where(predicate.Invoke).Select(ElementInfo.FromElement) ?? empty);
+
+
             result.AddRange((element as ContentPage)?.Content.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as ContentView)?.Content.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as ScrollView)?.Content.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as Layout<View>)?.Children.ToList().SelectMany(child => child.Find(predicate, containerPredicate)) ?? empty);
             result.AddRange((element as ListView)?.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as ViewCell)?.View?.Find(predicate, containerPredicate) ?? empty);
-            result.AddRange((element as TabbedPage)?.CurrentPage?.Find(predicate, containerPredicate) ?? empty);
 
             if (predicate.Invoke(element))
                 result.Add(ElementInfo.FromElement(element));
@@ -37,6 +43,15 @@ namespace QuickTest
             AddTapGestureRecognizers(element, result);
 
             return result;
+        }
+
+        static bool TitleViewIsVisible(Element element)
+        {
+            if (element.FindParent<NavigationPage>() == null)
+                return false;
+
+            var page = element as Page ?? new Page();
+            return NavigationPage.GetTitleView(page) != null;
         }
 
         public static List<ElementInfo> Find(this Element element, string text)
@@ -50,7 +65,7 @@ namespace QuickTest
         public static bool HasText(this Element element, string text)
         {
             return
-                ((element.Parent is NavigationPage && (element as Page)?.Title == text)) ||
+                ((element.Parent is NavigationPage && !TitleViewIsVisible(element) && (element as Page)?.Title == text)) ||
                 (element as Button)?.Text == text ||
                 (element as Label)?.Text == text ||
                 (element as Label)?.FormattedText?.ToString() == text ||
@@ -62,9 +77,9 @@ namespace QuickTest
                 ((element as Entry)?.Placeholder == text && string.IsNullOrEmpty((element as Entry)?.Text)) ||
                 (element as Image)?.Source?.AutomationId == text ||
                 (element as TextCell)?.Text == text ||
-                ((element.Parent is TabbedPage && (element.Parent as Page)?.Title == text)) ||
-                (((element.Parent as TabbedPage)?.Children.Any(p => p.Title == text) ?? false)) ||
-                ((element.FindParent<NavigationPage>() != null && (element as ToolbarItem)?.Text == text)) ||
+                (element.Parent as TabbedPage)?.Title == text ||
+                (element is Page && ((element.Parent as TabbedPage)?.Children.Any(p => p.Title == text) ?? false)) ||
+                ((element.FindParent<NavigationPage>() != null && !TitleViewIsVisible(element) && (element as ToolbarItem)?.Text == text)) ||
                 element?.AutomationId == text;
         }
 

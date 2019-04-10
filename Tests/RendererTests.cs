@@ -184,7 +184,6 @@ Message
         public void TestTitleViewRendering()
         {
             OpenMenu("TabbedTitleViewPage");
-            System.Console.WriteLine(Render());
             Assert.That(Render(), Is.EqualTo(@"· * TitleViewLabel TitleViewButton *
   |> TitleViewPage <| ContentPage |
   · 

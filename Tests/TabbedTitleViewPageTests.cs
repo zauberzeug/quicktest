@@ -18,6 +18,7 @@ namespace Tests
         [Test]
         public void Test()
         {
+            ShouldNotSee("ToolbarItem"); // toolbar items are not shown with custom title view
             Tap("TitleViewPage");
             Tap("TitleViewLabel");
             ShouldSee("Tapped on Label");
