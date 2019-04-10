@@ -56,7 +56,7 @@ namespace QuickTest
                 ((element as Entry)?.Placeholder == text && string.IsNullOrEmpty((element as Entry)?.Text)) ||
                 (element as Image)?.Source?.AutomationId == text ||
                 (element as TextCell)?.Text == text ||
-                (element.Parent as TabbedPage)?.Title == text ||
+                (!TitleViewIsVisible(element.Parent) && (element.Parent as TabbedPage)?.Title == text) ||
                 (element is Page && ((element.Parent as TabbedPage)?.Children.Any(p => p.Title == text) ?? false)) ||
                 ((element.FindParent<NavigationPage>() != null && !TitleViewIsVisible(element) && (element as ToolbarItem)?.Text == text)) ||
                 element?.AutomationId == text;
@@ -83,7 +83,7 @@ namespace QuickTest
 
         static bool TitleViewIsVisible(Element element)
         {
-            if (element.FindParent<NavigationPage>() == null)
+            if (element?.FindParent<NavigationPage>() == null)
                 return false;
 
             var page = element as Page ?? new Page();
