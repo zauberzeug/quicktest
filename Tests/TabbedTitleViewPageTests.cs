@@ -16,7 +16,7 @@ namespace Tests
         }
 
         [Test]
-        public void Test()
+        public void TitleViewIsVisibleWithTabbedPages()
         {
             ShouldNotSee("ToolbarItem"); // toolbar items are not shown with custom title view
             Tap("TitleViewPage");

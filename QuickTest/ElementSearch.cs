@@ -11,25 +11,13 @@ namespace QuickTest
         public static List<ElementInfo> Find(this Element element, Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
             var result = new List<ElementInfo>();
+            IEnumerable<ElementInfo> empty = new List<ElementInfo>();
 
             if (element == null) throw new NullReferenceException("can not search for items in null element");
 
             if (containerPredicate != null && !containerPredicate.Invoke(element)) return result;
 
-            IEnumerable<ElementInfo> empty = new List<ElementInfo>();
-
-            View titleView = null;
-            if (element is Page && element.Parent is TabbedPage && TitleViewIsVisible(element.Parent))
-                titleView = NavigationPage.GetTitleView(element.Parent as Page);
-            else if (TitleViewIsVisible(element))
-                titleView = NavigationPage.GetTitleView(element as Page);
-
-            if (titleView != null)
-                result.AddRange(titleView.Find(predicate, containerPredicate) ?? empty);
-            else
-                result.AddRange((element as Page)?.ToolbarItems.ToList().Where(predicate.Invoke).Select(ElementInfo.FromElement) ?? empty);
-
-
+            result.AddRange(FindInTitle(element, predicate, containerPredicate));
             result.AddRange((element as ContentPage)?.Content.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as ContentView)?.Content.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as ScrollView)?.Content.Find(predicate, containerPredicate) ?? empty);
@@ -43,15 +31,6 @@ namespace QuickTest
             AddTapGestureRecognizers(element, result);
 
             return result;
-        }
-
-        static bool TitleViewIsVisible(Element element)
-        {
-            if (element.FindParent<NavigationPage>() == null)
-                return false;
-
-            var page = element as Page ?? new Page();
-            return NavigationPage.GetTitleView(page) != null;
         }
 
         public static List<ElementInfo> Find(this Element element, string text)
@@ -81,6 +60,34 @@ namespace QuickTest
                 (element is Page && ((element.Parent as TabbedPage)?.Children.Any(p => p.Title == text) ?? false)) ||
                 ((element.FindParent<NavigationPage>() != null && !TitleViewIsVisible(element) && (element as ToolbarItem)?.Text == text)) ||
                 element?.AutomationId == text;
+        }
+
+        static IEnumerable<ElementInfo> FindInTitle(Element element, Predicate<Element> predicate, Predicate<Element> containerPredicate)
+        {
+            var result = new List<ElementInfo>();
+            IEnumerable<ElementInfo> empty = new List<ElementInfo>();
+
+            View titleView = null;
+            if (element is Page && element.Parent is TabbedPage && TitleViewIsVisible(element.Parent))
+                titleView = NavigationPage.GetTitleView(element.Parent as Page);
+            else if (TitleViewIsVisible(element))
+                titleView = NavigationPage.GetTitleView(element as Page);
+
+            if (titleView != null)
+                result.AddRange(titleView.Find(predicate, containerPredicate) ?? empty);
+            else
+                result.AddRange((element as Page)?.ToolbarItems.ToList().Where(predicate.Invoke).Select(ElementInfo.FromElement) ?? empty);
+
+            return result;
+        }
+
+        static bool TitleViewIsVisible(Element element)
+        {
+            if (element.FindParent<NavigationPage>() == null)
+                return false;
+
+            var page = element as Page ?? new Page();
+            return NavigationPage.GetTitleView(page) != null;
         }
 
         static void AddTapGestureRecognizers(Element sourceElement, IEnumerable<ElementInfo> result)
