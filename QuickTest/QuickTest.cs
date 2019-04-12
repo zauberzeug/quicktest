@@ -21,7 +21,7 @@ namespace QuickTest
             }
         }
 
-        TimeSpan Timeout { get; set; }
+        protected TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(0.2);
 
         protected T App { get; private set; }
 
@@ -30,8 +30,6 @@ namespace QuickTest
         {
             // Use null as runtimePlatform to be able to set all caching strategies in ListView
             MockForms.Init(runtimePlatform: null);
-
-            Timeout = TimeSpan.FromSeconds(0.2);
         }
 
         [TearDown]
