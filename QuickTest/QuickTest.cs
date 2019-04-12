@@ -216,15 +216,6 @@ namespace QuickTest
             return User.Render();
         }
 
-        static QuickTest<T> CreateWithTimeout(T app, User user, TimeSpan timeout)
-        {
-            return new QuickTest<T> {
-                App = app,
-                User = user,
-                Timeout = timeout,
-            };
-        }
-
         protected QuickTest<T> After(double seconds)
         {
             return CreateWithTimeout(App, User, TimeSpan.FromSeconds(seconds));
@@ -232,6 +223,15 @@ namespace QuickTest
 
         protected QuickTest<T> Now {
             get { return CreateWithTimeout(App, User, TimeSpan.FromSeconds(0.2)); }
+        }
+
+        static QuickTest<T> CreateWithTimeout(T app, User user, TimeSpan timeout)
+        {
+            return new QuickTest<T> {
+                App = app,
+                User = user,
+                Timeout = timeout,
+            };
         }
     }
 }
