@@ -23,7 +23,8 @@ namespace DemoApp
                     CreateMenuButton("TabbedPage", () => new TabbedPageDemoPage()),
                     CreateMenuButton("CarouselPage", () => new CarouselDemoPage()),
                     CreateMenuButton("TitleViewPage", () => new TitleViewPage()),
-                    CreateMenuButton("TabbedTitleViewPage", () => new TabbedTitleViewPage())
+                    CreateMenuButton("TabbedTitleViewPage", () => new TabbedTitleViewPage()),
+                    CreateMenuButton("Empty ContentPage", () => new ContentPage() { Title = "Page with no content", Content = null })
                 },
             };
         }

@@ -19,7 +19,7 @@ namespace QuickTest
             if (tabbedPage != null)
                 result += "\n|" + string.Join("|", tabbedPage.Children.Select(p => tabbedPage.CurrentPage == p ? $"> {p.Title} <" : $" {p.Title} ")) + "|";
 
-            result += (element as ContentPage)?.Content.Render();
+            result += (element as ContentPage)?.Content?.Render();
 
             result += RenderContent(element);
 
