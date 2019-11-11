@@ -106,6 +106,17 @@ namespace Tests
         }
 
         [Test]
+        public void TestEntryMaxLength()
+        {
+            var entry = Find("entry_automation_id").First() as Entry;
+            entry.MaxLength = 10;
+
+            Input("entry_automation_id", "Text 1234567890");
+            ShouldNotSee("Text 1234567890");
+            ShouldSee("Text 12345");
+        }
+
+        [Test]
         public void TestEditor()
         {
             ShouldSee("editor_automation_id");
@@ -115,6 +126,17 @@ namespace Tests
 
             Input("Text1", "Text2");
             ShouldSee("Text2");
+        }
+
+        [Test]
+        public void TestEditorMaxLength()
+        {
+            var editor = Find("editor_automation_id").First() as Editor;
+            editor.MaxLength = 10;
+
+            Input("editor_automation_id", "Text 1234567890");
+            ShouldNotSee("Text 1234567890");
+            ShouldSee("Text 12345");
         }
 
         [Test]

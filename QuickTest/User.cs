@@ -150,10 +150,12 @@ namespace QuickTest
 
             elements.First().SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, true);
             if (elements.First() is Entry) {
-                (elements.First() as Entry).Text = text;
+                var maxTextLength = Math.Min(text.Length, (elements.First() as Entry).MaxLength);
+                (elements.First() as Entry).Text = text.Substring(0, maxTextLength);
                 (elements.First() as Entry).SendCompleted();
             } else if (elements.First() is Editor) {
-                (elements.First() as Editor).Text = text;
+                var maxTextLength = Math.Min(text.Length, (elements.First() as Editor).MaxLength);
+                (elements.First() as Editor).Text = text.Substring(0, maxTextLength);
                 (elements.First() as Editor).SendCompleted();
             } else if (elements.First() is SearchBar)
                 (elements.First() as SearchBar).Text = text;
