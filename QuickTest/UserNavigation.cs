@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
@@ -44,12 +42,15 @@ namespace QuickTest
             HandleAppearing(CurrentPage);
 
             if (app.MainPage is MasterDetailPage) {
+                EnablePlatform(app.MainPage);
                 (app.MainPage as MasterDetailPage).PropertyChanging += HandleMasterDetailPropertyChanging;
                 (app.MainPage as MasterDetailPage).PropertyChanged += HandleMasterDetailPropertyChanged;
             }
 
-            if (CurrentNavigationPage != null)
+            if (CurrentNavigationPage != null) {
+                EnablePlatform(CurrentNavigationPage);
                 OnNavigationPageAdded();
+            }
 
             app.ModalPushing += HandleModalPushing;
             app.ModalPushed += HandleModalPushed;
@@ -59,6 +60,8 @@ namespace QuickTest
 
         void HandleAppearing(Page page)
         {
+            EnablePlatform(page);
+
             (page as IPageController).SendAppearing();
 
             if (page is MultiPage<Page>) {
@@ -171,5 +174,7 @@ namespace QuickTest
             }
             HandleAppearing(CurrentPage);
         }
+
+        void EnablePlatform(Page page) => page.IsPlatformEnabled = true;
     }
 }
