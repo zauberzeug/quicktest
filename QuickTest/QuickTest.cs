@@ -204,6 +204,11 @@ namespace QuickTest
                 Tap(textToTap);
         }
 
+        protected virtual void CloseMenu()
+        {
+            User.CloseMenu();
+        }
+
         protected virtual void GoBack()
         {
             User.GoBack();

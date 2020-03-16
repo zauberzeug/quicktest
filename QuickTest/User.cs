@@ -203,6 +203,11 @@ namespace QuickTest
             (app.MainPage as MasterDetailPage).IsPresented = true;
         }
 
+        public void CloseMenu()
+        {
+            (app.MainPage as MasterDetailPage).IsPresented = false;
+        }
+
         public void GoBack()
         {
             app.MainPage.SendBackButtonPressed();
