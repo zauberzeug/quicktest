@@ -23,10 +23,12 @@ function packNuGet {
 }
 
 function publishNuGet {
+  nuget push -Source https://www.nuget.org/api/v2/package $1
+}
+
+function createTag {
   git tag -a $VERSION -m ''  || exit 1
   git push --tags
-
-  nuget push -Source https://www.nuget.org/api/v2/package $1
 }
 
 nuget restore QuickTest.sln || exit 1
@@ -38,6 +40,12 @@ pushd packages && nuget install Nunit.Runners && popd
 export MONO_IOMAP=all # this fixes slash, backslash path seperator problems within nunit test runner
 NUNIT=(packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe)
 mono ${NUNIT[0]} --config=Release "Tests/Tests.csproj" || exit 1
+
+createTag
+
+if [[ $SKIP_DEPLOYMENT == True ]]; then
+  exit 0
+fi
 
 packNuGet Xamarin.Forms.QuickTest.nuspec
 publishNuGet Xamarin.Forms.QuickTest.$VERSION.nupkg
