@@ -47,9 +47,11 @@ git config --list
 
 createTag
 
+packNuGet Xamarin.Forms.QuickTest.nuspec
+
 if [[ $SKIP_DEPLOYMENT == True ]]; then
+  echo "Skipping deployment"
   exit 0
 fi
 
-packNuGet Xamarin.Forms.QuickTest.nuspec
 publishNuGet Xamarin.Forms.QuickTest.$VERSION.nupkg
