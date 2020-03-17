@@ -41,10 +41,6 @@ export MONO_IOMAP=all # this fixes slash, backslash path separator problems with
 NUNIT=(packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe)
 mono ${NUNIT[0]} --config=Release "Tests/Tests.csproj" || exit 1
 
-# debugging tag push problems
-whoami
-git config --list
-
 createTag
 
 packNuGet Xamarin.Forms.QuickTest.nuspec
