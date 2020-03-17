@@ -23,12 +23,12 @@ function packNuGet {
 }
 
 function publishNuGet {
-  nuget push -Source https://www.nuget.org/api/v2/package $1
+  nuget push -Source https://www.nuget.org/api/v2/package $1 || exit 1
 }
 
 function createTag {
   git tag -a $VERSION -m ''  || exit 1
-  git push --tags
+  git push --tags || exit 1
 }
 
 nuget restore QuickTest.sln || exit 1
@@ -37,7 +37,7 @@ msbuild /p:Configuration=Release QuickTest/QuickTest.csproj || exit 1
 msbuild /p:Configuration=Release Tests/Tests.csproj || exit 1
 
 pushd packages && nuget install Nunit.Runners && popd
-export MONO_IOMAP=all # this fixes slash, backslash path seperator problems within nunit test runner
+export MONO_IOMAP=all # this fixes slash, backslash path separator problems within nunit test runner
 NUNIT=(packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe)
 mono ${NUNIT[0]} --config=Release "Tests/Tests.csproj" || exit 1
 
