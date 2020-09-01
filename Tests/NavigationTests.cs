@@ -26,6 +26,10 @@ namespace Tests
 
             Tap("PopAsync");
             ShouldSee("Navigation >");
+
+            Tap("PopAsync");
+            ShouldSee("Navigation");
+
         }
 
         [Test]

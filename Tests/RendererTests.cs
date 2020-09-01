@@ -64,7 +64,7 @@ Message
             OpenMenu("ListViews (RetainElement)");
 
             Tap("DemoListViewWithTextCell");
-            Assert.That(Render(), Is.EqualTo(@"· ListView demos 
+            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithTextCell 
   · plain header
     - Item A1
     - Item B1
@@ -79,7 +79,7 @@ Message
             OpenMenu("ListViews (RetainElement)");
 
             Tap("DemoListViewWithStringViewCell");
-            Assert.That(Render(), Is.EqualTo(@"· ListView demos 
+            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithStringViewCell 
   · · header label
     - · Item A2
     - · Item B2
@@ -95,7 +95,7 @@ Message
             OpenMenu("ListViews (RetainElement)");
 
             Tap("DemoListViewWithItemViewCell");
-            Assert.That(Render(), Is.EqualTo(@"· ListView demos 
+            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithItemViewCell 
   · - · Item A3
     - · Item B3
     - · Item C3"));
@@ -109,7 +109,7 @@ Message
             OpenMenu("ListViews (RetainElement)");
 
             Tap("DemoListViewWithGroups");
-            Assert.That(Render(), Is.EqualTo(@"· ListView demos 
+            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithGroups 
   · · Group 4
     - · A4
     - · B4
@@ -128,7 +128,7 @@ Message
             OpenMenu("ListViews (RetainElement)");
 
             Tap("DemoListViewWithGroupsAndHeaderTemplate");
-            Assert.That(Render(), Is.EqualTo(@"· ListView demos 
+            Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithGroupsAndHeaderTemplate 
   · · 
       · Group 6
     - · A6
@@ -146,6 +146,12 @@ Message
         public void TestTitleRendering()
         {
             OpenMenu("Navigation");
+            Assert.That(Render(), Does.StartWith("· Navigation \n"));
+
+            Tap("PushAsync");
+            Assert.That(Render(), Does.StartWith("· Navigation > \n"));
+
+            Tap("PopAsync");
             Assert.That(Render(), Does.StartWith("· Navigation \n"));
 
             Tap("PushModalAsync");

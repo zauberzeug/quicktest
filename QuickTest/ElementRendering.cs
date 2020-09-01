@@ -75,7 +75,8 @@ namespace QuickTest
             if (titleView != null)
                 return $"*{RenderContent(titleView).Replace("\n", "").Replace("· ", " ").Replace("  ", "")} *";
 
-            return navigation.NavigationStack.FirstOrDefault()?.Title + " " + string.Join(" ", page.ToolbarItems.Select(t => $"[{t.Text}]"));
+            var title = navigation.NavigationStack.LastOrDefault()?.Title;
+            return title + " " + string.Join(" ", page.ToolbarItems.Select(t => $"[{t.Text}]"));
         }
 
         public static string Render(this ListView listView)

@@ -7,12 +7,16 @@ namespace DemoApp
         public static string PageLog;
         public static string LifecycleLog;
 
+        public static App Instance;
+
         public App()
         {
             PageLog = LifecycleLog = "";
 
             ToggleMasterDetail();
+            Instance = this;
         }
+
 
         public MasterDetailPage MasterDetail { get => MainPage as MasterDetailPage; }
 
