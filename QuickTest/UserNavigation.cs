@@ -71,6 +71,17 @@ namespace QuickTest
             }
         }
 
+        void HandleDisappearing(Page page)
+        {
+            (page as IPageController).SendDisappearing();
+
+            if (page is MultiPage<Page>) {
+                var multiPage = page as MultiPage<Page>;
+                multiPage.PropertyChanging -= HandleMultiPagePropertyChanging;
+                multiPage.PropertyChanged -= HandleMultiPagePropertyChanged;
+            }
+        }
+
         void HandleMultiPagePropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
             var multiPage = sender as MultiPage<Page>;
@@ -81,18 +92,6 @@ namespace QuickTest
         {
             var multiPage = sender as MultiPage<Page>;
             HandleAppearing(multiPage.CurrentPage);
-        }
-
-        void HandleDisappearing(Page page)
-        {
-            if (page is MultiPage<Page>) {
-                var multiPage = page as MultiPage<Page>;
-                (multiPage.CurrentPage as IPageController).SendDisappearing();
-                multiPage.PropertyChanging -= HandleMultiPagePropertyChanging;
-                multiPage.PropertyChanged -= HandleMultiPagePropertyChanged;
-            } else {
-                (page as IPageController).SendDisappearing();
-            }
         }
 
         void OnNavigationPageAdded()
@@ -135,7 +134,9 @@ namespace QuickTest
         void HandlePopped(object sender, NavigationEventArgs e)
         {
             HandleDisappearing(e.Page);
-            HandleAppearing(CurrentPage);
+            // CurrentPage can be a page contained in a TabbedPage or similar.
+            // That's why we need to use the page which is on top of the navigation stack.
+            HandleAppearing(CurrentPage.Navigation.NavigationStack.Last());
         }
 
         void HandlePoppedToRoot(object sender, NavigationEventArgs e)

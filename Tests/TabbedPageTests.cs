@@ -59,9 +59,9 @@ namespace Tests
             Tap("Open Subpage");
             ShouldSee("This is a sub page");
             ShouldNotSee("TabbedPage");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Tab A) A(Subpage) "));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Tab A) D(TabbedPage) A(Subpage) "));
             GoBack();
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Subpage) A(Tab A) "));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Subpage) A(TabbedPage) A(Tab A) "));
         }
     }
 }
