@@ -72,12 +72,16 @@
     <Compile Include="ListView\CellCache.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="ActionSheetArgumentsExtensions.cs" />
+    <Compile Include="Popup\Popup.cs" />
+    <Compile Include="Popup\AlertPopup.cs" />
+    <Compile Include="Popup\ActionSheetPopup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ListView\" />
+    <Folder Include="Popup\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.3.2.0.839982\build\netstandard2.0\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.3.2.0.839982\build\netstandard2.0\Xamarin.Forms.targets')" />
