@@ -89,5 +89,38 @@ Message
 [Option 2]
 [Cancel]"));
         }
+
+        [Test]
+        public void TestActionSheetWithoutCancel()
+        {
+            Tap("Show action sheet without cancel");
+            ShouldSee("Action sheet without cancel", "Destroy", "Option 1");
+            Tap("Option 1");
+        }
+
+        [Test]
+        public void TestActionSheetWithoutCancelRendering()
+        {
+            Tap("Show action sheet without cancel");
+            Assert.That(Render(), Is.EqualTo(@"Action sheet without cancel
+[Destroy]
+[Option 1]"));
+        }
+
+        [Test]
+        public void TestActionSheetWithoutDestruction()
+        {
+            Tap("Show action sheet without destruction");
+            ShouldSee("Action sheet without destruction", "Cancel");
+            Tap("Cancel");
+        }
+
+        [Test]
+        public void TestActionSheetWithoutDestructionRendering()
+        {
+            Tap("Show action sheet without destruction");
+            Assert.That(Render(), Is.EqualTo(@"Action sheet without destruction
+[Cancel]"));
+        }
     }
 }

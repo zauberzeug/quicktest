@@ -24,6 +24,14 @@ namespace DemoApp
                         Text = "Show action sheet",
                         Command = new Command(ShowActionSheet),
                     },
+                    new Button {
+                        Text = "Show action sheet without cancel",
+                        Command = new Command(ShowActionSheetWithoutCancel),
+                    },
+                    new Button {
+                        Text = "Show action sheet without destruction",
+                        Command = new Command(ShowActionSheetWithoutDestruction),
+                    },
                     (result = new Label()),
                 }
             };
@@ -45,6 +53,18 @@ namespace DemoApp
         {
             var result = await DisplayActionSheet("Action sheet", "Cancel", "Destroy", "Option 1", "Option 2");
             this.result.Text = $"Action sheet result: {result}";
+        }
+
+        async void ShowActionSheetWithoutCancel()
+        {
+            var result = await DisplayActionSheet("Action sheet without cancel", null, "Destroy", "Option 1");
+            this.result.Text = $"Action sheet without cancel: {result}";
+        }
+
+        async void ShowActionSheetWithoutDestruction()
+        {
+            var result = await DisplayActionSheet("Action sheet without destruction", "Cancel", null);
+            this.result.Text = $"Action sheet without destruction result: {result}";
         }
     }
 }
