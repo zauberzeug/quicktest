@@ -4,7 +4,7 @@ namespace DemoApp
 {
     public class PopupDemoPage : ContentPage
     {
-        Label alertResult;
+        Label result;
 
         public PopupDemoPage()
         {
@@ -20,7 +20,11 @@ namespace DemoApp
                         Text = "Show ok alert",
                         Command = new Command(ShowOkAlert),
                     },
-                    (alertResult = new Label()),
+                    new Button {
+                        Text = "Show action sheet",
+                        Command = new Command(ShowActionSheet),
+                    },
+                    (result = new Label()),
                 }
             };
         }
@@ -28,13 +32,19 @@ namespace DemoApp
         async void ShowYesNoAlert()
         {
             var result = await DisplayAlert("Alert", "Message", "Yes", "No");
-            alertResult.Text = $"Alert result: {result}";
+            this.result.Text = $"Alert result: {result}";
         }
 
         async void ShowOkAlert()
         {
             await DisplayAlert("Alert", "Message", "Ok");
-            alertResult.Text = $"Alert result: Ok";
+            result.Text = $"Alert result: Ok";
+        }
+
+        async void ShowActionSheet()
+        {
+            var result = await DisplayActionSheet("Action sheet", "Cancel", "Destroy", "Option 1", "Option 2");
+            this.result.Text = $"Action sheet result: {result}";
         }
     }
 }

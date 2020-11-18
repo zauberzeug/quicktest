@@ -71,6 +71,7 @@
     <Compile Include="ListView\CellCacheProvider.cs" />
     <Compile Include="ListView\CellCache.cs" />
     <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="ActionSheetArgumentsExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

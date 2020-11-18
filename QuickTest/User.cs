@@ -10,7 +10,7 @@ namespace QuickTest
     public partial class User
     {
         readonly Application app;
-        readonly Stack<AlertArguments> alerts = new Stack<AlertArguments>();
+        readonly Stack<object> popups = new Stack<object>();
 
         public User(Application app)
         {
@@ -18,7 +18,11 @@ namespace QuickTest
             app.Invoke("OnStart");
 
             MessagingCenter.Subscribe<Page, AlertArguments>(this, Page.AlertSignalName, (page, alert) => {
-                alerts.Push(alert);
+                popups.Push(alert);
+            });
+
+            MessagingCenter.Subscribe<Page, ActionSheetArguments>(this, Page.ActionSheetSignalName, (page, actionSheet) => {
+                popups.Push(actionSheet);
             });
 
             WireNavigation();
@@ -64,33 +68,21 @@ namespace QuickTest
 
         public bool CanSee(string text)
         {
-            if (alerts.Any())
-                return CanSeeAlertWith(text);
+            if (popups.Any())
+                return PopupContainsText(popups.Peek(), text);
             else
                 return CurrentPage.Find(text).Any();
         }
 
         public bool CanSeeOnce(string text)
         {
-            if (alerts.Any())
-                return CanSeeAlertWith(text);
+            if (popups.Any())
+                return PopupContainsText(popups.Peek(), text);
             else
                 return CurrentPage.Find(text).Count == 1;
         }
 
-        public bool CanSeeAlertWith(string text)
-        {
-            if (alerts.Any()) {
-                var alert = alerts.Peek();
-                return alert.Title == text
-                    || alert.Message == text
-                    || alert.Cancel == text
-                    || alert.Accept == text;
-            }
-            return false;
-        }
-
-        public bool SeesAlert() => alerts.Any();
+        public bool SeesAlert() => popups.Any();
 
         public List<Element> Find(string text)
         {
@@ -104,18 +96,10 @@ namespace QuickTest
 
         public void Tap(string text, int? index = null)
         {
-            if (alerts.Any()) {
+            if (popups.Any()) {
                 Assert.That(index, Is.Null, "Tap indices are not supported on alerts");
-
-                var alert = alerts.Peek();
-                if (alert.Accept == text)
-                    alert.SetResult(true);
-                else if (alert.Cancel == text)
-                    alert.SetResult(false);
-                else
-                    Assert.Fail($"Could not tap \"{text}\" on alert\n{alert}");
-
-                alerts.Pop();
+                TapOnPopup(popups.Peek(), text);
+                popups.Pop();
                 return;
             }
 
@@ -220,8 +204,8 @@ namespace QuickTest
 
         public string Render()
         {
-            if (alerts.Any())
-                return alerts.Peek().Render();
+            if (popups.Any())
+                return RenderPopup(popups.Peek());
 
             return CurrentPage.Render().Trim();
         }
@@ -234,6 +218,68 @@ namespace QuickTest
             Assert.That(elements, Has.Count.LessThan(2), $"Found multiple entries \"{automationId}\" on current page");
 
             return elements;
+        }
+
+        void TapOnPopup(object popup, string text)
+        {
+            var alert = popup as AlertArguments;
+            if (alert != null) {
+                if (alert.Accept == text)
+                    alert.SetResult(true);
+                else if (alert.Cancel == text)
+                    alert.SetResult(false);
+                else
+                    Assert.Fail($"Could not tap \"{text}\" on alert\n{alert}");
+                return;
+            }
+
+            var actionSheet = popup as ActionSheetArguments;
+            if (actionSheet != null) {
+                if (actionSheet.Cancel == text || actionSheet.Destruction == text || actionSheet.Buttons.Contains(text))
+                    actionSheet.SetResult(text);
+                else
+                    Assert.Fail($"Could not tap \"{text}\" on actionSheet \n{actionSheet}");
+                return;
+            }
+
+            throw new ArgumentException($"Popup type {popup.GetType().Name} not supported");
+        }
+
+
+        string RenderPopup(object popup)
+        {
+            var alert = popup as AlertArguments;
+            if (alert != null) {
+                return alert.Render();
+            }
+
+            var actionSheet = popup as ActionSheetArguments;
+            if (actionSheet != null) {
+                return actionSheet.Render();
+            }
+
+            throw new ArgumentException($"Popup type {popup.GetType().Name} not supported");
+        }
+
+        bool PopupContainsText(object popup, string text)
+        {
+            var alert = popup as AlertArguments;
+            if (alert != null) {
+                return alert.Title == text
+                    || alert.Message == text
+                    || alert.Cancel == text
+                    || alert.Accept == text;
+            }
+
+            var actionSheet = popup as ActionSheetArguments;
+            if (actionSheet != null) {
+                return actionSheet.Title == text
+                    || actionSheet.Cancel == text
+                    || actionSheet.Destruction == text
+                    || actionSheet.Buttons.Contains(text);
+            }
+
+            throw new ArgumentException($"Popup type {popup.GetType().Name} not supported");
         }
     }
 }
