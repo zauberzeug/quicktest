@@ -60,7 +60,7 @@ Message
             Assert.That(Render(), Is.EqualTo(@"Alert
 Message
 
-[] [Ok]"));
+[Ok]"));
         }
 
         [TestCase("Cancel")]
