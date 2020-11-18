@@ -15,18 +15,6 @@ namespace Tests
         }
 
         [Test]
-        public void TestAlertRendering()
-        {
-            OpenMenu("Alert");
-            ShouldSee("Message");
-
-            Assert.That(Render(), Is.EqualTo(@"Alert
-Message
-
-[] [Ok]"));
-        }
-
-        [Test]
         public void TestElementRendering()
         {
             OpenMenu("Elements");

@@ -64,18 +64,18 @@ namespace QuickTest
 
         public bool CanSee(string text)
         {
-            if (CanSeeAlertWith(text))
-                return true;
-
-            return CurrentPage.Find(text).Any();
+            if (alerts.Any())
+                return CanSeeAlertWith(text);
+            else
+                return CurrentPage.Find(text).Any();
         }
 
         public bool CanSeeOnce(string text)
         {
-            if (CanSeeAlertWith(text))
-                return true;
-
-            return CurrentPage.Find(text).Count == 1;
+            if (alerts.Any())
+                return CanSeeAlertWith(text);
+            else
+                return CurrentPage.Find(text).Count == 1;
         }
 
         public bool CanSeeAlertWith(string text)

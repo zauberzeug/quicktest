@@ -162,17 +162,6 @@ namespace Tests
         }
 
         [Test]
-        public void TestAlert()
-        {
-            OpenMenu("Alert");
-            ShouldSee("Alert", "Message", "Ok");
-            ShouldNotSee("Demo page");
-
-            Tap("Ok");
-            ShouldSee("Menu");
-        }
-
-        [Test]
         public void Slider()
         {
             var expectedLog = "A(Navigation) D(Navigation) ";

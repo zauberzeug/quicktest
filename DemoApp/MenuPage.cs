@@ -19,7 +19,7 @@ namespace DemoApp
                     CreateListViewButton(ListViewCachingStrategy.RecycleElement),
                     CreateListViewButton(ListViewCachingStrategy.RecycleElementAndDataTemplate),
                     CreateMenuButton("Binding", () => new BindingDemoPage()),
-                    new DemoButton("Alert") { Command = new Command(o => Application.Current.MainPage.DisplayAlert("Alert", "Message", "Ok")) },
+                    CreateMenuButton("Popups", () => new PopupDemoPage()),
                     CreateMenuButton("TabbedPage", () => new TabbedPageDemoPage()),
                     CreateMenuButton("CarouselPage", () => new CarouselDemoPage()),
                     CreateMenuButton("TitleViewPage", () => new TitleViewPage()),
