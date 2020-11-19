@@ -20,6 +20,11 @@ namespace QuickTest
                 || arguments.Accept == text;
         }
 
+        public override int Count(string text)
+        {
+            return new string[] { arguments.Title, arguments.Message, arguments.Cancel, arguments.Accept }.Count(t => t == text);
+        }
+
         public override bool Tap(string text)
         {
             if (arguments.Accept == text) {

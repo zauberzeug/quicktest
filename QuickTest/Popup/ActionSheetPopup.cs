@@ -21,6 +21,11 @@ namespace QuickTest
                 || arguments.Buttons.Contains(text);
         }
 
+        public override int Count(string text)
+        {
+            return arguments.Buttons.Concat(new string[] { arguments.Title, arguments.Cancel, arguments.Destruction }).Count(t => t == text);
+        }
+
         public override bool Tap(string text)
         {
             if (arguments.Cancel == text || arguments.Destruction == text || arguments.Buttons.Contains(text)) {

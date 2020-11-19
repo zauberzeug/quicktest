@@ -106,7 +106,9 @@ namespace QuickTest
         public virtual void ShouldSeeOnce(params string[] texts)
         {
             var list = new List<string>(texts);
-            Assert.That(() => list.All(User.CanSeeOnce), Is.True.After((int)Timeout.TotalMilliseconds, 10),
+            if (list.All((t) => User.CanSee(t, 1)))
+                return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
+            Assert.That(() => list.All((t) => User.CanSee(t, 1)), Is.True.After((int)Timeout.TotalMilliseconds, 10),
                         $"User should see {{ {string.Join(", ", texts)} }} only once in \n{ User?.Render() }");
         }
 
@@ -117,8 +119,10 @@ namespace QuickTest
 
         public virtual void ShouldSee(string match, int count)
         {
-            var matchCount = Find(match).Count;
-            Assert.That(matchCount, Is.EqualTo(count), $"The count of '{match}' should be {count}, but was {matchCount}");
+            if (User.CanSee(match, count))
+                return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
+            Assert.That(() => User.CanSee(match, count), Is.True.After((int)Timeout.TotalMilliseconds, 10),
+                $"User should see {{ {match} }} {count} times in \n{ User?.Render() }");
         }
 
         public virtual void ShouldSee(char match, int count)

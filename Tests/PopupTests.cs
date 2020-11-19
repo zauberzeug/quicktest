@@ -142,5 +142,43 @@ Message
             Assert.That(SeesActionSheet(), Is.True);
             Assert.That(SeesAlert(), Is.False);
         }
+
+        [Test]
+        public void CanCountInAlerts()
+        {
+            Tap("Show ok alert with repeated text");
+            Assert.Throws<AssertionException>(() => ShouldSee("Message", 2));
+            ShouldSee("Message", 3);
+            Assert.Throws<AssertionException>(() => ShouldSee("Message", 4));
+        }
+
+        [Test]
+        public void CanCountInActionSheets()
+        {
+            Tap("Show action sheet with repeated text");
+            Assert.Throws<AssertionException>(() => ShouldSee("Message", 4));
+            ShouldSee("Message", 5);
+            Assert.Throws<AssertionException>(() => ShouldSee("Message", 6));
+        }
+
+        [Test]
+        public void AlertHidesPage()
+        {
+            ShouldSee("Some text");
+            Tap("Show ok alert");
+            Assert.Throws<AssertionException>(() => ShouldSee("Some text"));
+            Assert.Throws<AssertionException>(() => ShouldSeeOnce("Some text"));
+            Assert.Throws<AssertionException>(() => ShouldSee("Some text", 1));
+        }
+
+        [Test]
+        public void ActionSheetHidesPage()
+        {
+            ShouldSee("Some text");
+            Tap("Show action sheet");
+            Assert.Throws<AssertionException>(() => ShouldSee("Some text"));
+            Assert.Throws<AssertionException>(() => ShouldSeeOnce("Some text"));
+            Assert.Throws<AssertionException>(() => ShouldSee("Some text", 1));
+        }
     }
 }

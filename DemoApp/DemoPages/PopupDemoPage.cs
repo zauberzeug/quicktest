@@ -21,6 +21,10 @@ namespace DemoApp
                         Command = new Command(ShowOkAlert),
                     },
                     new Button {
+                        Text = "Show ok alert with repeated text",
+                        Command = new Command(ShowOkAlertWithRepeatedText),
+                    },
+                    new Button {
                         Text = "Show action sheet",
                         Command = new Command(ShowActionSheet),
                     },
@@ -32,7 +36,14 @@ namespace DemoApp
                         Text = "Show action sheet without destruction",
                         Command = new Command(ShowActionSheetWithoutDestruction),
                     },
+                    new Button {
+                        Text = "Show action sheet with repeated text",
+                        Command = new Command(ShowActionSheetWithRepeatedText),
+                    },
                     (result = new Label()),
+                    new Label() {
+                        Text = "Some text",
+                    },
                 }
             };
         }
@@ -47,6 +58,12 @@ namespace DemoApp
         {
             await DisplayAlert("Alert", "Message", "Ok");
             result.Text = $"Alert result: Ok";
+        }
+
+        async void ShowOkAlertWithRepeatedText()
+        {
+            await DisplayAlert("Message", "Message", "Message");
+            result.Text = $"Alert result: Message";
         }
 
         async void ShowActionSheet()
@@ -65,6 +82,12 @@ namespace DemoApp
         {
             var result = await DisplayActionSheet("Action sheet without destruction", "Cancel", null);
             this.result.Text = $"Action sheet without destruction result: {result}";
+        }
+
+        async void ShowActionSheetWithRepeatedText()
+        {
+            var result = await DisplayActionSheet("Message", "Message", "Message", "Message", "Message");
+            this.result.Text = $"Action sheet with repeated text result: {result}";
         }
     }
 }

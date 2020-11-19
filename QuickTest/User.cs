@@ -74,12 +74,12 @@ namespace QuickTest
                 return CurrentPage.Find(text).Any();
         }
 
-        public bool CanSeeOnce(string text)
+        public bool CanSee(string text, int count)
         {
             if (popups.Any())
-                return popups.Peek().Contains(text);
+                return popups.Peek().Count(text) == count;
             else
-                return CurrentPage.Find(text).Count == 1;
+                return CurrentPage.Find(text).Count == count;
         }
 
         public bool SeesAlert() => popups.Any() && popups.Peek() is AlertPopup;
