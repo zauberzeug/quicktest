@@ -10,13 +10,13 @@ namespace QuickTest
     public class QuickTest<T> where T : Application
     {
         User user;
-        public User User {
+        User User {
             get {
                 if (user == null)
                     throw new LaunchException();
                 return user;
             }
-            private set {
+            set {
                 user = value;
             }
         }
@@ -35,7 +35,7 @@ namespace QuickTest
         [TearDown]
         protected virtual void TearDown()
         {
-            User?.Print();
+            Print();
         }
 
         public void Launch(T app)
@@ -219,6 +219,11 @@ namespace QuickTest
         protected virtual string Render()
         {
             return User.Render();
+        }
+
+        protected virtual void Print()
+        {
+            Console.WriteLine(Render());
         }
 
         protected QuickTest<T> After(double seconds)
