@@ -50,6 +50,11 @@ namespace QuickTest
             User.Tap(text);
         }
 
+        public virtual void Tap(char text)
+        {
+            Tap(text.ToString());
+        }
+
         public virtual void Tap(params string[] texts)
         {
             foreach (var text in texts) {
@@ -112,22 +117,22 @@ namespace QuickTest
                         $"User should see {{ {string.Join(", ", texts)} }} only once in \n{ User?.Render() }");
         }
 
-        public virtual void ShouldSee(char match)
+        public virtual void ShouldSee(char text)
         {
-            ShouldSee(match.ToString());
+            ShouldSee(text.ToString());
         }
 
-        public virtual void ShouldSee(string match, int count)
+        public virtual void ShouldSee(string text, int count)
         {
-            if (User.CanSee(match, count))
+            if (User.CanSee(text, count))
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
-            Assert.That(() => User.CanSee(match, count), Is.True.After((int)Timeout.TotalMilliseconds, 10),
-                $"User should see {{ {match} }} {count} times in \n{ User?.Render() }");
+            Assert.That(() => User.CanSee(text, count), Is.True.After((int)Timeout.TotalMilliseconds, 10),
+                $"User should see {{ {text} }} {count} times in \n{ User?.Render() }");
         }
 
-        public virtual void ShouldSee(char match, int count)
+        public virtual void ShouldSee(char text, int count)
         {
-            ShouldSee(match.ToString(), count);
+            ShouldSee(text.ToString(), count);
         }
 
         public virtual void ShouldNotSee(params string[] texts)
@@ -139,9 +144,9 @@ namespace QuickTest
                         $"User should not see any of {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
         }
 
-        public virtual void ShouldNotSee(char match)
+        public virtual void ShouldNotSee(char text)
         {
-            ShouldNotSee(match.ToString());
+            ShouldNotSee(text.ToString());
         }
 
         /// <summary>
@@ -150,6 +155,11 @@ namespace QuickTest
         protected virtual bool CanSee(string text)
         {
             return User.CanSee(text);
+        }
+
+        protected virtual bool CanSee(char text)
+        {
+            return CanSee(text.ToString());
         }
 
         /// <summary>
