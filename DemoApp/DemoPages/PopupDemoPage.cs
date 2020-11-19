@@ -44,6 +44,12 @@ namespace DemoApp
                     new Label() {
                         Text = "Some text",
                     },
+                    new Label() {
+                        Text = "Some duplicated text",
+                    },
+                    new Label() {
+                        Text = "Some duplicated text",
+                    },
                 }
             };
         }

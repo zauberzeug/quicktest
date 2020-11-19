@@ -9,23 +9,31 @@ namespace DemoApp
         {
             Title = "Menu";
 
-            Content = new StackLayout {
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                Children = {
-                    new DemoLabel("Menu"),
-                    CreateMenuButton("Navigation", () => new NavigationDemoPage()),
-                    CreateMenuButton("Elements", () => new ElementDemoPage()),
-                    CreateListViewButton(ListViewCachingStrategy.RetainElement),
-                    CreateListViewButton(ListViewCachingStrategy.RecycleElement),
-                    CreateListViewButton(ListViewCachingStrategy.RecycleElementAndDataTemplate),
-                    CreateMenuButton("Binding", () => new BindingDemoPage()),
-                    CreateMenuButton("Popups", () => new PopupDemoPage()),
-                    CreateMenuButton("TabbedPage", () => new TabbedPageDemoPage()),
-                    CreateMenuButton("CarouselPage", () => new CarouselDemoPage()),
-                    CreateMenuButton("TitleViewPage", () => new TitleViewPage()),
-                    CreateMenuButton("TabbedTitleViewPage", () => new TabbedTitleViewPage()),
-                    CreateMenuButton("Empty ContentPage", () => new ContentPage() { Title = "Page with no content", Content = null })
-                },
+            Content = new ScrollView {
+                Content = new StackLayout {
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                    Children = {
+                        new DemoLabel("Menu"),
+                        CreateMenuButton("Navigation", () => new NavigationDemoPage()),
+                        CreateMenuButton("Elements", () => new ElementDemoPage()),
+                        CreateListViewButton(ListViewCachingStrategy.RetainElement),
+                        CreateListViewButton(ListViewCachingStrategy.RecycleElement),
+                        CreateListViewButton(ListViewCachingStrategy.RecycleElementAndDataTemplate),
+                        CreateMenuButton("Binding", () => new BindingDemoPage()),
+                        CreateMenuButton("Popups", () => new PopupDemoPage()),
+                        CreateMenuButton("TabbedPage", () => new TabbedPageDemoPage()),
+                        CreateMenuButton("CarouselPage", () => new CarouselDemoPage()),
+                        CreateMenuButton("TitleViewPage", () => new TitleViewPage()),
+                        CreateMenuButton("TabbedTitleViewPage", () => new TabbedTitleViewPage()),
+                        CreateMenuButton("Empty ContentPage", () => new ContentPage() { Title = "Page with no content", Content = null }),
+                        new DemoButton("Show alert from menu") {
+                            Command = new Command(() => DisplayAlert("Alert", "Message", "Ok"))
+                        },
+                        new DemoButton("Show action sheet from menu") {
+                            Command = new Command(() => DisplayActionSheet("Alert", "Cancel", "Delete", "Keep"))
+                        },
+                    },
+                }
             };
         }
 

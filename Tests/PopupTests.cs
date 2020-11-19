@@ -1,6 +1,7 @@
 ﻿using DemoApp;
 using NUnit.Framework;
 using QuickTest;
+using Xamarin.Forms;
 
 namespace Tests
 {
@@ -161,24 +162,61 @@ Message
             Assert.Throws<AssertionException>(() => ShouldSee("Message", 6));
         }
 
-        [Test]
-        public void AlertHidesPage()
+        [TestCase("Show ok alert")]
+        [TestCase("Show action sheet")]
+        public void PopupHidesPage(string popup)
         {
             ShouldSee("Some text");
-            Tap("Show ok alert");
+            Tap(popup);
             Assert.Throws<AssertionException>(() => ShouldSee("Some text"));
             Assert.Throws<AssertionException>(() => ShouldSeeOnce("Some text"));
             Assert.Throws<AssertionException>(() => ShouldSee("Some text", 1));
         }
 
-        [Test]
-        public void ActionSheetHidesPage()
+        [TestCase("Show ok alert")]
+        [TestCase("Show action sheet")]
+        public void CannotGoBackWhenPopupIsPresented(string popup)
         {
-            ShouldSee("Some text");
-            Tap("Show action sheet");
-            Assert.Throws<AssertionException>(() => ShouldSee("Some text"));
-            Assert.Throws<AssertionException>(() => ShouldSeeOnce("Some text"));
-            Assert.Throws<AssertionException>(() => ShouldSee("Some text", 1));
+            Tap(popup);
+            Assert.Throws<AssertionException>(() => GoBack());
+        }
+
+        [TestCase("Show ok alert")]
+        [TestCase("Show action sheet")]
+        public void CannotOpenMenuWhenPopupIsPresented(string popup)
+        {
+            Tap(popup);
+            Assert.Throws<AssertionException>(() => OpenMenu());
+        }
+
+        [TestCase("Show alert from menu")]
+        [TestCase("Show action sheet from menu")]
+        public void CannotCloseMenuWhenPopupIsPresented(string popup)
+        {
+            OpenMenu();
+            Tap(popup);
+            Assert.Throws<AssertionException>(() => CloseMenu());
+        }
+
+        [TestCase("Show ok alert")]
+        [TestCase("Show action sheet")]
+        public void CannotFindElementsWhenPopupIsPresented(string popup)
+        {
+            Tap(popup);
+            Assert.That(Find("Some text"), Is.Empty);
+            Assert.That(Find(e => (e as Label)?.Text == "Some text"), Is.Empty);
+            Assert.That(FindFirst("Some text"), Is.Null);
+            Assert.That(FindFirst(e => (e as Label)?.Text == "Some text"), Is.Null);
+        }
+
+        // This use case could be supported, but is probably never needed.
+        // For now, we do not support it, and fail tests in this usecase.
+        [Test]
+        public void TapNthCannotBeUsedOnPopups()
+        {
+            Tap("Show action sheet with repeated text");
+            Assert.Throws<AssertionException>(() => TapNth("Some duplicated text", 1));
+            Assert.Throws<AssertionException>(() => TapNth("Message", 3));
         }
     }
 }

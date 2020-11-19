@@ -65,6 +65,7 @@ namespace QuickTest
 
         public virtual void TapNth(string text, int index)
         {
+            Assert.That(User.SeesPopup(), Is.False, "TapNath is not supported on popups");
             Assert.That(() => User.Find(text), Has.Count.GreaterThan(index).After((int)Timeout.TotalMilliseconds, 10),
                         $"User can't see {index + 1}th \"{text}\"  in \n{ User?.Render() }");
             User.Tap(text, index);
@@ -178,6 +179,8 @@ namespace QuickTest
         /// </summary>
         protected virtual List<Element> Find(string text)
         {
+            if (User.SeesPopup())
+                return new List<Element>();
             return User.Find(text);
         }
 
@@ -187,7 +190,7 @@ namespace QuickTest
         /// </summary>
         protected virtual Element FindFirst(string text)
         {
-            return User.Find(text).FirstOrDefault();
+            return Find(text).FirstOrDefault();
         }
 
         /// <summary>
@@ -196,6 +199,8 @@ namespace QuickTest
         /// </summary>
         protected virtual List<Element> Find(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
+            if (User.SeesPopup())
+                return new List<Element>();
             return User.Find(predicate, containerPredicate);
         }
 
@@ -205,7 +210,7 @@ namespace QuickTest
         /// </summary>
         protected virtual Element FindFirst(Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
-            return User.Find(predicate, containerPredicate).FirstOrDefault();
+            return Find(predicate, containerPredicate).FirstOrDefault();
         }
 
         /// <summary>
@@ -214,6 +219,7 @@ namespace QuickTest
         /// <param name="textToTap">If provided the text will be selected.</param>
         protected virtual void OpenMenu(string textToTap = null)
         {
+            Assert.That(User.SeesPopup(), Is.False, "Cannot open menu if popup is presented");
             User.OpenMenu();
 
             if (textToTap != null)
@@ -222,11 +228,13 @@ namespace QuickTest
 
         protected virtual void CloseMenu()
         {
+            Assert.That(User.SeesPopup(), Is.False, "Cannot close menu if popup is presented");
             User.CloseMenu();
         }
 
         protected virtual void GoBack()
         {
+            Assert.That(User.SeesPopup(), Is.False, "Cannot go back if popup is presented");
             User.GoBack();
         }
 
