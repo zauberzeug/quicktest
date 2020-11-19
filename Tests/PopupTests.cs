@@ -122,5 +122,25 @@ Message
             Assert.That(Render(), Is.EqualTo(@"Action sheet without destruction
 [Cancel]"));
         }
+
+        [Test]
+        public void TestSeesAlert()
+        {
+            Assert.That(SeesAlert(), Is.False);
+            Assert.That(SeesActionSheet(), Is.False);
+            Tap("Show ok alert");
+            Assert.That(SeesAlert(), Is.True);
+            Assert.That(SeesActionSheet(), Is.False);
+        }
+
+        [Test]
+        public void TestSeesActionSheet()
+        {
+            Assert.That(SeesActionSheet(), Is.False);
+            Assert.That(SeesAlert(), Is.False);
+            Tap("Show action sheet");
+            Assert.That(SeesActionSheet(), Is.True);
+            Assert.That(SeesAlert(), Is.False);
+        }
     }
 }

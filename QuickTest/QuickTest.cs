@@ -141,7 +141,7 @@ namespace QuickTest
         }
 
         /// <summary>
-        /// Weather a given text is visible to the user or not.
+        /// Whether a given text is visible to the user or not.
         /// </summary>
         protected virtual bool CanSee(string text)
         {
@@ -149,12 +149,14 @@ namespace QuickTest
         }
 
         /// <summary>
-        /// Weather a popup is shown.
+        /// Whether an alert is shown.
         /// </summary>
-        protected virtual bool SeesAlert()
-        {
-            return User.SeesAlert();
-        }
+        protected virtual bool SeesAlert() => User.SeesAlert();
+
+        /// <summary>
+        /// Whether an alert is shown.
+        /// </summary>
+        protected virtual bool SeesActionSheet() => User.SeesActionSheet();
 
         /// <summary>
         /// Find elements matching the exact string.

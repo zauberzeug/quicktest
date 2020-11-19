@@ -82,7 +82,9 @@ namespace QuickTest
                 return CurrentPage.Find(text).Count == 1;
         }
 
-        public bool SeesAlert() => popups.Any();
+        public bool SeesAlert() => popups.Any() && popups.Peek() is AlertPopup;
+
+        public bool SeesActionSheet() => popups.Any() && popups.Peek() is ActionSheetPopup;
 
         public List<Element> Find(string text)
         {
