@@ -148,18 +148,18 @@ Message
         public void CanCountInAlerts()
         {
             Tap("Show ok alert with repeated text");
-            Assert.Throws<AssertionException>(() => ShouldSee("Message", 2));
+            ShouldFail(() => ShouldSee("Message", 2));
             ShouldSee("Message", 3);
-            Assert.Throws<AssertionException>(() => ShouldSee("Message", 4));
+            ShouldFail(() => ShouldSee("Message", 4));
         }
 
         [Test]
         public void CanCountInActionSheets()
         {
             Tap("Show action sheet with repeated text");
-            Assert.Throws<AssertionException>(() => ShouldSee("Message", 4));
+            ShouldFail(() => ShouldSee("Message", 4));
             ShouldSee("Message", 5);
-            Assert.Throws<AssertionException>(() => ShouldSee("Message", 6));
+            ShouldFail(() => ShouldSee("Message", 6));
         }
 
         [TestCase("Show ok alert")]
@@ -168,9 +168,9 @@ Message
         {
             ShouldSee("Some text");
             Tap(popup);
-            Assert.Throws<AssertionException>(() => ShouldSee("Some text"));
-            Assert.Throws<AssertionException>(() => ShouldSeeOnce("Some text"));
-            Assert.Throws<AssertionException>(() => ShouldSee("Some text", 1));
+            ShouldFail(() => ShouldSee("Some text"));
+            ShouldFail(() => ShouldSeeOnce("Some text"));
+            ShouldFail(() => ShouldSee("Some text", 1));
         }
 
         [TestCase("Show ok alert")]
@@ -178,7 +178,7 @@ Message
         public void CannotGoBackWhenPopupIsPresented(string popup)
         {
             Tap(popup);
-            Assert.Throws<AssertionException>(() => GoBack());
+            ShouldFail(() => GoBack());
         }
 
         [TestCase("Show ok alert")]
@@ -186,7 +186,7 @@ Message
         public void CannotOpenMenuWhenPopupIsPresented(string popup)
         {
             Tap(popup);
-            Assert.Throws<AssertionException>(() => OpenMenu());
+            ShouldFail(() => OpenMenu());
         }
 
         [TestCase("Show alert from menu")]
@@ -195,7 +195,7 @@ Message
         {
             OpenMenu();
             Tap(popup);
-            Assert.Throws<AssertionException>(() => CloseMenu());
+            ShouldFail(() => CloseMenu());
         }
 
         [TestCase("Show ok alert")]
@@ -216,8 +216,10 @@ Message
         public void TapNthCannotBeUsedOnPopups(string popup)
         {
             Tap(popup);
-            Assert.Throws<AssertionException>(() => TapNth("Some duplicated text", 1));
-            Assert.Throws<AssertionException>(() => TapNth("Message", 3));
+            ShouldFail(() => TapNth("Some duplicated text", 1));
+            ShouldFail(() => TapNth("Message", 3));
         }
+
+        void ShouldFail(TestDelegate code) => Assert.Throws<AssertionException>(code);
     }
 }

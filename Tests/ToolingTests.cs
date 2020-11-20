@@ -31,7 +31,7 @@ namespace Tests
             ShouldSeeOnce("editor content");
             Input("entry_automation_id", "editor content");
             ShouldSee("editor content");
-            Assert.Throws<AssertionException>(() => ShouldSeeOnce("editor content"));
+            ShouldFail(() => ShouldSeeOnce("editor content"));
         }
 
         [Test]
@@ -40,9 +40,9 @@ namespace Tests
             OpenMenu("Elements");
             ShouldSee("editor content", 1);
             Input("entry_automation_id", "editor content");
-            Assert.Throws<AssertionException>(() => ShouldSee("editor content", 1));
+            ShouldFail(() => ShouldSee("editor content", 1));
             ShouldSee("editor content", 2);
-            Assert.Throws<AssertionException>(() => ShouldSee("editor content", 3));
+            ShouldFail(() => ShouldSee("editor content", 3));
         }
 
         [Test]
@@ -175,5 +175,7 @@ namespace Tests
             After(2).ShouldNotSee("1");
             Assert.That(DateTime.Now - time, Is.GreaterThan(TimeSpan.FromSeconds(1)));
         }
+
+        void ShouldFail(TestDelegate code) => Assert.Throws<AssertionException>(code);
     }
 }
