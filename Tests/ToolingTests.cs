@@ -35,7 +35,7 @@ namespace Tests
         }
 
         [Test]
-        public void TestShouldSeeCount()
+        public void TestShouldSeeWithCount()
         {
             OpenMenu("Elements");
             ShouldSee("editor content", 1);

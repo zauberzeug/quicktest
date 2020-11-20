@@ -65,7 +65,7 @@ namespace QuickTest
 
         public virtual void TapNth(string text, int index)
         {
-            Assert.That(User.SeesPopup(), Is.False, "TapNath is not supported on popups");
+            Assert.That(User.SeesPopup(), Is.False, "TapNth is not supported on popups");
             Assert.That(() => User.Find(text), Has.Count.GreaterThan(index).After((int)Timeout.TotalMilliseconds, 10),
                         $"User can't see {index + 1}th \"{text}\"  in \n{ User?.Render() }");
             User.Tap(text, index);
@@ -169,7 +169,7 @@ namespace QuickTest
         protected virtual bool SeesAlert() => User.SeesAlert();
 
         /// <summary>
-        /// Whether an alert is shown.
+        /// Whether an action sheet is shown.
         /// </summary>
         protected virtual bool SeesActionSheet() => User.SeesActionSheet();
 

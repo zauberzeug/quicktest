@@ -211,10 +211,11 @@ Message
 
         // This use case could be supported, but is probably never needed.
         // For now, we do not support it, and fail tests in this usecase.
-        [Test]
-        public void TapNthCannotBeUsedOnPopups()
+        [TestCase("Show ok alert with repeated text")]
+        [TestCase("Show action sheet with repeated text")]
+        public void TapNthCannotBeUsedOnPopups(string popup)
         {
-            Tap("Show action sheet with repeated text");
+            Tap(popup);
             Assert.Throws<AssertionException>(() => TapNth("Some duplicated text", 1));
             Assert.Throws<AssertionException>(() => TapNth("Message", 3));
         }
