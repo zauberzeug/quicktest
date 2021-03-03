@@ -11,7 +11,7 @@ namespace QuickTest
         public static T FindParent<T>(this Element element) where T : Element
         {
             if (element == null)
-                throw new NullReferenceException("can not find parent on null reference");
+                throw new NullReferenceException("cannot find parent on null reference");
             do
                 element = element.Parent;
             while (!(element is T) && element != null);

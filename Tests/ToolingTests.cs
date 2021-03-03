@@ -83,7 +83,7 @@ namespace Tests
         {
             OpenMenu("Elements");
 
-            // set itentical title for button and page title
+            // set identical title for button and page title
             (Find("Button").First() as DemoButton).Text = "Element demo";
             ShouldSee("Element demo", 2);
 

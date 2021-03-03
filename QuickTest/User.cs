@@ -154,7 +154,7 @@ namespace QuickTest
             else if (elements.First() is Slider)
                 (elements.First() as Slider).Value = double.Parse(text);
             else
-                throw new InvalidOperationException($"element '{automationId}' can not be used for input");
+                throw new InvalidOperationException($"element '{automationId}' cannot be used for input");
 
             elements.First().SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, false);
         }
@@ -185,7 +185,7 @@ namespace QuickTest
             if (elements.First() is SearchBar)
                 (elements.First() as SearchBar).Text = null;
             else
-                throw new InvalidOperationException($"element '{automationId}' can not be used for input");
+                throw new InvalidOperationException($"element '{automationId}' cannot be used for input");
 
             elements.First().SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, false);
         }

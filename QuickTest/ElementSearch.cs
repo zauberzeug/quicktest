@@ -13,7 +13,7 @@ namespace QuickTest
             var result = new List<ElementInfo>();
             IEnumerable<ElementInfo> empty = new List<ElementInfo>();
 
-            if (element == null) throw new NullReferenceException("can not search for items in null element");
+            if (element == null) throw new NullReferenceException("cannot search for items in null element");
 
             if (containerPredicate != null && !containerPredicate.Invoke(element)) return result;
 
