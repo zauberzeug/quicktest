@@ -17,6 +17,9 @@ namespace QuickTest
 
             if (containerPredicate != null && !containerPredicate.Invoke(element)) return result;
 
+            if (predicate.Invoke(element))
+                result.Add(ElementInfo.FromElement(element));
+
             result.AddRange(FindInTitle(element, predicate, containerPredicate));
             result.AddRange((element as ContentPage)?.Content?.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as ContentView)?.Content.Find(predicate, containerPredicate) ?? empty);
@@ -24,9 +27,6 @@ namespace QuickTest
             result.AddRange((element as Layout<View>)?.Children.ToList().SelectMany(child => child.Find(predicate, containerPredicate)) ?? empty);
             result.AddRange((element as ListView)?.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as ViewCell)?.View?.Find(predicate, containerPredicate) ?? empty);
-
-            if (predicate.Invoke(element))
-                result.Add(ElementInfo.FromElement(element));
 
             AddTapGestureRecognizers(element, result);
 

@@ -79,6 +79,23 @@ namespace Tests
         }
 
         [Test]
+        public void TestTapElementWithIdenticalTitle()
+        {
+            OpenMenu("Elements");
+
+            // set itentical title for button and page title
+            (Find("Button").First() as DemoButton).Text = "Element demo";
+            ShouldSee("Element demo", 2);
+
+            var elements = Find("Element demo");
+            Assert.That(elements.First(), Is.TypeOf<ElementDemoPage>());
+            Assert.That(elements.Last(), Is.TypeOf<DemoButton>());
+
+            TapNth("Element demo", 1);
+            Tap("Ok");
+        }
+
+        [Test]
         public void TestFind()
         {
             var elements = Find("PushAsync");
