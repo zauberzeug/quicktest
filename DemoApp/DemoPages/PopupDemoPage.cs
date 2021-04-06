@@ -40,6 +40,10 @@ namespace DemoApp
                         Text = "Show action sheet with repeated text",
                         Command = new Command(ShowActionSheetWithRepeatedText),
                     },
+                    new Button {
+                        Text = "Show action sheet which triggers alert",
+                        Command = new Command(ShowActionSheetWhichTriggersAlert),
+                    },
                     (result = new Label()),
                     new Label() {
                         Text = "Some text",
@@ -94,6 +98,16 @@ namespace DemoApp
         {
             var result = await DisplayActionSheet("Message", "Message", "Message", "Message", "Message");
             this.result.Text = $"Action sheet with repeated text result: {result}";
+        }
+
+        async void ShowActionSheetWhichTriggersAlert()
+        {
+            var result = await DisplayActionSheet("Trigger alert?", "No", null, "Yes");
+            this.result.Text = $"Action sheet which triggers alert: {result}";
+            if (result == "Yes") {
+                await DisplayAlert("Alert", "Message", "Ok");
+                this.result.Text = $"Alert result: Ok";
+            }
         }
     }
 }

@@ -125,6 +125,18 @@ Message
         }
 
         [Test]
+        public void WhenTappingOnPopupAnotherPopupCanBeOpened()
+        {
+            Tap("Show action sheet which triggers alert");
+            ShouldSee("Trigger alert?", "Yes", "No");
+            Tap("Yes");
+            ShouldNotSee("Trigger alert?", "Yes", "No");
+            ShouldSee("Alert", "Message", "Ok");
+            Tap("Ok");
+            ShouldSee("Show action sheet which triggers alert");
+        }
+
+        [Test]
         public void TestSeesAlert()
         {
             Assert.That(SeesAlert(), Is.False);

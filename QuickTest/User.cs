@@ -10,7 +10,7 @@ namespace QuickTest
     public partial class User
     {
         readonly Application app;
-        readonly Stack<Popup> popups = new Stack<Popup>();
+        readonly List<Popup> popups = new List<Popup>();
 
         public User(Application app)
         {
@@ -18,11 +18,11 @@ namespace QuickTest
             app.Invoke("OnStart");
 
             MessagingCenter.Subscribe<Page, AlertArguments>(this, Page.AlertSignalName, (page, alert) => {
-                popups.Push(new AlertPopup(alert));
+                popups.Add(new AlertPopup(alert));
             });
 
             MessagingCenter.Subscribe<Page, ActionSheetArguments>(this, Page.ActionSheetSignalName, (page, actionSheet) => {
-                popups.Push(new ActionSheetPopup(actionSheet));
+                popups.Add(new ActionSheetPopup(actionSheet));
             });
 
             WireNavigation();
@@ -69,7 +69,7 @@ namespace QuickTest
         public bool CanSee(string text)
         {
             if (popups.Any())
-                return popups.Peek().Contains(text);
+                return popups.Last().Contains(text);
             else
                 return CurrentPage.Find(text).Any();
         }
@@ -77,16 +77,16 @@ namespace QuickTest
         public bool CanSee(string text, int count)
         {
             if (popups.Any())
-                return popups.Peek().Count(text) == count;
+                return popups.Last().Count(text) == count;
             else
                 return CurrentPage.Find(text).Count == count;
         }
 
         public bool SeesPopup() => popups.Any();
 
-        public bool SeesAlert() => popups.Any() && popups.Peek() is AlertPopup;
+        public bool SeesAlert() => popups.Any() && popups.Last() is AlertPopup;
 
-        public bool SeesActionSheet() => popups.Any() && popups.Peek() is ActionSheetPopup;
+        public bool SeesActionSheet() => popups.Any() && popups.Last() is ActionSheetPopup;
 
         public List<Element> Find(string text)
         {
@@ -102,12 +102,11 @@ namespace QuickTest
         {
             if (popups.Any()) {
                 Assert.That(index, Is.Null, "Tap indices are not supported on alerts");
-                var popup = popups.Peek();
-                if (popup.Tap(text)) {
-                    popups.Pop();
-                } else {
+                var popup = popups.Last();
+                if (popup.Tap(text))
+                    popups.Remove(popup);
+                else
                     Assert.Fail($"Could not tap \"{text}\" on popup\n{popup}");
-                }
                 return;
             }
 
@@ -213,7 +212,7 @@ namespace QuickTest
         public string Render()
         {
             if (popups.Any())
-                return popups.Peek().Render();
+                return popups.Last().Render();
             else
                 return CurrentPage.Render().Trim();
         }
