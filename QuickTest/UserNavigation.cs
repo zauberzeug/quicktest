@@ -24,9 +24,9 @@ namespace QuickTest
         {
             HandleDisappearing(CurrentPage);
 
-            if (app.MainPage is MasterDetailPage) {
-                (app.MainPage as MasterDetailPage).PropertyChanging -= HandleMasterDetailPropertyChanging;
-                (app.MainPage as MasterDetailPage).PropertyChanged -= HandleMasterDetailPropertyChanged;
+            if (app.MainPage is MasterDetailPage masterDetailPage) {
+                masterDetailPage.PropertyChanging -= HandleMasterDetailPropertyChanging;
+                masterDetailPage.PropertyChanged -= HandleMasterDetailPropertyChanged;
             }
 
             OnNavigationPageRemoved();
@@ -41,10 +41,12 @@ namespace QuickTest
         {
             HandleAppearing(CurrentPage);
 
-            if (app.MainPage is MasterDetailPage) {
-                EnablePlatform(app.MainPage);
-                (app.MainPage as MasterDetailPage).PropertyChanging += HandleMasterDetailPropertyChanging;
-                (app.MainPage as MasterDetailPage).PropertyChanged += HandleMasterDetailPropertyChanged;
+            if (app.MainPage is MasterDetailPage masterDetailPage) {
+                EnablePlatform(masterDetailPage);
+                EnablePlatform(masterDetailPage.Master);
+                EnablePlatform(masterDetailPage.Detail);
+                masterDetailPage.PropertyChanging += HandleMasterDetailPropertyChanging;
+                masterDetailPage.PropertyChanged += HandleMasterDetailPropertyChanged;
             }
 
             if (CurrentNavigationPage != null) {
@@ -64,8 +66,7 @@ namespace QuickTest
 
             (page as IPageController).SendAppearing();
 
-            if (page is MultiPage<Page>) {
-                var multiPage = page as MultiPage<Page>;
+            if (page is MultiPage<Page> multiPage) {
                 multiPage.PropertyChanging += HandleMultiPagePropertyChanging;
                 multiPage.PropertyChanged += HandleMultiPagePropertyChanged;
             }
@@ -75,8 +76,7 @@ namespace QuickTest
         {
             (page as IPageController).SendDisappearing();
 
-            if (page is MultiPage<Page>) {
-                var multiPage = page as MultiPage<Page>;
+            if (page is MultiPage<Page> multiPage) {
                 multiPage.PropertyChanging -= HandleMultiPagePropertyChanging;
                 multiPage.PropertyChanged -= HandleMultiPagePropertyChanged;
             }
@@ -153,10 +153,10 @@ namespace QuickTest
         void HandleModalPushed(object sender, ModalPushedEventArgs e)
         {
             HandleAppearing(e.Modal);
-            if (e.Modal is NavigationPage) {
-                (e.Modal as NavigationPage).Pushed += HandlePushed;
-                (e.Modal as NavigationPage).Popped += HandlePopped;
-                (e.Modal as NavigationPage).PoppedToRoot += HandlePoppedToRoot;
+            if (e.Modal is NavigationPage navigationPage) {
+                navigationPage.Pushed += HandlePushed;
+                navigationPage.Popped += HandlePopped;
+                navigationPage.PoppedToRoot += HandlePoppedToRoot;
             }
         }
 
@@ -168,10 +168,10 @@ namespace QuickTest
         void HandleModalPopped(object sender, ModalPoppedEventArgs e)
         {
             HandleDisappearing(e.Modal);
-            if (e.Modal is NavigationPage) {
-                (e.Modal as NavigationPage).Pushed -= HandlePushed;
-                (e.Modal as NavigationPage).Popped -= HandlePopped;
-                (e.Modal as NavigationPage).PoppedToRoot -= HandlePoppedToRoot;
+            if (e.Modal is NavigationPage navigationPage) {
+                navigationPage.Pushed -= HandlePushed;
+                navigationPage.Popped -= HandlePopped;
+                navigationPage.PoppedToRoot -= HandlePoppedToRoot;
             }
             HandleAppearing(CurrentPage);
         }
