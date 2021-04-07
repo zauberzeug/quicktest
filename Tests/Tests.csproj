@@ -47,7 +47,7 @@
     <Compile Include="TitleViewPageTests.cs" />
     <Compile Include="TabbedTitleViewPageTests.cs" />
     <Compile Include="EmptyContentPageTests.cs" />
-    <Compile Include="MasterDetailPageTests.cs" />
+    <Compile Include="FlyoutPageTests.cs" />
     <Compile Include="PopupTests.cs" />
   </ItemGroup>
   <ItemGroup>

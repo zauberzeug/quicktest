@@ -4,7 +4,7 @@ using QuickTest;
 
 namespace Tests
 {
-    public class MasterDetailPagetests : QuickTest<App>
+    public class FlyoutPageTests : QuickTest<App>
     {
         [SetUp]
         protected override void SetUp()

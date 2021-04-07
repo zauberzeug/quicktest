@@ -24,9 +24,9 @@ namespace QuickTest
         {
             HandleDisappearing(CurrentPage);
 
-            if (app.MainPage is MasterDetailPage masterDetailPage) {
-                masterDetailPage.PropertyChanging -= HandleMasterDetailPropertyChanging;
-                masterDetailPage.PropertyChanged -= HandleMasterDetailPropertyChanged;
+            if (app.MainPage is FlyoutPage flyoutPage) {
+                flyoutPage.PropertyChanging -= HandleFlyoutPagePropertyChanging;
+                flyoutPage.PropertyChanged -= HandleFlyoutPagePropertyChanged;
             }
 
             OnNavigationPageRemoved();
@@ -41,12 +41,12 @@ namespace QuickTest
         {
             HandleAppearing(CurrentPage);
 
-            if (app.MainPage is MasterDetailPage masterDetailPage) {
-                EnablePlatform(masterDetailPage);
-                EnablePlatform(masterDetailPage.Master);
-                EnablePlatform(masterDetailPage.Detail);
-                masterDetailPage.PropertyChanging += HandleMasterDetailPropertyChanging;
-                masterDetailPage.PropertyChanged += HandleMasterDetailPropertyChanged;
+            if (app.MainPage is FlyoutPage flyoutPage) {
+                EnablePlatform(flyoutPage);
+                EnablePlatform(flyoutPage.Flyout);
+                EnablePlatform(flyoutPage.Detail);
+                flyoutPage.PropertyChanging += HandleFlyoutPagePropertyChanging;
+                flyoutPage.PropertyChanged += HandleFlyoutPagePropertyChanged;
             }
 
             if (CurrentNavigationPage != null) {
@@ -108,18 +108,18 @@ namespace QuickTest
             CurrentNavigationPage.PoppedToRoot -= HandlePoppedToRoot;
         }
 
-        void HandleMasterDetailPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
+        void HandleFlyoutPagePropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
-            if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
-                HandleDisappearing((app.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.LastOrDefault());
+            if (e.PropertyName == nameof(FlyoutPage.Detail)) {
+                HandleDisappearing((app.MainPage as FlyoutPage).Detail.Navigation.NavigationStack.LastOrDefault());
                 OnNavigationPageRemoved();
             }
         }
 
-        void HandleMasterDetailPropertyChanged(object sender, PropertyChangedEventArgs e)
+        void HandleFlyoutPagePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(MasterDetailPage.Detail)) {
-                HandleAppearing((app.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.LastOrDefault());
+            if (e.PropertyName == nameof(FlyoutPage.Detail)) {
+                HandleAppearing((app.MainPage as FlyoutPage).Detail.Navigation.NavigationStack.LastOrDefault());
                 OnNavigationPageAdded();
             }
         }

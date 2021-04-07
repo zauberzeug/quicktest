@@ -22,7 +22,7 @@ namespace Tests
         {
             Launch(new App());
             App.MainPage.Navigation.PushModalAsync(new ContentPage { Content = new Label { Text = "Modal Page" } });
-            App.MasterDetail.Detail = new NavigationPage(new ContentPage { Content = new Label { Text = "New Page" } });
+            App.Flyout.Detail = new NavigationPage(new ContentPage { Content = new Label { Text = "New Page" } });
             ShouldSee("Modal Page");
         }
 

@@ -34,7 +34,7 @@ namespace QuickTest
                 if (modalNavigationPage != null)
                     return modalNavigationPage;
                 return (app.MainPage as NavigationPage)
-                ?? (app.MainPage as MasterDetailPage).Detail as NavigationPage;
+                ?? (app.MainPage as FlyoutPage).Detail as NavigationPage;
             }
         }
 
@@ -44,11 +44,11 @@ namespace QuickTest
                 var currentPage = (modalStack.LastOrDefault() as ContentPage)
                     ?? ((modalStack.LastOrDefault() as NavigationPage)?.CurrentPage as ContentPage);
 
-                var masterDetailPage = app.MainPage as MasterDetailPage;
-                if (currentPage == null && masterDetailPage != null && masterDetailPage.IsPresented)
-                    currentPage = masterDetailPage.Master as ContentPage;
+                var flyoutPage = app.MainPage as FlyoutPage;
+                if (currentPage == null && flyoutPage != null && flyoutPage.IsPresented)
+                    currentPage = flyoutPage.Flyout as ContentPage;
 
-                var rootPage = masterDetailPage?.Detail ?? app.MainPage;
+                var rootPage = flyoutPage?.Detail ?? app.MainPage;
                 if (currentPage == null) {
                     var page = rootPage.Navigation.NavigationStack.Last();
                     if (page is TabbedPage)
@@ -191,12 +191,12 @@ namespace QuickTest
 
         public void OpenMenu()
         {
-            (app.MainPage as MasterDetailPage).IsPresented = true;
+            (app.MainPage as FlyoutPage).IsPresented = true;
         }
 
         public void CloseMenu()
         {
-            (app.MainPage as MasterDetailPage).IsPresented = false;
+            (app.MainPage as FlyoutPage).IsPresented = false;
         }
 
         public void GoBack()

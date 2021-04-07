@@ -32,9 +32,9 @@ namespace DemoApp
                     new DemoButton("PushModalAsync NavigationPage") {
                         Command = new Command(o => Navigation.PushModalAsync(new NavigationPage(new NavigationDemoPage(title + " ^")))),
                     },
-                    new DemoLabel("MasterDetail:"),
-                    new DemoButton("Toggle MasterDetail MainPage") {
-                        Command = new Command(obj => (Application.Current as App).ToggleMasterDetail()),
+                    new DemoLabel("Flyout:"),
+                    new DemoButton("Toggle Flyout MainPage") {
+                        Command = new Command(obj => (Application.Current as App).ToggleFlyout()),
                     },
                 },
             };

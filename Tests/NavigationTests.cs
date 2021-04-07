@@ -140,11 +140,11 @@ namespace Tests
         }
 
         [Test]
-        public void ToggleMainPageBetweenMasterDetailAndNavigation()
+        public void ToggleMainPageBetweenFlyoutAndNavigation()
         {
             var expectedLog = "A(Navigation) ";
 
-            Tap("Toggle MasterDetail MainPage");
+            Tap("Toggle Flyout MainPage");
             ShouldSee("Navigation");
             Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) A(Navigation) "));
 
@@ -156,7 +156,7 @@ namespace Tests
             ShouldSee("Navigation");
             Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation >) A(Navigation) "));
 
-            Tap("Toggle MasterDetail MainPage");
+            Tap("Toggle Flyout MainPage");
             Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) A(Navigation) "));
 
             OpenMenu("Elements");

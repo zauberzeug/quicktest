@@ -46,7 +46,7 @@ namespace DemoApp
         {
             return new DemoButton(title) {
                 Command = new Command(o => {
-                    var mainPage = (Application.Current.MainPage as MasterDetailPage);
+                    var mainPage = (Application.Current.MainPage as FlyoutPage);
                     mainPage.Detail = new NavigationPage(pageCreator.Invoke());
                     mainPage.IsPresented = false;
                 }),

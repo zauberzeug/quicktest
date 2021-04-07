@@ -13,20 +13,20 @@ namespace DemoApp
         {
             PageLog = LifecycleLog = "";
 
-            ToggleMasterDetail();
+            ToggleFlyout();
             Instance = this;
         }
 
 
-        public MasterDetailPage MasterDetail { get => MainPage as MasterDetailPage; }
+        public FlyoutPage Flyout { get => MainPage as FlyoutPage; }
 
-        public void ToggleMasterDetail()
+        public void ToggleFlyout()
         {
-            if (MainPage is MasterDetailPage)
+            if (MainPage is FlyoutPage)
                 MainPage = new NavigationPage(new NavigationDemoPage());
             else
-                MainPage = new MasterDetailPage {
-                    Master = new MenuPage(),
+                MainPage = new FlyoutPage {
+                    Flyout = new MenuPage(),
                     Detail = new NavigationPage(new NavigationDemoPage()),
                 };
         }
