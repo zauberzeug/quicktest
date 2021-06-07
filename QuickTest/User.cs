@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using NUnit.Framework;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -201,7 +202,13 @@ namespace QuickTest
 
         public void GoBack()
         {
-            app.MainPage.SendBackButtonPressed();
+            var modalPage = app.MainPage.Navigation.ModalStack.LastOrDefault();
+            if (modalPage != null) {
+                // Xamarin.Forms expects a synchronization context when popping a page from the modal stack via back button press
+                SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
+                modalPage.SendBackButtonPressed();
+            } else
+                app.MainPage.SendBackButtonPressed();
         }
 
         public void Print()

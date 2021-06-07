@@ -65,6 +65,38 @@ namespace Tests
         }
 
         [Test]
+        public void TestGoBackOnNavigationPageOnModalStack()
+        {
+            Tap("PushModalAsync NavigationPage");
+            ShouldSee("Navigation ^");
+
+            Tap("PushAsync");
+            ShouldSee("Navigation ^ >");
+
+            Tap("PushAsync");
+            ShouldSee("Navigation ^ > >");
+
+            GoBack();
+            ShouldSee("Navigation ^ >");
+
+            GoBack();
+            ShouldSee("Navigation ^");
+
+            GoBack();
+            ShouldSee("Navigation");
+        }
+
+        [Test]
+        public void TestGoBackOnPageOnModalStack()
+        {
+            Tap("PushModalAsync");
+            ShouldSee("Title: Navigation ^");
+
+            GoBack();
+            ShouldSee("Navigation");
+        }
+
+        [Test]
         public void TestPopToRoot()
         {
             Tap("PushAsync");
