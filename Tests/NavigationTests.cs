@@ -195,5 +195,16 @@ namespace Tests
             ShouldSee("Element demo");
             Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) "));
         }
+
+        [Test]
+        public void CanDisplayAlertOnModalPageWithoutFurtherNavigation()
+        {
+            Tap("PushModalAsync NavigationPage");
+            ShouldSee("Navigation ^");
+
+            Tap("Show Alert");
+            ShouldSee("Alert title", "Alert message", "Ok");
+            Tap("Ok");
+        }
     }
 }

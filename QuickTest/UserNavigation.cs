@@ -154,6 +154,7 @@ namespace QuickTest
         {
             HandleAppearing(e.Modal);
             if (e.Modal is NavigationPage navigationPage) {
+                EnablePlatform(navigationPage.CurrentPage);
                 navigationPage.Pushed += HandlePushed;
                 navigationPage.Popped += HandlePopped;
                 navigationPage.PoppedToRoot += HandlePoppedToRoot;
@@ -167,7 +168,6 @@ namespace QuickTest
 
         void HandleModalPopped(object sender, ModalPoppedEventArgs e)
         {
-            HandleDisappearing(e.Modal);
             if (e.Modal is NavigationPage navigationPage) {
                 navigationPage.Pushed -= HandlePushed;
                 navigationPage.Popped -= HandlePopped;

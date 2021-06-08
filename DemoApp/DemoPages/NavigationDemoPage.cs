@@ -36,6 +36,9 @@ namespace DemoApp
                     new DemoButton("Toggle Flyout MainPage") {
                         Command = new Command(obj => (Application.Current as App).ToggleFlyout()),
                     },
+                    new DemoButton("Show Alert") {
+                        Command = new Command(obj => ShowAlert()),
+                    },
                 },
             };
 
@@ -55,6 +58,11 @@ namespace DemoApp
             App.PageLog += $"D({Title}) ";
 
             base.OnDisappearing();
+        }
+
+        async void ShowAlert()
+        {
+            await DisplayAlert("Alert title", "Alert message", "Ok");
         }
     }
 }
