@@ -8,6 +8,7 @@ namespace DemoApp
         public NavigationDemoPage(string title = "Navigation")
         {
             Title = title;
+            PageExtensions.AddPageLog(this);
 
             Content = new StackLayout {
                 VerticalOptions = LayoutOptions.CenterAndExpand,
@@ -30,7 +31,7 @@ namespace DemoApp
                         Command = new Command(obj => Navigation.PopModalAsync()),
                     },
                     new DemoButton("PushModalAsync NavigationPage") {
-                        Command = new Command(o => Navigation.PushModalAsync(new NavigationPage(new NavigationDemoPage(title + " ^")))),
+                        Command = new Command(o => Navigation.PushModalAsync(new NavigationPage(new NavigationDemoPage(title + " ^")).AddPageLog())),
                     },
                     new DemoLabel("Flyout:"),
                     new DemoButton("Toggle Flyout MainPage") {
@@ -44,20 +45,6 @@ namespace DemoApp
 
             if (title.EndsWith("^", StringComparison.Ordinal))
                 (Content as StackLayout).Children.Insert(0, new DemoLabel("Title: " + title));
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            App.PageLog += $"A({Title}) ";
-        }
-
-        protected override void OnDisappearing()
-        {
-            App.PageLog += $"D({Title}) ";
-
-            base.OnDisappearing();
         }
 
         async void ShowAlert()

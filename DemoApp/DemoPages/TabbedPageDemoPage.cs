@@ -7,9 +7,7 @@ namespace DemoApp
         public TabbedPageDemoPage()
         {
             Title = "TabbedPage";
-
-            Appearing += (s, e) => App.PageLog += $"A({Title}) ";
-            Disappearing += (s, e) => App.PageLog += $"D({Title}) ";
+            PageExtensions.AddPageLog(this);
 
             var contentPageA = new ContentPage {
                 Title = "Tab A",
@@ -20,9 +18,7 @@ namespace DemoApp
                         new Button{Text = "Open Subpage", Command = new Command(OpenSubpage)},
                     }
                 }
-            };
-            contentPageA.Appearing += (s, e) => App.PageLog += $"A(Tab A) ";
-            contentPageA.Disappearing += (s, e) => App.PageLog += $"D(Tab A) ";
+            }.AddPageLog();
 
             var contentPageB = new ContentPage {
                 Title = "Tab B",
@@ -32,9 +28,7 @@ namespace DemoApp
                     },
                 },
                 ToolbarItems = { new DemoToolbarItem() }
-            };
-            contentPageB.Appearing += (s, e) => App.PageLog += $"A(Tab B) ";
-            contentPageB.Disappearing += (s, e) => App.PageLog += $"D(Tab B) ";
+            }.AddPageLog();
 
             Children.Add(contentPageA);
             Children.Add(contentPageB);
@@ -43,30 +37,27 @@ namespace DemoApp
         async void OpenModalPage()
         {
             var page = new ContentPage {
+                Title = "Modal",
                 Content = new StackLayout {
                     Children = {
                         new Label{Text = "This is a modal page"},
                         new Button{Text = "Close", Command = new Command(() => Navigation.PopModalAsync())},
                     }
                 }
-            };
-            page.Appearing += (s, e) => App.PageLog += $"A(Modal) ";
-            page.Disappearing += (s, e) => App.PageLog += $"D(Modal) ";
+            }.AddPageLog();
             await Navigation.PushModalAsync(page);
         }
 
         async void OpenSubpage()
         {
             var page = new ContentPage {
-                Title = "Some Subpage",
+                Title = "Subpage",
                 Content = new StackLayout {
                     Children = {
                         new Label{Text = "This is a sub page"},
                     }
                 }
-            };
-            page.Appearing += (s, e) => App.PageLog += $"A(Subpage) ";
-            page.Disappearing += (s, e) => App.PageLog += $"D(Subpage) ";
+            }.AddPageLog();
             await Navigation.PushAsync(page);
         }
     }

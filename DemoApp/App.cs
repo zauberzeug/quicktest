@@ -23,12 +23,12 @@ namespace DemoApp
         public void ToggleFlyout()
         {
             if (MainPage is FlyoutPage)
-                MainPage = new NavigationPage(new NavigationDemoPage());
+                MainPage = new NavigationPage(new NavigationDemoPage()).AddPageLog();
             else
                 MainPage = new FlyoutPage {
                     Flyout = new MenuPage(),
-                    Detail = new NavigationPage(new NavigationDemoPage()),
-                };
+                    Detail = new NavigationPage(new NavigationDemoPage()).AddPageLog(),
+                }.AddPageLog();
         }
 
         public static void ShowMessage(string title, string message)

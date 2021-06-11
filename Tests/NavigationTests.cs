@@ -162,7 +162,7 @@ namespace Tests
             var expectedLog = "A(Navigation) ";
 
             Tap("PushModalAsync NavigationPage");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) A(Navigation ^) "));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation) A(NavigationPage) A(Navigation ^) "));
 
             Tap("PushAsync");
             Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Navigation ^) A(Navigation ^ >) "));
