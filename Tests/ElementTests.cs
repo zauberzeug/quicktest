@@ -164,7 +164,7 @@ namespace Tests
         [Test]
         public void Slider()
         {
-            var expectedLog = "A(Navigation) D(Navigation) ";
+            var expectedLog = "A(FlyoutPage) A(NavigationPage) A(Navigation) D(Navigation) D(NavigationPage) A(NavigationPage) A(Element demo) ";
             Assert.That(App.PageLog, Is.EqualTo(expectedLog));
 
             Input("slider_automation_id", 10);

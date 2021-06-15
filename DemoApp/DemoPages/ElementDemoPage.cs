@@ -8,6 +8,7 @@ namespace DemoApp
         public ElementDemoPage()
         {
             Title = "Element demo";
+            PageExtensions.AddPageLog(this);
 
             var searchbar = new SearchBar {
                 AutomationId = "searchbar_automation_id",

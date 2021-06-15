@@ -6,6 +6,8 @@ namespace Tests
 {
     public class TabbedPageTests : QuickTest<App>
     {
+        string expectedLog;
+
         [SetUp]
         protected override void SetUp()
         {
@@ -13,16 +15,16 @@ namespace Tests
 
             Launch(new App());
             OpenMenu("TabbedPage");
+
+            expectedLog = "A(FlyoutPage) A(NavigationPage) A(Navigation) D(Navigation) D(NavigationPage) A(NavigationPage) A(TabbedPage) A(Tab A) ";
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog));
         }
 
         [Test]
         public void SwitchTab()
         {
-            var expectedLog = "A(Navigation) D(Navigation) ";
-
             ShouldSee("TabbedPage", "Tab A", "Tab B", "This is content on tab A");
             ShouldNotSee("This is content on tab B", "ToolbarItem");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "A(TabbedPage) A(Tab A) "));
 
             Tap("Tab B");
 
@@ -37,22 +39,20 @@ namespace Tests
         [Test]
         public void ModalPageOverTabbedPage()
         {
-            var expectedLog = "A(Navigation) D(Navigation) A(TabbedPage) A(Tab A) ";
             Assert.That(App.PageLog, Is.EqualTo(expectedLog));
             ShouldSee("TabbedPage");
 
             Tap("Open ModalPage");
             ShouldSee("This is a modal page");
             ShouldNotSee("TabbedPage");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Tab A) A(Modal) "));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Tab A) D(TabbedPage) D(NavigationPage) D(FlyoutPage) A(Modal) "));
             Tap("Close");
-            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Modal) A(Tab A) "));
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Modal) A(FlyoutPage) A(NavigationPage) A(TabbedPage) A(Tab A) "));
         }
 
         [Test]
         public void NavigationFromTabbedPage()
         {
-            var expectedLog = "A(Navigation) D(Navigation) A(TabbedPage) A(Tab A) ";
             Assert.That(App.PageLog, Is.EqualTo(expectedLog));
             ShouldSee("TabbedPage");
 

@@ -10,26 +10,21 @@ namespace QuickTest
         {
             app.PropertyChanging += (s, args) => {
                 if (args.PropertyName == nameof(Application.MainPage))
-                    HandleAppDisappearing();
+                    HandleMainPageChanging();
             };
             app.PropertyChanged += (s, args) => {
                 if (args.PropertyName == nameof(Application.MainPage))
-                    HandleAppAppearing();
+                    HandleMainPageChanged();
             };
 
-            HandleAppAppearing();
+            HandleMainPageChanged();
         }
 
-        void HandleAppDisappearing()
+        void HandleMainPageChanging()
         {
-            HandleDisappearing(CurrentPage);
-
-            if (app.MainPage is FlyoutPage flyoutPage) {
-                flyoutPage.PropertyChanging -= HandleFlyoutPagePropertyChanging;
-                flyoutPage.PropertyChanged -= HandleFlyoutPagePropertyChanged;
-            }
-
-            OnNavigationPageRemoved();
+            var mainPage = app.MainPage;
+            SendDisappearing(mainPage);
+            UnsubscribeFromPageEvents(mainPage);
 
             app.ModalPushing -= HandleModalPushing;
             app.ModalPushed -= HandleModalPushed;
@@ -37,22 +32,12 @@ namespace QuickTest
             app.ModalPopped -= HandleModalPopped;
         }
 
-        void HandleAppAppearing()
+        void HandleMainPageChanged()
         {
-            HandleAppearing(CurrentPage);
-
-            if (app.MainPage is FlyoutPage flyoutPage) {
-                EnablePlatform(flyoutPage);
-                EnablePlatform(flyoutPage.Flyout);
-                EnablePlatform(flyoutPage.Detail);
-                flyoutPage.PropertyChanging += HandleFlyoutPagePropertyChanging;
-                flyoutPage.PropertyChanged += HandleFlyoutPagePropertyChanged;
-            }
-
-            if (CurrentNavigationPage != null) {
-                EnablePlatform(CurrentNavigationPage);
-                OnNavigationPageAdded();
-            }
+            var mainPage = app.MainPage;
+            EnablePlatform(mainPage);
+            SendAppearing(mainPage);
+            SubscribeToPageEvents(mainPage);
 
             app.ModalPushing += HandleModalPushing;
             app.ModalPushed += HandleModalPushed;
@@ -60,122 +45,154 @@ namespace QuickTest
             app.ModalPopped += HandleModalPopped;
         }
 
-        void HandleAppearing(Page page)
+        void EnablePlatform(Page page)
         {
-            EnablePlatform(page);
+            page.IsPlatformEnabled = true;
 
-            (page as IPageController).SendAppearing();
-
-            if (page is MultiPage<Page> multiPage) {
-                multiPage.PropertyChanging += HandleMultiPagePropertyChanging;
-                multiPage.PropertyChanged += HandleMultiPagePropertyChanged;
+            if (page is FlyoutPage flyoutPage) {
+                EnablePlatform(flyoutPage.Flyout);
+                EnablePlatform(flyoutPage.Detail);
+            } else if (page is IPageContainer<Page> pageContainer) {
+                EnablePlatform(pageContainer.CurrentPage);
             }
         }
 
-        void HandleDisappearing(Page page)
+        void SendAppearing(Page page)
         {
-            (page as IPageController).SendDisappearing();
-
-            if (page is MultiPage<Page> multiPage) {
-                multiPage.PropertyChanging -= HandleMultiPagePropertyChanging;
-                multiPage.PropertyChanged -= HandleMultiPagePropertyChanged;
+            page.SendAppearing();
+            if (page is FlyoutPage flyoutPage) {
+                if (flyoutPage.IsPresented)
+                    flyoutPage.Flyout.SendAppearing();
+                else
+                    flyoutPage.Detail.SendAppearing();
             }
         }
 
-        void HandleMultiPagePropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
+        void SendDisappearing(Page page)
         {
-            var multiPage = sender as MultiPage<Page>;
-            HandleDisappearing(multiPage.CurrentPage);
+            if (page is FlyoutPage flyoutPage) {
+                if (flyoutPage.IsPresented)
+                    flyoutPage.Flyout.SendDisappearing();
+                else
+                    flyoutPage.Detail.SendDisappearing();
+            }
+            page.SendDisappearing();
         }
 
-        void HandleMultiPagePropertyChanged(object sender, PropertyChangedEventArgs e)
+        void SubscribeToPageEvents(Page page)
         {
-            var multiPage = sender as MultiPage<Page>;
-            HandleAppearing(multiPage.CurrentPage);
+            if (page is FlyoutPage flyoutPage) {
+                flyoutPage.PropertyChanging += HandleFlyoutPagePropertyChanging;
+                flyoutPage.PropertyChanged += HandleFlyoutPagePropertyChanged;
+                SubscribeToPageEvents(flyoutPage.Flyout);
+                SubscribeToPageEvents(flyoutPage.Detail);
+            }
+
+            if (page is IPageContainer<Page> pageContainer) {
+                page.PropertyChanging += HandlePageContainerPropertyChanging;
+                page.PropertyChanged += HandlePageContainerPropertyChanged;
+                SubscribeToPageEvents(pageContainer.CurrentPage);
+            }
         }
 
-        void OnNavigationPageAdded()
+        void UnsubscribeFromPageEvents(Page page)
         {
-            CurrentNavigationPage.Pushed += HandlePushed;
-            CurrentNavigationPage.Popped += HandlePopped;
-            CurrentNavigationPage.PoppedToRoot += HandlePoppedToRoot;
-        }
+            if (page is FlyoutPage flyoutPage) {
+                flyoutPage.PropertyChanging -= HandleFlyoutPagePropertyChanging;
+                flyoutPage.PropertyChanged -= HandleFlyoutPagePropertyChanged;
+                UnsubscribeFromPageEvents(flyoutPage.Flyout);
+                UnsubscribeFromPageEvents(flyoutPage.Detail);
+            }
 
-        void OnNavigationPageRemoved()
-        {
-            CurrentNavigationPage.Pushed -= HandlePushed;
-            CurrentNavigationPage.Popped -= HandlePopped;
-            CurrentNavigationPage.PoppedToRoot -= HandlePoppedToRoot;
+            if (page is IPageContainer<Page> pageContainer) {
+                page.PropertyChanging -= HandlePageContainerPropertyChanging;
+                page.PropertyChanged -= HandlePageContainerPropertyChanged;
+                UnsubscribeFromPageEvents(pageContainer.CurrentPage);
+            }
         }
 
         void HandleFlyoutPagePropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
-            if (e.PropertyName == nameof(FlyoutPage.Detail)) {
-                HandleDisappearing((app.MainPage as FlyoutPage).Detail.Navigation.NavigationStack.LastOrDefault());
-                OnNavigationPageRemoved();
+            var flyoutPage = sender as FlyoutPage;
+
+            Page page = null;
+            if (e.PropertyName == nameof(flyoutPage.Detail))
+                page = flyoutPage.Detail;
+            else if (e.PropertyName == nameof(flyoutPage.Flyout))
+                page = flyoutPage.Flyout;
+
+            if (page != null) {
+                SendDisappearing(page);
+                UnsubscribeFromPageEvents(page);
             }
         }
 
         void HandleFlyoutPagePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(FlyoutPage.Detail)) {
-                HandleAppearing((app.MainPage as FlyoutPage).Detail.Navigation.NavigationStack.LastOrDefault());
-                OnNavigationPageAdded();
+            var flyoutPage = sender as FlyoutPage;
+
+            Page page = null;
+            if (e.PropertyName == nameof(flyoutPage.Detail))
+                page = flyoutPage.Detail;
+            else if (e.PropertyName == nameof(flyoutPage.Flyout))
+                page = flyoutPage.Flyout;
+
+            if (page != null) {
+                EnablePlatform(page);
+                SendAppearing(page);
+                SubscribeToPageEvents(page);
             }
         }
 
-        void HandlePushed(object sender, NavigationEventArgs e)
+        void HandlePageContainerPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
-            var stack = CurrentPage.Navigation.NavigationStack;
-            HandleDisappearing(stack[stack.Count - 2]);
-            HandleAppearing(e.Page);
+            var pageContainer = sender as IPageContainer<Page>;
+            if (e.PropertyName != nameof(pageContainer.CurrentPage))
+                return;
+            SendDisappearing(pageContainer.CurrentPage);
         }
 
-        void HandlePopped(object sender, NavigationEventArgs e)
+        void HandlePageContainerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            HandleDisappearing(e.Page);
-            // CurrentPage can be a page contained in a TabbedPage or similar.
-            // That's why we need to use the page which is on top of the navigation stack.
-            HandleAppearing(CurrentPage.Navigation.NavigationStack.Last());
-        }
-
-        void HandlePoppedToRoot(object sender, NavigationEventArgs e)
-        {
-            HandleDisappearing((e as PoppedToRootEventArgs).PoppedPages.Last());
-            HandleAppearing(e.Page);
+            var pageContainer = sender as IPageContainer<Page>;
+            if (e.PropertyName != nameof(pageContainer.CurrentPage))
+                return;
+            var page = pageContainer.CurrentPage;
+            EnablePlatform(page);
+            SendAppearing(page);
+            SubscribeToPageEvents(page);
         }
 
         void HandleModalPushing(object sender, ModalPushingEventArgs e)
         {
-            HandleDisappearing(CurrentPage);
+            var page = GetCurrentModalOrMainPage();
+            SendDisappearing(page);
+            UnsubscribeFromPageEvents(page);
         }
 
         void HandleModalPushed(object sender, ModalPushedEventArgs e)
         {
-            HandleAppearing(e.Modal);
-            if (e.Modal is NavigationPage navigationPage) {
-                EnablePlatform(navigationPage.CurrentPage);
-                navigationPage.Pushed += HandlePushed;
-                navigationPage.Popped += HandlePopped;
-                navigationPage.PoppedToRoot += HandlePoppedToRoot;
-            }
+            var page = e.Modal;
+            EnablePlatform(page);
+            SendAppearing(page);
+            SubscribeToPageEvents(page);
         }
 
         void HandleModalPopping(object sender, ModalPoppingEventArgs e)
         {
-            HandleDisappearing(e.Modal);
+            var page = e.Modal;
+            SendDisappearing(page);
+            UnsubscribeFromPageEvents(page);
         }
 
         void HandleModalPopped(object sender, ModalPoppedEventArgs e)
         {
-            if (e.Modal is NavigationPage navigationPage) {
-                navigationPage.Pushed -= HandlePushed;
-                navigationPage.Popped -= HandlePopped;
-                navigationPage.PoppedToRoot -= HandlePoppedToRoot;
-            }
-            HandleAppearing(CurrentPage);
+            var page = GetCurrentModalOrMainPage();
+            EnablePlatform(page);
+            SendAppearing(page);
+            SubscribeToPageEvents(page);
         }
 
-        void EnablePlatform(Page page) => page.IsPlatformEnabled = true;
+        Page GetCurrentModalOrMainPage() => app.MainPage.Navigation.ModalStack.LastOrDefault() ?? app.MainPage;
     }
 }
