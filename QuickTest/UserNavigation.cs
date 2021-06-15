@@ -17,32 +17,83 @@ namespace QuickTest
                     HandleMainPageChanged();
             };
 
-            HandleMainPageChanged();
-        }
-
-        void HandleMainPageChanging()
-        {
-            var mainPage = app.MainPage;
-            SendDisappearing(mainPage);
-            UnsubscribeFromPageEvents(mainPage);
-
-            app.ModalPushing -= HandleModalPushing;
-            app.ModalPushed -= HandleModalPushed;
-            app.ModalPopping -= HandleModalPopping;
-            app.ModalPopped -= HandleModalPopped;
-        }
-
-        void HandleMainPageChanged()
-        {
-            var mainPage = app.MainPage;
-            EnablePlatform(mainPage);
-            SendAppearing(mainPage);
-            SubscribeToPageEvents(mainPage);
-
             app.ModalPushing += HandleModalPushing;
             app.ModalPushed += HandleModalPushed;
             app.ModalPopping += HandleModalPopping;
             app.ModalPopped += HandleModalPopped;
+
+            HandleMainPageChanged();
+        }
+
+        void HandleMainPageChanging() => HandlePageDisappearing(app.MainPage);
+
+        void HandleMainPageChanged() => HandlePageAppearing(app.MainPage);
+
+        void HandleFlyoutPagePropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
+        {
+            var flyoutPage = sender as FlyoutPage;
+
+            Page page = null;
+            if (e.PropertyName == nameof(flyoutPage.Detail))
+                page = flyoutPage.Detail;
+            else if (e.PropertyName == nameof(flyoutPage.Flyout))
+                page = flyoutPage.Flyout;
+
+            if (page != null)
+                HandlePageDisappearing(page);
+        }
+
+        void HandleFlyoutPagePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var flyoutPage = sender as FlyoutPage;
+
+            Page page = null;
+            if (e.PropertyName == nameof(flyoutPage.Detail))
+                page = flyoutPage.Detail;
+            else if (e.PropertyName == nameof(flyoutPage.Flyout))
+                page = flyoutPage.Flyout;
+
+            if (page != null)
+                HandlePageAppearing(page);
+        }
+
+        void HandlePageContainerPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
+        {
+            var pageContainer = sender as IPageContainer<Page>;
+            if (e.PropertyName != nameof(pageContainer.CurrentPage))
+                return;
+            HandlePageDisappearing(pageContainer.CurrentPage);
+        }
+
+        void HandlePageContainerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var pageContainer = sender as IPageContainer<Page>;
+            if (e.PropertyName != nameof(pageContainer.CurrentPage))
+                return;
+            HandlePageAppearing(pageContainer.CurrentPage);
+        }
+
+        void HandleModalPushing(object sender, ModalPushingEventArgs e) => HandlePageDisappearing(GetCurrentModalOrMainPage());
+
+        void HandleModalPushed(object sender, ModalPushedEventArgs e) => HandlePageAppearing(e.Modal);
+
+        void HandleModalPopping(object sender, ModalPoppingEventArgs e) => HandlePageDisappearing(e.Modal);
+
+        void HandleModalPopped(object sender, ModalPoppedEventArgs e) => HandlePageAppearing(GetCurrentModalOrMainPage());
+
+        Page GetCurrentModalOrMainPage() => app.MainPage.Navigation.ModalStack.LastOrDefault() ?? app.MainPage;
+
+        void HandlePageAppearing(Page page)
+        {
+            EnablePlatform(page);
+            SendAppearing(page);
+            SubscribeToPageEvents(page);
+        }
+
+        void HandlePageDisappearing(Page page)
+        {
+            SendDisappearing(page);
+            UnsubscribeFromPageEvents(page);
         }
 
         void EnablePlatform(Page page)
@@ -110,89 +161,5 @@ namespace QuickTest
                 UnsubscribeFromPageEvents(pageContainer.CurrentPage);
             }
         }
-
-        void HandleFlyoutPagePropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
-        {
-            var flyoutPage = sender as FlyoutPage;
-
-            Page page = null;
-            if (e.PropertyName == nameof(flyoutPage.Detail))
-                page = flyoutPage.Detail;
-            else if (e.PropertyName == nameof(flyoutPage.Flyout))
-                page = flyoutPage.Flyout;
-
-            if (page != null) {
-                SendDisappearing(page);
-                UnsubscribeFromPageEvents(page);
-            }
-        }
-
-        void HandleFlyoutPagePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            var flyoutPage = sender as FlyoutPage;
-
-            Page page = null;
-            if (e.PropertyName == nameof(flyoutPage.Detail))
-                page = flyoutPage.Detail;
-            else if (e.PropertyName == nameof(flyoutPage.Flyout))
-                page = flyoutPage.Flyout;
-
-            if (page != null) {
-                EnablePlatform(page);
-                SendAppearing(page);
-                SubscribeToPageEvents(page);
-            }
-        }
-
-        void HandlePageContainerPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
-        {
-            var pageContainer = sender as IPageContainer<Page>;
-            if (e.PropertyName != nameof(pageContainer.CurrentPage))
-                return;
-            SendDisappearing(pageContainer.CurrentPage);
-        }
-
-        void HandlePageContainerPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            var pageContainer = sender as IPageContainer<Page>;
-            if (e.PropertyName != nameof(pageContainer.CurrentPage))
-                return;
-            var page = pageContainer.CurrentPage;
-            EnablePlatform(page);
-            SendAppearing(page);
-            SubscribeToPageEvents(page);
-        }
-
-        void HandleModalPushing(object sender, ModalPushingEventArgs e)
-        {
-            var page = GetCurrentModalOrMainPage();
-            SendDisappearing(page);
-            UnsubscribeFromPageEvents(page);
-        }
-
-        void HandleModalPushed(object sender, ModalPushedEventArgs e)
-        {
-            var page = e.Modal;
-            EnablePlatform(page);
-            SendAppearing(page);
-            SubscribeToPageEvents(page);
-        }
-
-        void HandleModalPopping(object sender, ModalPoppingEventArgs e)
-        {
-            var page = e.Modal;
-            SendDisappearing(page);
-            UnsubscribeFromPageEvents(page);
-        }
-
-        void HandleModalPopped(object sender, ModalPoppedEventArgs e)
-        {
-            var page = GetCurrentModalOrMainPage();
-            EnablePlatform(page);
-            SendAppearing(page);
-            SubscribeToPageEvents(page);
-        }
-
-        Page GetCurrentModalOrMainPage() => app.MainPage.Navigation.ModalStack.LastOrDefault() ?? app.MainPage;
     }
 }
