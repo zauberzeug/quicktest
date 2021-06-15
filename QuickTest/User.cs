@@ -205,8 +205,12 @@ namespace QuickTest
             var modalPage = app.MainPage.Navigation.ModalStack.LastOrDefault();
             if (modalPage != null) {
                 // Xamarin.Forms expects a synchronization context when popping a page from the modal stack via back button press
-                SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
-                modalPage.SendBackButtonPressed();
+                try {
+                    SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
+                    modalPage.SendBackButtonPressed();
+                } finally {
+                    SynchronizationContext.SetSynchronizationContext(null);
+                }
             } else
                 app.MainPage.SendBackButtonPressed();
         }
