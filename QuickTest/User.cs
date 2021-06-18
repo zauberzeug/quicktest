@@ -41,27 +41,13 @@ namespace QuickTest
 
         public Page CurrentPage {
             get {
-                var modalStack = app.MainPage.Navigation.ModalStack;
-                var currentPage = (modalStack.LastOrDefault() as ContentPage)
-                    ?? ((modalStack.LastOrDefault() as NavigationPage)?.CurrentPage as ContentPage);
-
-                var flyoutPage = app.MainPage as FlyoutPage;
-                if (currentPage == null && flyoutPage != null && flyoutPage.IsPresented)
-                    currentPage = flyoutPage.Flyout as ContentPage;
-
-                var rootPage = flyoutPage?.Detail ?? app.MainPage;
-                if (currentPage == null) {
-                    var page = rootPage.Navigation.NavigationStack.Last();
-                    if (page is TabbedPage)
-                        return (page as TabbedPage).CurrentPage as ContentPage;
-                    else if (page is CarouselPage)
-                        return (page as CarouselPage).CurrentPage;
-                    else if (page is ContentPage)
-                        return page;
-                }
+                var outermostPage = app.MainPage.Navigation.ModalStack.LastOrDefault() ?? app.MainPage;
+                var currentPage = FindInnermostPage(outermostPage);
 
                 if (currentPage == null)
-                    Assert.Fail("TypeOf CurrentPage is supported yet");
+                    Assert.Fail("CurrentPage not found");
+                if (!(currentPage is ContentPage))
+                    Assert.Fail($"CurrentPage type {currentPage.GetType().Name} not supported");
 
                 return currentPage;
             }
@@ -236,6 +222,22 @@ namespace QuickTest
             Assert.That(elements, Has.Count.LessThan(2), $"Found multiple entries \"{automationId}\" on current page");
 
             return elements;
+        }
+
+
+        Page FindInnermostPage(Page page)
+        {
+            if (page is FlyoutPage flyoutPage) {
+                if (flyoutPage.IsPresented)
+                    return FindInnermostPage(flyoutPage.Flyout);
+                else
+                    return FindInnermostPage(flyoutPage.Detail);
+            }
+
+            if (page is IPageContainer<Page> pageContainer)
+                return FindInnermostPage(pageContainer.CurrentPage);
+
+            return page;
         }
     }
 }
