@@ -57,7 +57,10 @@ namespace QuickTest
                 HandlePageAppearing(page);
         }
 
-        void HandlePageContainerPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
+        // To be used with Page classes implementing IPageContainer.
+        // Luckily, even though IPageContainer does not include the property changing event,
+        // all classes implementing IPageContainer do send this event for CurrentPage.
+        void HandleContainerPagePropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
             var pageContainer = sender as IPageContainer<Page>;
             if (e.PropertyName != nameof(pageContainer.CurrentPage))
@@ -65,7 +68,10 @@ namespace QuickTest
             HandlePageDisappearing(pageContainer.CurrentPage);
         }
 
-        void HandlePageContainerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        // To be used with Page classes implementing IPageContainer.
+        // Luckily, even though IPageContainer does not include the property changed event,
+        // all classes implementing IPageContainer do send this event for CurrentPage.
+        void HandleContainerPagePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             var pageContainer = sender as IPageContainer<Page>;
             if (e.PropertyName != nameof(pageContainer.CurrentPage))
@@ -140,8 +146,8 @@ namespace QuickTest
             }
 
             if (page is IPageContainer<Page> pageContainer) {
-                page.PropertyChanging += HandlePageContainerPropertyChanging;
-                page.PropertyChanged += HandlePageContainerPropertyChanged;
+                page.PropertyChanging += HandleContainerPagePropertyChanging;
+                page.PropertyChanged += HandleContainerPagePropertyChanged;
                 SubscribeToPageEvents(pageContainer.CurrentPage);
             }
         }
@@ -156,8 +162,8 @@ namespace QuickTest
             }
 
             if (page is IPageContainer<Page> pageContainer) {
-                page.PropertyChanging -= HandlePageContainerPropertyChanging;
-                page.PropertyChanged -= HandlePageContainerPropertyChanged;
+                page.PropertyChanging -= HandleContainerPagePropertyChanging;
+                page.PropertyChanged -= HandleContainerPagePropertyChanged;
                 UnsubscribeFromPageEvents(pageContainer.CurrentPage);
             }
         }
