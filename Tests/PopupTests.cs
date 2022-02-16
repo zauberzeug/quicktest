@@ -39,7 +39,7 @@ namespace Tests
             Assert.That(Render(), Is.EqualTo(@"Alert
 Message
 
-[Yes] [No]"));
+[Yes] [No]".Replace("\r\n", "\n")));
         }
 
         [Test]
@@ -61,7 +61,7 @@ Message
             Assert.That(Render(), Is.EqualTo(@"Alert
 Message
 
-[Ok]"));
+[Ok]".Replace("\r\n", "\n")));
         }
 
         [TestCase("Cancel")]
@@ -88,7 +88,7 @@ Message
 [Destroy]
 [Option 1]
 [Option 2]
-[Cancel]"));
+[Cancel]".Replace("\r\n", "\n")));
         }
 
         [Test]
@@ -105,7 +105,7 @@ Message
             Tap("Show action sheet without cancel");
             Assert.That(Render(), Is.EqualTo(@"Action sheet without cancel
 [Destroy]
-[Option 1]"));
+[Option 1]".Replace("\r\n", "\n")));
         }
 
         [Test]
@@ -121,7 +121,7 @@ Message
         {
             Tap("Show action sheet without destruction");
             Assert.That(Render(), Is.EqualTo(@"Action sheet without destruction
-[Cancel]"));
+[Cancel]".Replace("\r\n", "\n")));
         }
 
         [Test]

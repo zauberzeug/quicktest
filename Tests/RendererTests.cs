@@ -43,7 +43,7 @@ namespace Tests
       · (slider_automation_id) --o---- 42
       · (picker_automation_id) Pick an item
       · Countdown
-      · logo.png"));
+      · logo.png".Replace("\r\n","\n")));
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace Tests
     - Item A1
     - Item B1
     - Item C1
-    plain footer"));
+    plain footer".Replace("\r\n", "\n")));
             GoBack();
         }
 
@@ -72,7 +72,7 @@ namespace Tests
     - · Item A2
     - · Item B2
     - · Item C2
-    · footer label"));
+    · footer label".Replace("\r\n", "\n")));
             GoBack();
 
         }
@@ -86,7 +86,7 @@ namespace Tests
             Assert.That(Render(), Is.EqualTo(@"· DemoListViewWithItemViewCell 
   · - · Item A3
     - · Item B3
-    - · Item C3"));
+    - · Item C3".Replace("\r\n", "\n")));
             GoBack();
 
         }
@@ -105,7 +105,7 @@ namespace Tests
     · Group 5
     - · A5
     - · B5
-    - · C5"));
+    - · C5".Replace("\r\n", "\n")));
             GoBack();
 
         }
@@ -126,7 +126,7 @@ namespace Tests
       · Group 7
     - · A7
     - · B7
-    - · C7"));
+    - · C7".Replace("\r\n", "\n")));
             GoBack();
         }
 
@@ -181,7 +181,7 @@ namespace Tests
             Assert.That(Render(), Is.EqualTo(@"· * TitleViewLabel TitleViewButton *
   |> TitleViewPage <| ContentPage |
   · 
-    ·"));
+    ·".Replace("\r\n", "\n")));
         }
     }
 }

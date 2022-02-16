@@ -1,78 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A11334E1-28E5-43CE-AA56-D66C9E117159}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>QuickTest</RootNamespace>
-    <AssemblyName>Xamarin.Forms.QuickTest</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Release\Xamarin.Forms.QuickTest.xml</DocumentationFile>
-    <NoWarn>1591</NoWarn>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.10.1" />
-    <PackageReference Include="Xamarin.Forms.Mocks" Version="4.7.0.1" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="QuickTest.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="InvokeAnything.cs" />
-    <Compile Include="ElementRendering.cs" />
-    <Compile Include="ElementSearch.cs" />
-    <Compile Include="ElementInfo.cs" />
-    <Compile Include="AlertArgumentExtensions.cs" />
-    <Compile Include="UserNavigation.cs" />
-    <Compile Include="ElementExtensions.cs" />
-    <Compile Include="LaunchException.cs" />
-    <Compile Include="ListView\CellGroup.cs" />
-    <Compile Include="ListView\ListViewCrawler.cs" />
-    <Compile Include="ListView\CrawlingStrategy.cs" />
-    <Compile Include="ListView\RetainElementCrawlingStrategy.cs" />
-    <Compile Include="ListView\RecycleElementCrawlingStrategy.cs" />
-    <Compile Include="ListView\CellCacheProvider.cs" />
-    <Compile Include="ListView\CellCache.cs" />
-    <Compile Include="DictionaryExtensions.cs" />
-    <Compile Include="ActionSheetArgumentsExtensions.cs" />
-    <Compile Include="Popup\Popup.cs" />
-    <Compile Include="Popup\AlertPopup.cs" />
-    <Compile Include="Popup\ActionSheetPopup.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ListView\" />
-    <Folder Include="Popup\" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ProjectExtensions>
-    <MonoDevelop>
-      <Properties>
-        <Policies>
-          <DotNetNamingPolicy DirectoryNamespaceAssociation="None" ResourceNamePolicy="FileFormatDefault" />
-        </Policies>
-      </Properties>
-    </MonoDevelop>
-  </ProjectExtensions>
-</Project>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Configurations>Debug;Release</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>portable</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<DefineConstants>DEBUG</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
+	  <PackageReference Include="NUnit" Version="3.13.2" />
+	  <PackageReference Include="Xamarin.Forms.Mocks" Version="4.7.0.1" />
+	  <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+	  </ItemGroup>
+
+	</Project>
