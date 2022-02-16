@@ -25,10 +25,5 @@
 	  <ProjectReference Include="..\DemoApp\DemoApp.csproj" />
 	  <ProjectReference Include="..\QuickTest\QuickTest.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="BindingTests.cs">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Compile>
-	</ItemGroup>
+	
 </Project>
