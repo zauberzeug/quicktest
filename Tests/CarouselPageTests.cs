@@ -4,7 +4,6 @@ using QuickTest;
 
 namespace Tests
 {
-    [TestFixture]
     public class CarouselPageTests : QuickTest<App>
     {
         [SetUp]
