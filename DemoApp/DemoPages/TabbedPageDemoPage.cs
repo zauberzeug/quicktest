@@ -11,6 +11,8 @@ namespace DemoApp
 
             var contentPageA = new ContentPage {
                 Title = "Tab A",
+                IconImageSource = "one.png",
+                AutomationId = "_Tab_A_AutomationId_",
                 Content = new StackLayout {
                     Children = {
                         new Label{Text = "This is content on tab A"},
@@ -22,6 +24,8 @@ namespace DemoApp
 
             var contentPageB = new ContentPage {
                 Title = "Tab B",
+                IconImageSource = "two.png",
+                AutomationId = "_Tab_B_AutomationId_",
                 Content = new StackLayout {
                     Children = {
                         new Label{Text = "This is content on tab B"}

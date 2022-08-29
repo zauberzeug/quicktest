@@ -57,7 +57,7 @@ namespace QuickTest
                 (element as Image)?.Source?.AutomationId == text ||
                 (element as TextCell)?.Text == text ||
                 (!TitleViewIsVisible(element.Parent) && (element.Parent as TabbedPage)?.Title == text) ||
-                (element is Page && ((element.Parent as TabbedPage)?.Children.Any(p => p.Title == text) ?? false)) ||
+                (element is Page && ((element.Parent as TabbedPage)?.Children.Any(p => p.Title == text || p.AutomationId == text || (p.IconImageSource as FileImageSource)?.File == text) ?? false)) ||
                 ((element.FindParent<NavigationPage>() != null && !TitleViewIsVisible(element) && (element as ToolbarItem)?.Text == text)) ||
                 element?.AutomationId == text;
         }

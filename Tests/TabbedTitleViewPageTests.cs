@@ -23,6 +23,10 @@ namespace Tests
             Tap("TitleViewPage");
             Tap("TitleViewLabel");
             ShouldSee("Tapped on Label");
+
+            Tap("ContentPage");
+            ShouldSee("Some content");
+            ShouldNotSee("Tapped on Label");
         }
     }
 }

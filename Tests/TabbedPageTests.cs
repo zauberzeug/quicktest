@@ -34,6 +34,48 @@ namespace Tests
 
             Tap("ToolbarItem");
             ShouldSee("ToolbarItem tapped");
+
+            Tap("Ok");
+
+            Tap("Tab A");
+
+            ShouldSee("This is content on tab A");
+            ShouldNotSee("This is content on tab B");
+            Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Tab B) A(Tab A) "));
+        }
+
+        [Test]
+        public void SwitchTabWithAutomationId()
+        {
+            ShouldSee("This is content on tab A");
+            ShouldNotSee("This is content on tab B");
+
+            Tap("_Tab_B_AutomationId_");
+
+            ShouldSee("This is content on tab B");
+            ShouldNotSee("This is content on tab A");
+
+            Tap("_Tab_A_AutomationId_");
+
+            ShouldSee("This is content on tab A");
+            ShouldNotSee("This is content on tab B");
+        }
+
+        [Test]
+        public void SwitchTabWithIconImageSource()
+        {
+            ShouldSee("This is content on tab A");
+            ShouldNotSee("This is content on tab B");
+
+            Tap("two.png");
+
+            ShouldSee("This is content on tab B");
+            ShouldNotSee("This is content on tab A");
+
+            Tap("one.png");
+
+            ShouldSee("This is content on tab A");
+            ShouldNotSee("This is content on tab B");
         }
 
         [Test]
