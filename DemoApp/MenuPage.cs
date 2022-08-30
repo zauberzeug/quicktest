@@ -25,6 +25,7 @@ namespace DemoApp
                         CreateMenuButton("CarouselPage", () => new CarouselDemoPage()),
                         CreateMenuButton("TitleViewPage", () => new TitleViewPage()),
                         CreateMenuButton("TabbedTitleViewPage", () => new TabbedTitleViewPage()),
+                        CreateMenuButton("NestedTabbedPage", () => new NestedTabbedPage()),
                         CreateMenuButton("Empty ContentPage", () => new ContentPage() { Title = "Page with no content", Content = null }),
                         new DemoButton("Show alert from menu") {
                             Command = new Command(() => DisplayAlert("Alert", "Message", "Ok"))

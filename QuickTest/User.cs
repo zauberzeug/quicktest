@@ -115,10 +115,7 @@ namespace QuickTest
                 (elementInfo.Element as Button).Command.Execute(null);
             else if (elementInfo.InvokeTap != null)
                 elementInfo.InvokeTap.Invoke();
-            else if (elementInfo.Element.Parent is TabbedPage) {
-                var tabbedPage = (elementInfo.Element.Parent as TabbedPage);
-                tabbedPage.CurrentPage = tabbedPage.Children.FirstOrDefault(p => p.Title == text || p.AutomationId == text || (p.IconImageSource as FileImageSource)?.File == text);
-            } else
+            else
                 throw new InvalidOperationException($"element with text '{text}' is not tappable");
         }
 

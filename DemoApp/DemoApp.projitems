@@ -45,6 +45,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\TabbedTitleViewPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DemoPages\PopupDemoPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DemoPages\NestedTabbedPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DemoPages\" />

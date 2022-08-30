@@ -49,6 +49,7 @@
     <Compile Include="EmptyContentPageTests.cs" />
     <Compile Include="FlyoutPageTests.cs" />
     <Compile Include="PopupTests.cs" />
+    <Compile Include="NestedTabbedPageTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuickTest\QuickTest.csproj">

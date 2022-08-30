@@ -17,7 +17,10 @@ namespace QuickTest
 
             if (containerPredicate != null && !containerPredicate.Invoke(element)) return result;
 
-            if (predicate.Invoke(element))
+            // if page is contained in tabbed page, it is checked in FindTabs and the predicate does not need to be additionally applied directly to the page
+            if (element is Page && element.Parent is TabbedPage tabbedPage)
+                result.AddRange(FindInTabbedPage(tabbedPage, predicate, containerPredicate));
+            else if (predicate.Invoke(element))
                 result.Add(ElementInfo.FromElement(element));
 
             result.AddRange(FindInTitle(element, predicate, containerPredicate));
@@ -56,10 +59,34 @@ namespace QuickTest
                 ((element as Entry)?.Placeholder == text && string.IsNullOrEmpty((element as Entry)?.Text)) ||
                 (element as Image)?.Source?.AutomationId == text ||
                 (element as TextCell)?.Text == text ||
-                (!TitleViewIsVisible(element.Parent) && (element.Parent as TabbedPage)?.Title == text) ||
-                (element is Page && ((element.Parent as TabbedPage)?.Children.Any(p => p.Title == text || p.AutomationId == text || (p.IconImageSource as FileImageSource)?.File == text) ?? false)) ||
+                (element is TabbedPage tabbedPage && !(tabbedPage.Parent is TabbedPage) && !TitleViewIsVisible(element) && tabbedPage.Title == text) ||
+                (element is Page page && element.Parent is TabbedPage && (page.Title == text || page.AutomationId == text || (page.IconImageSource as FileImageSource)?.File == text)) ||
                 ((element.FindParent<NavigationPage>() != null && !TitleViewIsVisible(element) && (element as ToolbarItem)?.Text == text)) ||
                 element?.AutomationId == text;
+        }
+
+        static List<ElementInfo> FindInTabbedPage(TabbedPage tabbedPage, Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
+        {
+            var result = new List<ElementInfo>();
+
+            if (containerPredicate != null && !containerPredicate.Invoke(tabbedPage))
+                return result;
+
+            var matchingChildren = tabbedPage.Children.Where(p => predicate(p));
+
+            result.AddRange(matchingChildren.Select(p => new ElementInfo {
+                Element = p,
+                InvokeTap = () => tabbedPage.CurrentPage = p,
+            }));
+
+            if (tabbedPage.Parent is TabbedPage parentTabbedPage)
+                result.AddRange(FindInTabbedPage(parentTabbedPage, predicate, containerPredicate));
+            else if (predicate(tabbedPage))
+                result.Add(new ElementInfo {
+                    Element = tabbedPage,
+                });
+
+            return result;
         }
 
         static IEnumerable<ElementInfo> FindInTitle(Element element, Predicate<Element> predicate, Predicate<Element> containerPredicate)

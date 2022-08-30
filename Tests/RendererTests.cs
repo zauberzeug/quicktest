@@ -162,6 +162,19 @@ namespace Tests
         }
 
         [Test]
+        public void TestNestedTabbedPageRendering()
+        {
+            OpenMenu("NestedTabbedPage");
+            var tabbedPageRendering = @"· NestedTabbedPage 
+  |> Outer Tab A <| Outer Tab B |
+  |> Tab A <| Tab B |
+  · 
+    · This is content on tab A";
+            Assert.That(Render(), Does.StartWith(tabbedPageRendering));
+        }
+
+
+        [Test]
         public void TestPickerRendering()
         {
             OpenMenu("Elements");
