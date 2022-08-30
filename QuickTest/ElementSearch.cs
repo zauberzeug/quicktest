@@ -17,13 +17,16 @@ namespace QuickTest
 
             if (containerPredicate != null && !containerPredicate.Invoke(element)) return result;
 
-            // if page is contained in tabbed page, it is checked in FindTabs and the predicate does not need to be additionally applied directly to the page
-            if (element is Page && element.Parent is TabbedPage tabbedPage)
-                result.AddRange(FindInTabbedPage(tabbedPage, predicate, containerPredicate));
-            else if (predicate.Invoke(element))
-                result.Add(ElementInfo.FromElement(element));
+            if (element is Page page) {
+                result.AddRange(FindInTitle(page, predicate, containerPredicate) ?? empty);
+                result.AddRange(FindInToolbarItems(page, predicate, containerPredicate) ?? empty);
+                if (page.Parent is TabbedPage tabbedPage)
+                    result.AddRange(FindInTabs(tabbedPage, predicate, containerPredicate));
+            } else {
+                if (predicate.Invoke(element))
+                    result.Add(ElementInfo.FromElement(element));
+            }
 
-            result.AddRange(FindInTitle(element, predicate, containerPredicate));
             result.AddRange((element as ContentPage)?.Content?.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as ContentView)?.Content.Find(predicate, containerPredicate) ?? empty);
             result.AddRange((element as ScrollView)?.Content.Find(predicate, containerPredicate) ?? empty);
@@ -47,7 +50,7 @@ namespace QuickTest
         public static bool HasText(this Element element, string text)
         {
             return
-                ((element.Parent is NavigationPage && !TitleViewIsVisible(element) && (element as Page)?.Title == text)) ||
+                (element as Page)?.Title == text ||
                 (element as Button)?.Text == text ||
                 (element as Label)?.Text == text ||
                 (element as Label)?.FormattedText?.ToString() == text ||
@@ -59,13 +62,62 @@ namespace QuickTest
                 ((element as Entry)?.Placeholder == text && string.IsNullOrEmpty((element as Entry)?.Text)) ||
                 (element as Image)?.Source?.AutomationId == text ||
                 (element as TextCell)?.Text == text ||
-                (element is TabbedPage tabbedPage && !(tabbedPage.Parent is TabbedPage) && !TitleViewIsVisible(element) && tabbedPage.Title == text) ||
                 (element is Page page && element.Parent is TabbedPage && (page.Title == text || page.AutomationId == text || (page.IconImageSource as FileImageSource)?.File == text)) ||
-                ((element.FindParent<NavigationPage>() != null && !TitleViewIsVisible(element) && (element as ToolbarItem)?.Text == text)) ||
+                (element as ToolbarItem)?.Text == text ||
                 element?.AutomationId == text;
         }
 
-        static List<ElementInfo> FindInTabbedPage(TabbedPage tabbedPage, Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
+        // Title or title view is only visible if there is a navigation bar.
+        // In case of (nested) tabbed pages, only the (outermost) tabbed page title or title view is visible.
+        static List<ElementInfo> FindInTitle(Page page, Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
+        {
+            var tabbedParent = page.Parent as TabbedPage;
+            if (tabbedParent != null)
+                while (tabbedParent.Parent is TabbedPage)
+                    tabbedParent = tabbedParent.Parent as TabbedPage;
+
+            if (tabbedParent != null)
+                page = tabbedParent;
+
+            var result = new List<ElementInfo>();
+
+            if (containerPredicate != null && !containerPredicate.Invoke(page))
+                return result;
+
+            // Title is only visible if inside navigation page
+            if (page.FindParent<NavigationPage>() == null)
+                return result;
+
+            var titleView = NavigationPage.GetTitleView(page);
+            if (titleView != null)
+                result.AddRange(titleView.Find(predicate, containerPredicate));
+            else if (predicate(page))
+                result.Add(ElementInfo.FromElement(page));
+            return result;
+        }
+
+        // Tabbed pages accumulate toolbar items from themselves and their current page (even in the nested case)
+        static List<ElementInfo> FindInToolbarItems(Page page, Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
+        {
+            var result = new List<ElementInfo>();
+
+            if (containerPredicate != null && !containerPredicate(page))
+                return result;
+
+            // Toolbar items are only visible if inside navigation page
+            if (page.FindParent<NavigationPage>() == null)
+                return result;
+
+            result.AddRange(page.ToolbarItems.ToList().Where(predicate.Invoke).Select(ElementInfo.FromElement));
+
+            var tabbedParent = page.Parent as TabbedPage;
+            if (tabbedParent != null)
+                result.AddRange(FindInToolbarItems(tabbedParent, predicate, containerPredicate));
+
+            return result;
+        }
+
+        static List<ElementInfo> FindInTabs(TabbedPage tabbedPage, Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
             var result = new List<ElementInfo>();
 
@@ -80,41 +132,9 @@ namespace QuickTest
             }));
 
             if (tabbedPage.Parent is TabbedPage parentTabbedPage)
-                result.AddRange(FindInTabbedPage(parentTabbedPage, predicate, containerPredicate));
-            else if (predicate(tabbedPage))
-                result.Add(new ElementInfo {
-                    Element = tabbedPage,
-                });
+                result.AddRange(FindInTabs(parentTabbedPage, predicate, containerPredicate));
 
             return result;
-        }
-
-        static IEnumerable<ElementInfo> FindInTitle(Element element, Predicate<Element> predicate, Predicate<Element> containerPredicate)
-        {
-            var result = new List<ElementInfo>();
-            IEnumerable<ElementInfo> empty = new List<ElementInfo>();
-
-            View titleView = null;
-            if (element is Page && element.Parent is TabbedPage && TitleViewIsVisible(element.Parent))
-                titleView = NavigationPage.GetTitleView(element.Parent as Page);
-            else if (TitleViewIsVisible(element))
-                titleView = NavigationPage.GetTitleView(element as Page);
-
-            if (titleView != null)
-                result.AddRange(titleView.Find(predicate, containerPredicate) ?? empty);
-            else
-                result.AddRange((element as Page)?.ToolbarItems.ToList().Where(predicate.Invoke).Select(ElementInfo.FromElement) ?? empty);
-
-            return result;
-        }
-
-        static bool TitleViewIsVisible(Element element)
-        {
-            if (element?.FindParent<NavigationPage>() == null)
-                return false;
-
-            var page = element as Page ?? new Page();
-            return NavigationPage.GetTitleView(page) != null;
         }
 
         static void AddTapGestureRecognizers(Element sourceElement, IEnumerable<ElementInfo> result)

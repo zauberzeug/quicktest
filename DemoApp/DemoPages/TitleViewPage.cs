@@ -12,7 +12,7 @@ namespace DemoApp
 
             infoLabel = new Label();
 
-            ToolbarItems.Add(new DemoToolbarItem()); // test to ensure this is not visible
+            ToolbarItems.Add(new DemoToolbarItem());
 
             TitleView = CreateTitelView();
             NavigationPage.SetTitleView(this, TitleView);

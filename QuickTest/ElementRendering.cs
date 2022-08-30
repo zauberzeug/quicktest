@@ -75,12 +75,16 @@ namespace QuickTest
             if (navigation == null)
                 return ""; // without navigation the user can't see the title
 
+            string result = "";
             var titleView = NavigationPage.GetTitleView(page);
             if (titleView != null)
-                return $"*{RenderContent(titleView).Replace("\n", "").Replace("· ", " ").Replace("  ", "")} *";
+                result += $"*{RenderContent(titleView).Replace("\n", "").Replace("· ", " ").Replace("  ", "")} *";
+            else
+                result += navigation.NavigationStack.LastOrDefault()?.Title;
 
-            var title = navigation.NavigationStack.LastOrDefault()?.Title;
-            return title + " " + string.Join(" ", page.ToolbarItems.Select(t => $"[{t.Text}]"));
+            result += " " + string.Join(" ", page.ToolbarItems.Select(t => $"[{t.Text}]"));
+
+            return result;
         }
 
         public static string Render(this ListView listView)

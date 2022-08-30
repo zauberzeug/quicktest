@@ -191,7 +191,7 @@ namespace Tests
         public void TestTitleViewRendering()
         {
             OpenMenu("TabbedTitleViewPage");
-            Assert.That(Render(), Is.EqualTo(@"· * TitleViewLabel TitleViewButton *
+            Assert.That(Render(), Is.EqualTo(@"· * TitleViewLabel TitleViewButton * [ToolbarItem]
   |> TitleViewPage <| ContentPage |
   · 
     ·"));

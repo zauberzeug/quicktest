@@ -21,7 +21,6 @@ namespace Tests
             ShouldSee("TitleViewLabel");
             ShouldSee("TitleViewButton");
             ShouldNotSee("TitleViewPage"); // normal title is not visible
-            ShouldNotSee("ToolbarItem"); // toolbar items are not shown with custom title view
         }
 
         [Test]
