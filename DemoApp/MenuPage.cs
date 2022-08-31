@@ -22,6 +22,7 @@ namespace DemoApp
                         CreateMenuButton("Binding", () => new BindingDemoPage()),
                         CreateMenuButton("Popups", () => new PopupDemoPage()),
                         CreateMenuButton("TabbedPage", () => new TabbedPageDemoPage()),
+                        CreateMenuButton("TabbedPage inner navigation", () => new TabbedPageDemoPage(withInnerNavigation: true), withNavigationPage: false),
                         CreateMenuButton("CarouselPage", () => new CarouselDemoPage()),
                         CreateMenuButton("TitleViewPage", () => new TitleViewPage()),
                         CreateMenuButton("TabbedTitleViewPage", () => new TabbedTitleViewPage()),
@@ -43,12 +44,15 @@ namespace DemoApp
             return CreateMenuButton($"ListViews ({cachingStrategy})", () => new ListViewDemoPage(cachingStrategy));
         }
 
-        DemoButton CreateMenuButton(string title, Func<Page> pageCreator)
+        DemoButton CreateMenuButton(string title, Func<Page> pageCreator, bool withNavigationPage = true)
         {
             return new DemoButton(title) {
                 Command = new Command(o => {
                     var mainPage = (Application.Current.MainPage as FlyoutPage);
-                    mainPage.Detail = new NavigationPage(pageCreator.Invoke()).AddPageLog();
+                    if (withNavigationPage)
+                        mainPage.Detail = new NavigationPage(pageCreator.Invoke()).AddPageLog();
+                    else
+                        mainPage.Detail = pageCreator.Invoke();
                     mainPage.IsPresented = false;
                 }),
             };

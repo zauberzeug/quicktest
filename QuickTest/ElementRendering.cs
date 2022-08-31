@@ -15,13 +15,15 @@ namespace QuickTest
 
             result += GetTitle(element as ContentPage);
 
-            var tabbedPage = element.Parent as TabbedPage;
-            var tabResult = "";
-            while (tabbedPage != null) {
-                tabResult = "\n|" + string.Join("|", tabbedPage.Children.Select(p => tabbedPage.CurrentPage == p ? $"> {p.Title} <" : $" {p.Title} ")) + "|" + tabResult;
-                tabbedPage = tabbedPage.Parent as TabbedPage;
+            if (element is Page) {
+                var tabbedPage = element.FindParent<TabbedPage>();
+                var tabResult = "";
+                while (tabbedPage != null) {
+                    tabResult = "\n|" + string.Join("|", tabbedPage.Children.Select(p => tabbedPage.CurrentPage == p ? $"> {p.Title} <" : $" {p.Title} ")) + "|" + tabResult;
+                    tabbedPage = tabbedPage.FindParent<TabbedPage>();
+                }
+                result += tabResult;
             }
-            result += tabResult;
 
             result += (element as ContentPage)?.Content?.Render();
 

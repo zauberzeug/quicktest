@@ -4,7 +4,7 @@ namespace DemoApp
 {
     public class TabbedPageDemoPage : TabbedPage
     {
-        public TabbedPageDemoPage()
+        public TabbedPageDemoPage(bool withInnerNavigation = false)
         {
             Title = "TabbedPage";
             PageExtensions.AddPageLog(this);
@@ -34,8 +34,21 @@ namespace DemoApp
                 ToolbarItems = { new DemoToolbarItem() }
             }.AddPageLog();
 
-            Children.Add(contentPageA);
-            Children.Add(contentPageB);
+
+            AddChild(contentPageA, withInnerNavigation);
+            AddChild(contentPageB, withInnerNavigation);
+        }
+
+        void AddChild(Page page, bool withInnerNavigation)
+        {
+            if (withInnerNavigation)
+                Children.Add(new NavigationPage(page) {
+                    Title = $"Nav {page.Title}",
+                    IconImageSource = page.IconImageSource,
+                    AutomationId = $"_Nav{page.AutomationId}",
+                }.AddPageLog());
+            else
+                Children.Add(page);
         }
 
         async void OpenModalPage()
@@ -49,7 +62,7 @@ namespace DemoApp
                     }
                 }
             }.AddPageLog();
-            await Navigation.PushModalAsync(page);
+            await CurrentPage.Navigation.PushModalAsync(page);
         }
 
         async void OpenSubpage()
@@ -62,7 +75,7 @@ namespace DemoApp
                     }
                 }
             }.AddPageLog();
-            await Navigation.PushAsync(page);
+            await CurrentPage.Navigation.PushAsync(page);
         }
     }
 }

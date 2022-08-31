@@ -20,8 +20,10 @@ namespace QuickTest
             if (element is Page page) {
                 result.AddRange(FindInTitle(page, predicate, containerPredicate) ?? empty);
                 result.AddRange(FindInToolbarItems(page, predicate, containerPredicate) ?? empty);
-                if (page.Parent is TabbedPage tabbedPage)
-                    result.AddRange(FindInTabs(tabbedPage, predicate, containerPredicate));
+
+                var tabbedParent = page.FindParent<TabbedPage>();
+                if (tabbedParent != null)
+                    result.AddRange(FindInTabs(tabbedParent, predicate, containerPredicate));
             } else {
                 if (predicate.Invoke(element))
                     result.Add(ElementInfo.FromElement(element));
@@ -71,13 +73,14 @@ namespace QuickTest
         // In case of (nested) tabbed pages, only the (outermost) tabbed page title or title view is visible.
         static List<ElementInfo> FindInTitle(Page page, Predicate<Element> predicate, Predicate<Element> containerPredicate = null)
         {
-            var tabbedParent = page.Parent as TabbedPage;
-            if (tabbedParent != null)
-                while (tabbedParent.Parent is TabbedPage)
-                    tabbedParent = tabbedParent.Parent as TabbedPage;
-
-            if (tabbedParent != null)
-                page = tabbedParent;
+            // Find page of which the title would be displayed in a navigation bar
+            while (true) {
+                if (page.Parent is TabbedPage tabbedPage) {
+                    page = tabbedPage;
+                    continue;
+                } else
+                    break;
+            }
 
             var result = new List<ElementInfo>();
 
@@ -110,7 +113,7 @@ namespace QuickTest
 
             result.AddRange(page.ToolbarItems.ToList().Where(predicate.Invoke).Select(ElementInfo.FromElement));
 
-            var tabbedParent = page.Parent as TabbedPage;
+            var tabbedParent = page.FindParent<TabbedPage>();
             if (tabbedParent != null)
                 result.AddRange(FindInToolbarItems(tabbedParent, predicate, containerPredicate));
 
@@ -131,7 +134,8 @@ namespace QuickTest
                 InvokeTap = () => tabbedPage.CurrentPage = p,
             }));
 
-            if (tabbedPage.Parent is TabbedPage parentTabbedPage)
+            TabbedPage parentTabbedPage = tabbedPage.FindParent<TabbedPage>();
+            if (parentTabbedPage != null)
                 result.AddRange(FindInTabs(parentTabbedPage, predicate, containerPredicate));
 
             return result;
