@@ -5,7 +5,7 @@ namespace DemoApp
 {
     public class NestedTabbedPage : TabbedPage
     {
-        public NestedTabbedPage()
+        public NestedTabbedPage(bool withInnerNavigation = false)
         {
             Title = "NestedTabbedPage";
             PageExtensions.AddPageLog(this);
@@ -28,8 +28,20 @@ namespace DemoApp
                 }
             }.AddPageLog();
 
-            Children.Add(contentPageA);
-            Children.Add(contentPageB);
+            AddChild(contentPageA, withInnerNavigation);
+            AddChild(contentPageB, withInnerNavigation);
+        }
+
+        void AddChild(Page page, bool withInnerNavigation)
+        {
+            if (withInnerNavigation)
+                Children.Add(new NavigationPage(page) {
+                    Title = $"Nav {page.Title}",
+                    IconImageSource = page.IconImageSource,
+                    AutomationId = $"_Nav{page.AutomationId}",
+                }.AddPageLog());
+            else
+                Children.Add(page);
         }
     }
 }

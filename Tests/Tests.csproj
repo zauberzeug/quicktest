@@ -51,6 +51,7 @@
     <Compile Include="PopupTests.cs" />
     <Compile Include="NestedTabbedPageTests.cs" />
     <Compile Include="TabbedPageWithInnerNavigationTests.cs" />
+    <Compile Include="NestedTabbedPageWithInnerNavigationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuickTest\QuickTest.csproj">
