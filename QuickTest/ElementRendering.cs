@@ -19,7 +19,7 @@ namespace QuickTest
                 var tabbedPage = element.FindParent<TabbedPage>();
                 var tabResult = "";
                 while (tabbedPage != null) {
-                    tabResult = "\n|" + string.Join("|", tabbedPage.Children.Select(p => tabbedPage.CurrentPage == p ? $"> {p.Title} <" : $" {p.Title} ")) + "|" + tabResult;
+                    tabResult = "\n|" + string.Join("|", tabbedPage.Children.Select(p => tabbedPage.CurrentPage == p ? $"> {GetTabTitle(p)} <" : $" {GetTabTitle(p)} ")) + "|" + tabResult;
                     tabbedPage = tabbedPage.FindParent<TabbedPage>();
                 }
                 result += tabResult;
@@ -87,6 +87,16 @@ namespace QuickTest
             result += " " + string.Join(" ", page.ToolbarItems.Select(t => $"[{t.Text}]"));
 
             return result;
+        }
+
+        static string GetTabTitle(Page page)
+        {
+            if (!string.IsNullOrWhiteSpace(page.Title))
+                return page.Title;
+            else if (page.IconImageSource is FileImageSource fileImageSource)
+                return fileImageSource.File;
+            else
+                return page.AutomationId;
         }
 
         public static string Render(this ListView listView)

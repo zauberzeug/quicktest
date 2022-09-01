@@ -18,6 +18,8 @@ namespace DemoApp
                         new Label{Text = "This is content on tab A"},
                         new Button{Text = "Open ModalPage", Command = new Command(OpenModalPage)},
                         new Button{Text = "Open Subpage", Command = new Command(OpenSubpage)},
+                        new Button { Text = "Remove titles", Command = new Command(RemoveTitles) },
+                        new Button { Text = "Remove icons", Command = new Command(RemoveIcons) },
                     }
                 }
             }.AddPageLog();
@@ -76,6 +78,19 @@ namespace DemoApp
                 }
             }.AddPageLog();
             await CurrentPage.Navigation.PushAsync(page);
+        }
+
+
+        void RemoveTitles()
+        {
+            foreach (var c in Children)
+                c.Title = "";
+        }
+
+        void RemoveIcons()
+        {
+            foreach (var c in Children)
+                c.IconImageSource = null;
         }
     }
 }

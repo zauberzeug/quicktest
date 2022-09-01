@@ -159,6 +159,14 @@ namespace Tests
             Assert.That(Render(), Is.EqualTo("·  \n  · \n    · This is a modal page\n    · Close"));
             Tap("Close");
             Assert.That(Render(), Does.StartWith(tabbedPageRendering));
+
+            Tap("Remove titles");
+            tabbedPageRendering = "· TabbedPage \n  |> one.png <| two.png |\n  · \n    · This is content on tab A\n";
+            Assert.That(Render(), Does.StartWith(tabbedPageRendering));
+
+            Tap("Remove icons");
+            tabbedPageRendering = "· TabbedPage \n  |> _Tab_A_AutomationId_ <| _Tab_B_AutomationId_ |\n  · \n    · This is content on tab A\n";
+            Assert.That(Render(), Does.StartWith(tabbedPageRendering));
         }
 
         [Test]
