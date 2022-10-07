@@ -40,6 +40,11 @@ namespace DemoApp
 
             AddChild(contentPageA, withInnerNavigation);
             AddChild(contentPageB, withInnerNavigation);
+
+            ToolbarItems.Add(new ToolbarItem {
+                Text = "Add tabs",
+                Command = new Command(AddTabs),
+            });
         }
 
         void AddChild(Page page, bool withInnerNavigation)
@@ -102,6 +107,12 @@ namespace DemoApp
         {
             foreach (var c in Children)
                 c.IconImageSource = null;
+        }
+
+        void AddTabs()
+        {
+            Children.Add(new ContentPage { Title = "New tab A", Content = new Label { Text = "Content new tab A" } });
+            Children.Add(new ContentPage { Title = "New tab B", Content = new Label { Text = "Content new tab B" } });
         }
     }
 }

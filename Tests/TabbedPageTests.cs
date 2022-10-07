@@ -113,6 +113,10 @@ namespace Tests
             ShouldSee("TabbedPage");
             Assert.DoesNotThrow(() => Tap("Clear children"));
             ShouldSee("TabbedPage");
+            Assert.DoesNotThrow(() => Tap("Add tabs"));
+            ShouldSee("New tab A");
+            ShouldSee("Content new tab A");
+            ShouldSee("New tab B");
         }
     }
 }

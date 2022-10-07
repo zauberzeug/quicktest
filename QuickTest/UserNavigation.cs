@@ -65,7 +65,8 @@ namespace QuickTest
             var pageContainer = sender as IPageContainer<Page>;
             if (e.PropertyName != nameof(pageContainer.CurrentPage))
                 return;
-            HandlePageDisappearing(pageContainer.CurrentPage);
+            if (pageContainer.CurrentPage != null)
+                HandlePageDisappearing(pageContainer.CurrentPage);
         }
 
         // To be used with Page classes implementing IPageContainer.
