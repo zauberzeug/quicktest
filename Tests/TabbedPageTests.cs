@@ -105,5 +105,14 @@ namespace Tests
             GoBack();
             Assert.That(App.PageLog, Is.EqualTo(expectedLog += "D(Subpage) A(TabbedPage) A(Tab A) "));
         }
+
+        // Quicktest must support currentpage of container pages to become null
+        [Test]
+        public void CanClearChildren()
+        {
+            ShouldSee("TabbedPage");
+            Assert.DoesNotThrow(() => Tap("Clear children"));
+            ShouldSee("TabbedPage");
+        }
     }
 }

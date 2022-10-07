@@ -46,8 +46,6 @@ namespace QuickTest
 
                 if (currentPage == null)
                     Assert.Fail("CurrentPage not found");
-                if (!(currentPage is ContentPage))
-                    Assert.Fail($"CurrentPage type {currentPage.GetType().Name} not supported");
 
                 return currentPage;
             }
@@ -232,7 +230,8 @@ namespace QuickTest
             }
 
             if (page is IPageContainer<Page> pageContainer)
-                return FindInnermostPage(pageContainer.CurrentPage);
+                if (pageContainer.CurrentPage != null)
+                    return FindInnermostPage(pageContainer.CurrentPage);
 
             return page;
         }

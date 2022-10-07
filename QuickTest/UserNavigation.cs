@@ -76,7 +76,8 @@ namespace QuickTest
             var pageContainer = sender as IPageContainer<Page>;
             if (e.PropertyName != nameof(pageContainer.CurrentPage))
                 return;
-            HandlePageAppearing(pageContainer.CurrentPage);
+            if (pageContainer.CurrentPage != null)
+                HandlePageAppearing(pageContainer.CurrentPage);
         }
 
         void HandleModalPushing(object sender, ModalPushingEventArgs e) => HandlePageDisappearing(GetCurrentModalOrMainPage());

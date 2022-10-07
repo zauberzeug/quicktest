@@ -20,6 +20,7 @@ namespace DemoApp
                         new Button{Text = "Open Subpage", Command = new Command(OpenSubpage)},
                         new Button { Text = "Remove titles", Command = new Command(RemoveTitles) },
                         new Button { Text = "Remove icons", Command = new Command(RemoveIcons) },
+                        new Button { Text = "Clear children", Command = new Command(() => Children.Clear()) },
                     }
                 }
             }.AddPageLog();
@@ -51,6 +52,16 @@ namespace DemoApp
                 }.AddPageLog());
             else
                 Children.Add(page);
+        }
+
+        void Test()
+        {
+            var childCount = Children.Count;
+            var dummyPage = new ContentPage();
+            for (int i = 0; i < childCount; i++)
+                Children.RemoveAt(i);
+            // add new pages
+            Children.Remove(dummyPage);
         }
 
         async void OpenModalPage()
