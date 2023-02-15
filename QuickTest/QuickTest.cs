@@ -67,7 +67,7 @@ namespace QuickTest
         {
             Assert.That(User.SeesPopup(), Is.False, "TapNth is not supported on popups");
             Assert.That(() => User.Find(text), Has.Count.GreaterThan(index).After((int)Timeout.TotalMilliseconds, 10),
-                        $"User can't see {index + 1}th \"{text}\"  in \n{ User?.Render() }");
+                        () => $"User can't see {index + 1}th \"{text}\"  in \n{ User?.Render() }");
             User.Tap(text, index);
         }
 
@@ -106,7 +106,7 @@ namespace QuickTest
             if (list.All(User.CanSee))
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
             Assert.That(() => list.All(User.CanSee), Is.True.After((int)Timeout.TotalMilliseconds, 10),
-                        $"User should see {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
+                        () => $"User should see {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
         }
 
         public virtual void ShouldSeeOnce(params string[] texts)
@@ -115,7 +115,7 @@ namespace QuickTest
             if (list.All((t) => User.CanSee(t, 1)))
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
             Assert.That(() => list.All((t) => User.CanSee(t, 1)), Is.True.After((int)Timeout.TotalMilliseconds, 10),
-                        $"User should see {{ {string.Join(", ", texts)} }} only once in \n{ User?.Render() }");
+                        () => $"User should see {{ {string.Join(", ", texts)} }} only once in \n{ User?.Render() }");
         }
 
         public virtual void ShouldSee(char text)
@@ -128,7 +128,7 @@ namespace QuickTest
             if (User.CanSee(text, count))
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
             Assert.That(() => User.CanSee(text, count), Is.True.After((int)Timeout.TotalMilliseconds, 10),
-                $"User should see {{ {text} }} {count} times in \n{ User?.Render() }");
+                () => $"User should see {{ {text} }} {count} times in \n{ User?.Render() }");
         }
 
         public virtual void ShouldSee(char text, int count)
@@ -142,7 +142,7 @@ namespace QuickTest
             if (!list.Any(User.CanSee))
                 return; // NOTE: prevent Assert from waiting 10 ms each time if text is seen immediately
             Assert.That(() => !list.Any(User.CanSee), Is.True.After((int)Timeout.TotalMilliseconds, 10),
-                        $"User should not see any of {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
+                        () => $"User should not see any of {{ {string.Join(", ", texts)} }} in \n{ User?.Render() }");
         }
 
         public virtual void ShouldNotSee(char text)
