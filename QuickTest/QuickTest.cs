@@ -44,6 +44,12 @@ namespace QuickTest
             User = new User(App);
         }
 
+        public void ResetApp()
+        {
+            App = null;
+            User = null;
+        }
+
         public virtual void Tap(string text)
         {
             ShouldSee(text);

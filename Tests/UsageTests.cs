@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using DemoApp;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using QuickTest;
 using Xamarin.Forms;
 
@@ -10,6 +10,11 @@ namespace Tests
 {
     public class UsageTests : QuickTest<App>
     {
+        protected override void TearDown()
+        {
+            base.TearDown();
+            ResetApp();
+        }
 
         [Test]
         public void ErrorWhenNotLaunchingApp()
@@ -29,8 +34,6 @@ namespace Tests
         }
 
         // This test reproduces a problem with QuickTest output in case of a failing test.
-        // This test is intended to fail, and thus made explicit.
-        [Explicit]
         [Test]
         public void ErrorOutputPrintsUpToDateViewHierarchyEvenWhenPolling()
         {
@@ -48,12 +51,23 @@ namespace Tests
             App.Instance.Flyout.Detail = new NavigationPage(contentPage);
 
             Task.Run(async delegate {
-                await Task.Delay(1000);
+                await Task.Delay(100);
                 layout.Children.Add(new Label { Text = "Label 3" });
             });
 
-            // Label 3 should be visible in the error output
-            After(5).ShouldSee("Label 4");
+            Exception assertionException = null;
+
+            using (new TestExecutionContext.IsolatedContext()) {
+                try {
+                    // Label 3 should be visible in the error output
+                    After(1).ShouldSee("Label 4");
+                } catch (Exception e) {
+                    assertionException = e;
+                }
+            }
+
+            Assert.That(assertionException, Is.Not.Null);
+            Assert.That(assertionException.Message, Does.Contain("Label 3"));
         }
     }
 }
