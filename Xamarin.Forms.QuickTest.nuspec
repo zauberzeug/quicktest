@@ -19,8 +19,8 @@
      </dependencies>
   </metadata>
     <files>
-        <file src="QuickTest/bin/Release/Xamarin.Forms.QuickTest.dll" target="lib/net45" />
-        <file src="QuickTest/bin/Release/Xamarin.Forms.QuickTest.pdb" target="lib/net45" />
-        <file src="QuickTest/bin/Release/Xamarin.Forms.QuickTest.xml" target="lib/net45" />
+        <file src="QuickTest/bin/Release/Xamarin.Forms.QuickTest.dll" target="lib/netstandard2.0" />
+        <file src="QuickTest/bin/Release/Xamarin.Forms.QuickTest.pdb" target="lib/netstandard2.0" />
+        <file src="QuickTest/bin/Release/Xamarin.Forms.QuickTest.xml" target="lib/netstandard2.0" />
     </files>
 </package>
