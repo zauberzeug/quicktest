@@ -173,20 +173,32 @@ namespace QuickTest
         {
             var result = new List<ElementInfo>();
 
-
             if (cellGroup.Header != null)
                 result.AddRange(cellGroup.Header.Find(predicate, containerPredicate));
 
             foreach (var cell in cellGroup.Content) {
-                var info = GetElementInfo(predicate, containerPredicate, cell);
-                if (info != null) {
+                var infos = cell.Find(predicate, containerPredicate);
+                foreach (var info in infos)
                     if (info.InvokeTap == null)
                         info.InvokeTap = () => listView.Invoke("NotifyRowTapped", cell.GetIndex<ItemsView<Cell>, Cell>(), cell);
-
-                    result.Add(info);
-                }
+                result.AddRange(infos);
             }
+
             return result;
+        }
+
+
+        static List<ElementInfo> Find(this Cell cell, Predicate<Element> predicate, Predicate<Element> containerPredicate)
+        {
+            if (predicate.Invoke(cell))
+                return new List<ElementInfo>() {
+                    new ElementInfo { Element = cell }
+                };
+
+            if (cell is ViewCell viewCell)
+                return viewCell.View.Find(predicate, containerPredicate);
+
+            return new List<ElementInfo>();
         }
 
         static List<ElementInfo> Find(object stringBindingOrView, Predicate<Element> predicate, Predicate<Element> containerPredicate)
@@ -197,19 +209,6 @@ namespace QuickTest
                 return (stringBindingOrView as View).Find(predicate, containerPredicate);
 
             return new List<ElementInfo>();
-        }
-
-        static ElementInfo GetElementInfo(Predicate<Element> predicate, Predicate<Element> containerPredicate, object cell)
-        {
-            if (predicate.Invoke(cell as Cell)) {
-                return new ElementInfo { Element = cell as Cell };
-            }
-
-            var viewCellResults = (cell as ViewCell)?.View.Find(predicate, containerPredicate);
-            if (viewCellResults?.Any() ?? false)
-                return viewCellResults.First();
-
-            return null;
         }
     }
 }

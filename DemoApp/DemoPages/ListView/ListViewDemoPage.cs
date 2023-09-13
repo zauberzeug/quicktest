@@ -23,6 +23,7 @@ namespace DemoApp
                     CreateSubpageButton(new DemoListViewForRecycling(cachingStrategy)),
                     CreateSubpageButton(new DemoListViewForRecyclingWithTemplateSelector(cachingStrategy)),
                     CreateSubpageButton(new DemoListViewForRecyclingWithGroups(cachingStrategy)),
+                    CreateSubpageButton(new DemoListViewWithDuplicatedTexts(cachingStrategy)),
                 },
             };
         }

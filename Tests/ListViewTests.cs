@@ -220,11 +220,34 @@ namespace Tests
             }
         }
 
+        [Test]
+        public void DuplicatedTextsAreAllFound()
+        {
+            Tap("DemoListViewWithDuplicatedTexts");
+            ShouldSee("Header", 2);
+            ShouldSee("Footer", 2);
+            ShouldSee("Group 6", 2);
+            ShouldSee("Group 7", 2);
+            ShouldSee("A6", 2);
+            ShouldSee("B6", 2);
+            ShouldSee("C6", 2);
+            ShouldSee("A7", 2);
+            ShouldSee("B7", 2);
+            ShouldSee("C7", 2);
+
+            TapNth("A6", 0);
+            ShouldSee($"A6 tapped");
+            Tap("Ok");
+            TapNth("A6", 1);
+            ShouldSee($"A6 tapped");
+        }
+
         void TapCell(string name)
         {
             Tap(name);
             ShouldSee($"{name} tapped");
             Tap("Ok");
         }
+
     }
 }
