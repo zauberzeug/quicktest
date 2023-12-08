@@ -29,6 +29,12 @@ namespace QuickTest
             WireNavigation();
         }
 
+        public void Cleanup()
+        {
+            MessagingCenter.Unsubscribe<Page, AlertArguments>(this, Page.AlertSignalName);
+            MessagingCenter.Unsubscribe<Page, ActionSheetArguments>(this, Page.ActionSheetSignalName);
+        }
+
         public NavigationPage CurrentNavigationPage {
             get {
                 var modalNavigationPage = app.MainPage.Navigation.ModalStack.LastOrDefault() as NavigationPage;

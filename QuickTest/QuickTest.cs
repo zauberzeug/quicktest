@@ -36,6 +36,7 @@ namespace QuickTest
         protected virtual void TearDown()
         {
             Print();
+            ResetApp();
         }
 
         public void Launch(T app)
@@ -47,6 +48,7 @@ namespace QuickTest
         public void ResetApp()
         {
             App = null;
+            user?.Cleanup();
             User = null;
         }
 
